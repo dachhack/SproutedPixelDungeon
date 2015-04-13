@@ -29,7 +29,7 @@ public class CurareShuriken extends MissileWeapon {
 	public static final float DURATION = 3f;
 
 	{
-		name = "shuriken";
+		name = "curare shuriken";
 		image = ItemSpriteSheet.SHURIKEN;
 
 		STR = 13;

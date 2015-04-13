@@ -191,6 +191,8 @@ public class ItemSpriteSheet {
 	public static final int POTION_CHARCOAL = ROW11 + 9;
 	public static final int POTION_SILVER = ROW11 + 10;
 	public static final int POTION_IVORY = ROW11 + 11;
+	public static final int POTION_AQUA = ROW11 + 12;
+	public static final int POTION_HONEY = ROW11 + 13;
 
 	// Row Twelve: Seeds
 	public static final int SEED_ROTBERRY = ROW12 + 0;

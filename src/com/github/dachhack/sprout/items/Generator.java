@@ -96,9 +96,9 @@ public class Generator {
 				PotionOfLevitation.class, PotionOfStrength.class,
 				PotionOfMindVision.class, PotionOfPurity.class,
 				PotionOfInvisibility.class, PotionOfMight.class,
-				PotionOfFrost.class };
+				PotionOfFrost.class, PotionOfMending.class };
 		Category.POTION.probs = new float[] { 45, 4, 15, 10, 15, 10, 0, 20, 12,
-				10, 0, 10 };
+				10, 0, 10, 10 };
 
 		Category.WAND.classes = new Class<?>[] { WandOfTeleportation.class,
 				WandOfSlowness.class, WandOfFirebolt.class,

@@ -32,7 +32,7 @@ import com.watabou.utils.Random;
 public class IncendiaryShuriken extends MissileWeapon {
 
 	{
-		name = "shuriken";
+		name = "incendiary shuriken";
 		image = ItemSpriteSheet.SHURIKEN;
 
 		STR = 13;
@@ -57,6 +57,7 @@ public class IncendiaryShuriken extends MissileWeapon {
 		Char enemy = Actor.findChar(cell);
 		if ((enemy == null || enemy == curUser) && Level.flamable[cell])
 			GameScene.add(Blob.seed(cell, 4, Fire.class));
+		
 		else
 			super.onThrow(cell);
 	}

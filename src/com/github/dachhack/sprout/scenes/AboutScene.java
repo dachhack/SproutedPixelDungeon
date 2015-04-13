@@ -35,7 +35,7 @@ import com.github.dachhack.sprout.ui.Window;
 
 public class AboutScene extends PixelScene {
 
-	private static final String TTL_SHPX = "Pixel Dungeon - Garden of Hack n Slash";
+	private static final String TTL_SHPX = "Sprouted Pixel Dungeon";
 
 	private static final String TXT_SHPX = "Modified from Shattered Pixel Dungeon\n\n"
 			+ "Shattered Pixel is here, check it out:";

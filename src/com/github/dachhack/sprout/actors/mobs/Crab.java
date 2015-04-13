@@ -48,7 +48,7 @@ public class Crab extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 12;
+		return 12+(Dungeon.depth);
 	}
 
 	@Override

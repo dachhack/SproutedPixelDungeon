@@ -44,6 +44,7 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
+import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.DM300Sprite;
@@ -92,6 +93,11 @@ public class DM300 extends Mob implements Callback {
 
 		return super.act();
 	}
+	
+	protected boolean canAttack(Char enemy) {
+		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
+	}
+
 	
 	@Override
 	protected boolean doAttack(Char enemy) {
@@ -198,7 +204,12 @@ public class DM300 extends Mob implements Callback {
 		super.notice();
 		yell("Unauthorised personnel detected.");
 	}
-
+	
+	@Override
+	public void call() {
+		next();
+	}
+		
 	@Override
 	public String description() {
 		return "This machine was created by the Dwarves several centuries ago. Later, Dwarves started to replace machines with "
@@ -206,6 +217,7 @@ public class DM300 extends Mob implements Callback {
 				+ "machines were typically used for construction and mining, and in some cases, for city defense.";
 	}
 
+	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
 		RESISTANCES.add(Death.class);
@@ -228,9 +240,5 @@ public class DM300 extends Mob implements Callback {
 		return IMMUNITIES;
 	}
 
-	@Override
-	public void call() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

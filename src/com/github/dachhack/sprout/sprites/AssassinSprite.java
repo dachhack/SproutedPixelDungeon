@@ -35,15 +35,14 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
-public class TenguSprite extends MobSprite {
+public class AssassinSprite extends MobSprite {
 
-	private static final float DURATION = 2f;
 	private Animation cast;
 
-	public TenguSprite() {
+	public AssassinSprite() {
 		super();
 
-		texture(Assets.TENGU);
+		texture(Assets.ASSASSIN);
 
 		TextureFilm frames = new TextureFilm(texture, 14, 16);
 
@@ -59,28 +58,12 @@ public class TenguSprite extends MobSprite {
 		cast = attack.clone();
 
 		die = new Animation(8, false);
-		die.frames(frames, 8, 9, 10, 10, 10, 10, 10, 10);
+		die.frames(frames, 8, 9, 10, 10);
 
 		play(run.clone());
 	}
 
-	@Override
-	public void move(int from, int to) {
-
-		place(to);
-
-		play(run);
-		turnTo(from, to);
-
-		isMoving = true;
-
-		if (Level.water[to]) {
-			GameScene.ripple(to);
-		}
-
-		ch.onMotionComplete();
-	}
-
+	
 	@Override
 	public void attack(int cell) {
 		if (!Level.adjacent(cell, ch.pos)) {
@@ -93,17 +76,12 @@ public class TenguSprite extends MobSprite {
 						}
 				});
 		 	  
+		  		
 		  		if(Random.Int(5)==0){
-		  				Buff.affect(enemy, Burning.class).reignite(enemy);
-		  				enemy.sprite.emitter().burst(FlameParticle.FACTORY, 5);
-		  			}
-		  		if(Random.Int(10)==0){
-		  			Buff.affect(enemy, Slow.class, Slow.duration(enemy) / 2);
+		  			Buff.affect(enemy, Slow.class, Slow.duration(enemy));
 		  		}
 		  				  		
-		  		if(Random.Int(20)==0){
-		  		       Buff.prolong(enemy, Paralysis.class, DURATION);
-		  		}
+		  		
 		  		
 			play(cast);
 			turnTo(ch.pos, cell);

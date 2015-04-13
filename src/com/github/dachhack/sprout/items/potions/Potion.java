@@ -61,17 +61,17 @@ public class Potion extends Item {
 			PotionOfParalyticGas.class, PotionOfLevitation.class,
 			PotionOfMindVision.class, PotionOfPurity.class,
 			PotionOfInvisibility.class, PotionOfMight.class,
-			PotionOfFrost.class };
+			PotionOfFrost.class, PotionOfMending.class };
 	private static final String[] colors = { "turquoise", "crimson", "azure",
 			"jade", "golden", "magenta", "charcoal", "ivory", "amber",
-			"bistre", "indigo", "silver" };
+			"bistre", "indigo", "silver", "aqua" };
 	private static final Integer[] images = { ItemSpriteSheet.POTION_TURQUOISE,
 			ItemSpriteSheet.POTION_CRIMSON, ItemSpriteSheet.POTION_AZURE,
 			ItemSpriteSheet.POTION_JADE, ItemSpriteSheet.POTION_GOLDEN,
 			ItemSpriteSheet.POTION_MAGENTA, ItemSpriteSheet.POTION_CHARCOAL,
 			ItemSpriteSheet.POTION_IVORY, ItemSpriteSheet.POTION_AMBER,
 			ItemSpriteSheet.POTION_BISTRE, ItemSpriteSheet.POTION_INDIGO,
-			ItemSpriteSheet.POTION_SILVER };
+			ItemSpriteSheet.POTION_SILVER, ItemSpriteSheet.POTION_AQUA };
 
 	private static ItemStatusHandler<Potion> handler;
 
@@ -155,7 +155,9 @@ public class Potion extends Item {
 						|| this instanceof PotionOfHealing
 						|| this instanceof PotionOfMindVision
 						|| this instanceof PotionOfStrength
-						|| this instanceof PotionOfInvisibility || this instanceof PotionOfMight)) {
+						|| this instanceof PotionOfInvisibility 
+						|| this instanceof PotionOfMight
+						|| this instanceof PotionOfMending)) {
 
 			GameScene.show(new WndOptions(TXT_BENEFICIAL, TXT_R_U_SURE_THROW,
 					TXT_YES, TXT_NO) {

@@ -47,8 +47,8 @@ public class Eye extends Mob {
 		name = "evil eye";
 		spriteClass = EyeSprite.class;
 
-		HP = HT = 100;
-		defenseSkill = 20;
+		HP = HT = 100+(Dungeon.depth*Random.NormalIntRange(4, 7));
+		defenseSkill = 20+(Dungeon.depth);
 		viewDistance = Light.DISTANCE;
 
 		EXP = 13;
@@ -85,7 +85,7 @@ public class Eye extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 30;
+		return 30+(Dungeon.depth);
 	}
 
 	@Override

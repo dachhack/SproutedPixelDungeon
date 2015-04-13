@@ -38,8 +38,8 @@ public class Brute extends Mob {
 		name = "gnoll brute";
 		spriteClass = BruteSprite.class;
 
-		HP = HT = 40;
-		defenseSkill = 15;
+		HP = HT = 40+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		defenseSkill = 15+(Dungeon.depth);
 
 		EXP = 8;
 		maxLvl = 15;
@@ -67,7 +67,7 @@ public class Brute extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 20;
+		return 20+(Dungeon.depth);
 	}
 
 	@Override

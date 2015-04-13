@@ -19,9 +19,14 @@ package com.github.dachhack.sprout.sprites;
 
 import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.actors.mobs.DM300;
+import com.github.dachhack.sprout.actors.mobs.Shaman;
+import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.Speck;
 
 public class DM300Sprite extends MobSprite {
+	
+	private int[] points = new int[2];
 
 	public DM300Sprite() {
 		super();
@@ -43,6 +48,16 @@ public class DM300Sprite extends MobSprite {
 		die.frames(frames, 0, 7, 0, 7, 0, 7, 0, 7, 0, 7, 0, 7, 8);
 
 		play(idle);
+	}
+	
+	public void zap(int pos) {
+
+		points[0] = ch.pos;
+		points[1] = pos;
+		parent.add(new Lightning(points, 2, (DM300) ch));
+
+		turnTo(ch.pos, pos);
+		play(zap);
 	}
 
 	@Override

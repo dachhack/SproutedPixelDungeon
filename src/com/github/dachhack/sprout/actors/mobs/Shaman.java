@@ -46,8 +46,8 @@ public class Shaman extends Mob implements Callback {
 		name = "gnoll shaman";
 		spriteClass = ShamanSprite.class;
 
-		HP = HT = 18+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 8;
+		HP = HT = 18+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		defenseSkill = 8+(Dungeon.depth);
 
 		EXP = 6;
 		maxLvl = 14;

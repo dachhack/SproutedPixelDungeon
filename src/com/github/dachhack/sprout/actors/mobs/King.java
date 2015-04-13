@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
@@ -28,7 +29,10 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
@@ -41,9 +45,11 @@ import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.CityBossLevel;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.KingSprite;
 import com.github.dachhack.sprout.sprites.UndeadSprite;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -51,6 +57,7 @@ import com.watabou.utils.Random;
 public class King extends Mob {
 
 	private static final int MAX_ARMY_SIZE = 5;
+	private static final int REGEN = 3;
 
 	{
 		name = "King of Dwarves";
@@ -133,6 +140,19 @@ public class King extends Mob {
 		}
 	}
 
+
+	@Override
+	protected boolean act() {
+		boolean result = super.act();
+
+		if (HP < HT) {
+			sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
+			HP = HP + REGEN;
+		}
+		return result;
+	}
+	
+	
 	@Override
 	public void die(Object cause) {
 

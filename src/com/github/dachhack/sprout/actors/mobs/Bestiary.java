@@ -40,7 +40,11 @@ public class Bestiary {
 
 		if (Random.Int(30) == 0) {
 			if (cl == Rat.class) {
+				if(Random.Int(1)==0){
 				cl = Albino.class;
+				}  else {								
+				cl = RatBoss.class;
+				}
 			} else if (cl == Thief.class) {
 				cl = Bandit.class;
 			} else if (cl == Brute.class) {
@@ -102,19 +106,19 @@ public class Bestiary {
 					Swarm.class, Shaman.class };
 			break;
 		case 7:
-			chances = new float[] { 3, 1, 1, 1 };
+			chances = new float[] { 3, 1, 1, 1,  0.02f};
 			classes = new Class<?>[] { Skeleton.class, Shaman.class,
-					Thief.class, Swarm.class };
+					Thief.class, Swarm.class, Assassin.class};
 			break;
 		case 8:
-			chances = new float[] { 3, 2, 1, 1, 1, 0.02f };
+			chances = new float[] { 3, 2, 1, 1, 1, 0.2f, 0.02f };
 			classes = new Class<?>[] { Skeleton.class, Shaman.class,
-					Gnoll.class, Thief.class, Swarm.class, Bat.class };
+					Gnoll.class, Thief.class, Swarm.class, Assassin.class, Bat.class };
 			break;
 		case 9:
-			chances = new float[] { 3, 3, 1, 1, 0.02f, 0.01f };
+			chances = new float[] { 3, 3, 1, 1, 3, 0.02f, 0.01f };
 			classes = new Class<?>[] { Skeleton.class, Shaman.class,
-					Thief.class, Swarm.class, Bat.class, Brute.class };
+					Thief.class, Swarm.class, Assassin.class, Bat.class, Brute.class };
 			break;
 
 		case 10:

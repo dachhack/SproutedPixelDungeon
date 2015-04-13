@@ -17,44 +17,50 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
+import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
+import com.github.dachhack.sprout.sprites.RatBossSprite;
 import com.github.dachhack.sprout.sprites.RatSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
-public class Rat extends Mob {
+public class RatBoss extends Rat {
 	
 
-	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "marsupial rat";
-		spriteClass = RatSprite.class;
+		name = "rat boss";
+		spriteClass = RatBossSprite.class;
 
-		HP = HT = 8+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 3+(Dungeon.depth);
+		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		defenseSkill = 5+(Dungeon.depth);
 		
 		loot = new Meat();
 		lootChance = 0.5f;
+		
+		lootOther = new PotionOfMending();
+		lootChance = 1f;
 
 		maxLvl = 5;
 	}
 
-
+	@Override
+	public void die(Object cause) {
+		super.die(cause);
+		Badges.validateRare(this);
+	}
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 5);
+		return Random.NormalIntRange(3, 8);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 8;
+		return 12;
 	}
 
 	@Override
@@ -63,30 +69,21 @@ public class Rat extends Mob {
 	}
 
 	@Override
+	public void notice() {
+		super.notice();
+		yell("Scritch Scratch!");
+		boolean spawnedRats = false;
+		if (!spawnedRats){
+	    Rat.spawnAround(pos);
+	    GLog.n("Rat pack apears!");
+	    spawnedRats = true;
+		}
+	  }
+
+	
+	@Override
 	public String description() {
 		return "Marsupial rats are aggressive but rather weak denizens "
 				+ "of the sewers. They have a nasty bite, but are only life threatening in large numbers.";
 	}
-	
-	public static void spawnAround(int pos) {
-		for (int n : Level.NEIGHBOURS4) {
-			int cell = pos + n;
-			if (Level.passable[cell] && Actor.findChar(cell) == null) {
-				spawnAt(cell);
-			}
-		}
-	}
-	
-	public static Rat spawnAt(int pos) {
-		
-        Rat b = new Rat();  
-    	
-			b.pos = pos;
-			b.state = b.HUNTING;
-			GameScene.add(b, SPAWN_DELAY);
-
-			return b;
-     
-     }
-	
 }

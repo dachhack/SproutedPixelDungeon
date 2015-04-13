@@ -48,7 +48,8 @@ public class WndBlacksmith extends Window {
 
 	private static final String TXT_PROMPT = "Ok, a deal is a deal, dat's what I can do for you: I can reforge "
 			+ "2 items and turn them into one of a better quality.";
-	private static final String TXT_SELECT = "Select an item to reforge";
+	private static final String TXT_SELECT1 = "Select an item to enhance. Then, select and item to melt down.";
+	private static final String TXT_SELECT2 = "Select an item to melt down. This item will be destroyed.";
 	private static final String TXT_REFORGE = "Reforge them";
 
 	public WndBlacksmith(Blacksmith troll, Hero hero) {
@@ -72,7 +73,7 @@ public class WndBlacksmith extends Window {
 			protected void onClick() {
 				btnPressed = btnItem1;
 				GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEABLE,
-						TXT_SELECT);
+						TXT_SELECT1);
 			}
 		};
 		btnItem1.setRect((WIDTH - BTN_GAP) / 2 - BTN_SIZE,
@@ -84,7 +85,7 @@ public class WndBlacksmith extends Window {
 			protected void onClick() {
 				btnPressed = btnItem2;
 				GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEABLE,
-						TXT_SELECT);
+						TXT_SELECT2);
 			}
 		};
 		btnItem2.setRect(btnItem1.right() + BTN_GAP, btnItem1.top(), BTN_SIZE,

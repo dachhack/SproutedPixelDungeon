@@ -200,6 +200,10 @@ public class Dungeon {
 		Level level;
 		switch (depth) {
 		case 1:
+			//level = new PrisonLevel();
+			//hero.HT=999;
+			//hero.HP=hero.HT;
+			//break;
 		case 2:
 		case 3:
 		case 4:

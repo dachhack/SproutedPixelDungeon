@@ -19,8 +19,10 @@ package com.github.dachhack.sprout.items.weapon.melee;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -28,6 +30,7 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,8 @@ public class ShortSword extends MeleeWeapon {
 	private static final float TIME_TO_REFORGE = 2f;
 
 	private boolean equipped;
+	
+	private float upgradeChance = 0.5f;
 
 	{
 		name = "short sword";
@@ -99,13 +104,25 @@ public class ShortSword extends MeleeWeapon {
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
 		@Override
 		public void onSelect(Item item) {
+			DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
+			if (gold!=null){
+			upgradeChance = (upgradeChance + (gold.quantity()*0.01f));
+			}
 			if (item != null && !(item instanceof Boomerang)) {
                 int i=0;
 				while(i<level) {
-				Sample.INSTANCE.play(Assets.SND_EVOKE);
-				ScrollOfUpgrade.upgrade(curUser);
-				evoke(curUser);
-				((MeleeWeapon) item).safeUpgrade();
+					if (i<2){
+					  Sample.INSTANCE.play(Assets.SND_EVOKE);
+					  ScrollOfUpgrade.upgrade(curUser);
+					  evoke(curUser);
+					  ((MeleeWeapon) item).safeUpgrade();
+					} else if (Random.Float()<upgradeChance){
+				     Sample.INSTANCE.play(Assets.SND_EVOKE);
+				     ScrollOfUpgrade.upgrade(curUser);
+				     evoke(curUser);
+				     ((MeleeWeapon) item).safeUpgrade();
+				     upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
+				  }
 				i++;
 				}
 							

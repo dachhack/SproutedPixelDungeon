@@ -441,7 +441,7 @@ public class Ghost extends NPC {
 			name = "gnoll trickster";
 			spriteClass = GnollTricksterSprite.class;
 
-			HP = HT = 20;
+			HP = HT = 40;
 			defenseSkill = 5;
 
 			EXP = 5;
@@ -539,7 +539,7 @@ public class Ghost extends NPC {
 			name = "great crab";
 			spriteClass = GreatCrabSprite.class;
 
-			HP = HT = 30;
+			HP = HT = 50;
 			defenseSkill = 0; // see damage()
 			baseSpeed = 1f;
 

@@ -52,6 +52,7 @@ public class Assets {
 	public static final String GNOLL = "gnoll.png";
 	public static final String CRAB = "crab.png";
 	public static final String GOO = "goo.png";
+	public static final String POISONGOO = "poisongoo.png";
 	public static final String SWARM = "swarm.png";
 	public static final String SKELETON = "skeleton.png";
 	public static final String SHAMAN = "shaman.png";
@@ -87,6 +88,8 @@ public class Assets {
 	public static final String RATKING = "ratking.png";
 	public static final String BEE = "bee.png";
 	public static final String MIMIC = "mimic.png";
+	public static final String RATBOSS = "ratboss.png";
+	public static final String ASSASSIN = "assassin.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";

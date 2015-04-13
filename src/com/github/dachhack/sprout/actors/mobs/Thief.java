@@ -44,8 +44,8 @@ public class Thief extends Mob {
 		name = "crazy thief";
 		spriteClass = ThiefSprite.class;
 
-		HP = HT = 20+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 12;
+		HP = HT = 20+(Dungeon.depth*Random.NormalIntRange(3, 5));
+		defenseSkill = 12+(Dungeon.depth);
 
 		EXP = 5;
 		maxLvl = 10;

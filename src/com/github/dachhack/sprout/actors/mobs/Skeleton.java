@@ -41,8 +41,8 @@ public class Skeleton extends Mob {
 		name = "skeleton";
 		spriteClass = SkeletonSprite.class;
 
-		HP = HT = 25+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 9;
+		HP = HT = 25+(Dungeon.depth*Random.NormalIntRange(3, 7));
+		defenseSkill = 9+(Dungeon.depth);
 
 		EXP = 5;
 		maxLvl = 10;
@@ -53,7 +53,7 @@ public class Skeleton extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(3, 8);
+		return Random.NormalIntRange(10, 20);
 	}
 
 	@Override

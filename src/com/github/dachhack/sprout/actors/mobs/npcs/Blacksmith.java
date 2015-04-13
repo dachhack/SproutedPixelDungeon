@@ -33,6 +33,8 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.quest.Pickaxe;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
+import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -65,6 +67,7 @@ public class Blacksmith extends NPC {
 		name = "troll blacksmith";
 		spriteClass = BlacksmithSprite.class;
 	}
+	
 
 	@Override
 	protected boolean act() {
@@ -110,10 +113,10 @@ public class Blacksmith extends NPC {
 				} else if (!pick.bloodStained) {
 					tell(TXT4);
 				} else {
-					if (pick.isEquipped(Dungeon.hero)) {
-						pick.doUnequip(Dungeon.hero, false);
-					}
-					pick.detach(Dungeon.hero.belongings.backpack);
+					//if (pick.isEquipped(Dungeon.hero)) {
+					//	pick.doUnequip(Dungeon.hero, false);
+					//}
+					//pick.detach(Dungeon.hero.belongings.backpack);
 					tell(TXT_COMPLETED);
 
 					Quest.completed = true;
@@ -129,11 +132,10 @@ public class Blacksmith extends NPC {
 				} else if (gold == null || gold.quantity() < 15) {
 					tell(TXT3);
 				} else {
-					if (pick.isEquipped(Dungeon.hero)) {
-						pick.doUnequip(Dungeon.hero, false);
-					}
-					pick.detach(Dungeon.hero.belongings.backpack);
-					gold.detachAll(Dungeon.hero.belongings.backpack);
+					//if (pick.isEquipped(Dungeon.hero)) {
+					//	pick.doUnequip(Dungeon.hero, false);
+					//}
+					//pick.detach(Dungeon.hero.belongings.backpack);
 					tell(TXT_COMPLETED);
 
 					Quest.completed = true;
@@ -162,9 +164,9 @@ public class Blacksmith extends NPC {
 			return "Select 2 different items, not the same item twice!";
 		}
 
-		if (item1.getClass() != item2.getClass()) {
-			return "Select 2 items of the same type!";
-		}
+		//if (item1.getClass() != item2.getClass()) {
+		//	return "Select 2 items of the same type!";
+		//}
 
 		if (!item1.isIdentified() || !item2.isIdentified()) {
 			return "I need to know what I'm working with, identify them first!";
@@ -185,16 +187,14 @@ public class Blacksmith extends NPC {
 		return null;
 	}
 
+	private static float upgradeChance = 0.5f;
 	public static void upgrade(Item item1, Item item2) {
 
 		Item first, second;
-		if (item2.level > item1.level) {
-			first = item2;
-			second = item1;
-		} else {
+		
 			first = item1;
 			second = item2;
-		}
+		
 
 		Sample.INSTANCE.play(Assets.SND_EVOKE);
 		ScrollOfUpgrade.upgrade(Dungeon.hero);
@@ -203,7 +203,25 @@ public class Blacksmith extends NPC {
 		if (first.isEquipped(Dungeon.hero)) {
 			((EquipableItem) first).doUnequip(Dungeon.hero, true);
 		}
-		first.upgrade();
+		
+		DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
+		if (gold!=null){
+		upgradeChance = (upgradeChance + (gold.quantity()*0.05f));
+		}
+		if (first != null) {
+            int i=0;
+			while(i<first.level) {
+				if (i<2){
+				  Sample.INSTANCE.play(Assets.SND_EVOKE);
+				  first.upgrade();
+				} else if (Random.Float()<upgradeChance){
+				  first.upgrade();
+			     upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
+			  }
+			i++;
+			}
+		}
+		
 		GLog.p(TXT_LOOKS_BETTER, first.name());
 		Dungeon.hero.spendAndNext(2f);
 		Badges.validateItemLevelAquired(first);
@@ -212,7 +230,7 @@ public class Blacksmith extends NPC {
 			((EquipableItem) second).doUnequip(Dungeon.hero, false);
 		}
 		second.detachAll(Dungeon.hero.belongings.backpack);
-
+		gold.detachAll(Dungeon.hero.belongings.backpack);
 		Quest.reforged = true;
 
 		Journal.remove(Journal.Feature.TROLL);

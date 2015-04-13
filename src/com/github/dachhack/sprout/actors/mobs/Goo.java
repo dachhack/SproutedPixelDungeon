@@ -30,6 +30,7 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.blobs.Web;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Ooze;
+import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -204,13 +205,18 @@ public class Goo extends Mob {
 
 		yell("glurp... glurp...");
 	}
-
+  
+	protected boolean spawnedMini = false;
+	
 	@Override
 	public void notice() {
 		super.notice();
 		yell("GLURP-GLURP!");
+		if (!spawnedMini){
 	    PoisonGoo.spawnAround(pos);
-	}
+	    spawnedMini = true;
+		}
+	  }
 
 	@Override
 	public String description() {
@@ -249,6 +255,16 @@ public class Goo extends Mob {
 	@Override
 	public HashSet<Class<?>> resistances() {
 		return RESISTANCES;
+	}
+	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
+
+	static {
+		IMMUNITIES.add(Roots.class);
+	}
+
+	@Override
+	public HashSet<Class<?>> immunities() {
+		return IMMUNITIES;
 	}
 	
 	}

@@ -50,6 +50,7 @@ public class Swarm extends Mob {
 		flying = true;
 
 		loot = new PotionOfHealing();
+		//loot = new PotionOfMending(); potential nerf
 		lootChance = 0.2f; // by default, see die()
 	}
 
@@ -144,7 +145,7 @@ public class Swarm extends Mob {
 	@Override
 	protected Item createLoot() {
 		Dungeon.limitedDrops.swarmHP.count++;
-		if (Dungeon.limitedDrops.swarmHP.count>2){ Dungeon.limitedDrops.swarmHP.count=2; }
+		if (Dungeon.limitedDrops.swarmHP.count>5){ Dungeon.limitedDrops.swarmHP.count=5; }
 		return super.createLoot();
 	}
 

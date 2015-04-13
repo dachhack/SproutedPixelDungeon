@@ -40,8 +40,8 @@ public class Elemental extends Mob {
 		name = "fire elemental";
 		spriteClass = ElementalSprite.class;
 
-		HP = HT = 65+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 20;
+		HP = HT = 65+(Dungeon.depth*Random.NormalIntRange(4, 7));
+		defenseSkill = 20+(Dungeon.depth);
 
 		EXP = 10;
 		maxLvl = 20;

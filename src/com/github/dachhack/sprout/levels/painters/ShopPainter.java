@@ -176,10 +176,7 @@ public class ShopPainter extends Painter {
 			itemsToSpawn.add(Random.Int(2) == 0 ? Generator
 					.random(Generator.Category.POTION) : Generator
 					.random(Generator.Category.SCROLL));
-
-		itemsToSpawn.add(new OverpricedRation());
-		itemsToSpawn.add(new OverpricedRation());
-
+		
 		itemsToSpawn.add(new Bomb().random());
 		switch (Random.Int(5)) {
 		case 1:

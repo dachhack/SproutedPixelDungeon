@@ -49,7 +49,7 @@ public class Warlock extends Mob implements Callback {
 		spriteClass = WarlockSprite.class;
 
 		HP = HT = 70+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 18;
+		defenseSkill = 18+(Dungeon.depth);
 
 		EXP = 11;
 		maxLvl = 21;
@@ -68,7 +68,7 @@ public class Warlock extends Mob implements Callback {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 25;
+		return 25+(Dungeon.depth);
 	}
 
 	@Override

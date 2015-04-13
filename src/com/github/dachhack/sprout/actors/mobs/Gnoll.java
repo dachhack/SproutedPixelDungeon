@@ -32,7 +32,7 @@ public class Gnoll extends Mob {
 		spriteClass = GnollSprite.class;
 
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 4;
+		defenseSkill = 4+(Dungeon.depth);
 
 		EXP = 2;
 		maxLvl = 8;
@@ -51,7 +51,7 @@ public class Gnoll extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 11;
+		return 11+(Dungeon.depth);
 	}
 
 	@Override

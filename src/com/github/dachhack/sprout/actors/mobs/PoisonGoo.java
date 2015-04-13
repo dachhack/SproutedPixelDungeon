@@ -32,6 +32,7 @@ import com.github.dachhack.sprout.actors.blobs.Web;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -40,6 +41,7 @@ import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.LloydsBeacon;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.potions.PotionOfPurity;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
@@ -48,6 +50,7 @@ import com.github.dachhack.sprout.levels.SewerBossLevel;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.GooSprite;
+import com.github.dachhack.sprout.sprites.PoisonGooSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
@@ -60,13 +63,13 @@ protected static final float SPAWN_DELAY = 2f;
 
 	{
 		name = "Goo";
-		HP = HT = 40;
+		HP = HT = 50;
 		EXP = 10;
 		defenseSkill = 12;
-		spriteClass = GooSprite.class;
+		spriteClass = PoisonGooSprite.class;
 		baseSpeed = 2f;
 
-		loot = new PotionOfPurity();
+		loot = new PotionOfMending();
 		lootChance = 1f;
 		FLEEING = new Fleeing();
 	}
@@ -90,9 +93,9 @@ protected static final float SPAWN_DELAY = 2f;
 
 	@Override
 	public int attackProc(Char enemy, int damage) {
-		if (Random.Int(2) == 0) {
+		if (Random.Int(1) == 0) {
 			Buff.affect(enemy, Poison.class).set(
-					Random.Int(7, 9) * Poison.durationFactor(enemy));
+					Random.Int(7, 10) * Poison.durationFactor(enemy));
 			state = FLEEING;
 		}
 
@@ -102,19 +105,19 @@ protected static final float SPAWN_DELAY = 2f;
 	@Override
 	public void move(int step) {
 		if (state == FLEEING) {
-			GameScene.add(Blob.seed(pos, Random.Int(5, 7), Web.class));
+			GameScene.add(Blob.seed(pos, Random.Int(7, 10), Web.class));
 		}
 		super.move(step);
 	}
 	
 	@Override
 	public int damageRoll() {
-			return Random.NormalIntRange(5, 30);
+			return Random.NormalIntRange(1, 10);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 15;
+		return 5;
 	}
 
 	@Override
@@ -161,6 +164,17 @@ protected static final float SPAWN_DELAY = 2f;
 	@Override
 	public HashSet<Class<?>> resistances() {
 		return RESISTANCES;
+	}
+	
+	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
+
+	static {
+		IMMUNITIES.add(Roots.class);
+	}
+
+	@Override
+	public HashSet<Class<?>> immunities() {
+		return IMMUNITIES;
 	}
 	
 	private class Fleeing extends Mob.Fleeing {

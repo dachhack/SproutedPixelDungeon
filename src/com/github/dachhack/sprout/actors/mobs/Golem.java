@@ -35,8 +35,8 @@ public class Golem extends Mob {
 		name = "golem";
 		spriteClass = GolemSprite.class;
 
-		HP = HT = 85+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 18;
+		HP = HT = 85+(Dungeon.depth*Random.NormalIntRange(4, 7));
+		defenseSkill = 18+(Dungeon.depth);
 
 		EXP = 12;
 		maxLvl = 22;

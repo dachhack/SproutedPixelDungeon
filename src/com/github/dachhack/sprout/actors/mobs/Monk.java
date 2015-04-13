@@ -41,7 +41,7 @@ public class Monk extends Mob {
 		name = "dwarf monk";
 		spriteClass = MonkSprite.class;
 
-		HP = HT = 70+(Dungeon.depth*Random.NormalIntRange(1, 3));
+		HP = HT = 70+(Dungeon.depth*Random.NormalIntRange(3, 5));
 		defenseSkill = 30;
 
 		EXP = 11;

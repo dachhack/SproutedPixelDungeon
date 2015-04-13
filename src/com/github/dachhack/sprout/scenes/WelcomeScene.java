@@ -23,25 +23,26 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Future = "Wait What?";
 
-	private static final String TXT_Welcome = "Pixel Dungeon - Garden of Hack n Slash is a rework/expansion of Watabou's Pixel Dungeon.\n\n"
+	private static final String TXT_Welcome = "Sprouted Pixel Dungeon is a rework/expansion of Watabou's Pixel Dungeon.\n\n"
 			+ "Included are all additions from Shattered Pixel Dungeon by Evan-00\n\n"
 			+ "This version was adapted for those who love to grind, level up, and collect loot\n\n"
-			+ "This is is exclusively a vanity release so enjoy being special!\n\n"
 			+ "Happy Dungeoneering!";
 
-	private static final String TXT_Update = "Garden Enhancements:\n\n"
+	private static final String TXT_Update = "Sprouted Enhancements:\n\n"
 			+"Much bigger level grid.\n\n"
 			+"Mobs drop monster meat.\n\n"
 			+"More dew.\n\n"
 			+"Dew Vial fills to 100 and heals at a cost of 10.\n\n"
-			+"Dew Vial also waters nearby trampled grass.\n\n"
+			+"Dew Vial also waters the dungeon around you.\n\n"
 			+"Graveyards/Crypts are worth looting.\n\n"
 			+"Wraiths are worth hunting.\n\n"
 			+"Bosses are harder and drop $$$ rewards.\n\n"
 			+"Scrolls of Upgrade do not remove Enchantments.\n\n"
+			+"Nuts\n\n"
 			+"Heal on level up.\n\n"
 			+"Potions shift color when game closes.\n\n"
-			+"Okay. That last one is a bug.\n\n"
+			+"Okay, that last one is a bug.\n\n"
+			+"And more...\n\n"
 			+"\n\n"
 			+"Shattered V0.2.4c:\n"
 			+ "-Various bug and crash fixes.\n"
