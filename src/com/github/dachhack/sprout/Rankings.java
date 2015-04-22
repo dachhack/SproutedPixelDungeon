@@ -24,8 +24,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import android.content.Context;
+
 import com.watabou.noosa.Game;
-import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Bundlable;
@@ -121,7 +122,7 @@ public enum Rankings {
 
 		try {
 			OutputStream output = Game.instance.openFileOutput(RANKINGS_FILE,
-					Game.MODE_PRIVATE);
+					Context.MODE_PRIVATE);
 			Bundle.write(bundle, output);
 			output.close();
 		} catch (IOException e) {

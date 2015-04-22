@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -50,7 +51,7 @@ public class ScrollOfRemoveCurse extends Scroll {
 				curUser.belongings.misc2)
 				|| procced;
 
-		Weakness.detach(curUser, Weakness.class);
+		Buff.detach(curUser, Weakness.class);
 
 		if (procced) {
 			GLog.p(TXT_PROCCED);
@@ -77,6 +78,7 @@ public class ScrollOfRemoveCurse extends Scroll {
 			Item item = items[i];
 			if (item != null && item.cursed) {
 				item.cursed = false;
+				item.level = -item.level;
 				procced = true;
 			}
 		}

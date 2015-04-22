@@ -64,6 +64,7 @@ public class WandOfRegrowth extends Wand {
 		}
 	}
 
+	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile
 				.foliage(curUser.sprite.parent, curUser.pos, cell, callback);

@@ -19,12 +19,7 @@ package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
-import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Roots;
-import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
@@ -35,7 +30,7 @@ public class Nut extends Food {
 	{
 		name = "dungeon nut";
 		image = ItemSpriteSheet.SEED_DUNGEONNUT;
-		energy = Hunger.HUNGRY-10;
+		energy = (Hunger.STARVING - Hunger.HUNGRY)/2;
 		message = "Crunch Crunch.";
 		hornValue = 1;
 	}

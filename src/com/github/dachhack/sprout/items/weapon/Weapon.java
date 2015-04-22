@@ -168,7 +168,7 @@ public class Weapon extends KindOfWeapon {
 
 	public Item upgrade(boolean enchant) {
 		if (enchantment != null) {
-			if (!enchant && Random.Int(level) > 0) {
+			if (!enchant && Random.Int(level)>level) {
 				enchant();
 			}
 		} else {

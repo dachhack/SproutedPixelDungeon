@@ -672,7 +672,9 @@ public class Hero extends Char {
 				theKey = null;
 
 				if (heap.type == Type.LOCKED_CHEST
-						|| heap.type == Type.CRYSTAL_CHEST) {
+						|| heap.type == Type.CRYSTAL_CHEST 
+						//|| heap.type == Type.MONSTERBOX
+						) {
 
 					theKey = belongings.getKey(GoldenKey.class, Dungeon.depth);
 
@@ -953,7 +955,7 @@ public class Hero extends Char {
 			tenacity += ((RingOfTenacity.Tenacity) buff).level;
 		}
 		if (tenacity != 0) // (HT - HP)/HT = heroes current % missing health.
-			dmg = (int) Math.ceil((float) dmg
+			dmg = (int) Math.ceil(dmg
 					* Math.pow(0.9, tenacity * ((float) (HT - HP) / HT)));
 
 		super.damage(dmg, src);
@@ -1144,7 +1146,7 @@ public class Hero extends Char {
 				sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 			}
 
-			((Hunger) buff(Hunger.class)).satisfy(10);
+			buff(Hunger.class).satisfy(10);
 		}
 
 		if (subClass == HeroSubClass.WARLOCK) {
@@ -1155,7 +1157,7 @@ public class Hero extends Char {
 				sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 			}
 
-			((Hunger) buff(Hunger.class)).satisfy(10);
+			buff(Hunger.class).satisfy(10);
 		}
 	}
 
@@ -1170,7 +1172,7 @@ public class Hero extends Char {
 
 	public boolean isStarving() {
 		return buff(Hunger.class) != null
-				&& ((Hunger) buff(Hunger.class)).isStarving();
+				&& buff(Hunger.class).isStarving();
 	}
 
 	@Override
@@ -1277,7 +1279,7 @@ public class Hero extends Char {
 			ankh.detach(belongings.backpack);
 
 			Sample.INSTANCE.play(Assets.SND_TELEPORT);
-			GLog.w(ankh.TXT_REVIVE);
+			GLog.w(Ankh.TXT_REVIVE);
 			Statistics.ankhsUsed++;
 
 			return;

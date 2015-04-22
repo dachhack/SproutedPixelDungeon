@@ -18,7 +18,6 @@
 package com.github.dachhack.sprout.items.keys;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.Utils;

@@ -53,6 +53,7 @@ public class Web extends Blob {
 		emitter.pour(WebParticle.FACTORY, 0.4f);
 	}
 
+	@Override
 	public void seed(int cell, int amount) {
 		int diff = amount - cur[cell];
 		if (diff > 0) {

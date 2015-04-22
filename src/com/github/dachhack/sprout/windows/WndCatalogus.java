@@ -86,12 +86,14 @@ public class WndCatalogus extends WndTabbed {
 
 		boolean showPotions = WndCatalogus.showPotions;
 		Tab[] tabs = { new LabeledTab(TXT_POTIONS) {
+			@Override
 			protected void select(boolean value) {
 				super.select(value);
 				WndCatalogus.showPotions = value;
 				updateList();
 			};
 		}, new LabeledTab(TXT_SCROLLS) {
+			@Override
 			protected void select(boolean value) {
 				super.select(value);
 				WndCatalogus.showPotions = !value;

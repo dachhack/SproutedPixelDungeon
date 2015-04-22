@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
@@ -30,12 +31,15 @@ import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.quest.DarkGold;
+import com.github.dachhack.sprout.items.rings.Ring;
+import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.items.wands.WandOfAmok;
 import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
-import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
 import com.github.dachhack.sprout.items.weapon.melee.Knuckles;
 import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
@@ -143,11 +147,16 @@ public enum HeroClass {
 		(hero.belongings.weapon = new ShortSword()).identify();
 		Dart darts = new Dart(8);
 		darts.identify().collect();
+		//for(int i=1; i<8; i++){
 		//Scroll scroll = new ScrollOfUpgrade();
-        //scroll.identify().collect();
-        //Scroll scroll2 = new ScrollOfUpgrade();
-        //scroll2.identify().collect();
-        //DarkGold gold = new DarkGold(); gold.collect();
+       // scroll.identify().collect();
+		//}
+       // for(int i=1; i<45; i++){
+       // DarkGold gold = new DarkGold(); gold.collect();
+       // }
+       // Ring ring = new RingOfAccuracy(); ring.collect();
+      //  Wand wand = new WandOfAmok(); wand.collect();
+      //  Honeypot honeypot = new Honeypot(); honeypot.collect();
        	Dungeon.quickslot.setSlot(0, darts);
 
 		new PotionOfStrength().setKnown();

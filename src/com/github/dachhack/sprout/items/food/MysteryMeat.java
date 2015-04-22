@@ -73,6 +73,7 @@ public class MysteryMeat extends Food {
 		return "Eat at your own risk!";
 	}
 
+	@Override
 	public int price() {
 		return 5 * quantity;
 	};

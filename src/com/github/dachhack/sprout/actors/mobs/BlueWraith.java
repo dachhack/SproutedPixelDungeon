@@ -17,39 +17,16 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Frost;
-import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
-import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
-import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.food.GoldenNut;
-import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.potions.PotionOfHealing;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.BlueWraithSprite;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.WarlockSprite;
-import com.github.dachhack.sprout.sprites.WraithSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.utils.Bundle;
-import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class BlueWraith extends Wraith  {
@@ -85,6 +62,7 @@ public class BlueWraith extends Wraith  {
 		return damage;
 	}
 
+	@Override
 	public void adjustStats(int level) {
 		this.level = level;
 		defenseSkill = attackSkill(null) * 5;

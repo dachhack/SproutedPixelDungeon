@@ -22,7 +22,6 @@ import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.effects.Splash;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;

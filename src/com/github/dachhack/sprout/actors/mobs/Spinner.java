@@ -39,7 +39,7 @@ public class Spinner extends Mob {
 		spriteClass = SpinnerSprite.class;
 
 		HP = HT = 50+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 14+(Dungeon.depth);
+		defenseSkill = 14+(Math.round((Dungeon.depth)/2));
 
 		EXP = 9;
 		maxLvl = 16;

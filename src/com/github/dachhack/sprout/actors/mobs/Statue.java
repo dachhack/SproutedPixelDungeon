@@ -25,7 +25,6 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.Weapon.Enchantment;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;

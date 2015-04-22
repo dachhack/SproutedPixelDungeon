@@ -54,6 +54,7 @@ public class MeleeWeapon extends Weapon {
 		return upgrade(false);
 	}
 
+	@Override
 	public Item upgrade(boolean enchant) {
 		STR--;
 		MIN++;

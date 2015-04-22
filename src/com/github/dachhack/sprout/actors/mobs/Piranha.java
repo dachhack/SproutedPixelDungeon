@@ -29,7 +29,6 @@ import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.PiranhaSprite;
 import com.watabou.utils.Random;

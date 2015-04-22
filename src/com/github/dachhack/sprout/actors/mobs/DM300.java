@@ -94,6 +94,7 @@ public class DM300 extends Mob implements Callback {
 		return super.act();
 	}
 	
+	@Override
 	protected boolean canAttack(Char enemy) {
 		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
 	}

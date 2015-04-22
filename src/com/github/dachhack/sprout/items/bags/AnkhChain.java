@@ -15,40 +15,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.actors.buffs;
+package com.github.dachhack.sprout.items.bags;
 
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.ui.BuffIndicator;
-import com.watabou.utils.Random;
+import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.potions.Potion;
+import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
-public class Drowsy extends Buff {
+public class AnkhChain extends Bag {
 
-	@Override
-	public int icon() {
-		return BuffIndicator.DROWSY;
+	{
+		name = "chain";
+		image = ItemSpriteSheet.CHAIN;
+
+		size = 12;
 	}
 
 	@Override
-	public boolean attachTo(Char target) {
-		if (!target.immunities().contains(Sleep.class)
-				&& super.attachTo(target)) {
-			if (cooldown() == 0)
-				spend(Random.Int(3, 6));
-			return true;
-		}
-		return false;
+	public boolean grab(Item item) {
+		return item instanceof Ankh;
 	}
 
 	@Override
-	public boolean act() {
-		Buff.affect(target, MagicalSleep.class);
-
-		detach();
-		return true;
+	public int price() {
+		return 50;
 	}
 
 	@Override
-	public String toString() {
-		return "Drowsy";
+	public String info() {
+		return "This chain can hold your amulets and other small jewelery.\n\n"
+				+"Must be a pretty scarry dungeon you are heading into!";
 	}
 }
+

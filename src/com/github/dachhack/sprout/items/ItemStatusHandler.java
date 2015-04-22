@@ -50,7 +50,7 @@ public class ItemStatusHandler<T extends Item> {
 
 		for (int i = 0; i < items.length; i++) {
 
-			Class<? extends T> item = (Class<? extends T>) (items[i]);
+			Class<? extends T> item = (items[i]);
 
 			int index = Random.Int(labelsLeft.size());
 
@@ -96,7 +96,7 @@ public class ItemStatusHandler<T extends Item> {
 
 		for (int i = 0; i < items.length; i++) {
 
-			Class<? extends T> item = (Class<? extends T>) (items[i]);
+			Class<? extends T> item = (items[i]);
 			String itemName = item.toString();
 
 			if (bundle.contains(itemName + PFX_LABEL) && Dungeon.version > 4) {

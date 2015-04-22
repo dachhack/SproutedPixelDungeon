@@ -47,6 +47,7 @@ public class WandOfSlowness extends Wand {
 		}
 	}
 
+	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.slowness(curUser.sprite.parent, curUser.pos, cell,
 				callback);

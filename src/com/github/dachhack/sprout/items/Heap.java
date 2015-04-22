@@ -27,6 +27,7 @@ import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.BlueWraith;
 import com.github.dachhack.sprout.actors.mobs.Mimic;
+import com.github.dachhack.sprout.actors.mobs.MonsterBox;
 import com.github.dachhack.sprout.actors.mobs.Wraith;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -38,6 +39,7 @@ import com.github.dachhack.sprout.items.artifacts.AlchemistsToolkit;
 import com.github.dachhack.sprout.items.food.Blandfruit;
 import com.github.dachhack.sprout.items.food.ChargrilledMeat;
 import com.github.dachhack.sprout.items.food.FrozenCarpaccio;
+import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.food.Nut;
 import com.github.dachhack.sprout.items.food.ToastedNut;
@@ -46,11 +48,9 @@ import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.plants.Plant.Seed;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.windows.WndTitledMessage;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
@@ -63,11 +63,12 @@ import java.util.LinkedList;
 public class Heap implements Bundlable {
 
 	private static final String TXT_MIMIC = "This is a mimic!";
+	//private static final String TXT_MONSTERBOX = "You've opened a world of hurt!";
 
 	private static final int SEEDS_TO_POTION = 3;
 
 	public enum Type {
-		HEAP, FOR_SALE, CHEST, LOCKED_CHEST, CRYSTAL_CHEST, TOMB, SKELETON, REMAINS, MIMIC
+		HEAP, FOR_SALE, CHEST, LOCKED_CHEST, CRYSTAL_CHEST, TOMB, SKELETON, REMAINS, MIMIC //,MONSTERBOX
 	}
 
 	public Type type = Type.HEAP;
@@ -96,6 +97,8 @@ public class Heap implements Bundlable {
 			return ItemSpriteSheet.BONES;
 		case REMAINS:
 			return ItemSpriteSheet.REMAINS;
+		//case MONSTERBOX:
+		//	return ItemSpriteSheet.LOCKED_CHEST;
 		default:
 			return 0;
 		}
@@ -108,6 +111,13 @@ public class Heap implements Bundlable {
 
 	public void open(Hero hero) {
 		switch (type) {
+		//case MONSTERBOX:
+		//	if (MonsterBox.spawnAt(pos, items) != null) {
+		//		GLog.n(TXT_MONSTERBOX);
+		//		destroy();
+		//	} else {
+		//		type = Type.CHEST;
+		//	}
 		case MIMIC:
 			if (Mimic.spawnAt(pos, items) != null) {
 				GLog.n(TXT_MIMIC);
@@ -141,6 +151,7 @@ public class Heap implements Bundlable {
 		default:
 		}
 
+		//if (type != Type.MIMIC && type != Type.MONSTERBOX) {
 		if (type != Type.MIMIC) {
 			type = Type.HEAP;
 			sprite.link();
@@ -213,10 +224,6 @@ public class Heap implements Bundlable {
 			}
 		}
 
-		if (type != Type.HEAP) {
-			return;
-		}
-
 		boolean burnt = false;
 		boolean evaporated = false;
 
@@ -229,6 +236,9 @@ public class Heap implements Bundlable {
 				evaporated = true;
 			} else if (item instanceof MysteryMeat) {
 				replace(item, ChargrilledMeat.cook((MysteryMeat) item));
+				burnt = true;
+			} else if (item instanceof Meat) {
+				replace(item, ChargrilledMeat.cook((Meat) item));
 				burnt = true;
 			} else if (item instanceof Nut) {
 				replace(item, ToastedNut.cook((Nut) item));
@@ -266,7 +276,7 @@ public class Heap implements Bundlable {
 	public void explode() {
 
 		// breaks open most standard containers, mimics die.
-		if (type == Type.MIMIC || type == Type.CHEST || type == Type.SKELETON) {
+		if (type == Type.MIMIC ||  type == Type.CHEST || type == Type.SKELETON) {
 			type = Type.HEAP;
 			sprite.link();
 			sprite.drop();
@@ -313,6 +323,7 @@ public class Heap implements Bundlable {
 				destroy();
 			}
 		}
+
 
 		if (type != Type.HEAP) {
 			return;

@@ -29,6 +29,7 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
@@ -64,13 +65,13 @@ public class Food extends Item {
 
 			detach(hero.belongings.backpack);
 
-			((Hunger) hero.buff(Hunger.class)).satisfy(energy);
+			hero.buff(Hunger.class).satisfy(energy);
 			GLog.i(message);
-
+            int healEnergy = Math.max(7, Math.round(energy/20));
 			switch (hero.heroClass) {
 			case WARRIOR:
 				if (hero.HP < hero.HT) {
-					hero.HP = Math.min(hero.HP + 5, hero.HT);
+					hero.HP = Math.min(hero.HP + Random.Int(3, healEnergy), hero.HT);
 					hero.sprite.emitter()
 							.burst(Speck.factory(Speck.HEALING), 1);
 				}
@@ -78,9 +79,24 @@ public class Food extends Item {
 			case MAGE:
 				hero.belongings.charge(false);
 				ScrollOfRecharging.charge(hero);
+				if (hero.HP < hero.HT) {
+					hero.HP = Math.min((hero.HP + Random.Int(1, 3)), hero.HT);
+					hero.sprite.emitter()
+							.burst(Speck.factory(Speck.HEALING), 1);
+				}
 				break;
 			case ROGUE:
+				if (hero.HP < hero.HT) {
+					hero.HP = Math.min((hero.HP + Random.Int(1, 3)), hero.HT);
+					hero.sprite.emitter()
+							.burst(Speck.factory(Speck.HEALING), 1);
+				}
 			case HUNTRESS:
+				if (hero.HP < hero.HT) {
+					hero.HP = Math.min((hero.HP + Random.Int(1, 3)), hero.HT);
+					hero.sprite.emitter()
+							.burst(Speck.factory(Speck.HEALING), 1);
+				}
 				break;
 			}
 

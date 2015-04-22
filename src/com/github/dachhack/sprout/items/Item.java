@@ -387,7 +387,7 @@ public class Item implements Bundlable {
 	public static Item virtual(Class<? extends Item> cl) {
 		try {
 
-			Item item = (Item) cl.newInstance();
+			Item item = cl.newInstance();
 			item.quantity = 0;
 			return item;
 

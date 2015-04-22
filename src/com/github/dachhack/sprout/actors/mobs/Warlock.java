@@ -49,7 +49,7 @@ public class Warlock extends Mob implements Callback {
 		spriteClass = WarlockSprite.class;
 
 		HP = HT = 70+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 18+(Dungeon.depth);
+		defenseSkill = 18+(Math.round((Dungeon.depth)/2));
 
 		EXP = 11;
 		maxLvl = 21;
@@ -81,6 +81,7 @@ public class Warlock extends Mob implements Callback {
 		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
 	}
 
+	@Override
 	protected boolean doAttack(Char enemy) {
 
 		if (Level.adjacent(pos, enemy.pos)) {

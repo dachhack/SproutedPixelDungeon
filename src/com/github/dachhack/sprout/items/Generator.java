@@ -96,9 +96,9 @@ public class Generator {
 				PotionOfLevitation.class, PotionOfStrength.class,
 				PotionOfMindVision.class, PotionOfPurity.class,
 				PotionOfInvisibility.class, PotionOfMight.class,
-				PotionOfFrost.class, PotionOfMending.class };
+				PotionOfFrost.class, PotionOfMending.class};
 		Category.POTION.probs = new float[] { 45, 4, 15, 10, 15, 10, 0, 20, 12,
-				10, 0, 10, 10 };
+				10, 0, 10, 10};
 
 		Category.WAND.classes = new Class<?>[] { WandOfTeleportation.class,
 				WandOfSlowness.class, WandOfFirebolt.class,
@@ -151,7 +151,7 @@ public class Generator {
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
 				Nut.class};
-		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 15};
+		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 25};
 	}
 
 	public static void reset() {

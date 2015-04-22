@@ -82,7 +82,7 @@ public class Blandfruit extends Food {
 
 				detach(hero.belongings.backpack);
 
-				((Hunger) hero.buff(Hunger.class)).satisfy(energy);
+				hero.buff(Hunger.class).satisfy(energy);
 				GLog.i(message);
 
 				hero.sprite.operate(hero.pos);
@@ -96,7 +96,7 @@ public class Blandfruit extends Food {
 				Badges.validateFoodEaten();
 			} else {
 
-				((Hunger) hero.buff(Hunger.class)).satisfy(Hunger.HUNGRY);
+				hero.buff(Hunger.class).satisfy(Hunger.HUNGRY);
 
 				detach(hero.belongings.backpack);
 

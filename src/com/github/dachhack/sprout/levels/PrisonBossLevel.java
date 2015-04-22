@@ -160,14 +160,17 @@ public class PrisonBossLevel extends RegularLevel {
 		return true;
 	}
 
+	@Override
 	protected boolean[] water() {
 		return Patch.generate(0.45f, 5);
 	}
 
+	@Override
 	protected boolean[] grass() {
 		return Patch.generate(0.30f, 4);
 	}
 
+	@Override
 	protected void paintDoors(Room r) {
 
 		for (Room n : r.connected.keySet()) {
@@ -276,6 +279,7 @@ public class PrisonBossLevel extends RegularLevel {
 	protected void createMobs() {
 	}
 
+	@Override
 	public Actor respawner() {
 		return null;
 	}

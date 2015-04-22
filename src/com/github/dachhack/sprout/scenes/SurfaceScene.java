@@ -140,6 +140,7 @@ public class SurfaceScene extends PixelScene {
 		window.add(pet);
 
 		window.add(new TouchArea(sky) {
+			@Override
 			protected void onClick(Touch touch) {
 				pet.jump();
 			};
@@ -167,6 +168,7 @@ public class SurfaceScene extends PixelScene {
 		}
 
 		RedButton gameOver = new RedButton("Game Over") {
+			@Override
 			protected void onClick() {
 				Game.switchScene(TitleScene.class);
 			}

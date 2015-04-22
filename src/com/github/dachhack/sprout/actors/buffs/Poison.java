@@ -25,7 +25,6 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.rings.RingOfElements.Resistance;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Bundle;
 
 public class Poison extends Buff implements Hero.Doom {

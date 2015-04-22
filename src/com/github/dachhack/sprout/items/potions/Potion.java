@@ -61,17 +61,18 @@ public class Potion extends Item {
 			PotionOfParalyticGas.class, PotionOfLevitation.class,
 			PotionOfMindVision.class, PotionOfPurity.class,
 			PotionOfInvisibility.class, PotionOfMight.class,
-			PotionOfFrost.class, PotionOfMending.class };
+			PotionOfFrost.class, PotionOfMending.class};
+	
 	private static final String[] colors = { "turquoise", "crimson", "azure",
 			"jade", "golden", "magenta", "charcoal", "ivory", "amber",
-			"bistre", "indigo", "silver", "aqua" };
+			"bistre", "indigo", "silver", "aqua"};
 	private static final Integer[] images = { ItemSpriteSheet.POTION_TURQUOISE,
 			ItemSpriteSheet.POTION_CRIMSON, ItemSpriteSheet.POTION_AZURE,
 			ItemSpriteSheet.POTION_JADE, ItemSpriteSheet.POTION_GOLDEN,
 			ItemSpriteSheet.POTION_MAGENTA, ItemSpriteSheet.POTION_CHARCOAL,
 			ItemSpriteSheet.POTION_IVORY, ItemSpriteSheet.POTION_AMBER,
 			ItemSpriteSheet.POTION_BISTRE, ItemSpriteSheet.POTION_INDIGO,
-			ItemSpriteSheet.POTION_SILVER, ItemSpriteSheet.POTION_AQUA };
+			ItemSpriteSheet.POTION_SILVER, ItemSpriteSheet.POTION_AQUA};
 
 	private static ItemStatusHandler<Potion> handler;
 

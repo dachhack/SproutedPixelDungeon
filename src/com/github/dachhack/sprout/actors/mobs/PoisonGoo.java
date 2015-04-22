@@ -17,49 +17,50 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.watabou.noosa.Camera;
-import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.GooWarn;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.blobs.Web;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Ooze;
+import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Terror;
-import com.github.dachhack.sprout.effects.CellEmitter;
+import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
+import com.github.dachhack.sprout.actors.mobs.Yog.Larva;
+import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
+import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.effects.particles.ElmoParticle;
-import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.LloydsBeacon;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
-import com.github.dachhack.sprout.items.potions.PotionOfPurity;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.SewerBossLevel;
+import com.github.dachhack.sprout.levels.Terrain;
+import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.GooSprite;
 import com.github.dachhack.sprout.sprites.PoisonGooSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class PoisonGoo extends Mob {
 	
 protected static final float SPAWN_DELAY = 2f;
+
+private boolean gooSplit = false;
+
+int gooGeneration = 0;
+
+private static final String GOOGENERATION = "gooGeneration";
 
 	{
 		name = "Goo";
@@ -74,7 +75,7 @@ protected static final float SPAWN_DELAY = 2f;
 		FLEEING = new Fleeing();
 	}
 
-	
+	private static final float SPLIT_DELAY = 1f;	
 	
 	@Override
 	protected boolean act() {
@@ -87,6 +88,10 @@ protected static final float SPAWN_DELAY = 2f;
 		if (Level.water[pos] && HP < HT) {
 			sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 			HP++;
+		} else if(Level.water[pos] && HP == HT && HT < 100){
+			sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
+			HT=HT+5;
+			HP=HT;
 		}
 		return result;
 	}
@@ -124,15 +129,99 @@ protected static final float SPAWN_DELAY = 2f;
 	public int dr() {
 		return 2;
 	}
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(GOOGENERATION, gooGeneration);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		gooGeneration = bundle.getInt(GOOGENERATION);
+	}
+
+	@Override
+	public int defenseProc(Char enemy, int damage) {
+		gooSplit = false;   
+		for (Mob mob : Dungeon.level.mobs) {
+			if (mob instanceof Goo) {
+				gooSplit = true;
+			}
+		}
+		if (HP >= damage + 2 && gooSplit) {
+			ArrayList<Integer> candidates = new ArrayList<Integer>();
+			boolean[] passable = Level.passable;
+
+			int[] neighbours = { pos + 1, pos - 1, pos + Level.WIDTH,
+					pos - Level.WIDTH };
+			for (int n : neighbours) {
+				if (passable[n] && Actor.findChar(n) == null) {
+					candidates.add(n);
+				}
+			}
+
+			if (candidates.size() > 0) {
+				GLog.n("Mini Goo divides!");
+				PoisonGoo clone = split();
+				clone.HP = (HP - damage) / 2;
+				clone.pos = Random.element(candidates);
+				clone.state = clone.HUNTING;
+
+				if (Dungeon.level.map[clone.pos] == Terrain.DOOR) {
+					Door.enter(clone.pos);
+				}
+
+				GameScene.add(clone, SPLIT_DELAY);
+				Actor.addDelayed(new Pushing(clone, pos, clone.pos), -1);
+
+				HP -= clone.HP;
+			}
+		}
+
+		return damage;
+	}
+
+
+	private PoisonGoo split() {
+		PoisonGoo clone = new PoisonGoo();
+		clone.gooGeneration = gooGeneration + 1;
+		if (buff(Burning.class) != null) {
+			Buff.affect(clone, Burning.class).reignite(clone);
+		}
+		if (buff(Poison.class) != null) {
+			Buff.affect(clone, Poison.class).set(2);
+		}
+		return clone;
+	}
+	
+	
 	
 
 	@Override
 	public void die(Object cause) {
+		
+		if (gooGeneration > 0){
+		lootChance = 0;
+		}
 
 		super.die(cause);
+		   
+		if (Dungeon.level.mobs.size()==1){
+			
+			((SewerBossLevel) Dungeon.level).unseal();
 
-		Dungeon.level.drop(new Gold(Random.Int(500, 1000)), pos).sprite.drop();
+			GameScene.bossSlain();
+			Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
 
+			Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
+
+			Badges.validateBossSlain();
+		} else {
+
+		Dungeon.level.drop(new Gold(Random.Int(100, 200)), pos).sprite.drop();
+		}
 		
 		yell("glurp... glurp...");
 	}

@@ -22,10 +22,16 @@ import com.github.dachhack.sprout.Journal.Feature;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Generator;
+import com.github.dachhack.sprout.items.Honeypot;
+import com.github.dachhack.sprout.items.Honeypot.ShatteredPot;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Generator.Category;
 import com.github.dachhack.sprout.items.artifacts.Artifact;
+import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.food.PotionOfConstitution;
 import com.github.dachhack.sprout.items.potions.Potion;
+import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.rings.Ring;
@@ -55,6 +61,8 @@ public class WaterOfTransmutation extends WellWater {
 			item = changeSeed((Plant.Seed) item);
 		} else if (item instanceof Artifact) {
 			item = changeArtifact((Artifact) item);
+		} else if (item instanceof ShatteredPot) {
+			item = changeHoneypot((ShatteredPot) item);
 		} else {
 			item = null;
 		}
@@ -218,6 +226,10 @@ public class WaterOfTransmutation extends WellWater {
 		} else if (p instanceof PotionOfMight) {
 
 			return new PotionOfStrength();
+		
+		} else if (p instanceof PotionOfMending){
+		
+			return new PotionOfHealing();
 
 		} else {
 
@@ -229,6 +241,12 @@ public class WaterOfTransmutation extends WellWater {
 		}
 	}
 
+	private Food changeHoneypot(ShatteredPot s) {
+		return new PotionOfConstitution();
+	}
+	
+	
+	
 	@Override
 	public String tileDesc() {
 		return "Power of change radiates from the water of this well. "

@@ -139,6 +139,7 @@ public class HallsBossLevel extends Level {
 	protected void createMobs() {
 	}
 
+	@Override
 	public Actor respawner() {
 		return null;
 	}

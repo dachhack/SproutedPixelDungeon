@@ -92,6 +92,7 @@ public class MirrorImage extends NPC {
 		return dmg;
 	}
 
+	@Override
 	protected Char chooseEnemy() {
 
 		if (enemy == null || !enemy.isAlive()) {

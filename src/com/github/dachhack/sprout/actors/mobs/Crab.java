@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.sprites.CrabSprite;
 import com.watabou.utils.Random;
@@ -43,12 +42,12 @@ public class Crab extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(3, 6);
+		return Random.NormalIntRange(3, 6+(Dungeon.depth));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 12+(Dungeon.depth);
+		return 12+(Math.round((Dungeon.depth)/2));
 	}
 
 	@Override

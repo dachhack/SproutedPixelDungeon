@@ -48,8 +48,8 @@ public class WndBlacksmith extends Window {
 
 	private static final String TXT_PROMPT = "Ok, a deal is a deal, dat's what I can do for you: I can reforge "
 			+ "2 items and turn them into one of a better quality.";
-	private static final String TXT_SELECT1 = "Select an item to enhance. Then, select and item to melt down.";
-	private static final String TXT_SELECT2 = "Select an item to melt down. This item will be destroyed.";
+	private static final String TXT_SELECT1 = "Select an item to enhance.";
+	private static final String TXT_SELECT2 = "Select an item to melt down.";
 	private static final String TXT_REFORGE = "Reforge them";
 
 	public WndBlacksmith(Blacksmith troll, Hero hero) {

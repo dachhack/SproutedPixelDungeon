@@ -63,6 +63,7 @@ public class DungeonTilemap extends Tilemap {
 		parent.add(tile);
 
 		parent.add(new AlphaTweener(tile, 0, 0.6f) {
+			@Override
 			protected void onComplete() {
 				tile.killAndErase();
 				killAndErase();

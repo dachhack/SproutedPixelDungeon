@@ -50,6 +50,7 @@ public class Toast extends Component {
 		add(bg);
 
 		close = new SimpleButton(Icons.get(Icons.CLOSE)) {
+			@Override
 			protected void onClick() {
 				onClose();
 			};

@@ -27,12 +27,9 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.GooWarn;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
-import com.github.dachhack.sprout.actors.blobs.Web;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Roots;
-import com.github.dachhack.sprout.actors.buffs.Terror;
-import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
@@ -194,14 +191,19 @@ public class Goo extends Mob {
 
 		super.die(cause);
 
-		((SewerBossLevel) Dungeon.level).unseal();
+     if (Dungeon.level.mobs.size()==1){
+			
+			((SewerBossLevel) Dungeon.level).unseal();
 
-		GameScene.bossSlain();
-		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
+			GameScene.bossSlain();
+			Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
 
-		Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
+			Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
 
-		Badges.validateBossSlain();
+			Badges.validateBossSlain();
+		} else {
+			Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
+		}
 
 		yell("glurp... glurp...");
 	}

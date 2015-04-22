@@ -25,7 +25,6 @@ import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.sprites.GolemSprite;
 import com.watabou.utils.Random;
 
@@ -36,7 +35,7 @@ public class Golem extends Mob {
 		spriteClass = GolemSprite.class;
 
 		HP = HT = 85+(Dungeon.depth*Random.NormalIntRange(4, 7));
-		defenseSkill = 18+(Dungeon.depth);
+		defenseSkill = 18+(Math.round((Dungeon.depth)/2));
 
 		EXP = 12;
 		maxLvl = 22;

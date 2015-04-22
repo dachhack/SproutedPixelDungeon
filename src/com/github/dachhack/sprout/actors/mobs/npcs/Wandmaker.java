@@ -35,7 +35,6 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.quest.CorpseDust;
 import com.github.dachhack.sprout.items.wands.Wand;

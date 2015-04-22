@@ -25,7 +25,7 @@ public class ChargrilledMeat extends Food {
 	{
 		name = "chargrilled meat";
 		image = ItemSpriteSheet.STEAK;
-		energy = Hunger.STARVING - Hunger.HUNGRY;
+		energy = Hunger.STARVING/2;
 		hornValue = 1;
 	}
 
@@ -40,6 +40,12 @@ public class ChargrilledMeat extends Food {
 	}
 
 	public static Food cook(MysteryMeat ingredient) {
+		ChargrilledMeat result = new ChargrilledMeat();
+		result.quantity = ingredient.quantity();
+		return result;
+	}
+	
+	public static Food cook(Meat ingredient) {
 		ChargrilledMeat result = new ChargrilledMeat();
 		result.quantity = ingredient.quantity();
 		return result;

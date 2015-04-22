@@ -40,7 +40,6 @@ import com.github.dachhack.sprout.items.bags.PotionBandolier;
 import com.github.dachhack.sprout.items.bags.ScrollHolder;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
 import com.github.dachhack.sprout.items.bags.WandHolster;
-import com.github.dachhack.sprout.items.food.OverpricedRation;
 import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.scrolls.Scroll;

@@ -50,6 +50,7 @@ public class WarlockSprite extends MobSprite {
 		play(idle);
 	}
 
+	@Override
 	public void zap(int cell) {
 
 		turnTo(ch.pos, cell);

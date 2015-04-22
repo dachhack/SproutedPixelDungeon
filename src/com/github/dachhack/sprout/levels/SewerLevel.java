@@ -26,7 +26,11 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.items.DewVial;
+import com.github.dachhack.sprout.items.bags.AnkhChain;
+import com.github.dachhack.sprout.items.bags.PotionBandolier;
+import com.github.dachhack.sprout.items.bags.ScrollHolder;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
+import com.github.dachhack.sprout.items.bags.WandHolster;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;
@@ -49,10 +53,12 @@ public class SewerLevel extends RegularLevel {
 		return Assets.WATER_SEWERS;
 	}
 
+	@Override
 	protected boolean[] water() {
 		return Patch.generate(feeling == Feeling.WATER ? 0.60f : 0.45f, 5);
 	}
 
+	@Override
 	protected boolean[] grass() {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.60f : 0.40f, 4);
 	}
@@ -107,6 +113,7 @@ public class SewerLevel extends RegularLevel {
 			Dungeon.limitedDrops.dewVial.drop();
 			addItemToSpawn(new SeedPouch());
 			Dungeon.limitedDrops.seedBag.drop();
+					
 		}
 
 		Ghost.Quest.spawn(this);

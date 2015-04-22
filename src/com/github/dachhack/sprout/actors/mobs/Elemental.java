@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.food.ChargrilledMeat;
-import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
 import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
 import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
@@ -41,7 +40,7 @@ public class Elemental extends Mob {
 		spriteClass = ElementalSprite.class;
 
 		HP = HT = 65+(Dungeon.depth*Random.NormalIntRange(4, 7));
-		defenseSkill = 20+(Dungeon.depth);
+		defenseSkill = 20+(Math.round((Dungeon.depth)/2));
 
 		EXP = 10;
 		maxLvl = 20;

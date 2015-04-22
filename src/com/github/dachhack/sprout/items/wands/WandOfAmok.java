@@ -53,6 +53,7 @@ public class WandOfAmok extends Wand {
 		}
 	}
 
+	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.purpleLight(curUser.sprite.parent, curUser.pos, cell,
 				callback);

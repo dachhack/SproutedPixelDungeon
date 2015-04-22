@@ -90,6 +90,7 @@ public class Assets {
 	public static final String MIMIC = "mimic.png";
 	public static final String RATBOSS = "ratboss.png";
 	public static final String ASSASSIN = "assassin.png";
+	public static final String MONSTERBOX = "monsterbox.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";

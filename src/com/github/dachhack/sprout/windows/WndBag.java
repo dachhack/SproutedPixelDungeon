@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.items.EquipableItem;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.armor.Armor;
+import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.bags.PotionBandolier;
 import com.github.dachhack.sprout.items.bags.ScrollHolder;
@@ -115,7 +116,8 @@ public class WndBag extends WndTabbed {
 		Bag[] bags = { stuff.backpack, stuff.getItem(SeedPouch.class),
 				stuff.getItem(ScrollHolder.class),
 				stuff.getItem(PotionBandolier.class),
-				stuff.getItem(WandHolster.class) };
+				stuff.getItem(WandHolster.class), 
+				stuff.getItem(AnkhChain.class)};
 
 		for (Bag b : bags) {
 			if (b != null) {
@@ -274,6 +276,8 @@ public class WndBag extends WndTabbed {
 				return Icons.get(Icons.WAND_HOLSTER);
 			} else if (bag instanceof PotionBandolier) {
 				return Icons.get(Icons.POTION_BANDOLIER);
+			} else if (bag instanceof AnkhChain) {
+				return Icons.get(Icons.ANKH_CHAIN);
 			} else {
 				return Icons.get(Icons.BACKPACK);
 			}
@@ -391,6 +395,7 @@ public class WndBag extends WndTabbed {
 			Sample.INSTANCE.play(Assets.SND_CLICK, 0.7f, 0.7f, 1.2f);
 		};
 
+		@Override
 		protected void onTouchUp() {
 			bg.brightness(1.0f);
 		};

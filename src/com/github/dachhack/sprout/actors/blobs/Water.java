@@ -18,10 +18,6 @@
 package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.particles.LeafParticle;
 import com.github.dachhack.sprout.levels.Level;

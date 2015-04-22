@@ -20,7 +20,6 @@ package com.github.dachhack.sprout;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.watabou.utils.Bundle;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class GamesInProgress {

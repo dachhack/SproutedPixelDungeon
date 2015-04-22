@@ -30,6 +30,7 @@ public class GooWarn extends Blob {
 
 	}
 
+	@Override
 	public void seed(int cell, int amount) {
 		int diff = amount - cur[cell];
 		if (diff > 0) {

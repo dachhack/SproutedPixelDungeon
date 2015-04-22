@@ -19,6 +19,7 @@ package com.github.dachhack.sprout;
 
 import com.watabou.noosa.Game;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 enum Preferences {
@@ -42,7 +43,7 @@ enum Preferences {
 
 	private SharedPreferences get() {
 		if (prefs == null) {
-			prefs = Game.instance.getPreferences(Game.MODE_PRIVATE);
+			prefs = Game.instance.getPreferences(Context.MODE_PRIVATE);
 		}
 		return prefs;
 	}

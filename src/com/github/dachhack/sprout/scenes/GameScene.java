@@ -334,6 +334,7 @@ public class GameScene extends PixelScene {
 		fadeIn();
 	}
 
+	@Override
 	public void destroy() {
 
 		freezeEmitters = false;

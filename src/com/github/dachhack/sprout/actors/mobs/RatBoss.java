@@ -23,7 +23,6 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.sprites.RatBossSprite;
-import com.github.dachhack.sprout.sprites.RatSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
@@ -55,7 +54,7 @@ public class RatBoss extends Rat {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(3, 8);
+		return Random.NormalIntRange(3, 8+(Dungeon.depth));
 	}
 
 	@Override

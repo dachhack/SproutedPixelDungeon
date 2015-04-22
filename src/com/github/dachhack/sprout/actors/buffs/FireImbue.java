@@ -3,13 +3,12 @@ package com.github.dachhack.sprout.actors.buffs;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.HashSet;
 
 /**
  * Created by debenhame on 19/11/2014.
@@ -42,7 +41,7 @@ public class FireImbue extends Buff {
 	@Override
 	public boolean act() {
 		if (Dungeon.level.map[target.pos] == Terrain.GRASS) {
-			Dungeon.level.set(target.pos, Terrain.EMBERS);
+			Level.set(target.pos, Terrain.EMBERS);
 			GameScene.updateMap(target.pos);
 		}
 

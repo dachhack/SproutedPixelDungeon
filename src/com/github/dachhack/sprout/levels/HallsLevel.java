@@ -59,10 +59,12 @@ public class HallsLevel extends RegularLevel {
 		return Assets.WATER_HALLS;
 	}
 
+	@Override
 	protected boolean[] water() {
 		return Patch.generate(feeling == Feeling.WATER ? 0.55f : 0.40f, 6);
 	}
 
+	@Override
 	protected boolean[] grass() {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.55f : 0.30f, 3);
 	}

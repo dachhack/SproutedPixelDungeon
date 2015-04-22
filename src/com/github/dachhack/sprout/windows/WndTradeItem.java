@@ -169,7 +169,7 @@ public class WndTradeItem extends Window {
 						} else {
 							for (Mob mob : Dungeon.level.mobs) {
 								if (mob instanceof Shopkeeper) {
-									mob.yell(((Shopkeeper) mob).TXT_THIEF);
+									mob.yell(Shopkeeper.TXT_THIEF);
 									((Shopkeeper) mob).flee();
 									break;
 								}

@@ -26,6 +26,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import android.content.Context;
+
 import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.actors.mobs.Acidic;
 import com.github.dachhack.sprout.actors.mobs.Albino;
@@ -198,7 +200,7 @@ public class Badges {
 
 			try {
 				OutputStream output = Game.instance.openFileOutput(BADGES_FILE,
-						Game.MODE_PRIVATE);
+						Context.MODE_PRIVATE);
 				Bundle.write(bundle, output);
 				output.close();
 				saveNeeded = false;

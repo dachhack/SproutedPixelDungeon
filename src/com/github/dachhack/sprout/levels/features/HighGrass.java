@@ -33,7 +33,6 @@ import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
-import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.utils.Random;
 
@@ -62,7 +61,7 @@ public class HighGrass {
 
 			if (naturalismLevel >= 0) {
 				// Seed
-				if (Random.Int(12 - ((int) (naturalismLevel * 3.34))) == 0) {
+				if (Random.Int(18 - ((int) (naturalismLevel * 3.34))) == 0) {
 					Item seed = Generator.random(Generator.Category.SEED);
 
 					if (seed instanceof BlandfruitBush.Seed) {

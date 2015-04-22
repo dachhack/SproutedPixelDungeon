@@ -204,6 +204,7 @@ public class InterlevelScene extends PixelScene {
 							error);
 
 				add(new WndError(errorMsg) {
+					@Override
 					public void onBackPressed() {
 						super.onBackPressed();
 						Game.switchScene(StartScene.class);

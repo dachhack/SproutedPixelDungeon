@@ -17,13 +17,14 @@
  */
 package com.github.dachhack.sprout;
 
+import android.content.Context;
+
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
-import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -64,7 +65,7 @@ public class Bones {
 
 		try {
 			OutputStream output = Game.instance.openFileOutput(BONES_FILE,
-					Game.MODE_PRIVATE);
+					Context.MODE_PRIVATE);
 			Bundle.write(bundle, output);
 			output.close();
 		} catch (IOException e) {

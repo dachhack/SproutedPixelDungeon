@@ -19,15 +19,8 @@ package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
-import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Roots;
-import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.plants.Earthroot.Armor;
-import com.github.dachhack.sprout.plants.Earthroot.NutArmor;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
@@ -37,7 +30,7 @@ public class ToastedNut extends Nut {
 	{
 		name = "toasted dungeon nut";
 		image = ItemSpriteSheet.SEED_TOASTEDDUNGEONNUT;
-		energy = Hunger.HUNGRY-100;
+		energy = Hunger.STARVING - Hunger.HUNGRY;
 		message = "Crunch Crunch. MMMM--Nutty";
 		hornValue = 2;
 	}

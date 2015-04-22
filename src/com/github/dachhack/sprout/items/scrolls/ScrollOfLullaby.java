@@ -23,7 +23,6 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
-import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.levels.Level;

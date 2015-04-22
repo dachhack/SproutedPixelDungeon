@@ -48,7 +48,7 @@ public class Eye extends Mob {
 		spriteClass = EyeSprite.class;
 
 		HP = HT = 100+(Dungeon.depth*Random.NormalIntRange(4, 7));
-		defenseSkill = 20+(Dungeon.depth);
+		defenseSkill = 20+(Math.round((Dungeon.depth)/2));
 		viewDistance = Light.DISTANCE;
 
 		EXP = 13;

@@ -410,7 +410,7 @@ public abstract class Wand extends KindOfWeapon {
 					return;
 				}
 
-				final Wand curWand = (Wand) Wand.curItem;
+				final Wand curWand = (Wand) Item.curItem;
 
 				curWand.setKnown();
 

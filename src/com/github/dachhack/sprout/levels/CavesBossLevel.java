@@ -192,6 +192,7 @@ public class CavesBossLevel extends Level {
 	protected void createMobs() {
 	}
 
+	@Override
 	public Actor respawner() {
 		return null;
 	}

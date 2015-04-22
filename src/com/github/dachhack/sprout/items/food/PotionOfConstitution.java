@@ -17,23 +17,24 @@
  */
 package com.github.dachhack.sprout.items.food;
 
-import com.github.dachhack.sprout.actors.buffs.Barkskin;
+import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Hunger;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.plants.Earthroot.NutArmor;
+import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
-public class GoldenNut extends Nut {
+public class PotionOfConstitution extends Food {
 
 	{
-		name = "golden dungeon nut";
-		image = ItemSpriteSheet.SEED_GOLDENDUNGEONNUT;
-		energy = Hunger.STARVING;
-		message = "Melts in your mouth. Tastes like Nutella.";
-		hornValue = 2;
+		name = "Honey";
+		image = ItemSpriteSheet.POTION_HONEY;
+		bones = true;
+		message = "You feel your life extending.";
+		hornValue = 0;
 	}
 
 	@Override
@@ -42,32 +43,26 @@ public class GoldenNut extends Nut {
 		super.execute(hero, action);
 
 		if (action.equals(AC_EAT)) {
+			 hero.HT = hero.HT + (Random.Int(5, 20));
+				hero.HP = hero.HP+Math.min(((hero.HT-hero.HP)/2), hero.HT-hero.HP);
+				Buff.detach(hero, Poison.class);
+				Buff.detach(hero, Cripple.class);
+				Buff.detach(hero, Weakness.class);
+				Buff.detach(hero, Bleeding.class);
 
-			switch (Random.Int(2)) {
-			case 0:
-				GLog.w("You have recieved the dungeon's blessing.");
-				Buff.affect(hero, Barkskin.class).level(hero.HT);
-				Buff.affect(hero, NutArmor.class).level(hero.HT);
-				break;
-			case 1:
-				GLog.w("You have recieved the dungeon's highest blessing.");
-				Buff.affect(hero, Barkskin.class).level(hero.HT*2);
-				Buff.affect(hero, NutArmor.class).level(hero.HT*2);
-				break;
-			}
+				hero.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f, 4);
+			
 		}
 	}	
 	
 	@Override
 	public String info() {
-		return "Unique dungeon nut guilded with enchantment.";
+		return "Life giving nectar.";
 	}
+
 
 	@Override
 	public int price() {
-		return 20 * quantity;
+		return 900 * quantity;
 	}
-
 }
-
-

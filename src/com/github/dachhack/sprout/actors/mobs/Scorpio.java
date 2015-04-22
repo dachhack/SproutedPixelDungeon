@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
@@ -42,7 +41,7 @@ public class Scorpio extends Mob {
 		spriteClass = ScorpioSprite.class;
 
 		HP = HT = 95+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 24+(Dungeon.depth);
+		defenseSkill = 24+(Math.round((Dungeon.depth)/2));
 		viewDistance = Light.DISTANCE;
 
 		EXP = 14;
@@ -62,7 +61,7 @@ public class Scorpio extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 36+(Dungeon.depth);
+		return 36+(Math.round((Dungeon.depth)/2));
 	}
 
 	@Override

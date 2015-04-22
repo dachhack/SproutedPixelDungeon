@@ -163,6 +163,7 @@ public class WandOfTelekinesis extends Wand {
 		heap.sprite.drop();
 	}
 
+	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.force(curUser.sprite.parent, curUser.pos, cell, callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);

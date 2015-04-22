@@ -116,6 +116,7 @@ public class WandOfMagicMissile extends Wand {
 	public void setKnown() {
 	}
 
+	@Override
 	protected int initialCharges() {
 		return 3;
 	}

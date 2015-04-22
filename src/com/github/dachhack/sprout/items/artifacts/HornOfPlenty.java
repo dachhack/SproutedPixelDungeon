@@ -70,7 +70,7 @@ public class HornOfPlenty extends Artifact {
 			else if (charge == 0)
 				GLog.i("Your horn has no food in it to eat!");
 			else {
-				((Hunger) hero.buff(Hunger.class)).satisfy(energy * charge);
+				hero.buff(Hunger.class).satisfy(energy * charge);
 
 				// if you get at least 100 food energy from the horn
 				if (charge >= 3) {

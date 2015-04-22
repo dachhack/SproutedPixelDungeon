@@ -49,7 +49,7 @@ public class Succubus extends Mob {
 		spriteClass = SuccubusSprite.class;
 
 		HP = HT = 80+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 25+(Dungeon.depth);
+		defenseSkill = 25+(Math.round((Dungeon.depth)/2));
 		viewDistance = Light.DISTANCE;
 
 		EXP = 12;

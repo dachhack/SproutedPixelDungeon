@@ -29,7 +29,7 @@ public class Levitation extends FlavourBuff {
 	public boolean attachTo(Char target) {
 		if (super.attachTo(target)) {
 			target.flying = true;
-			Roots.detach(target, Roots.class);
+			Buff.detach(target, Roots.class);
 			return true;
 		} else {
 			return false;

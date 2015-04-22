@@ -79,6 +79,10 @@ public class Room extends Rect implements Graph.Node, Bundlable {
 					Type.POOL, Type.GARDEN, Type.LIBRARY, Type.ARMORY,
 					Type.TREASURY, Type.TRAPS, Type.STORAGE, Type.STATUE,
 					Type.LABORATORY, Type.VAULT));
+	
+	//public static final ArrayList<Type> SPECIALS = new ArrayList<Type>(
+	//		Arrays.asList(Type.GARDEN, Type.VAULT, Type.GARDEN, Type.VAULT, Type.GARDEN, Type.VAULT, Type.VAULT, Type.VAULT));
+
 
 	public Type type = Type.NULL;
 

@@ -18,12 +18,8 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
-import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Roots;
-import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
@@ -34,7 +30,7 @@ public class Meat extends Food {
 	{
 		name = "monster meat";
 		image = ItemSpriteSheet.MEAT;
-		energy = Hunger.HUNGRY-60;
+		energy = Hunger.STARVING - Hunger.HUNGRY;
 		message = "You choked down the monster meat.";
 		hornValue = 1;
 	}
@@ -65,4 +61,5 @@ public class Meat extends Food {
 	public int price() {
 		return 20 * quantity;
 	}
+		
 }

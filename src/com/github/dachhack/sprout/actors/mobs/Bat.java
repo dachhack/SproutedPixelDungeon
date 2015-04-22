@@ -58,7 +58,7 @@ public class Bat extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 16+(Dungeon.depth);
+		return 16+(Math.round((Dungeon.depth)/2));
 	}
 
 	@Override

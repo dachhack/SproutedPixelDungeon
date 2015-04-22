@@ -39,10 +39,14 @@ public class VaultPainter extends Painter {
 		int cy = (room.top + room.bottom) / 2;
 		int c = cx + cy * Level.WIDTH;
 
-		switch (Random.Int(3)) {
+		switch (Random.Int(0)) {
 
 		case 0:
+			//if (Random.Int(1)==2){
 			level.drop(prize(level), c).type = Type.LOCKED_CHEST;
+			//} else {
+			//level.drop(prize(level), c).type = Type.MONSTERBOX;	
+			//}
 			level.addItemToSpawn(new GoldenKey(Dungeon.depth));
 			break;
 

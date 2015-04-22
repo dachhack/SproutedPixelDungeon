@@ -27,14 +27,11 @@ import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.EquipableItem;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.quest.Pickaxe;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -176,7 +173,7 @@ public class Blacksmith extends NPC {
 			return "I don't work with cursed items!";
 		}
 
-		if (item1.level < 0 || item2.level < 0) {
+		if (item1.level < 0 || item2.level < 1) {
 			return "It's a junk, the quality is too poor!";
 		}
 
@@ -209,16 +206,14 @@ public class Blacksmith extends NPC {
 		upgradeChance = (upgradeChance + (gold.quantity()*0.05f));
 		}
 		if (first != null) {
-            int i=0;
-			while(i<first.level) {
+                for(int i=0; i<second.level; i++){
 				if (i<2){
 				  Sample.INSTANCE.play(Assets.SND_EVOKE);
 				  first.upgrade();
 				} else if (Random.Float()<upgradeChance){
 				  first.upgrade();
-			     upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
-			  }
-			i++;
+			      upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
+			    }
 			}
 		}
 		
@@ -315,8 +310,9 @@ public class Blacksmith extends NPC {
 		}
 
 		public static boolean spawn(Collection<Room> rooms) {
-			if (!spawned && Dungeon.depth > 11
-					&& Random.Int(15 - Dungeon.depth) == 0) {
+			if (!spawned && Dungeon.depth==1){
+					//> 11
+					//&& Random.Int(15 - Dungeon.depth) == 0) {
 
 				Room blacksmith = null;
 				for (Room r : rooms) {

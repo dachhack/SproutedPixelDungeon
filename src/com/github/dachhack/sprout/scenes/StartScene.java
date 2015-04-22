@@ -514,6 +514,7 @@ public class StartScene extends PixelScene {
 			if (Badges.isUnlocked(Badges.Badge.VICTORY)) {
 				StartScene.this.add(new WndChallenges(ShatteredPixelDungeon
 						.challenges(), true) {
+					@Override
 					public void onBackPressed() {
 						super.onBackPressed();
 						image.copy(Icons

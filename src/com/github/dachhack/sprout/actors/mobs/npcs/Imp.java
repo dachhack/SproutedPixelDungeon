@@ -29,7 +29,6 @@ import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.quest.DwarfToken;
 import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.levels.CityLevel;
-import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ImpSprite;
 import com.github.dachhack.sprout.utils.Utils;

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.effects;
 
 import com.watabou.gltextures.SmartTexture;
+import com.watabou.glwrap.Texture;
 import com.watabou.noosa.NinePatch;
 import com.github.dachhack.sprout.Assets;
 
@@ -28,7 +29,7 @@ public class ShadowBox extends NinePatch {
 	public ShadowBox() {
 		super(Assets.SHADOW, 1);
 
-		texture.filter(SmartTexture.LINEAR, SmartTexture.LINEAR);
+		texture.filter(Texture.LINEAR, Texture.LINEAR);
 
 		scale.set(SIZE, SIZE);
 	}

@@ -78,6 +78,7 @@ public class Toolbar extends Component {
 				Dungeon.hero.rest(false);
 			};
 
+			@Override
 			protected boolean onLongClick() {
 				Dungeon.hero.rest(true);
 				return true;
@@ -113,6 +114,7 @@ public class Toolbar extends Component {
 						null, WndBag.Mode.ALL, null));
 			}
 
+			@Override
 			protected boolean onLongClick() {
 				GameScene.show(new WndCatalogus());
 				return true;

@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Random;
 
 public class ToxicGas extends Blob implements Hero.Doom {

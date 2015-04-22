@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -25,7 +24,6 @@ import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.rings.RingOfSharpshooting;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;

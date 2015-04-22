@@ -1,6 +1,6 @@
 /*
  * Pixel Dungeon
- * Copyright (C) 2012-2014  Oleg Dolya
+ * Copyright (C) 2012-2015 Oleg Dolya
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,23 +15,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.items.weapon.enchantments;
+package com.github.dachhack.sprout.sprites;
 
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.watabou.noosa.TextureFilm;
+import com.github.dachhack.sprout.Assets;
 
-public class Instability extends Weapon.Enchantment {
+public class MonsterBoxSprite extends MobSprite {
 
-	private static final String TXT_UNSTABLE = "Unstable %s";
+	public MonsterBoxSprite() {
+		super();
 
-	@Override
-	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
-		return random().proc(weapon, attacker, defender, damage);
+		texture(Assets.MONSTERBOX);
+
+		TextureFilm frames = new TextureFilm(texture, 16, 16);
+
+		idle = new Animation(5, true);
+		idle.frames(frames, 0, 0, 0, 1, 1);
+
+		run = new Animation(10, true);
+		run.frames(frames, 0, 1, 2, 3, 3, 2, 1);
+
+		attack = new Animation(10, false);
+		attack.frames(frames, 0, 4, 5, 6);
+
+		die = new Animation(5, false);
+		die.frames(frames, 7, 8, 9);
+
+		play(idle);
 	}
 
 	@Override
-	public String name(String weaponName) {
-		return String.format(TXT_UNSTABLE, weaponName);
+	public int blood() {
+		return 0xFFcb9700;
 	}
-
 }

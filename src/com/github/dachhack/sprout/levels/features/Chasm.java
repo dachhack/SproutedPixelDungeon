@@ -30,18 +30,13 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
-import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.RegularLevel;
 import com.github.dachhack.sprout.levels.Room;
-import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.MobSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndOptions;
-import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
 public class Chasm {

@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.items.artifacts.HornOfPlenty;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 

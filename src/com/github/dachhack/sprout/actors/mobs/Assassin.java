@@ -19,29 +19,14 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Badges.Badge;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.TomeOfMastery;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.AssassinSprite;
-import com.github.dachhack.sprout.sprites.TenguSprite;
 import com.watabou.utils.Random;
 
 public class Assassin extends Mob {
@@ -53,7 +38,7 @@ public class Assassin extends Mob {
 
 		HP = HT = 25+(Dungeon.depth*Random.NormalIntRange(2, 5));
 		EXP = 20;
-		defenseSkill = 5+(Dungeon.depth);
+		defenseSkill = 10+(Math.round((Dungeon.depth)/2));
 	}
 
 	

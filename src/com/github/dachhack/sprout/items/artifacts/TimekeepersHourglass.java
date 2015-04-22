@@ -12,6 +12,7 @@ import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndOptions;
+import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -286,7 +287,7 @@ public class TimekeepersHourglass extends Artifact {
 			if (Dungeon.level != null)
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					mob.sprite.add(CharSprite.State.PARALYSED);
-			GameScene.freezeEmitters = true;
+			Group.freezeEmitters = true;
 			return super.attachTo(target);
 		}
 
@@ -295,7 +296,7 @@ public class TimekeepersHourglass extends Artifact {
 			triggerPresses();
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 				mob.sprite.remove(CharSprite.State.PARALYSED);
-			GameScene.freezeEmitters = false;
+			Group.freezeEmitters = false;
 
 			charge = 0;
 			updateQuickslot();

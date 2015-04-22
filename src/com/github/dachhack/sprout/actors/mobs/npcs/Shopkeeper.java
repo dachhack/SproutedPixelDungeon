@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.items.Heap;

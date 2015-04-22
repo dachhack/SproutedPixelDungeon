@@ -23,8 +23,6 @@ import com.github.dachhack.sprout.actors.blobs.StenchGas;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 
-import java.util.HashSet;
-
 public class GasesImmunity extends FlavourBuff {
 
 	public static final float DURATION = 10f;

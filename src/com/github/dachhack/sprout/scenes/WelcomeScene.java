@@ -24,7 +24,7 @@ public class WelcomeScene extends PixelScene {
 	private static final String TTL_Future = "Wait What?";
 
 	private static final String TXT_Welcome = "Sprouted Pixel Dungeon is a rework/expansion of Watabou's Pixel Dungeon.\n\n"
-			+ "Included are all additions from Shattered Pixel Dungeon by Evan-00\n\n"
+			+ "Included are all additions from Shattered Pixel Dungeon (0.2.4c) by 00-Evan\n\n"
 			+ "This version was adapted for those who love to grind, level up, and collect loot\n\n"
 			+ "Happy Dungeoneering!";
 
@@ -40,8 +40,6 @@ public class WelcomeScene extends PixelScene {
 			+"Scrolls of Upgrade do not remove Enchantments.\n\n"
 			+"Nuts\n\n"
 			+"Heal on level up.\n\n"
-			+"Potions shift color when game closes.\n\n"
-			+"Okay, that last one is a bug.\n\n"
 			+"And more...\n\n"
 			+"\n\n"
 			+"Shattered V0.2.4c:\n"

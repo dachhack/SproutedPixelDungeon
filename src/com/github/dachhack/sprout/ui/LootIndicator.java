@@ -41,6 +41,7 @@ public class LootIndicator extends Tag {
 		super.createChildren();
 
 		slot = new ItemSlot() {
+			@Override
 			protected void onClick() {
 				Dungeon.hero.handle(Dungeon.hero.pos);
 			};

@@ -183,10 +183,12 @@ public class SewerBossLevel extends RegularLevel {
 		return true;
 	}
 
+	@Override
 	protected boolean[] water() {
 		return Patch.generate(0.5f, 5);
 	}
 
+	@Override
 	protected boolean[] grass() {
 		return Patch.generate(0.40f, 4);
 	}
@@ -229,6 +231,7 @@ public class SewerBossLevel extends RegularLevel {
 		mobs.add(mob);
 	}
 
+	@Override
 	public Actor respawner() {
 		return null;
 	}

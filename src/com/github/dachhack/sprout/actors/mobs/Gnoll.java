@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.sprites.GnollSprite;
@@ -32,7 +31,7 @@ public class Gnoll extends Mob {
 		spriteClass = GnollSprite.class;
 
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 4+(Dungeon.depth);
+		defenseSkill = 4+(Math.round((Dungeon.depth)/2));
 
 		EXP = 2;
 		maxLvl = 8;
@@ -46,7 +45,7 @@ public class Gnoll extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(2, 5);
+		return Random.NormalIntRange(2, 5+(Dungeon.depth));
 	}
 
 	@Override

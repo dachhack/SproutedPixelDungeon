@@ -87,6 +87,7 @@ public class FrozenCarpaccio extends Food {
 				+ "by cutting thin slices of it. And this way it's suprisingly good.";
 	}
 
+	@Override
 	public int price() {
 		return 10 * quantity;
 	};

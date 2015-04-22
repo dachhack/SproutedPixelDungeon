@@ -178,14 +178,14 @@ public class StandardPainter extends Painter {
 		if (Random.Int(2) != 0) {
 			Item prize = level.findPrizeItem();
 			if (prize != null) {
-				level.drop(prize, (room.center().x + center.y * level.WIDTH));
+				level.drop(prize, (room.center().x + center.y * Level.WIDTH));
 				return;
 			}
 		}
 
 		level.drop(Generator.random(Random.oneOf(Generator.Category.POTION,
 				Generator.Category.SCROLL)), (room.center().x + center.y
-				* level.WIDTH));
+				* Level.WIDTH));
 	}
 
 	private static void paintBridge(Level level, Room room) {

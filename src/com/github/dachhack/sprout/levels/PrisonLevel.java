@@ -46,10 +46,12 @@ public class PrisonLevel extends RegularLevel {
 		return Assets.WATER_PRISON;
 	}
 
+	@Override
 	protected boolean[] water() {
 		return Patch.generate(feeling == Feeling.WATER ? 0.65f : 0.45f, 4);
 	}
 
+	@Override
 	protected boolean[] grass() {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.60f : 0.40f, 3);
 	}

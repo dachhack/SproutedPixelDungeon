@@ -50,10 +50,12 @@ public class CavesLevel extends RegularLevel {
 		return Assets.WATER_CAVES;
 	}
 
+	@Override
 	protected boolean[] water() {
 		return Patch.generate(feeling == Feeling.WATER ? 0.60f : 0.45f, 6);
 	}
 
+	@Override
 	protected boolean[] grass() {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.55f : 0.35f, 3);
 	}

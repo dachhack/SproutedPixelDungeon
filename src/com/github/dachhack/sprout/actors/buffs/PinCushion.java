@@ -7,7 +7,6 @@ import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
 /**
  * Created by debenhame on 06/02/2015.

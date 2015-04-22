@@ -24,7 +24,6 @@ import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.RatSprite;
-import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
 public class Rat extends Mob {
@@ -37,7 +36,7 @@ public class Rat extends Mob {
 		spriteClass = RatSprite.class;
 
 		HP = HT = 8+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 3+(Dungeon.depth);
+		defenseSkill = 3+(Math.round((Dungeon.depth)/2));
 		
 		loot = new Meat();
 		lootChance = 0.5f;
@@ -49,7 +48,7 @@ public class Rat extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 5);
+		return Random.NormalIntRange(1, 5+(Dungeon.depth));
 	}
 
 	@Override

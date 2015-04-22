@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout;
 
+import android.content.Context;
+
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
@@ -90,7 +92,7 @@ public class Dungeon {
 		armband,
 
 		// containers
-		dewVial, seedBag, scrollBag, potionBag, wandBag;
+		dewVial, seedBag, scrollBag, potionBag, wandBag, ankhChain;
 
 		public int count = 0;
 
@@ -104,6 +106,8 @@ public class Dungeon {
 			count = 1;
 		}
 	}
+	
+	public static boolean earlygrass = false;
 
 	public static int challenges;
 
@@ -156,7 +160,7 @@ public class Dungeon {
 		for (limitedDrops a : limitedDrops.values())
 			a.count = 0;
 
-		transmutation = Random.IntRange(6, 14);
+		transmutation = Random.IntRange( 6, 14 );
 
 		chapters = new HashSet<Integer>();
 
@@ -200,7 +204,7 @@ public class Dungeon {
 		Level level;
 		switch (depth) {
 		case 1:
-			//level = new PrisonLevel();
+			//level = new CavesLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
 			//break;
@@ -320,7 +324,7 @@ public class Dungeon {
 
 	public static void dropToChasm(Item item) {
 		int depth = Dungeon.depth + 1;
-		ArrayList<Item> dropped = (ArrayList<Item>) Dungeon.droppedItems
+		ArrayList<Item> dropped = Dungeon.droppedItems
 				.get(depth);
 		if (dropped == null) {
 			Dungeon.droppedItems.put(depth, dropped = new ArrayList<Item>());
@@ -468,7 +472,7 @@ public class Dungeon {
 			bundle.put(BADGES, badges);
 
 			OutputStream output = Game.instance.openFileOutput(fileName,
-					Game.MODE_PRIVATE);
+					Context.MODE_PRIVATE);
 			Bundle.write(bundle, output);
 			output.close();
 
@@ -484,7 +488,7 @@ public class Dungeon {
 
 		OutputStream output = Game.instance.openFileOutput(
 				Utils.format(depthFile(hero.heroClass), depth),
-				Game.MODE_PRIVATE);
+				Context.MODE_PRIVATE);
 		Bundle.write(bundle, output);
 		output.close();
 	}

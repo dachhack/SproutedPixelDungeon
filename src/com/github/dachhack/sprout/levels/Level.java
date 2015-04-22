@@ -232,18 +232,23 @@ public abstract class Level implements Bundlable {
 			}
 
 			if (Dungeon.depth > 1 && Dungeon.depth < 6) {
-				switch (Random.Int(10)) {
-				case 0:
-					if (!Dungeon.bossLevel(Dungeon.depth + 1)) {
-						feeling = Feeling.CHASM;
+				if (Dungeon.depth == 4 && !Dungeon.earlygrass) {
+					feeling = Feeling.GRASS;
+				} else {
+				  switch (Random.Int(10)) {
+				  case 0:
+				  	if (!Dungeon.bossLevel(Dungeon.depth + 1)) {
+				 		feeling = Feeling.CHASM;
 					}
 					break;
-				case 1:
+				  case 1:
 					feeling = Feeling.WATER;
 					break;
-				case 2: case 3: case 4: 
+				  case 2: case 3: case 4: 
 					feeling = Feeling.GRASS;
+					Dungeon.earlygrass = true;
 					break;
+				 }
 				}
 			} else if (Dungeon.depth > 5) {
 				switch (Random.Int(10)) {
@@ -670,7 +675,9 @@ public abstract class Level implements Bundlable {
 			}
 
 		} else if (heap.type == Heap.Type.LOCKED_CHEST
-				|| heap.type == Heap.Type.CRYSTAL_CHEST) {
+				|| heap.type == Heap.Type.CRYSTAL_CHEST
+				//|| heap.type == Heap.Type.MONSTERBOX
+				) {
 
 			int n;
 			do {

@@ -72,12 +72,14 @@ public class WndHero extends WndTabbed {
 		add(buffs);
 
 		add(new LabeledTab(TXT_STATS) {
+			@Override
 			protected void select(boolean value) {
 				super.select(value);
 				stats.visible = stats.active = selected;
 			};
 		});
 		add(new LabeledTab(TXT_BUFFS) {
+			@Override
 			protected void select(boolean value) {
 				super.select(value);
 				buffs.visible = buffs.active = selected;

@@ -23,7 +23,6 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Haste;
-import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.utils.GLog;
 

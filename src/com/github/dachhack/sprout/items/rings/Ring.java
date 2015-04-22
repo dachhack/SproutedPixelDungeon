@@ -86,6 +86,7 @@ public class Ring extends KindofMisc {
 		syncVisuals();
 	}
 
+	@Override
 	public void syncVisuals() {
 		image = handler.image(this);
 		gem = handler.label(this);
@@ -132,6 +133,7 @@ public class Ring extends KindofMisc {
 
 	}
 
+	@Override
 	public void activate(Char ch) {
 		buff = buff();
 		buff.attachTo(ch);

@@ -6,8 +6,6 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
-import java.util.HashSet;
-
 /**
  * Created by debenhame on 19/11/2014.
  */

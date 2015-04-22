@@ -373,6 +373,7 @@ public class WndRanking extends WndTabbed {
 			Sample.INSTANCE.play(Assets.SND_CLICK, 0.7f, 0.7f, 1.2f);
 		};
 
+		@Override
 		protected void onTouchUp() {
 			bg.brightness(1.0f);
 		};
@@ -417,6 +418,7 @@ public class WndRanking extends WndTabbed {
 			Sample.INSTANCE.play(Assets.SND_CLICK, 0.7f, 0.7f, 1.2f);
 		};
 
+		@Override
 		protected void onTouchUp() {
 			bg.brightness(1.0f);
 		};

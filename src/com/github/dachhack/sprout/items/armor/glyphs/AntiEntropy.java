@@ -19,10 +19,8 @@ package com.github.dachhack.sprout.items.armor.glyphs;
 
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.effects.particles.SnowParticle;
 import com.github.dachhack.sprout.items.armor.Armor;
 import com.github.dachhack.sprout.items.armor.Armor.Glyph;

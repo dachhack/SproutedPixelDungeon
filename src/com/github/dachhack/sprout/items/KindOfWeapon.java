@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.utils.GLog;
