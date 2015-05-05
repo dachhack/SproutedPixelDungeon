@@ -21,92 +21,75 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.food.Meat;
+import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
-import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
-import com.github.dachhack.sprout.sprites.BatSprite;
+import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.sprites.DwarfLichSprite;
 import com.watabou.utils.Random;
 
-public class Bat extends Mob {
+public class DwarfLich extends Mob {
 
 	{
-		name = "vampire bat";
-		spriteClass = BatSprite.class;
+		name = "dwarf lich";
+		spriteClass = DwarfLichSprite.class;
 
-		HP = HT = 30+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		defenseSkill = 15;
-		baseSpeed = 2f;
-
-		EXP = 7;
-		maxLvl = 15;
-
-		flying = true;
-
-		loot = new PotionOfMending();
-		lootChance = 0.1667f; // by default, see die()
-
-		lootOther = new Meat();
-		lootChanceOther = 0.5f; // by default, see die()
+		HP = HT = 95+(Dungeon.depth*Random.NormalIntRange(1, 3));
+		defenseSkill = 24+(Math.round((Dungeon.depth)/2));
+	
+		EXP = 14;
+		
+		loot = new PotionOfHealing();
+		lootChance = 0.2f;
+		
+		lootOther = new Blackberry();
+		lootChanceOther = 0.333f; // by default, see die()
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(6, 12);
+		return Random.NormalIntRange(20, 32);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 16+(Math.round((Dungeon.depth)/2));
+		return 36+(Math.round((Dungeon.depth)/2));
 	}
 
 	@Override
 	public int dr() {
-		return 4;
+		return 16;
 	}
 
 	@Override
-	public String defenseVerb() {
-		return "evaded";
+	protected boolean canAttack(Char enemy) {
+		return !Level.adjacent(pos, enemy.pos)
+				&& Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
 	}
 
 	@Override
-	public int attackProc(Char enemy, int damage) {
-
-		int reg = Math.min(damage, HT - HP);
-
-		if (reg > 0) {
-			HP += reg;
-			sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+	protected boolean getCloser(int target) {
+		if (state == HUNTING) {
+			return enemySeen && getFurther(target);
+		} else {
+			return super.getCloser(target);
 		}
-
-		return damage;
 	}
 
-	@Override
-	public void die(Object cause) {
-		// sets drop chance
-		lootChance = 1f / ((6 + Dungeon.limitedDrops.batHP.count));
-		super.die(cause);
-	}
-
-	@Override
-	protected Item createLoot() {
-		Dungeon.limitedDrops.batHP.count++;
-		return super.createLoot();
-	}
+	
 
 	@Override
 	public String description() {
-		return "These brisk and tenacious inhabitants of cave domes may defeat much larger opponents by "
-				+ "replenishing their health with each successful attack.";
+		return "A powerful wizard sacrificed to sustain the undead dwarf king, "
+				+ "the wizard calls on the power of death to damage opponents.";
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
 		RESISTANCES.add(Leech.class);
+		RESISTANCES.add(Poison.class);
 	}
 
 	@Override

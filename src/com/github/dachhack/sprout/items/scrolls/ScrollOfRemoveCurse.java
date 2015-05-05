@@ -78,7 +78,7 @@ public class ScrollOfRemoveCurse extends Scroll {
 			Item item = items[i];
 			if (item != null && item.cursed) {
 				item.cursed = false;
-				item.level = -item.level;
+				if(item.level<0){item.level = -item.level;}
 				procced = true;
 			}
 		}

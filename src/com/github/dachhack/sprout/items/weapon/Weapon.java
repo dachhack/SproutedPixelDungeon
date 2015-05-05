@@ -224,6 +224,14 @@ public class Weapon extends KindOfWeapon {
 		while (ench.getClass() == oldEnchantment) {
 			ench = Enchantment.randomAdv();
 		}
+		
+		if (ench.getClass() == oldEnchantment) {
+			ench = Enchantment.randomAdv();
+		}
+		
+		if (ench.getClass() == oldEnchantment) {
+			ench = Enchantment.randomAdv();
+		}
 
 		return enchant(ench);
 	}

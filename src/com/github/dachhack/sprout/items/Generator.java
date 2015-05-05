@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
 import com.github.dachhack.sprout.items.armor.*;
 import com.github.dachhack.sprout.items.artifacts.*;
 import com.github.dachhack.sprout.items.bags.Bag;
+import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.food.Nut;
@@ -86,9 +87,9 @@ public class Generator {
 				ScrollOfMagicMapping.class, ScrollOfRage.class,
 				ScrollOfTerror.class, ScrollOfLullaby.class,
 				ScrollOfMagicalInfusion.class, ScrollOfPsionicBlast.class,
-				ScrollOfMirrorImage.class };
+				ScrollOfMirrorImage.class, ScrollOfRegrowth.class };
 		Category.SCROLL.probs = new float[] { 30, 10, 15, 0, 10, 15, 12, 8, 8,
-				0, 3, 6 };
+				0, 3, 6, 0 };
 
 		Category.POTION.classes = new Class<?>[] { PotionOfHealing.class,
 				PotionOfExperience.class, PotionOfToxicGas.class,
@@ -150,8 +151,8 @@ public class Generator {
 				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
-				Nut.class};
-		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 25};
+				Nut.class, Blackberry.class};
+		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 20, 15};
 	}
 
 	public static void reset() {

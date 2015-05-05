@@ -23,6 +23,7 @@ import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Water;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -219,6 +220,7 @@ public class DewVial extends Item {
 			GLog.i("You see your hands turn invisible!");
 			GLog.i("You are moving much faster!");
 			volume = volume - 10;
+			
 		} else if (action.equals(AC_BLESS)) {	
 
 			boolean procced = uncurse(hero, hero.belongings.backpack.items.toArray(new Item[0]));
@@ -233,7 +235,6 @@ public class DewVial extends Item {
 				GLog.i(TXT_NOT_PROCCED);
 			}
 													
-			GLog.i(TXT_BLESSED);
 			volume = volume - 30;	
 			
 		} else {
@@ -244,22 +245,28 @@ public class DewVial extends Item {
 	}
 
 	public static boolean uncurse(Hero hero, Item... items) {
-
-		boolean procced = false;
+		
+        int levelLimit = Math.max(5, 5+Math.round(Statistics.deepestFloor/3));
+        boolean procced = false;
+		boolean proccedUp = false;
 		for (int i = 0; i < items.length; i++) {
 			Item item = items[i];
 			if (item != null && item.cursed) {
 				item.cursed = false;
+				if(item.level<0){item.level = -item.level;}
 				procced = true;
 				hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
 			}
-			if (item != null && Random.Float()<0.33f && item.isUpgradable()){
+			if (item != null && Random.Float()<0.33f && item.isUpgradable() && item.level < levelLimit){
 			    item.upgrade();
+			    proccedUp = true;
 			    hero.sprite.emitter().start(Speck.factory(Speck.UP), 0.2f, 3);
 			    GLog.p(TXT_LOOKS_BETTER, item.name());
 			    Badges.validateItemLevelAquired(item);
 			}
 		}
+		
+		if (proccedUp){GLog.i(TXT_BLESSED);}
 					
 		return procced;
 	}
@@ -302,6 +309,19 @@ public class DewVial extends Item {
 		updateQuickslot();
 	}
 
+	public void collectDew(RedDewdrop dew) {
+
+		GLog.i(TXT_COLLECTED);
+		volume += (dew.quantity*5);
+		if (volume >= MAX_VOLUME) {
+			volume = MAX_VOLUME;
+			GLog.p(TXT_FULL);
+		}
+
+		updateQuickslot();
+	}
+
+	
 	public void fill() {
 		volume = volume + 10;
 		updateQuickslot();

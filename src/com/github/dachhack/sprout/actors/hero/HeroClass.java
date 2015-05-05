@@ -149,12 +149,12 @@ public enum HeroClass {
 		darts.identify().collect();
 		//for(int i=1; i<8; i++){
 		//Scroll scroll = new ScrollOfUpgrade();
-       // scroll.identify().collect();
+        //scroll.identify().collect();
 		//}
        // for(int i=1; i<45; i++){
        // DarkGold gold = new DarkGold(); gold.collect();
        // }
-       // Ring ring = new RingOfAccuracy(); ring.collect();
+        //Ring ring = new RingOfAccuracy(); ring.collect();
       //  Wand wand = new WandOfAmok(); wand.collect();
       //  Honeypot honeypot = new Honeypot(); honeypot.collect();
        	Dungeon.quickslot.setSlot(0, darts);

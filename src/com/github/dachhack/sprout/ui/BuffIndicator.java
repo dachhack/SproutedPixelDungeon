@@ -68,6 +68,7 @@ public class BuffIndicator extends Component {
 	public static final int FORESIGHT = 32;
 	public static final int VERTIGO = 33;
 	public static final int HASTE = 34;
+	public static final int REGEN = 35;
 
 	public static final int SIZE = 7;
 

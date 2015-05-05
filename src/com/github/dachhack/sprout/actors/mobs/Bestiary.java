@@ -40,7 +40,7 @@ public class Bestiary {
 
 		if (Random.Int(30) == 0) {
 			if (cl == Rat.class) {
-				if(Random.Int(1)==0){
+				if(Random.Int(2)==0){
 				cl = Albino.class;
 				}  else {								
 				cl = RatBoss.class;
@@ -131,18 +131,18 @@ public class Bestiary {
 			classes = new Class<?>[] { Bat.class, Brute.class };
 			break;
 		case 12:
-			chances = new float[] { 1, 1, 0.2f };
-			classes = new Class<?>[] { Bat.class, Brute.class, Spinner.class };
+			chances = new float[] { 1, 1, 0.2f, 0.02f };
+			classes = new Class<?>[] { Bat.class, Brute.class, Spinner.class, BrokenRobot.class };
 			break;
 		case 13:
-			chances = new float[] { 1, 3, 1, 1, 0.02f };
+			chances = new float[] { 1, 3, 1, 1, 0.02f, 0.2f };
 			classes = new Class<?>[] { Bat.class, Brute.class, Shaman.class,
-					Spinner.class, Elemental.class };
+					Spinner.class, Elemental.class, BrokenRobot.class };
 			break;
 		case 14:
-			chances = new float[] { 1, 3, 1, 4, 0.02f, 0.01f };
+			chances = new float[] { 1, 3, 1, 4, 0.02f, 0.01f, 3 };
 			classes = new Class<?>[] { Bat.class, Brute.class, Shaman.class,
-					Spinner.class, Elemental.class, Monk.class };
+					Spinner.class, Elemental.class, Monk.class, BrokenRobot.class  };
 			break;
 
 		case 15:
@@ -161,14 +161,14 @@ public class Bestiary {
 					Warlock.class };
 			break;
 		case 18:
-			chances = new float[] { 1, 2, 1, 1 };
+			chances = new float[] { 1, 2, 1, 1, 0.5f };
 			classes = new Class<?>[] { Elemental.class, Monk.class,
-					Golem.class, Warlock.class };
+					Golem.class, Warlock.class, DwarfLich.class };
 			break;
 		case 19:
-			chances = new float[] { 1, 2, 3, 1, 0.02f };
+			chances = new float[] { 1, 2, 3, 1, 0.02f, 2 };
 			classes = new Class<?>[] { Elemental.class, Monk.class,
-					Golem.class, Warlock.class, Succubus.class };
+					Golem.class, Warlock.class, Succubus.class, DwarfLich.class};
 			break;
 
 		case 20:
@@ -181,12 +181,12 @@ public class Bestiary {
 			classes = new Class<?>[] { Succubus.class, Eye.class };
 			break;
 		case 23:
-			chances = new float[] { 1, 2, 1 };
-			classes = new Class<?>[] { Succubus.class, Eye.class, Scorpio.class };
+			chances = new float[] { 1, 2, 1, 0.5f };
+			classes = new Class<?>[] { Succubus.class, Eye.class, Scorpio.class, DemonGoo.class };
 			break;
 		case 24:
-			chances = new float[] { 1, 2, 3 };
-			classes = new Class<?>[] { Succubus.class, Eye.class, Scorpio.class };
+			chances = new float[] { 1, 2, 3, 2 };
+			classes = new Class<?>[] { Succubus.class, Eye.class, Scorpio.class, DemonGoo.class };
 			break;
 
 		case 25:

@@ -58,10 +58,11 @@ public class GardenPainter extends Painter {
 			}
 		}
 		
-		if (Random.Int(1)==0){
+		
+		if (Random.Int(2)==0 && !Dungeon.limitedDrops.ankhChain.dropped()){
 			int pos;
 			do {pos = room.random();}
-			while (level.heaps.get(pos) != null && !Dungeon.limitedDrops.ankhChain.dropped());
+			while (level.heaps.get(pos) != null);
 			level.drop(new AnkhChain(), pos);
 			Dungeon.limitedDrops.ankhChain.drop();
 		}

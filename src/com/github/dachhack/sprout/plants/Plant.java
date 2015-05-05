@@ -28,11 +28,13 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.CellEmitter;
+//import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.effects.particles.LeafParticle;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
+//import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.sprites.PlantSprite;
@@ -49,6 +51,8 @@ public class Plant implements Bundlable {
 	public int pos;
 
 	public PlantSprite sprite;
+	
+	//private static final float TIME_TO_EAT = 3f;
 
 	public void activate(Char ch) {
 
@@ -132,6 +136,7 @@ public class Plant implements Bundlable {
 		public ArrayList<String> actions(Hero hero) {
 			ArrayList<String> actions = super.actions(hero);
 			actions.add(AC_PLANT);
+		//	actions.add(Food.AC_EAT);
 			return actions;
 		}
 
@@ -153,7 +158,18 @@ public class Plant implements Bundlable {
 				((Seed) detach(hero.belongings.backpack)).onThrow(hero.pos);
 
 				hero.sprite.operate(hero.pos);
+				
+		//	} else if (action.equals(Food.AC_EAT)) {
+			//	detach(hero.belongings.backpack);
+//
+	//			hero.sprite.operate(hero.pos);
+		//		hero.busy();
+			//	SpellSprite.show(hero, SpellSprite.FOOD);
+			//	Sample.INSTANCE.play(Assets.SND_EAT);
 
+			//	hero.spend(TIME_TO_EAT);
+
+			
 			} else {
 
 				super.execute(hero, action);

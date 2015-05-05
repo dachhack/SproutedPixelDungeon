@@ -153,20 +153,10 @@ public class Armor extends EquipableItem {
 
 	public Item upgrade(boolean inscribe) {
 
-		if (glyph != null) {
-			if (!inscribe && Random.Int(level) > 0) {
-				inscribe(null);
-				inscribe(Glyph.random());
-				//GLog.w(TXT_INCOMPATIBLE);
-				
-			}
-		} else {
 			if (inscribe) {
 				inscribe(Glyph.random());
 			}
-		}
-		;
-
+				
 		DR += tier;
 		STR--;
 
@@ -358,6 +348,9 @@ public class Armor extends EquipableItem {
 		private static final float[] chances = new float[] { 1, 1, 1, 1, 1, 1,
 				1, 1, 1, 1 };
 
+		private static final float[] chancesAdv = new float[] { 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1 };
+		
 		public abstract int proc(Armor armor, Char attacker, Char defender,
 				int damage);
 
@@ -399,6 +392,16 @@ public class Armor extends EquipableItem {
 		public static Glyph random() {
 			try {
 				return ((Class<Glyph>) glyphs[Random.chances(chances)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		
+		@SuppressWarnings("unchecked")
+		public static Glyph randomAdv() {
+			try {
+				return ((Class<Glyph>) glyphs[Random.chances(chancesAdv)])
 						.newInstance();
 			} catch (Exception e) {
 				return null;

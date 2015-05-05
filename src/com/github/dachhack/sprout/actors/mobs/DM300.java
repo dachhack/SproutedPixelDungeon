@@ -71,9 +71,13 @@ public class DM300 extends Mob implements Callback {
 		lootChance = 0.333f;
 	}
 
+	private int bossAlive = 0;
+	private int towerAlive = 1;
+	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(18, 24);
+		
+		return Random.NormalIntRange(18, 24)*towerAlive;
 	}
 
 	@Override
@@ -83,12 +87,19 @@ public class DM300 extends Mob implements Callback {
 
 	@Override
 	public int dr() {
-		return 10;
+		return 10+(4*towerAlive);
 	}
 
 	@Override
 	public boolean act() {
-
+		towerAlive = 1;
+        for (Mob mob : Dungeon.level.mobs) {
+			
+			if (mob instanceof Tower){
+				   towerAlive++;
+				 }
+			}
+        
 		GameScene.add(Blob.seed(pos, 30, ToxicGas.class));
 
 		return super.act();
@@ -191,11 +202,22 @@ public class DM300 extends Mob implements Callback {
 
 		super.die(cause);
 
-		GameScene.bossSlain();
-		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-		Dungeon.level.drop(new Gold(Random.Int(3000, 6000)), pos).sprite.drop();
+for (Mob mob : Dungeon.level.mobs) {
+			
+			if (mob instanceof Tower || mob instanceof DM300){
+				   bossAlive++;
+				 }
+			
+			}
+			
+			 if(bossAlive==0){
+				 
+					GameScene.bossSlain();
+					Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
+					Dungeon.level.drop(new Gold(Random.Int(3000, 6000)), pos).sprite.drop();
 
-		Badges.validateBossSlain();
+					Badges.validateBossSlain();
+			 }
 
 		yell("Mission failed. Shutting down.");
 	}

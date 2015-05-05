@@ -204,7 +204,7 @@ public class Dungeon {
 		Level level;
 		switch (depth) {
 		case 1:
-			//level = new CavesLevel();
+			//level = new CityLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
 			//break;

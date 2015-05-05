@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
 import com.github.dachhack.sprout.sprites.RatBossSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
@@ -40,7 +41,7 @@ public class RatBoss extends Rat {
 		loot = new Meat();
 		lootChance = 0.5f;
 		
-		lootOther = new PotionOfMending();
+		lootOther = new ScrollOfRegrowth();
 		lootChance = 1f;
 
 		maxLvl = 5;

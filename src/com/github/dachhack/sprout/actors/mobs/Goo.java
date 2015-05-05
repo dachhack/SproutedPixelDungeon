@@ -61,6 +61,7 @@ public class Goo extends Mob {
 	}
 
 	private int pumpedUp = 0;
+	private int goosAlive = 0;
 
 	@Override
 	public int damageRoll() {
@@ -191,7 +192,15 @@ public class Goo extends Mob {
 
 		super.die(cause);
 
-     if (Dungeon.level.mobs.size()==1){
+		for (Mob mob : Dungeon.level.mobs) {
+			
+			if (mob instanceof Goo || mob instanceof PoisonGoo){
+				   goosAlive++;
+				 }
+			
+			}
+			
+			 if(goosAlive==0){
 			
 			((SewerBossLevel) Dungeon.level).unseal();
 

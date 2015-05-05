@@ -23,16 +23,31 @@ import com.watabou.noosa.tweeners.AlphaTweener;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.ToxicGas;
+import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Burning;
+import com.github.dachhack.sprout.actors.buffs.Charm;
+import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
+import com.github.dachhack.sprout.effects.Wound;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
+import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.WraithSprite;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -52,10 +67,10 @@ public class Wraith extends Mob {
 		flying = true;
 		
 		loot = new ScrollOfMagicalInfusion();
-		lootChance = 0.125f;
+		lootChance = 0.075f;
 		
 		lootOther = new ScrollOfUpgrade();
-		lootChanceOther = 0.125f;
+		lootChanceOther = 0.075f;
 	}
 
 	protected static final String LEVEL = "level";
@@ -98,6 +113,18 @@ public class Wraith extends Mob {
 
 		return damage;
 	}
+	
+	public void damage(int dmg, Object src) {
+		if (enemySeen
+				&& (src instanceof Wand
+						|| src instanceof LightningTrap.Electricity || src instanceof Char)) {
+			GLog.n("The attack passes through the wraith.");
+			sprite.showStatus(CharSprite.NEUTRAL, "missed");
+		} else {
+			super.damage(dmg, src);
+		}
+	}
+
 	
 	@Override
 	public String defenseVerb() {
@@ -150,6 +177,12 @@ public class Wraith extends Mob {
 	static {
 		IMMUNITIES.add(Death.class);
 		IMMUNITIES.add(Terror.class);
+		IMMUNITIES.add(Amok.class);
+		IMMUNITIES.add(Charm.class);
+		IMMUNITIES.add(Sleep.class);
+		IMMUNITIES.add(ToxicGas.class);
+		IMMUNITIES.add(ScrollOfPsionicBlast.class);
+		IMMUNITIES.add(Vertigo.class);
 	}
 
 	@Override

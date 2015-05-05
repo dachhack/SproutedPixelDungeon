@@ -19,34 +19,50 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
+import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.effects.CellEmitter;
+import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
+import com.github.dachhack.sprout.effects.particles.SmokeParticle;
+import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Dewdrop;
+import com.github.dachhack.sprout.items.Heap;
+import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
+import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.Terrain;
+import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.sprites.BrokenRobotSprite;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.EyeSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
-public class Eye extends Mob {
+public class BrokenRobot extends Mob {
 
-	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
+	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
+	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "evil eye";
-		spriteClass = EyeSprite.class;
+		name = "broken robot";
+		spriteClass = BrokenRobotSprite.class;
 
 		HP = HT = 100+(Dungeon.depth*Random.NormalIntRange(4, 7));
 		defenseSkill = 20+(Math.round((Dungeon.depth)/2));
@@ -55,20 +71,34 @@ public class Eye extends Mob {
 		EXP = 13;
 		maxLvl = 25;
 
-		flying = true;
-
-		loot = new PotionOfHealing();
+		
+		loot = new RedDewdrop();
 		lootChance = 0.5f;
 		
-		lootOther = new Meat();
+		lootOther = new ScrollOfRecharging();
 		lootChanceOther = 0.5f; // by default, see die()
 	}
 
 	@Override
 	public int dr() {
-		return 10;
+		return 15;
 	}
 
+	@Override
+	public boolean act() {
+
+		switch (Random.Int(50)) {
+		case 1:
+			GLog.n("Malfunction!");
+			explode(pos);
+			if (HP<1){destroy();}
+		break;
+		}
+
+		return super.act();
+	}
+
+	
 	private int hitCell;
 
 	@Override
@@ -86,14 +116,14 @@ public class Eye extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 30+(Dungeon.depth);
+		return 20+(Dungeon.depth);
 	}
 
 	@Override
 	protected float attackDelay() {
-		return 1.6f;
+		return 1.8f;
 	}
-
+	
 	@Override
 	protected boolean doAttack(Char enemy) {
 
@@ -152,13 +182,89 @@ public class Eye extends Mob {
 
 	@Override
 	public String description() {
-		return "One of this demon's other names is \"orb of hatred\", because when it sees an enemy, "
-				+ "it uses its deathgaze recklessly, often ignoring its allies and wounding them.";
+		return "A wandering robot unfinshed and broken down. "
+				+ "You can feel its malice toward intruders.";
 	}
 
+	public static void spawnAround(int pos) {
+		for (int n : Level.NEIGHBOURS4) {
+			int cell = pos + n;
+			if (Level.passable[cell] && Actor.findChar(cell) == null) {
+				spawnAt(cell);
+			}
+		}
+	}
+	
+	public static BrokenRobot spawnAt(int pos) {
+		
+		BrokenRobot b = new BrokenRobot();  
+    	
+			b.pos = pos;
+			b.state = b.HUNTING;
+			GameScene.add(b, SPAWN_DELAY);
+
+			return b;
+     
+     }
+	
+	
+	public void explode(int cell) {
+		// We're blowing up, so no need for a fuse anymore.
+	
+		Sample.INSTANCE.play(Assets.SND_BLAST, 2);
+
+		if (Dungeon.visible[cell]) {
+			CellEmitter.center(cell).burst(BlastParticle.FACTORY, 30);
+		}
+
+		boolean terrainAffected = false;
+		for (int n : Level.NEIGHBOURS9) {
+			int c = cell + n;
+			if (c >= 0 && c < Level.LENGTH) {
+				if (Dungeon.visible[c]) {
+					CellEmitter.get(c).burst(SmokeParticle.FACTORY, 4);
+				}
+
+				if (Level.flamable[c]) {
+					Level.set(c, Terrain.EMBERS);
+					GameScene.updateMap(c);
+					terrainAffected = true;
+				}
+
+				// destroys items / triggers bombs caught in the blast.
+				Heap heap = Dungeon.level.heaps.get(c);
+				if (heap != null)
+					heap.explode();
+
+				Char ch = Actor.findChar(c);
+				if (ch != null) {
+					// those not at the center of the blast take damage less
+					// consistently.
+					int minDamage = c == cell ? Dungeon.depth + 5 : 1;
+					int maxDamage = 10 + Dungeon.depth * 2;
+
+					int dmg = Random.NormalIntRange(minDamage, maxDamage)
+							- Random.Int(ch.dr());
+					if (dmg > 0) {
+						ch.damage(dmg, this);
+					}
+
+					if (ch == Dungeon.hero && !ch.isAlive())
+						// constant is used here in the rare instance a player
+						// is killed by a double bomb.
+						Dungeon.fail(Utils.format(ResultDescriptions.ITEM,
+								"bomb"));
+				}
+			}
+		}
+
+		if (terrainAffected) {
+			Dungeon.observe();
+		}
+	}
+	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
-		RESISTANCES.add(WandOfDisintegration.class);
 		RESISTANCES.add(Death.class);
 		RESISTANCES.add(Leech.class);
 	}
@@ -171,6 +277,7 @@ public class Eye extends Mob {
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
 	static {
 		IMMUNITIES.add(Terror.class);
+		IMMUNITIES.add(ToxicGas.class);
 	}
 
 	@Override

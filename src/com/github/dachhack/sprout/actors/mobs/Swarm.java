@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.features.Door;
@@ -49,7 +50,7 @@ public class Swarm extends Mob {
 
 		flying = true;
 
-		loot = new PotionOfHealing();
+		loot = new PotionOfMending();
 		//loot = new PotionOfMending(); potential nerf
 		lootChance = 0.2f; // by default, see die()
 	}

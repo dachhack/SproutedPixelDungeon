@@ -44,7 +44,7 @@ public class PotionOfMending extends Potion {
 
 	public static void heal(Hero hero) {
 
-		hero.HP = hero.HP+Math.min(((hero.HT-hero.HP)/2), hero.HT-hero.HP);
+		hero.HP = hero.HP+Math.min(((hero.HT-hero.HP)/4), hero.HT-hero.HP);
 		Buff.detach(hero, Poison.class);
 		Buff.detach(hero, Cripple.class);
 		Buff.detach(hero, Weakness.class);

@@ -58,7 +58,8 @@ public class Tengu extends Mob {
 	}
 
 	private int timeToJump = JUMP_DELAY;
-
+	
+	
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(8, 15);
@@ -71,12 +72,13 @@ public class Tengu extends Mob {
 
 	@Override
 	public int dr() {
-		return 5;
+		return 10;
 	}
 
 	@Override
 	public void die(Object cause) {
 
+		
 		Badges.Badge badgeToCheck = null;
 		switch (Dungeon.hero.heroClass) {
 		case WARRIOR:
@@ -104,6 +106,7 @@ public class Tengu extends Mob {
 		Badges.validateBossSlain();
 
 		yell("Free at last...");
+					
 	}
 
 	@Override

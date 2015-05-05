@@ -91,6 +91,10 @@ public class Assets {
 	public static final String RATBOSS = "ratboss.png";
 	public static final String ASSASSIN = "assassin.png";
 	public static final String MONSTERBOX = "monsterbox.png";
+	public static final String BROKENROBOT = "robot.png";
+	public static final String TOWER = "tower.png";
+	public static final String DWARFLICH = "dwarflich.png";
+	public static final String DEMONGOO = "demongoo.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";

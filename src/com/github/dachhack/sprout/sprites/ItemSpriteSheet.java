@@ -43,6 +43,7 @@ public class ItemSpriteSheet {
 	public static final int DEWDROP = ROW1 + 1;
 	public static final int PETAL = ROW1 + 2;
 	public static final int SANDBAG = ROW1 + 3;
+	public static final int REDDEWDROP = ROW8 + 8;
 	// Heaps (containers)
 	public static final int BONES = ROW1 + 4;
 	public static final int REMAINS = ROW1 + 5;
@@ -177,6 +178,7 @@ public class ItemSpriteSheet {
 	public static final int SCROLL_BERKANAN = ROW10 + 9;
 	public static final int SCROLL_ODAL = ROW10 + 10;
 	public static final int SCROLL_TIWAZ = ROW10 + 11;
+	public static final int SCROLL_NENDIL = ROW10 + 12;
 
 	// Row Eleven: Potions
 	public static final int POTION_CRIMSON = ROW11 + 0;
@@ -209,6 +211,7 @@ public class ItemSpriteSheet {
 	public static final int SEED_DUNGEONNUT = ROW12 + 11;
 	public static final int SEED_TOASTEDDUNGEONNUT = ROW12 + 12;
 	public static final int SEED_GOLDENDUNGEONNUT = ROW12 + 13;
+	public static final int SEED_BLACKBERRY = ROW12 + 14;
 
 	// Row Thirteen: Food
 	public static final int MEAT = ROW13 + 0;

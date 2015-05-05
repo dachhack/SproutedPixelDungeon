@@ -15,35 +15,53 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.items.bags;
+package com.github.dachhack.sprout.actors.buffs;
 
-import com.github.dachhack.sprout.items.Ankh;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.github.dachhack.sprout.ui.BuffIndicator;
 
-public class AnkhChain extends Bag {
+public class BerryRegeneration extends Buff {
+	
+	private int level = 0;
 
-	{
-		name = "chain";
-		image = ItemSpriteSheet.CHAIN;
+	public int level() {
+		return level;
+	}
 
-		size = 12;
+	public void level(int value) {
+		if (level < value) {
+			level = value;
+		}
 	}
 
 	@Override
-	public boolean grab(Item item) {
-		return item instanceof Ankh;
+	public int icon() {
+		return BuffIndicator.REGEN;
 	}
 
 	@Override
-	public int price() {
-		return 50;
+	public String toString() {
+		return "Regenerating";
 	}
-
 	@Override
-	public String info() {
-		return "This chain can hold your amulets and other small jewelery.\n\n"
-				+"Must be a pretty scarry dungeon you are heading into!";
-	}
+	public boolean act() {
+		if (target.isAlive()) {
+			   
+			if (target.HP < target.HT) {
+				target.HP += Math.min(1+Math.round(level/25),(target.HT-target.HP));
+			}
+			
+				spend(TICK);
+				if (--level <= 0) {
+					detach();
+				}
+
+			} else {
+
+				detach();
+
+			}
+
+			return true;
+		}
+	
 }
-

@@ -36,6 +36,7 @@ import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.artifacts.AlchemistsToolkit;
+import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Blandfruit;
 import com.github.dachhack.sprout.items.food.ChargrilledMeat;
 import com.github.dachhack.sprout.items.food.FrozenCarpaccio;
@@ -234,6 +235,9 @@ public class Heap implements Bundlable {
 			} else if (item instanceof Dewdrop) {
 				items.remove(item);
 				evaporated = true;
+			} else if (item instanceof Blackberry) {
+				items.remove(item);
+				evaporated = true;
 			} else if (item instanceof MysteryMeat) {
 				replace(item, ChargrilledMeat.cook((MysteryMeat) item));
 				burnt = true;
@@ -340,6 +344,9 @@ public class Heap implements Bundlable {
 				frozen = true;
 			} else if (item instanceof Bomb) {
 				((Bomb) item).fuse = null;
+				frozen = true;
+			} else if (item instanceof Meat) {
+				replace(item, FrozenCarpaccio.cook((Meat) item));
 				frozen = true;
 			}
 		}

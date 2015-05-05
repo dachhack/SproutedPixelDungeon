@@ -15,35 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.items.bags;
+package com.github.dachhack.sprout.sprites;
 
-import com.github.dachhack.sprout.items.Ankh;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.watabou.noosa.TextureFilm;
+import com.watabou.noosa.particles.PixelParticle;
+import com.github.dachhack.sprout.Assets;
 
-public class AnkhChain extends Bag {
+public class TowerSprite extends MobSprite {
 
-	{
-		name = "chain";
-		image = ItemSpriteSheet.CHAIN;
 
-		size = 12;
+	public TowerSprite() {
+		super();
+
+		texture(Assets.TOWER);
+		TextureFilm frames = new TextureFilm(texture, 16, 16);
+
+		idle = new Animation(10, true);
+		idle.frames(frames, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+		run = idle.clone();
+		die = idle.clone();
+		attack = idle.clone();
+
+		idle();
 	}
 
-	@Override
-	public boolean grab(Item item) {
-		return item instanceof Ankh;
-	}
-
-	@Override
-	public int price() {
-		return 50;
-	}
-
-	@Override
-	public String info() {
-		return "This chain can hold your amulets and other small jewelery.\n\n"
-				+"Must be a pretty scarry dungeon you are heading into!";
-	}
 }
-
