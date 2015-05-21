@@ -79,17 +79,19 @@ public class DwarfLichSprite extends MobSprite {
 				
 				
 				Char ch = Actor.findChar(c);
-				if (ch != null) {
+				if (ch != null && ch==Dungeon.hero) {
 					// those not at the center of the blast take damage less
 					// consistently.
 					int minDamage = c == cell ? Dungeon.depth + 5 : 1;
 					int maxDamage = 10 + Dungeon.depth * 2;
-
-					int dmg = Random.NormalIntRange(minDamage, maxDamage)
-							- Random.Int(ch.dr());
+					                    
+					
+					int dmg = Random.NormalIntRange(minDamage, maxDamage) - Random.Int(ch.dr());
+					
+					
 					if (dmg > 0) {
 						ch.damage(dmg, this);
-						if(Random.Int(10)==1){Buff.prolong(ch, Paralysis.class, 1);}
+						if(Random.Int(20)==1){Buff.prolong(ch, Paralysis.class, 1);}
 					}
 											
 

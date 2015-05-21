@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.actors.mobs;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.items.food.Blackberry;
@@ -27,16 +28,19 @@ import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DwarfLichSprite;
 import com.watabou.utils.Random;
 
 public class DwarfLich extends Mob {
+	
+	private static final float SPAWN_DELAY = 2f;
 
 	{
 		name = "dwarf lich";
 		spriteClass = DwarfLichSprite.class;
 
-		HP = HT = 95+(Dungeon.depth*Random.NormalIntRange(1, 3));
+		HP = HT = 75+(Dungeon.depth*Random.NormalIntRange(1, 3));
 		defenseSkill = 24+(Math.round((Dungeon.depth)/2));
 	
 		EXP = 14;
@@ -45,7 +49,7 @@ public class DwarfLich extends Mob {
 		lootChance = 0.2f;
 		
 		lootOther = new Blackberry();
-		lootChanceOther = 0.333f; // by default, see die()
+		lootChanceOther = 0.333f;
 	}
 
 	@Override
@@ -78,6 +82,29 @@ public class DwarfLich extends Mob {
 		}
 	}
 
+
+	public static void spawnAround(int pos) {
+		for (int n : Level.NEIGHBOURS4) {
+			int cell = pos + n;
+			if (Level.passable[cell] && Actor.findChar(cell) == null) {
+				spawnAt(cell);
+			}
+		}
+	}
+	
+	public static DwarfLich spawnAt(int pos) {
+		
+		DwarfLich d = new DwarfLich();  
+    	
+			d.pos = pos;
+			d.state = d.HUNTING;
+			GameScene.add(d, SPAWN_DELAY);
+
+			return d;
+     
+     }
+	
+	
 	
 
 	@Override

@@ -161,6 +161,7 @@ public class HallsBossLevel extends Level {
 	public int randomRespawnCell() {
 		return -1;
 	}
+	
 
 	@Override
 	public void press(int cell, Char hero) {

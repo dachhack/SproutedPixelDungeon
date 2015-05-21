@@ -19,9 +19,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -32,9 +30,6 @@ import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
-import com.github.dachhack.sprout.items.ArmorKit;
-import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
@@ -44,6 +39,8 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.KingSprite;
 import com.github.dachhack.sprout.sprites.UndeadSprite;
+import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -53,13 +50,14 @@ public class King extends Mob {
 	private static final int MAX_ARMY_SIZE = 5;
 	private static final int REGEN = 3;
 
+
 	{
 		name = "King of Dwarves";
 		spriteClass = KingSprite.class;
 
-		HP = HT = 600;
+		HP = HT = 500;
 		EXP = 40;
-		defenseSkill = 25;
+		defenseSkill = 25; //25
 
 		Undead.count = 0;
 	}
@@ -92,7 +90,7 @@ public class King extends Mob {
 
 	@Override
 	public int dr() {
-		return 14;
+		return 14; //14
 	}
 
 	@Override
@@ -147,20 +145,24 @@ public class King extends Mob {
 	}
 	
 	
+	private void summonLiches (int pos){
+		 DwarfLich.spawnAround(pos);
+	}
+	
 	@Override
 	public void die(Object cause) {
-
-		GameScene.bossSlain();
-		Dungeon.level.drop(new ArmorKit(), pos).sprite.drop();
-		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-		Dungeon.level.drop(new Gold(Random.Int(4900, 10000)), pos).sprite.drop();
-
-		super.die(cause);
-
-		Badges.validateBossSlain();
-
+		            
+		int findTomb=Dungeon.hero.pos;
 		yell("You cannot kill me, " + Dungeon.hero.givenName()
 				+ "... I am... immortal...");
+		 for (Mob mob : Dungeon.level.mobs) {
+				if (mob instanceof DwarfKingTomb){findTomb=mob.pos;}
+		 }
+		 
+		 summonLiches(findTomb);
+		 GLog.n("Release the Liches!");
+		 super.die(cause);
+							
 	}
 
 	private int maxArmySize() {

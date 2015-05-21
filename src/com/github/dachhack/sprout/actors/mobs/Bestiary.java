@@ -17,7 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.Statistics;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.watabou.utils.Random;
@@ -72,14 +72,9 @@ public class Bestiary {
 
 		switch (depth) {
 		case 1:
-			if (!Statistics.amuletObtained){
-			chances = new float[] { 1};
-			classes = new Class<?>[] { Rat.class};
+			chances = new float[] { 1 };
+			classes = new Class<?>[] {Rat.class};	
 			break;
-			} else {
-			chances = new float[] { 1, 0.01f };
-			classes = new Class<?>[] { Rat.class, BlueWraith.class };	
-			}
 		case 2:
 			chances = new float[] { 1, 1 };
 			classes = new Class<?>[] { Rat.class, Gnoll.class };
@@ -94,7 +89,6 @@ public class Bestiary {
 			classes = new Class<?>[] { Rat.class, Gnoll.class, Crab.class,
 					Swarm.class, Skeleton.class, Thief.class };
 			break;
-
 		case 5:
 			chances = new float[] { 1 };
 			classes = new Class<?>[] { Goo.class };
@@ -116,9 +110,15 @@ public class Bestiary {
 					Gnoll.class, Thief.class, Swarm.class, Assassin.class, Bat.class };
 			break;
 		case 9:
-			chances = new float[] { 3, 3, 1, 1, 3, 0.02f, 0.01f };
+			if (Dungeon.sporkAvail){
+			chances = new float[] { 3, 3, 1, 1, 3, 0.02f, 0.01f, 0.1f };
 			classes = new Class<?>[] { Skeleton.class, Shaman.class,
-					Thief.class, Swarm.class, Assassin.class, Bat.class, Brute.class };
+					Thief.class, Swarm.class, Assassin.class, Bat.class, Brute.class, BanditKing.class };
+			} else {
+				chances = new float[] { 3, 3, 1, 1, 3, 0.02f, 0.01f };
+				classes = new Class<?>[] { Skeleton.class, Shaman.class,
+				    Thief.class, Swarm.class, Assassin.class, Bat.class, Brute.class };
+			}
 			break;
 
 		case 10:
@@ -166,11 +166,11 @@ public class Bestiary {
 					Golem.class, Warlock.class, DwarfLich.class };
 			break;
 		case 19:
+			
 			chances = new float[] { 1, 2, 3, 1, 0.02f, 2 };
 			classes = new Class<?>[] { Elemental.class, Monk.class,
-					Golem.class, Warlock.class, Succubus.class, DwarfLich.class};
+			Golem.class, Warlock.class, Succubus.class, DwarfLich.class};
 			break;
-
 		case 20:
 			chances = new float[] { 1 };
 			classes = new Class<?>[] { King.class };
@@ -210,6 +210,7 @@ public class Bestiary {
 				|| mob instanceof Ghost.FetidRat
 				|| mob instanceof Ghost.GnollTrickster
 				|| mob instanceof Ghost.GreatCrab
-				|| mob instanceof BlueWraith;
+				|| mob instanceof BlueWraith
+				|| mob instanceof BanditKing;
 	}
 }

@@ -22,7 +22,7 @@ import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class MindVision extends FlavourBuff {
 
-	public static final float DURATION = 20f;
+	public static final float DURATION = 40f;
 
 	public int distance = 2;
 

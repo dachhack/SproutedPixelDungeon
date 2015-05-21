@@ -27,7 +27,6 @@ import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.BlueWraith;
 import com.github.dachhack.sprout.actors.mobs.Mimic;
-import com.github.dachhack.sprout.actors.mobs.MonsterBox;
 import com.github.dachhack.sprout.actors.mobs.Wraith;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -104,6 +103,26 @@ public class Heap implements Bundlable {
 			return 0;
 		}
 	}
+	
+
+	public boolean chestCheck() {
+		switch (type) {
+		case HEAP:
+		case FOR_SALE:
+		case TOMB:
+		case SKELETON:
+		case REMAINS:
+				return false;
+		case CRYSTAL_CHEST:
+		case LOCKED_CHEST:
+		case MIMIC:
+		case CHEST:
+		       return true;		
+		default:
+			return false;
+		}
+	}
+
 
 	public ItemSprite.Glowing glowing() {
 		return (type == Type.HEAP || type == Type.FOR_SALE) && items.size() > 0 ? items

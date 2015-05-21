@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
+import com.github.dachhack.sprout.actors.mobs.DwarfKingTomb;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
@@ -185,13 +186,17 @@ public class CityBossLevel extends Level {
 			locked = true;
 
 			Mob boss = Bestiary.mob(Dungeon.depth);
+			Mob tomb = new DwarfKingTomb();
 			boss.state = boss.HUNTING;
 			int count = 0;
 			do {
 				boss.pos = Random.Int(LENGTH);
-			} while (!passable[boss.pos] || !outsideEntraceRoom(boss.pos)
+				tomb.pos = (TOP + 1) * WIDTH + CENTER;
+			} while (!passable[boss.pos] 
+					|| !outsideEntraceRoom(boss.pos)
 					|| (Dungeon.visible[boss.pos] && count++ < 20));
 			GameScene.add(boss);
+			GameScene.add(tomb);
 
 			if (Dungeon.visible[boss.pos]) {
 				boss.notice();

@@ -266,6 +266,8 @@ public abstract class Level implements Bundlable {
 				case 3:
 					feeling = Feeling.DARK;
 					addItemToSpawn(new Torch());
+					addItemToSpawn(new Torch());
+					addItemToSpawn(new Torch());
 					viewDistance = (int) Math.ceil(viewDistance / 3f);
 					break;
 				}
@@ -483,6 +485,15 @@ public abstract class Level implements Bundlable {
 	}
 
 	public int randomRespawnCell() {
+		int cell;
+		do {
+			cell = Random.Int(LENGTH);
+		} while (!passable[cell] || Dungeon.visible[cell]
+				|| Actor.findChar(cell) != null);
+		return cell;
+	}
+
+	public int randomRespawnCellMob() {
 		int cell;
 		do {
 			cell = Random.Int(LENGTH);

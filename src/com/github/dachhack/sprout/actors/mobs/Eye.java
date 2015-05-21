@@ -27,22 +27,25 @@ import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
-import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.EyeSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
 public class Eye extends Mob {
 
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
+	protected static final float SPAWN_DELAY = 2f;
 
 	{
 		name = "evil eye";
@@ -150,6 +153,33 @@ public class Eye extends Mob {
 		return true;
 	}
 
+	public static void spawnAroundChance(int pos) {
+		for (int n : Level.NEIGHBOURS4) {
+			int cell = pos + n;
+			if (Level.passable[cell] && Actor.findChar(cell) == null && Random.Float()<0.50f) {
+				spawnAt(cell);
+			}
+		}
+	}
+
+	public static Eye spawnAt(int pos) {
+		if (Level.passable[pos] && Actor.findChar(pos) == null) {
+          
+			Eye e = new Eye();
+			e.pos = pos;
+			e.state = e.HUNTING;
+			GameScene.add(e, SPAWN_DELAY);
+
+			e.sprite.alpha(0);
+			e.sprite.parent.add(new AlphaTweener(e.sprite, 1, 0.5f));
+
+		return e;
+  			
+		} else {
+			return null;
+		}
+	}
+	
 	@Override
 	public String description() {
 		return "One of this demon's other names is \"orb of hatred\", because when it sees an enemy, "

@@ -133,6 +133,7 @@ public class Blacksmith extends NPC {
 					//	pick.doUnequip(Dungeon.hero, false);
 					//}
 					//pick.detach(Dungeon.hero.belongings.backpack);
+					yell("Keep the pickaxe. It's good for breaking stones in your way.");
 					tell(TXT_COMPLETED);
 
 					Quest.completed = true;
@@ -225,7 +226,7 @@ public class Blacksmith extends NPC {
 			((EquipableItem) second).doUnequip(Dungeon.hero, false);
 		}
 		second.detachAll(Dungeon.hero.belongings.backpack);
-		gold.detachAll(Dungeon.hero.belongings.backpack);
+		if (gold!=null){gold.detachAll(Dungeon.hero.belongings.backpack);}
 		Quest.reforged = true;
 
 		Journal.remove(Journal.Feature.TROLL);

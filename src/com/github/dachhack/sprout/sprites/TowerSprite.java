@@ -18,7 +18,6 @@
 package com.github.dachhack.sprout.sprites;
 
 import com.watabou.noosa.TextureFilm;
-import com.watabou.noosa.particles.PixelParticle;
 import com.github.dachhack.sprout.Assets;
 
 public class TowerSprite extends MobSprite {

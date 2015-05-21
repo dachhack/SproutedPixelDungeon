@@ -15,34 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.actors.mobs;
+package com.github.dachhack.sprout.items.weapon.melee;
 
-import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.sprites.ShieldedSprite;
+import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
-public class Shielded extends Brute {
+public class Spork extends MeleeWeapon {
 
 	{
-		name = "shielded brute";
-		spriteClass = ShieldedSprite.class;
+		name = "spork";
+		image = ItemSpriteSheet.SPORK;
+	}
 
-		defenseSkill = 20+(Dungeon.depth);
+	public Spork() {
+		super(1, 1f, 0.25f);
 	}
 
 	@Override
-	public int dr() {
-		return 20;
-	}
-
-	@Override
-	public String defenseVerb() {
-		return "blocked";
-	}
-
-	@Override
-	public void die(Object cause) {
-		super.die(cause);
-		Badges.validateRare(this);
+	public String desc() {
+		return "Is it a spoon? Is it a fork? It is neither and it is both. "
+				+"Mobs better repect!";
 	}
 }

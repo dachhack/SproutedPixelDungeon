@@ -22,20 +22,28 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.items.DewVial;
+import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
+import com.github.dachhack.sprout.items.armor.PlateArmor;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
 import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.potions.PotionOfExperience;
+import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfInvisibility;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.quest.DarkGold;
+import com.github.dachhack.sprout.items.quest.Pickaxe;
 import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.wands.WandOfAmok;
@@ -147,16 +155,25 @@ public enum HeroClass {
 		(hero.belongings.weapon = new ShortSword()).identify();
 		Dart darts = new Dart(8);
 		darts.identify().collect();
-		//for(int i=1; i<8; i++){
-		//Scroll scroll = new ScrollOfUpgrade();
-        //scroll.identify().collect();
-		//}
-       // for(int i=1; i<45; i++){
+		//for(int i=0; i<20; i++){
+		//Scroll scroll = new ScrollOfMagicalInfusion();
+       // scroll.identify().collect();
+       // }		
+	//	PlateArmor armor = new PlateArmor();
+      //  armor.identify().collect();
+    //  for(int i=1; i<30; i++){
+     //    PotionOfExperience potion1 = new PotionOfExperience(); potion1.collect();
+     //    PotionOfInvisibility potion2 = new PotionOfInvisibility(); potion2.collect();
+     //    PotionOfHealing potion3 = new PotionOfHealing(); potion3.collect();
+    //     }
+        
+        //for(int i=1; i<45; i++){
        // DarkGold gold = new DarkGold(); gold.collect();
-       // }
+        //}
         //Ring ring = new RingOfAccuracy(); ring.collect();
       //  Wand wand = new WandOfAmok(); wand.collect();
       //  Honeypot honeypot = new Honeypot(); honeypot.collect();
+		//  Pickaxe Pickaxe = new Pickaxe(); Pickaxe.collect();
        	Dungeon.quickslot.setSlot(0, darts);
 
 		new PotionOfStrength().setKnown();

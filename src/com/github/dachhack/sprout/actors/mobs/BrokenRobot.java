@@ -28,28 +28,20 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
-import com.github.dachhack.sprout.effects.particles.SparkParticle;
-import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.RedDewdrop;
-import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
-import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
-import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.BrokenRobotSprite;
 import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.EyeSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
@@ -64,7 +56,7 @@ public class BrokenRobot extends Mob {
 		name = "broken robot";
 		spriteClass = BrokenRobotSprite.class;
 
-		HP = HT = 100+(Dungeon.depth*Random.NormalIntRange(4, 7));
+		HP = HT = 75+(Dungeon.depth*Random.NormalIntRange(4, 7));
 		defenseSkill = 20+(Math.round((Dungeon.depth)/2));
 		viewDistance = Light.DISTANCE;
 
@@ -81,18 +73,20 @@ public class BrokenRobot extends Mob {
 
 	@Override
 	public int dr() {
-		return 15;
+		return 5;
 	}
 
 	@Override
 	public boolean act() {
 
-		switch (Random.Int(50)) {
-		case 1:
+		if(enemySeen){
+		  switch (Random.Int(50)) {
+		  case 1:
 			GLog.n("Malfunction!");
 			explode(pos);
 			if (HP<1){destroy();}
-		break;
+		  break;
+		 }
 		}
 
 		return super.act();
@@ -121,7 +115,7 @@ public class BrokenRobot extends Mob {
 
 	@Override
 	protected float attackDelay() {
-		return 1.8f;
+		return 3f;
 	}
 	
 	@Override
@@ -248,7 +242,10 @@ public class BrokenRobot extends Mob {
 					if (dmg > 0) {
 						ch.damage(dmg, this);
 					}
-
+ 
+					if (ch == this && HP<1){	
+						this.destroy();
+				     }
 					if (ch == Dungeon.hero && !ch.isAlive())
 						// constant is used here in the rare instance a player
 						// is killed by a double bomb.

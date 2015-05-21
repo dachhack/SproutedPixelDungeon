@@ -20,36 +20,25 @@ package com.github.dachhack.sprout.actors.mobs;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
-import com.github.dachhack.sprout.actors.blobs.Web;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Roots;
-import com.github.dachhack.sprout.actors.buffs.Terror;
-import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.Larva;
-import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
 import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.SewerBossLevel;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DemonGooSprite;
-import com.github.dachhack.sprout.sprites.PoisonGooSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -66,7 +55,8 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 		name = "demon goo";
 		HP = HT = 100;
 		EXP = 10;
-		defenseSkill = 20;
+		defenseSkill = 10;
+		//10
 		spriteClass = DemonGooSprite.class;
 		baseSpeed = 2f;
 		viewDistance = Light.DISTANCE;
@@ -106,6 +96,7 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 	@Override
 	public int dr() {
 		return 10;
+		//10
 	}
 
 	@Override
@@ -181,6 +172,13 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 		return "Demon Goo is pretty angry you killed its buddy in the sewers. ";
 	}
 
+	@Override
+	public void die(Object cause) {
+
+		super.die(cause);
+       	yell("glurp... glurp...");
+	}
+	
 	
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

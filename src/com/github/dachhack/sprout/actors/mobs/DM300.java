@@ -65,7 +65,7 @@ public class DM300 extends Mob implements Callback {
 
 		HP = HT = 500;
 		EXP = 30;
-		defenseSkill = 50;
+		defenseSkill = 40;
 
 		loot = new CapeOfThorns().identify();
 		lootChance = 0.333f;

@@ -157,6 +157,7 @@ public class ShopPainter extends Painter {
 			itemsToSpawn.add(new PlateArmor().identify());
 			itemsToSpawn.add(new Torch());
 			itemsToSpawn.add(new Torch());
+			itemsToSpawn.add(new Torch());
 			break;
 		}
 

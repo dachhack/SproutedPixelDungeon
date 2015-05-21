@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
+import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
@@ -36,7 +37,9 @@ import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Pushing;
+import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
@@ -59,7 +62,7 @@ public class Yog extends Mob {
 		name = "Yog-Dzewa";
 		spriteClass = YogSprite.class;
 
-		HP = HT = 800;
+		HP = HT = 1000;
 
 		EXP = 50;
 
@@ -91,6 +94,11 @@ public class Yog extends Mob {
 	}
 
 	@Override
+	public int dr() {
+		return 10+(10*fistsCount);
+	}
+	
+	@Override
 	public void damage(int dmg, Object src) {
 
 		if (fistsCount > 0) {
@@ -102,6 +110,28 @@ public class Yog extends Mob {
 			}
 
 			dmg >>= fistsCount;
+		}
+		
+		if (HP<(HT/4) && Random.Float() < 0.25f){
+			int newPos = -1;
+				for (int i = 0; i < 20; i++) {
+				newPos = Dungeon.level.randomRespawnCellMob();
+				if (newPos != -1) {
+					break;
+				}
+			}
+			if (newPos != -1) {
+				Actor.freeCell(pos);
+				CellEmitter.get(pos).start(Speck.factory(Speck.LIGHT), 0.2f, 3);
+				pos = newPos;
+				sprite.place(pos);
+				sprite.visible = Dungeon.visible[pos];
+				GLog.n("Yog vanishes!");
+			}		
+			Buff.affect(this, BerryRegeneration.class).level(HP);
+			if (Dungeon.level.mobs.size()<8){
+			Eye.spawnAroundChance(newPos);
+			}
 		}
 
 		super.damage(dmg, src);
@@ -147,7 +177,7 @@ public class Yog extends Mob {
 	public void die(Object cause) {
 
 		for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
-			if (mob instanceof BurningFist || mob instanceof RottingFist) {
+			if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof Eye) {
 				mob.die(cause);
 			}
 		}
@@ -198,7 +228,7 @@ public class Yog extends Mob {
 			name = "rotting fist";
 			spriteClass = RottingFistSprite.class;
 
-			HP = HT = 300;
+			HP = HT = 500;
 			defenseSkill = 25;
 
 			EXP = 0;
@@ -292,7 +322,7 @@ public class Yog extends Mob {
 			name = "burning fist";
 			spriteClass = BurningFistSprite.class;
 
-			HP = HT = 200;
+			HP = HT = 400;
 			defenseSkill = 25;
 
 			EXP = 0;

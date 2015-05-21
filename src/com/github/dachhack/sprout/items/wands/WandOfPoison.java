@@ -39,7 +39,7 @@ public class WandOfPoison extends Wand {
 		if (ch != null) {
 
 			Buff.affect(ch, Poison.class).set(
-					Poison.durationFactor(ch) * (5 + level()));
+					Poison.durationFactor(ch) * (5 + level()*2));
 
 		} else {
 

@@ -37,7 +37,7 @@ public class Assassin extends Mob {
 		baseSpeed = 2f;
 
 		HP = HT = 25+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		EXP = 20;
+		EXP = 10;
 		defenseSkill = 10+(Math.round((Dungeon.depth)/2));
 	}
 

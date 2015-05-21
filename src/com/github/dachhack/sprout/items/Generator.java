@@ -116,9 +116,9 @@ public class Generator {
 				Sword.class, Longsword.class, BattleAxe.class, WarHammer.class,
 				Glaive.class, ShortSword.class, Dart.class, Javelin.class,
 				IncendiaryDart.class, CurareDart.class, Shuriken.class,
-				Boomerang.class, Tamahawk.class };
+				Boomerang.class, Tamahawk.class, Spork.class };
 		Category.WEAPON.probs = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-				0, 1, 1, 1, 1, 0, 1 };
+				0, 1, 1, 1, 1, 0, 1, 0 };
 
 		Category.ARMOR.classes = new Class<?>[] { ClothArmor.class,
 				LeatherArmor.class, MailArmor.class, ScaleArmor.class,

@@ -35,7 +35,7 @@ public class ItemSpriteSheet {
 	private static final int ROW13 = 12 * 16;
 	private static final int ROW14 = 13 * 16;
 	private static final int ROW15 = 14 * 16;
-	private static final int ROW16 = 15 * 16;
+	//private static final int ROW16 = 15 * 16;
 
 	// Row One: Items which can't be obtained
 	// null warning occupies space 0, should only show up if there's a bug.
@@ -91,7 +91,7 @@ public class ItemSpriteSheet {
 	public static final int WAR_HAMMER = ROW3 + 9;
 	public static final int GLAIVE = ROW3 + 10;
 
-	// Row Four: Missile weapons
+	// Row Four: Missile weapons and sporks
 	public static final int DART = ROW4 + 0;
 	public static final int BOOMERANG = ROW4 + 1;
 	public static final int INCENDIARY_DART = ROW4 + 2;
@@ -99,6 +99,8 @@ public class ItemSpriteSheet {
 	public static final int CURARE_DART = ROW4 + 4;
 	public static final int JAVELIN = ROW4 + 5;
 	public static final int TOMAHAWK = ROW4 + 6;
+	public static final int SPORK = ROW4 + 7;
+	public static final int ROYALSPORK = ROW4 + 8;
 
 	// Row Five: Armors
 	public static final int ARMOR_CLOTH = ROW5 + 0;
@@ -176,7 +178,7 @@ public class ItemSpriteSheet {
 	public static final int SCROLL_MANNAZ = ROW10 + 7;
 	public static final int SCROLL_NAUDIZ = ROW10 + 8;
 	public static final int SCROLL_BERKANAN = ROW10 + 9;
-	public static final int SCROLL_ODAL = ROW10 + 10;
+	public static final int SCROLL_NCOSRANE = ROW10 + 10;
 	public static final int SCROLL_TIWAZ = ROW10 + 11;
 	public static final int SCROLL_NENDIL = ROW10 + 12;
 

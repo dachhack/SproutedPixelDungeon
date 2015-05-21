@@ -95,6 +95,8 @@ public class Assets {
 	public static final String TOWER = "tower.png";
 	public static final String DWARFLICH = "dwarflich.png";
 	public static final String DEMONGOO = "demongoo.png";
+	public static final String BANDITKING = "banditking.png";
+	public static final String DWARFKINGTOMB = "dwarfkingtomb.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";

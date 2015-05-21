@@ -17,11 +17,10 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.Badges;
+
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
 import com.github.dachhack.sprout.sprites.RatBossSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -42,17 +41,13 @@ public class RatBoss extends Rat {
 		lootChance = 0.5f;
 		
 		lootOther = new ScrollOfRegrowth();
-		lootChance = 1f;
+		lootChanceOther = 0.1f;
 
 		maxLvl = 5;
 	}
 
-	@Override
-	public void die(Object cause) {
-		super.die(cause);
-		Badges.validateRare(this);
-	}
-	
+	private boolean spawnedRats = false;
+			
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(3, 8+(Dungeon.depth));
@@ -72,7 +67,6 @@ public class RatBoss extends Rat {
 	public void notice() {
 		super.notice();
 		yell("Scritch Scratch!");
-		boolean spawnedRats = false;
 		if (!spawnedRats){
 	    Rat.spawnAround(pos);
 	    GLog.n("Rat pack apears!");

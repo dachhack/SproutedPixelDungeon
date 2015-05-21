@@ -41,7 +41,7 @@ public class Weapon extends KindOfWeapon {
 	private static final int HITS_TO_KNOW = 20;
 
 	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s to identify it. It is %s.";
-	private static final String TXT_INCOMPATIBLE = "Interaction of different types of magic has negated the enchantment on this weapon!";
+	//private static final String TXT_INCOMPATIBLE = "Interaction of different types of magic has negated the enchantment on this weapon!";
 	private static final String TXT_TO_STRING = "%s :%d";
 
 	public int STR = 10;
@@ -167,14 +167,13 @@ public class Weapon extends KindOfWeapon {
 	}
 
 	public Item upgrade(boolean enchant) {
-		if (enchantment != null) {
-			if (!enchant && Random.Int(level)>level) {
+		
+		if (enchant){
+		   if (enchantment != null) {
+				enchantAdv();
+		   } else {
 				enchant();
-			}
-		} else {
-			if (enchant) {
-				enchant();
-			}
+		   }
 		}
 
 		return super.upgrade();
@@ -216,25 +215,35 @@ public class Weapon extends KindOfWeapon {
 		return this;
 	}
 
+	
 	public Weapon enchant() {
 
-		Class<? extends Enchantment> oldEnchantment = enchantment != null ? enchantment
-				.getClass() : null;
+		Class<? extends Enchantment> oldEnchantment = enchantment != null ? enchantment.getClass() : null;
 		Enchantment ench = Enchantment.random();
+		while (ench.getClass() == oldEnchantment) {
+			ench = Enchantment.random();
+		}
+		
+		return enchant(ench);
+	}
+	
+	public Weapon enchantAdv() {
+
+		Class<? extends Enchantment> oldEnchantment = enchantment != null ? enchantment.getClass() : null;
+		Enchantment ench = Enchantment.randomAdv();
 		while (ench.getClass() == oldEnchantment) {
 			ench = Enchantment.randomAdv();
 		}
 		
-		if (ench.getClass() == oldEnchantment) {
-			ench = Enchantment.randomAdv();
-		}
-		
-		if (ench.getClass() == oldEnchantment) {
-			ench = Enchantment.randomAdv();
-		}
-
 		return enchant(ench);
 	}
+
+	public Weapon enchantNom() {
+
+		Enchantment ench = Enchantment.randomNom();
+		return enchant(ench);
+	}
+	
 
 	public boolean isEnchanted() {
 		return enchantment != null;
@@ -250,12 +259,16 @@ public class Weapon extends KindOfWeapon {
 		private static final Class<?>[] enchants = new Class<?>[] { Fire.class,
 				Poison.class, Death.class, Paralysis.class, Leech.class,
 				Slow.class, Shock.class, Instability.class, Horror.class,
-				Luck.class };
+				Luck.class, Nomnom.class };
 		private static final float[] chances = new float[] { 10, 10, 1, 2, 1,
-				2, 6, 3, 2, 2 };
+				2, 6, 3, 2, 2, 0 };
 		
 		private static final float[] chancesAdv = new float[] { 2, 2, 2, 2, 2,
-			2, 2, 2, 2, 2 };
+			2, 2, 2, 2, 2, 0 };
+		
+		private static final float[] chancesNom = new float[] { 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 1 };
+		
 
 		public abstract boolean proc(Weapon weapon, Char attacker,
 				Char defender, int damage);
@@ -289,6 +302,15 @@ public class Weapon extends KindOfWeapon {
 		public static Enchantment randomAdv() {
 			try {
 				return ((Class<Enchantment>) enchants[Random.chances(chancesAdv)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		@SuppressWarnings("unchecked")
+		public static Enchantment randomNom() {
+			try {
+				return ((Class<Enchantment>) enchants[Random.chances(chancesNom)])
 						.newInstance();
 			} catch (Exception e) {
 				return null;

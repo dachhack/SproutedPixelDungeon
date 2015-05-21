@@ -15,34 +15,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.actors.mobs;
+package com.github.dachhack.sprout.sprites;
 
-import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.sprites.ShieldedSprite;
+import com.watabou.noosa.TextureFilm;
+import com.github.dachhack.sprout.Assets;
 
-public class Shielded extends Brute {
+public class BanditKingSprite extends MobSprite {
 
-	{
-		name = "shielded brute";
-		spriteClass = ShieldedSprite.class;
+	public BanditKingSprite() {
+		super();
 
-		defenseSkill = 20+(Dungeon.depth);
-	}
+		texture(Assets.BANDITKING);
+		TextureFilm film = new TextureFilm(texture, 12, 13);
 
-	@Override
-	public int dr() {
-		return 20;
-	}
+		idle = new Animation(1, true);
+		idle.frames(film, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 
-	@Override
-	public String defenseVerb() {
-		return "blocked";
-	}
+		run = new Animation(15, true);
+		run.frames(film, 0, 0, 2, 3, 3, 4);
 
-	@Override
-	public void die(Object cause) {
-		super.die(cause);
-		Badges.validateRare(this);
+		die = new Animation(10, false);
+		die.frames(film, 1, 1, 5, 5, 5);
+
+		attack = new Animation(12, false);
+		attack.frames(film, 10, 11, 12, 0);
+
+		idle();
 	}
 }

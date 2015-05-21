@@ -89,7 +89,7 @@ public class Dungeon {
 		blandfruitSeed,
 
 		// doesn't use Generator, so we have to enforce one armband drop here
-		armband,
+		armband, spork, royalspork,
 
 		// containers
 		dewVial, seedBag, scrollBag, potionBag, wandBag, ankhChain;
@@ -110,6 +110,9 @@ public class Dungeon {
 	public static boolean earlygrass = false;
 
 	public static int challenges;
+	
+	public static int ratChests = 0;
+	public static boolean sporkAvail = false;
 
 	public static Hero hero;
 	public static Level level;
@@ -154,6 +157,8 @@ public class Dungeon {
 
 		depth = 0;
 		gold = 0;
+		
+		sporkAvail = false;
 
 		droppedItems = new SparseArray<ArrayList<Item>>();
 
@@ -204,11 +209,15 @@ public class Dungeon {
 		Level level;
 		switch (depth) {
 		case 1:
-			//level = new CityLevel();
+			//level = new CavesLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
 			//break;
 		case 2:
+			//level = new CavesBossLevel();
+			//hero.HT=999;
+			//hero.HP=hero.HT;
+			//break;
 		case 3:
 		case 4:
 			level = new SewerLevel();

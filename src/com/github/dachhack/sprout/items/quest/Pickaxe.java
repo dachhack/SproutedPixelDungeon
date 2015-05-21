@@ -26,6 +26,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Bat;
+import com.github.dachhack.sprout.actors.mobs.DwarfKingTomb;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.weapon.Weapon;
@@ -38,6 +39,7 @@ import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 public class Pickaxe extends Weapon {
 
@@ -63,7 +65,9 @@ public class Pickaxe extends Weapon {
 	}
 
 	public boolean bloodStained = false;
-
+	
+	
+		
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
@@ -147,6 +151,10 @@ public class Pickaxe extends Weapon {
 		if (!bloodStained && defender instanceof Bat && (defender.HP <= damage)) {
 			bloodStained = true;
 			updateQuickslot();
+		}
+		if (defender instanceof DwarfKingTomb){
+			
+			defender.damage(Random.Int(100,200), this);
 		}
 	}
 

@@ -61,7 +61,7 @@ public class DewVial extends Item {
 	private static final String TXT_VALUE = "%+dHP";
 	private static final String TXT_STATUS = "%d/%d";
 
-	private static final String TXT_AUTO_DRINK = "The dew vial was emptied to heal your wounds.";
+	//private static final String TXT_AUTO_DRINK = "The dew vial was emptied to heal your wounds.";
 	private static final String TXT_COLLECTED = "You collected a dewdrop into your dew vial.";
 	private static final String TXT_WATERED = "The dungeon regrows around you.";
 	private static final String TXT_REFRESHED = "You splash the dew on your face.";
@@ -253,7 +253,7 @@ public class DewVial extends Item {
 			Item item = items[i];
 			if (item != null && item.cursed) {
 				item.cursed = false;
-				if(item.level<0){item.level = -item.level;}
+				if(item.level<0){item.upgrade(-item.level);} //upgrade to even
 				procced = true;
 				hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
 			}

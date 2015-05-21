@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.mobs.npcs.RatKing;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
@@ -38,6 +39,8 @@ public class RatKingPainter extends Painter {
 		Room.Door entrance = room.entrance();
 		entrance.set(Room.Door.Type.HIDDEN);
 		int door = entrance.x + entrance.y * Level.WIDTH;
+		
+		Dungeon.ratChests=0;
 
 		for (int i = room.left + 1; i < room.right; i++) {
 			addChest(level, (room.top + 1) * Level.WIDTH + i, door);
@@ -89,5 +92,6 @@ public class RatKingPainter extends Painter {
 		}
 
 		level.drop(prize, pos).type = Heap.Type.CHEST;
+		Dungeon.ratChests++;
 	}
 }

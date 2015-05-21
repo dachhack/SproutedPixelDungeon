@@ -22,7 +22,6 @@ import com.github.dachhack.sprout.Journal.Feature;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Honeypot.ShatteredPot;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Generator.Category;

@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
@@ -27,26 +26,20 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
-import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.RedDewdrop;
-import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
-import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.ShamanSprite;
 import com.github.dachhack.sprout.sprites.TowerSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -62,7 +55,7 @@ public class Tower extends Mob implements Callback {
 		HP = HT = 300+(Dungeon.depth*Random.NormalIntRange(2, 5));
 		defenseSkill = 0;
 
-		EXP = 10;
+		EXP = 25;
 		
 		hostile = false;
 		state = PASSIVE;
@@ -106,7 +99,7 @@ public class Tower extends Mob implements Callback {
 
 	@Override
 	public int dr() {
-		return 25;
+		return 10;
 	}
 	
 	@Override
@@ -200,6 +193,9 @@ public class Tower extends Mob implements Callback {
 	}
 	
 	
+	@Override
+	public void add(Buff buff) {
+	}
 	
 	@Override
 	public void die(Object cause) {

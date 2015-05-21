@@ -28,26 +28,20 @@ import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
+import com.github.dachhack.sprout.actors.buffs.Frost;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroSubClass;
-import com.github.dachhack.sprout.effects.Wound;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.WraithSprite;
-import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -114,16 +108,15 @@ public class Wraith extends Mob {
 		return damage;
 	}
 	
-	public void damage(int dmg, Object src) {
-		if (enemySeen
-				&& (src instanceof Wand
-						|| src instanceof LightningTrap.Electricity || src instanceof Char)) {
-			GLog.n("The attack passes through the wraith.");
-			sprite.showStatus(CharSprite.NEUTRAL, "missed");
-		} else {
-			super.damage(dmg, src);
-		}
-	}
+	//public void damage(int dmg, Object src) {
+	//	if (enemySeen
+	//			&& (src instanceof Wand || src instanceof LightningTrap.Electricity || src instanceof Char)) {
+	//		GLog.n("The attack passes through the wraith.");
+	//		sprite.showStatus(CharSprite.NEUTRAL, "missed");
+	//	} else {
+	//		super.damage(dmg, src);
+	//	}
+	//}
 
 	
 	@Override
@@ -183,6 +176,10 @@ public class Wraith extends Mob {
 		IMMUNITIES.add(ToxicGas.class);
 		IMMUNITIES.add(ScrollOfPsionicBlast.class);
 		IMMUNITIES.add(Vertigo.class);
+		IMMUNITIES.add(Burning.class);
+		IMMUNITIES.add(Paralysis.class);
+		IMMUNITIES.add(Roots.class);
+		IMMUNITIES.add(Frost.class);
 	}
 
 	@Override
