@@ -153,11 +153,26 @@ public class Weapon extends KindOfWeapon {
 
 		int damage = super.damageRoll(hero);
 
-		if (this instanceof MeleeWeapon
-				|| (this instanceof MissileWeapon && hero.heroClass == HeroClass.HUNTRESS)) {
+		if (this instanceof MeleeWeapon) {
 			int exStr = hero.STR() - STR;
 			if (exStr > 0) {
 				damage += Random.IntRange(0, exStr);
+			}
+		}
+		if (this instanceof MissileWeapon && hero.heroClass == HeroClass.HUNTRESS) {
+			int exStr = hero.STR() - STR;
+			int lvlBonus = Math.round(hero.lvl/3);
+			int totBonus = exStr+lvlBonus+1;
+			if (totBonus > 0) {
+				damage += Random.IntRange(lvlBonus, totBonus);
+			}
+		}
+		if (this instanceof MissileWeapon && hero.heroClass != HeroClass.HUNTRESS) {
+			int exStr = hero.STR() - STR;
+			int lvlBonus = Math.round(hero.lvl/5);
+			int totBonus = Math.round(exStr/3)+lvlBonus;
+			if (totBonus > 0) {
+				damage += Random.IntRange(0, totBonus);
 			}
 		}
 

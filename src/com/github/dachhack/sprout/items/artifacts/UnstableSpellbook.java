@@ -166,7 +166,7 @@ public class UnstableSpellbook extends Artifact {
 						+ scrolls.get(0)
 						+ " and "
 						+ scrolls.get(1)
-						+ ". Perhaps adding to the book will increase its power";
+						+ ". Perhaps adding scrolls to the book will increase its power";
 			else
 				desc += "The book's index has one remaining blank page. "
 						+ "That page is listed as " + scrolls.get(0) + ".";

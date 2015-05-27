@@ -58,6 +58,6 @@ public class ScrollOfMagicalInfusion extends InventoryScroll {
 	public String desc() {
 		return "This scroll will infuse a weapon or armor with powerful magical energy.\n\n"
 				+ "In addition to being upgraded, A weapon will gain a magical enchantment, or armor will be imbued with a magical glyph.\n\n"
-				+ "If the item already has an enchantment or glyph, it will never be erased by the upgrade.";
+				+ "If the item already has an enchantment or glyph, it will be erased and replaced by the upgrade.";
 	}
 }

@@ -33,6 +33,7 @@ public class Nut extends Food {
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/2;
 		message = "Crunch Crunch.";
 		hornValue = 1;
+		bones = false;
 	}
 
 	@Override

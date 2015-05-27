@@ -66,7 +66,7 @@ public class Skeleton extends Mob {
 			Char ch = findChar(pos + Level.NEIGHBOURS8[i]);
 			if (ch != null && ch.isAlive()) {
 				int damage = Math.max(0,
-						damageRoll() - Random.IntRange(0, ch.dr() / 2));
+						Random.NormalIntRange(3, 8) - Random.IntRange(0, ch.dr() / 2));
 				ch.damage(damage, this);
 				if (ch == Dungeon.hero && !ch.isAlive()) {
 					heroKilled = true;

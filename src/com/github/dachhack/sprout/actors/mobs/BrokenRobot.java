@@ -244,7 +244,7 @@ public class BrokenRobot extends Mob {
 					}
  
 					if (ch == this && HP<1){	
-						this.destroy();
+						die(this);
 				     }
 					if (ch == Dungeon.hero && !ch.isAlive())
 						// constant is used here in the rare instance a player

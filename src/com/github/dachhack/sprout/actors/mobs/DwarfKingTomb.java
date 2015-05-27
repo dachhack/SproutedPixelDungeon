@@ -65,7 +65,7 @@ public class DwarfKingTomb extends Mob  {
 
 	@Override
 	public int dr() {
-		return 15;
+		return 18;
 		
 	}
 	

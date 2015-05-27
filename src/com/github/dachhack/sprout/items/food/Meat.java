@@ -33,6 +33,7 @@ public class Meat extends Food {
 		energy = Hunger.STARVING - Hunger.HUNGRY;
 		message = "You choked down the monster meat.";
 		hornValue = 1;
+		bones = false;
 	}
 
 	@Override

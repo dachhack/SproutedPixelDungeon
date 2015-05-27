@@ -35,6 +35,7 @@ public class Blackberry extends Food {
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
 		message = "Juicy!";
 		hornValue = 1;
+		bones = false;
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class Blackberry extends Food {
 				break;
 			case 0: case 2: case 3: case 4: case 5: 
 			case 6: case 7: case 8: case 9: case 10:
-				GLog.w("The berry releases energy your body!");
+				GLog.w("The berry releases energy into your body!");
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
 				break;
 			}

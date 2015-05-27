@@ -31,14 +31,14 @@ import java.util.ArrayList;
 
 public class Ankh extends Item {
 
-	public static final String AC_BLESS = "BLESS";
+	public static final String AC_BLESS = "IMBUE";
 
 	public static final String TXT_DESC_NOBLESS = "Upon resurrection all non-equipped items are lost. "
-			+ "Using a full dew vial, the ankh can be blessed with extra strength.";
-	public static final String TXT_DESC_BLESSED = "The ankh has been blessed and is now much stronger. "
+			+ "Using drops of dew, the ankh can be imbued with extra strength.";
+	public static final String TXT_DESC_BLESSED = "The ankh has been imbued and is now much stronger. "
 			+ "The Ankh will sacrifice itself to save you in a moment of deadly peril.";
 
-	public static final String TXT_BLESS = "You bless the ankh with clean water.";
+	public static final String TXT_BLESS = "You imbue the ankh with clean water.";
 	public static final String TXT_REVIVE = "The ankh explodes with life-giving energy!";
 
 	{

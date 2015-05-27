@@ -40,11 +40,7 @@ public class Bestiary {
 
 		if (Random.Int(30) == 0) {
 			if (cl == Rat.class) {
-				if(Random.Int(2)==0){
 				cl = Albino.class;
-				}  else {								
-				cl = RatBoss.class;
-				}
 			} else if (cl == Thief.class) {
 				cl = Bandit.class;
 			} else if (cl == Brute.class) {
@@ -53,8 +49,6 @@ public class Bestiary {
 				cl = Senior.class;
 			} else if (cl == Scorpio.class) {
 				cl = Acidic.class;
-			}else if (cl == Wraith.class) {
-				cl = BlueWraith.class;
 			}
 		}
 
@@ -72,8 +66,8 @@ public class Bestiary {
 
 		switch (depth) {
 		case 1:
-			chances = new float[] { 1 };
-			classes = new Class<?>[] {Rat.class};	
+			chances = new float[] { 1, 0.02f };
+			classes = new Class<?>[] {Rat.class, RatBoss.class};	
 			break;
 		case 2:
 			chances = new float[] { 1, 1 };
@@ -210,7 +204,6 @@ public class Bestiary {
 				|| mob instanceof Ghost.FetidRat
 				|| mob instanceof Ghost.GnollTrickster
 				|| mob instanceof Ghost.GreatCrab
-				|| mob instanceof BlueWraith
 				|| mob instanceof BanditKing;
 	}
 }

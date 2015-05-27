@@ -44,7 +44,7 @@ public class Assassin extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(8, 15);
+		return Random.NormalIntRange(10, 18);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Assassin extends Mob {
 	}
 	@Override
 	protected float attackDelay() {
-		return 0.5f;
+		return 0.75f;
 	}
 
 	

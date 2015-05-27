@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.Heap;
+import com.github.dachhack.sprout.items.weapon.melee.RoyalSpork;
 import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.RatKingSprite;
@@ -85,7 +86,7 @@ public class RatKing extends NPC {
 			yell("I'm not sleeping!");
 			yell("Please don't take my treasures!");
 			state = WANDERING;
-		//} else if (Statistics.deepestFloor>20 && checkChests >= Dungeon.ratChests && spork==null && royalspork==null){ 
+		//} else if (Statistics.deepestFloor>9 && checkChests >= Dungeon.ratChests && spork==null && royalspork==null){ 
 		} else if (Statistics.deepestFloor>20 && checkChests >= Dungeon.ratChests && spork==null){ 
 			yell("Thank you for not stealing my treasures! You can have my spork if you can kill the Bandit King who took it from me.");
 			Dungeon.sporkAvail = true;

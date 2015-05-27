@@ -91,7 +91,7 @@ public class DwarfLichSprite extends MobSprite {
 					
 					if (dmg > 0) {
 						ch.damage(dmg, this);
-						if(Random.Int(20)==1){Buff.prolong(ch, Paralysis.class, 1);}
+						if(Random.Int(15)==1){Buff.prolong(ch, Paralysis.class, 1);}
 					}
 											
 

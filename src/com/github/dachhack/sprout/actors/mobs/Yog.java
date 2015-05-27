@@ -112,7 +112,7 @@ public class Yog extends Mob {
 			dmg >>= fistsCount;
 		}
 		
-		if (HP<(HT/4) && Random.Float() < 0.25f){
+		if (HP<(HT/4) && Random.Float() < 0.50f){
 			int newPos = -1;
 				for (int i = 0; i < 20; i++) {
 				newPos = Dungeon.level.randomRespawnCellMob();
@@ -129,7 +129,7 @@ public class Yog extends Mob {
 				GLog.n("Yog vanishes!");
 			}		
 			Buff.affect(this, BerryRegeneration.class).level(HP);
-			if (Dungeon.level.mobs.size()<8){
+			if (Dungeon.level.mobs.size()<12){
 			Eye.spawnAroundChance(newPos);
 			}
 		}

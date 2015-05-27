@@ -43,7 +43,7 @@ public class AnkhChain extends Bag {
 	@Override
 	public String info() {
 		return "This chain can hold your amulets and other small jewelery.\n\n"
-				+"Must be a pretty scarry dungeon you are heading into!";
+				+"Must be a pretty scary dungeon you are heading into!";
 	}
 }
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.github.dachhack.sprout"
-	android:versionCode="47"
-	android:versionName="0.1.4"
+	android:versionCode="48"
+	android:versionName="0.1.5"
 	android:installLocation="auto">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     
 	<uses-sdk 
 	    android:minSdkVersion="8"
-	    android:targetSdkVersion="18"/>
+	    android:targetSdkVersion="22"/>
 	
 	<uses-feature 
 	    android:glEsVersion="0x00020000"/>

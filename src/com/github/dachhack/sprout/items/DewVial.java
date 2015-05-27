@@ -111,7 +111,7 @@ public class DewVial extends Item {
 			actions.add(AC_WATER);
 			actions.add(AC_SPLASH);
 		}
-		else if (volume > 19) {
+		else if (volume > 29) {
 			actions.add(AC_DRINK);
 			actions.add(AC_WATER);
 		} 
@@ -324,6 +324,10 @@ public class DewVial extends Item {
 	
 	public void fill() {
 		volume = volume + 10;
+		if (volume >= MAX_VOLUME) {
+			volume = MAX_VOLUME;
+			GLog.p(TXT_FULL);
+		}
 		updateQuickslot();
 	}
 
@@ -344,10 +348,10 @@ public class DewVial extends Item {
 	public String info() {
 		return "You can store excess dew in this tiny vessel for drinking it later. "
 				+ "The more full the vial is, the more each dew drop will heal you. "
-				+ "A full vial is as strong as a potion of healing."
+				+ "Ten drops would probably be sufficient to fully heal your wounds. "
 				+ "\n\nVials like this one used to be imbued with revival magic, "
 				+ "but that power has faded. There still seems to be some residual power "
-				+ "left, perhaps a full vial can bless another revival item.";
+				+ "left, perhaps collected drops can bless another revival item.";
 	}
 
 	@Override
