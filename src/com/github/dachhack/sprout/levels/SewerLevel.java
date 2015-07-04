@@ -17,17 +17,25 @@
  */
 package com.github.dachhack.sprout.levels;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
+import com.github.dachhack.sprout.actors.mobs.npcs.Ghost.GnollArcher;
+import com.github.dachhack.sprout.items.DewVial;
+import com.github.dachhack.sprout.items.bags.SeedPouch;
+import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.Blueberry;
+import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.Moonberry;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.PixelParticle;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.DungeonTilemap;
-import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
-import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.bags.SeedPouch;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
@@ -43,6 +51,7 @@ public class SewerLevel extends RegularLevel {
 	public String tilesTex() {
 		return Assets.TILES_SEWERS;
 	}
+	
 
 	@Override
 	public String waterTex() {
@@ -99,24 +108,48 @@ public class SewerLevel extends RegularLevel {
 				break;
 			}
 		}
+		
+		
+		
+      
+		
 	}
 
 	@Override
 	protected void createItems() {
-		if (!Dungeon.limitedDrops.dewVial.dropped()
-				&& Random.Int(1 - Dungeon.depth) == 0) {
+		if (!Dungeon.limitedDrops.dewVial.dropped()	&& Dungeon.depth == 1) {
 			addItemToSpawn(new DewVial());
 			Dungeon.limitedDrops.dewVial.drop();
 			addItemToSpawn(new SeedPouch());
 			Dungeon.limitedDrops.seedBag.drop();
-					
+			
+			addItemToSpawn(new Moonberry());
+			addItemToSpawn(new Blueberry());
+			addItemToSpawn(new Cloudberry());
+			addItemToSpawn(new Blackberry());
 		}
 
 		Ghost.Quest.spawn(this);
+		spawnGnoll(this);
 
 		super.createItems();
 	}
+	
+	public static void spawnGnoll(SewerLevel level) {
+		if (Dungeon.depth == 4 && !Dungeon.gnollspawned){
 
+			GnollArcher gnoll = new Ghost.GnollArcher();
+			do {
+				gnoll.pos = level.randomRespawnCell();
+			} while (gnoll.pos == -1);
+			level.mobs.add(gnoll);
+			Actor.occupyCell(gnoll);
+           
+			Dungeon.gnollspawned = true;
+		}
+	}
+
+	
 	@Override
 	public void addVisuals(Scene scene) {
 		super.addVisuals(scene);

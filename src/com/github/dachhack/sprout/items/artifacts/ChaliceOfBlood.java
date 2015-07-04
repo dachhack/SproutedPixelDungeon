@@ -1,5 +1,7 @@
 package com.github.dachhack.sprout.items.artifacts;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
@@ -14,8 +16,6 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndOptions;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 /**
  * Created by debenhame on 27/08/2014.

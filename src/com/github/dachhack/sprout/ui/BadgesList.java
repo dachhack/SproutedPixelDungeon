@@ -19,16 +19,16 @@ package com.github.dachhack.sprout.ui;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.effects.BadgeBanner;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.windows.WndBadge;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.ui.Component;
 
 public class BadgesList extends ScrollPane {
 

@@ -17,14 +17,14 @@
  */
 package com.github.dachhack.sprout.items.potions;
 
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.tweeners.AlphaTweener;
 
 public class PotionOfInvisibility extends Potion {
 

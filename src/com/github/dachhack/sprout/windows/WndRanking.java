@@ -19,13 +19,6 @@ package com.github.dachhack.sprout.windows;
 
 import java.util.Locale;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.ColorBlock;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Group;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.ui.Button;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -41,6 +34,13 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.ScrollPane;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.ColorBlock;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Group;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.ui.Button;
 
 public class WndRanking extends WndTabbed {
 
@@ -158,6 +158,7 @@ public class WndRanking extends WndTabbed {
 		private static final String TXT_FOOD = "Food Eaten";
 		private static final String TXT_ALCHEMY = "Potions Cooked";
 		private static final String TXT_ANKHS = "Ankhs Used";
+		private static final String TXT_SHADOW = "Shadow Yogs Killed";
 
 		public StatsTab() {
 			super();
@@ -219,6 +220,11 @@ public class WndRanking extends WndTabbed {
 					Integer.toString(Statistics.potionsCooked), pos);
 			pos = statSlot(this, TXT_ANKHS,
 					Integer.toString(Statistics.ankhsUsed), pos);
+			
+			pos += GAP;
+			
+			pos = statSlot(this, TXT_SHADOW,
+					Integer.toString(Statistics.shadowYogsKilled), pos);
 		}
 
 		private float statSlot(Group parent, String label, String value,

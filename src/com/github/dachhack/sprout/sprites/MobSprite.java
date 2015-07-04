@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.tweeners.AlphaTweener;
-import com.watabou.noosa.tweeners.ScaleTweener;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.watabou.noosa.tweeners.AlphaTweener;
+import com.watabou.noosa.tweeners.ScaleTweener;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 

@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.effects;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.sprites.CharSprite;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.audio.Sample;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.sprites.CharSprite;
 
 public class IceBlock extends Gizmo {
 

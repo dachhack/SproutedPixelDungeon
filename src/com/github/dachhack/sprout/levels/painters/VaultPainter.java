@@ -19,8 +19,8 @@ package com.github.dachhack.sprout.levels.painters;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Heap.Type;
+import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.keys.GoldenKey;
 import com.github.dachhack.sprout.items.keys.IronKey;
 import com.github.dachhack.sprout.levels.Level;

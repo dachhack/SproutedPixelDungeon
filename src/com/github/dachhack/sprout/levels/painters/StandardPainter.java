@@ -36,6 +36,28 @@ public class StandardPainter extends Painter {
 		for (Room.Door door : room.connected.values()) {
 			door.set(Room.Door.Type.REGULAR);
 		}
+		
+		if (Dungeon.depth==31){
+			if (Math.min(room.width(), room.height()) >= 4
+					&& Math.max(room.width(), room.height()) >= 6) {
+				paintGraveyard(level, room);
+				return;
+			}
+		}
+		if (Dungeon.depth==32){
+			if (Math.min(room.width(), room.height()) >= 4
+					&& Math.max(room.width(), room.height()) >= 6) {
+				paintStriped(level, room);
+				return;
+			}
+		}
+		if (Dungeon.depth==33){
+			if (Math.min(room.width(), room.height()) >= 4
+					&& Math.max(room.width(), room.height()) >= 6) {
+				paintStudy(level, room);
+				return;
+			}
+		}
 
 		if (!Dungeon.bossLevel() && Random.Int(5) == 0) {
 			switch (Random.Int(6)) {
@@ -81,7 +103,8 @@ public class StandardPainter extends Painter {
 				}
 			case 5:
 				if (!Dungeon.bossLevel()
-						&& !Dungeon.bossLevel(Dungeon.depth + 1)
+						&& !Dungeon.bossLevel(Dungeon.depth + 1) 
+						&& (Dungeon.depth < 22 || Dungeon.depth > 26)
 						&& Math.min(room.width(), room.height()) >= 5) {
 					paintFissure(level, room);
 					return;
@@ -192,7 +215,7 @@ public class StandardPainter extends Painter {
 
 		fill(level, room.left + 1, room.top + 1, room.width() - 1,
 				room.height() - 1,
-				!Dungeon.bossLevel() && !Dungeon.bossLevel(Dungeon.depth + 1)
+				!Dungeon.bossLevel() && !Dungeon.bossLevel(Dungeon.depth + 1) && (Dungeon.depth < 22 || Dungeon.depth > 26)
 						&& Random.Int(3) == 0 ? Terrain.CHASM : Terrain.WATER);
 
 		Point door1 = null;

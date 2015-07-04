@@ -1,5 +1,8 @@
 package com.github.dachhack.sprout.items.artifacts;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
@@ -18,9 +21,6 @@ import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by debenhame on 26/11/2014.

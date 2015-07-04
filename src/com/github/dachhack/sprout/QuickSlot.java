@@ -1,12 +1,12 @@
 package com.github.dachhack.sprout;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.github.dachhack.sprout.items.Item;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by debenhame on 16/01/2015.

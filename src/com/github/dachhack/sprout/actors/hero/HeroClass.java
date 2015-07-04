@@ -22,31 +22,14 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
-import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.Dewdrop;
-import com.github.dachhack.sprout.items.Honeypot;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
-import com.github.dachhack.sprout.items.armor.PlateArmor;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
 import com.github.dachhack.sprout.items.food.Food;
-import com.github.dachhack.sprout.items.potions.PotionOfExperience;
-import com.github.dachhack.sprout.items.potions.PotionOfHealing;
-import com.github.dachhack.sprout.items.potions.PotionOfInvisibility;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
-import com.github.dachhack.sprout.items.quest.DarkGold;
-import com.github.dachhack.sprout.items.quest.Pickaxe;
-import com.github.dachhack.sprout.items.rings.Ring;
-import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
-import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.wands.Wand;
-import com.github.dachhack.sprout.items.wands.WandOfAmok;
 import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
 import com.github.dachhack.sprout.items.weapon.melee.Knuckles;
@@ -151,30 +134,53 @@ public enum HeroClass {
 
 	private static void initWarrior(Hero hero) {
 		hero.STR = hero.STR + 1;
+		
 
 		(hero.belongings.weapon = new ShortSword()).identify();
 		Dart darts = new Dart(8);
 		darts.identify().collect();
-		//for(int i=0; i<20; i++){
-		//Scroll scroll = new ScrollOfMagicalInfusion();
-       // scroll.identify().collect();
-       // }		
-	//	PlateArmor armor = new PlateArmor();
-      //  armor.identify().collect();
-    //  for(int i=1; i<30; i++){
-     //    PotionOfExperience potion1 = new PotionOfExperience(); potion1.collect();
-     //    PotionOfInvisibility potion2 = new PotionOfInvisibility(); potion2.collect();
-     //    PotionOfHealing potion3 = new PotionOfHealing(); potion3.collect();
-    //     }
-        
-        //for(int i=1; i<45; i++){
-       // DarkGold gold = new DarkGold(); gold.collect();
-        //}
-        //Ring ring = new RingOfAccuracy(); ring.collect();
-      //  Wand wand = new WandOfAmok(); wand.collect();
-      //  Honeypot honeypot = new Honeypot(); honeypot.collect();
-		//  Pickaxe Pickaxe = new Pickaxe(); Pickaxe.collect();
-       	Dungeon.quickslot.setSlot(0, darts);
+		
+		//Playtest
+		/*
+		hero.HT=hero.HP=999;
+		hero.STR = hero.STR + 20;
+		
+		//PotionOfLiquidFlame potion5 = new PotionOfLiquidFlame(); potion5.collect();
+		BookOfDead dbook = new BookOfDead(); dbook.collect();
+		BookOfLife lbook = new BookOfLife(); lbook.collect();
+		BookOfTranscendence tbook = new BookOfTranscendence(); tbook.collect();
+		SanChikarah san = new SanChikarah(); san.collect();
+		PotionBandolier bag1 = new PotionBandolier(); bag1.collect();
+		ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
+		
+		
+		for(int i=0; i<40; i++){
+		Scroll scroll = new ScrollOfMagicalInfusion();
+        scroll.identify().collect();
+        Scroll scroll2 = new ScrollOfUpgrade();
+        scroll2.identify().collect();      
+       }		
+		PlateArmor armor = new PlateArmor();
+      armor.identify().collect();
+      for(int i=1; i<40; i++){
+        PotionOfExperience potion1 = new PotionOfExperience(); potion1.collect();
+       PotionOfInvisibility potion2 = new PotionOfInvisibility(); potion2.collect();
+       PotionOfHealing potion3 = new PotionOfHealing(); potion3.collect();
+       PotionOfMindVision potion4 = new PotionOfMindVision(); potion4.collect();
+      PotionOfLevitation potion5 = new PotionOfLevitation(); potion5.collect();
+        }
+         
+        Wand wand = new WandOfDisintegration(); wand.collect();
+        GoldenNut nut = new GoldenNut(); nut.collect();
+        SewersKey key1 = new SewersKey(); key1.collect();
+        PrisonKey key2 = new PrisonKey(); key2.collect();
+        CavesKey key3 = new CavesKey(); key3.collect();
+        CityKey key4 = new CityKey(); key4.collect();
+        HallsKey key5 = new HallsKey(); key5.collect();
+       
+        HolyHandGrenade bomb = new HolyHandGrenade(10); bomb.collect();
+		*/    	
+		Dungeon.quickslot.setSlot(0, darts);
 
 		new PotionOfStrength().setKnown();
 	}

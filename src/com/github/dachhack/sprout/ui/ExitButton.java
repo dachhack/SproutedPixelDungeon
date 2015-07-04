@@ -17,13 +17,13 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.scenes.TitleScene;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.ShatteredPixelDungeon;
-import com.github.dachhack.sprout.scenes.TitleScene;
 
 public class ExitButton extends Button {
 

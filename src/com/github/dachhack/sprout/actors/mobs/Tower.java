@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -43,6 +42,7 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.TowerSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 

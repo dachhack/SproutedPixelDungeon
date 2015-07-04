@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.levels.features;
 
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -37,6 +34,9 @@ import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.MobSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndOptions;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Chasm {

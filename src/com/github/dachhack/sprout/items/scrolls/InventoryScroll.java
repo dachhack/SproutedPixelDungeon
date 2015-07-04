@@ -17,13 +17,13 @@
  */
 package com.github.dachhack.sprout.items.scrolls;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.github.dachhack.sprout.windows.WndOptions;
+import com.watabou.noosa.audio.Sample;
 
 public abstract class InventoryScroll extends Scroll {
 

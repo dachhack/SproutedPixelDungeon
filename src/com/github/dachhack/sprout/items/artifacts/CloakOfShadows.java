@@ -1,5 +1,7 @@
 package com.github.dachhack.sprout.items.artifacts;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
@@ -11,8 +13,6 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
-
-import java.util.ArrayList;
 
 /**
  * Created by debenhame on 25/08/2014.

@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -27,6 +26,7 @@ import com.github.dachhack.sprout.actors.mobs.npcs.MirrorImage;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class ScrollOfMirrorImage extends Scroll {

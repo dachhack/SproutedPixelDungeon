@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.scenes.PixelScene;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.ui.Component;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.scenes.PixelScene;
 
 public class GoldIndicator extends Component {
 

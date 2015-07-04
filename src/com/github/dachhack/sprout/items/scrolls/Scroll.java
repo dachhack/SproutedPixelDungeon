@@ -17,6 +17,9 @@
  */
 package com.github.dachhack.sprout.items.scrolls;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -26,9 +29,6 @@ import com.github.dachhack.sprout.items.artifacts.UnstableSpellbook;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 public abstract class Scroll extends Item {
 

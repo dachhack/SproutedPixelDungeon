@@ -20,7 +20,6 @@ package com.github.dachhack.sprout.items.potions;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -40,6 +39,7 @@ import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndOptions;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 
 public class Potion extends Item {

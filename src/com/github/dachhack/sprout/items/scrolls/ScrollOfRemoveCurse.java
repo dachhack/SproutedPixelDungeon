@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.scrolls;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -27,6 +26,7 @@ import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRemoveCurse extends Scroll {
 

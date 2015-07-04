@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.mobs.Shaman;
 import com.github.dachhack.sprout.effects.Lightning;
+import com.watabou.noosa.TextureFilm;
 
 public class ShamanSprite extends MobSprite {
 

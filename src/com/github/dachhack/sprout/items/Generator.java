@@ -17,39 +17,135 @@
  */
 package com.github.dachhack.sprout.items;
 
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
-import com.github.dachhack.sprout.items.armor.*;
-import com.github.dachhack.sprout.items.artifacts.*;
-import com.github.dachhack.sprout.items.bags.Bag;
-import com.github.dachhack.sprout.items.food.Blackberry;
-import com.github.dachhack.sprout.items.food.Food;
-import com.github.dachhack.sprout.items.food.MysteryMeat;
-import com.github.dachhack.sprout.items.food.Nut;
-import com.github.dachhack.sprout.items.food.Pasty;
-import com.github.dachhack.sprout.items.potions.*;
-import com.github.dachhack.sprout.items.rings.*;
-import com.github.dachhack.sprout.items.scrolls.*;
-import com.github.dachhack.sprout.items.wands.*;
-import com.github.dachhack.sprout.items.weapon.*;
-import com.github.dachhack.sprout.items.weapon.melee.*;
-import com.github.dachhack.sprout.items.weapon.missiles.*;
-import com.github.dachhack.sprout.plants.*;
-import com.watabou.utils.Bundle;
-import com.watabou.utils.Random;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
+import com.github.dachhack.sprout.items.armor.Armor;
+import com.github.dachhack.sprout.items.armor.ClothArmor;
+import com.github.dachhack.sprout.items.armor.LeatherArmor;
+import com.github.dachhack.sprout.items.armor.MailArmor;
+import com.github.dachhack.sprout.items.armor.PlateArmor;
+import com.github.dachhack.sprout.items.armor.ScaleArmor;
+import com.github.dachhack.sprout.items.artifacts.AlchemistsToolkit;
+import com.github.dachhack.sprout.items.artifacts.Artifact;
+import com.github.dachhack.sprout.items.artifacts.CapeOfThorns;
+import com.github.dachhack.sprout.items.artifacts.ChaliceOfBlood;
+import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
+import com.github.dachhack.sprout.items.artifacts.DriedRose;
+import com.github.dachhack.sprout.items.artifacts.HornOfPlenty;
+import com.github.dachhack.sprout.items.artifacts.MasterThievesArmband;
+import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
+import com.github.dachhack.sprout.items.artifacts.TalismanOfForesight;
+import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.items.artifacts.UnstableSpellbook;
+import com.github.dachhack.sprout.items.bags.Bag;
+import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.Blueberry;
+import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.food.Moonberry;
+import com.github.dachhack.sprout.items.food.MysteryMeat;
+import com.github.dachhack.sprout.items.food.Nut;
+import com.github.dachhack.sprout.items.food.Pasty;
+import com.github.dachhack.sprout.items.potions.Potion;
+import com.github.dachhack.sprout.items.potions.PotionOfExperience;
+import com.github.dachhack.sprout.items.potions.PotionOfFrost;
+import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfInvisibility;
+import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
+import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
+import com.github.dachhack.sprout.items.potions.PotionOfMight;
+import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
+import com.github.dachhack.sprout.items.potions.PotionOfParalyticGas;
+import com.github.dachhack.sprout.items.potions.PotionOfPurity;
+import com.github.dachhack.sprout.items.potions.PotionOfStrength;
+import com.github.dachhack.sprout.items.potions.PotionOfToxicGas;
+import com.github.dachhack.sprout.items.rings.Ring;
+import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
+import com.github.dachhack.sprout.items.rings.RingOfElements;
+import com.github.dachhack.sprout.items.rings.RingOfEvasion;
+import com.github.dachhack.sprout.items.rings.RingOfForce;
+import com.github.dachhack.sprout.items.rings.RingOfFuror;
+import com.github.dachhack.sprout.items.rings.RingOfHaste;
+import com.github.dachhack.sprout.items.rings.RingOfMagic;
+import com.github.dachhack.sprout.items.rings.RingOfMight;
+import com.github.dachhack.sprout.items.rings.RingOfSharpshooting;
+import com.github.dachhack.sprout.items.rings.RingOfTenacity;
+import com.github.dachhack.sprout.items.rings.RingOfWealth;
+import com.github.dachhack.sprout.items.scrolls.Scroll;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfLullaby;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMirrorImage;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRage;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfTeleportation;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfTerror;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.items.wands.WandOfAmok;
+import com.github.dachhack.sprout.items.wands.WandOfAvalanche;
+import com.github.dachhack.sprout.items.wands.WandOfBlink;
+import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
+import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
+import com.github.dachhack.sprout.items.wands.WandOfFlock;
+import com.github.dachhack.sprout.items.wands.WandOfLightning;
+import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
+import com.github.dachhack.sprout.items.wands.WandOfPoison;
+import com.github.dachhack.sprout.items.wands.WandOfRegrowth;
+import com.github.dachhack.sprout.items.wands.WandOfSlowness;
+import com.github.dachhack.sprout.items.wands.WandOfTelekinesis;
+import com.github.dachhack.sprout.items.wands.WandOfTeleportation;
+import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.BattleAxe;
+import com.github.dachhack.sprout.items.weapon.melee.Dagger;
+import com.github.dachhack.sprout.items.weapon.melee.Glaive;
+import com.github.dachhack.sprout.items.weapon.melee.Knuckles;
+import com.github.dachhack.sprout.items.weapon.melee.Longsword;
+import com.github.dachhack.sprout.items.weapon.melee.Mace;
+import com.github.dachhack.sprout.items.weapon.melee.Quarterstaff;
+import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
+import com.github.dachhack.sprout.items.weapon.melee.Spear;
+import com.github.dachhack.sprout.items.weapon.melee.Spork;
+import com.github.dachhack.sprout.items.weapon.melee.Sword;
+import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
+import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
+import com.github.dachhack.sprout.items.weapon.missiles.CurareDart;
+import com.github.dachhack.sprout.items.weapon.missiles.Dart;
+import com.github.dachhack.sprout.items.weapon.missiles.IncendiaryDart;
+import com.github.dachhack.sprout.items.weapon.missiles.Javelin;
+import com.github.dachhack.sprout.items.weapon.missiles.Shuriken;
+import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
+import com.github.dachhack.sprout.plants.BlandfruitBush;
+import com.github.dachhack.sprout.plants.Blindweed;
+import com.github.dachhack.sprout.plants.Dreamfoil;
+import com.github.dachhack.sprout.plants.Earthroot;
+import com.github.dachhack.sprout.plants.Fadeleaf;
+import com.github.dachhack.sprout.plants.Firebloom;
+import com.github.dachhack.sprout.plants.Icecap;
+import com.github.dachhack.sprout.plants.Plant;
+import com.github.dachhack.sprout.plants.Sorrowmoss;
+import com.github.dachhack.sprout.plants.Stormvine;
+import com.github.dachhack.sprout.plants.Sungrass;
+import com.watabou.utils.Bundle;
+import com.watabou.utils.Random;
 
 public class Generator {
 
 	public static enum Category {
 		WEAPON(150, Weapon.class), ARMOR(100, Armor.class), POTION(500,
 				Potion.class), SCROLL(400, Scroll.class), WAND(40, Wand.class), RING(
-				15, Ring.class), ARTIFACT(20, Artifact.class), SEED(50,
-				Plant.Seed.class), FOOD(0, Food.class), GOLD(500, Gold.class);
+				15, Ring.class), ARTIFACT(20, Artifact.class), SEED(0,
+				Plant.Seed.class), FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class);
 
 		public Class<?>[] classes;
 		public float[] probs;
@@ -88,7 +184,7 @@ public class Generator {
 				ScrollOfTerror.class, ScrollOfLullaby.class,
 				ScrollOfMagicalInfusion.class, ScrollOfPsionicBlast.class,
 				ScrollOfMirrorImage.class, ScrollOfRegrowth.class };
-		Category.SCROLL.probs = new float[] { 30, 10, 15, 0, 10, 15, 12, 8, 8,
+		Category.SCROLL.probs = new float[] { 30, 10, 15, 0, 10, 20, 10, 8, 8,
 				0, 3, 6, 0 };
 
 		Category.POTION.classes = new Class<?>[] { PotionOfHealing.class,
@@ -134,7 +230,7 @@ public class Generator {
 				RingOfFuror.class, RingOfHaste.class, RingOfMagic.class,
 				RingOfMight.class, RingOfSharpshooting.class,
 				RingOfTenacity.class, RingOfWealth.class };
-		Category.RING.probs = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+		Category.RING.probs = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
 
 		Category.ARTIFACT.classes = new Class<?>[] { CapeOfThorns.class,
 				ChaliceOfBlood.class, CloakOfShadows.class, HornOfPlenty.class,
@@ -151,8 +247,12 @@ public class Generator {
 				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
-				Nut.class, Blackberry.class};
-		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 20, 15};
+				Nut.class, Blackberry.class, Blueberry.class, Cloudberry.class,
+				Moonberry.class};
+		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 12, 8, 1, 4, 1};
+		
+		Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class,Moonberry.class};
+		Category.BERRY.probs = new float[] {8,2,2,1};
 	}
 
 	public static void reset() {

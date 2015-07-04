@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Visual;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.sprites.CharSprite;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Visual;
 import com.watabou.utils.PointF;
 
 public class Pushing extends Actor {

@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -26,6 +24,8 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Image;
 
 public class WndInfoCell extends Window {
 

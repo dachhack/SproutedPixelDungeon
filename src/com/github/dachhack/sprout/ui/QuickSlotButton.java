@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.noosa.Image;
-import com.watabou.noosa.ui.Button;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Actor;
@@ -29,6 +27,8 @@ import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.windows.WndBag;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.ui.Button;
 
 public class QuickSlotButton extends Button implements WndBag.Listener {
 

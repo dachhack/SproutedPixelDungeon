@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import com.watabou.input.Touchscreen.Touch;
-import com.watabou.noosa.TouchArea;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.watabou.input.Touchscreen.Touch;
+import com.watabou.noosa.TouchArea;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.PointF;
 

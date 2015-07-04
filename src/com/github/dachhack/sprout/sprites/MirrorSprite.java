@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.npcs.MirrorImage;
+import com.watabou.noosa.TextureFilm;
 
 public class MirrorSprite extends MobSprite {
 

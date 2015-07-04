@@ -17,13 +17,13 @@
  */
 package com.github.dachhack.sprout.items.potions;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.blobs.Freezing;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.utils.BArray;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PathFinder;
 
 public class PotionOfFrost extends Potion {

@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapTextMultiline;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -26,6 +25,7 @@ import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndItem extends Window {
 

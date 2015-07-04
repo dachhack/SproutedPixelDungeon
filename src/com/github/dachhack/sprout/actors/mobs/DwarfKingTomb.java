@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.actors.mobs;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.ArmorKit;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.RedDewdrop;
@@ -50,6 +51,10 @@ public class DwarfKingTomb extends Mob  {
 	@Override
 	public void beckon(int cell) {
 		// Do nothing
+	}
+	
+	@Override
+	public void add(Buff buff) {
 	}
 	
 	

@@ -17,11 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.audio.Music;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Chrome;
@@ -31,6 +26,11 @@ import com.github.dachhack.sprout.ui.BadgesList;
 import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.ScrollPane;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.audio.Music;
 import com.watabou.utils.Callback;
 
 public class BadgesScene extends PixelScene {

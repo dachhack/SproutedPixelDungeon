@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.items;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
@@ -26,8 +28,6 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
-
-import java.util.ArrayList;
 
 public class GreaterStylus extends Item {
 

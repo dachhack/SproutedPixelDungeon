@@ -32,7 +32,7 @@ import com.watabou.utils.Random;
 public class Assassin extends Mob {
 	
 	{
-		name = "Assassin";
+		name = "Shinobi";
 		spriteClass = AssassinSprite.class;
 		baseSpeed = 2f;
 
@@ -70,8 +70,8 @@ public class Assassin extends Mob {
 	
 	@Override
 	public String description() {
-		return "Tengu are members of the ancient assassins clan, which is also called Tengu. "
-				+ "These assassins are noted for extensive use of shuriken and traps.";
+		return "Shinobi are members of the Tengu assassin clan. "
+				+ "They fight with ranged attacks at high speed. ";
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

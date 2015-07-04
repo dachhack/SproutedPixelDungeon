@@ -17,8 +17,8 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
+import com.watabou.noosa.TextureFilm;
 
 public class BanditSprite extends MobSprite {
 

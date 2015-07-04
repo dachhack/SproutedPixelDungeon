@@ -26,7 +26,17 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
 import com.github.dachhack.sprout.items.rings.RingOfFuror;
 import com.github.dachhack.sprout.items.rings.RingOfSharpshooting;
-import com.github.dachhack.sprout.items.weapon.enchantments.*;
+import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
+import com.github.dachhack.sprout.items.weapon.enchantments.Horror;
+import com.github.dachhack.sprout.items.weapon.enchantments.Instability;
+import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
+import com.github.dachhack.sprout.items.weapon.enchantments.Luck;
+import com.github.dachhack.sprout.items.weapon.enchantments.Nomnom;
+import com.github.dachhack.sprout.items.weapon.enchantments.Paralysis;
+import com.github.dachhack.sprout.items.weapon.enchantments.Poison;
+import com.github.dachhack.sprout.items.weapon.enchantments.Shock;
+import com.github.dachhack.sprout.items.weapon.enchantments.Slow;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.sprites.ItemSprite;
@@ -176,9 +186,7 @@ public class Weapon extends KindOfWeapon {
 			}
 		}
 
-		return Math.round(damage
-				* (imbue == Imbue.LIGHT ? 0.7f : (imbue == Imbue.HEAVY ? 1.5f
-						: 1f)));
+		return Math.round(damage* (imbue == Imbue.LIGHT ? 0.7f : (imbue == Imbue.HEAVY ? 1.5f: 1f)));
 	}
 
 	public Item upgrade(boolean enchant) {

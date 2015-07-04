@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.levels.Level;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
 
 public class Ripple extends Image {
 

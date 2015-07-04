@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.effects.DeathRay;
+import com.watabou.noosa.TextureFilm;
 
 public class BrokenRobotSprite extends MobSprite {
 

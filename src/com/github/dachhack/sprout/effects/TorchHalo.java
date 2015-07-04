@@ -21,8 +21,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
 
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.sprites.CharSprite;
+import com.watabou.noosa.Game;
 
 public class TorchHalo extends Halo {
 

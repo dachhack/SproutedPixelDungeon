@@ -19,11 +19,6 @@ package com.github.dachhack.sprout.sprites;
 
 import android.graphics.Bitmap;
 
-import com.watabou.gltextures.TextureCache;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.MovieClip;
-import com.watabou.noosa.TextureFilm;
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
@@ -35,6 +30,11 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.gltextures.TextureCache;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.MovieClip;
+import com.watabou.noosa.TextureFilm;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 

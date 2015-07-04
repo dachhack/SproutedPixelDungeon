@@ -21,6 +21,10 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.effects.BadgeBanner;
 import com.watabou.input.Touchscreen;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapText.Font;
@@ -30,10 +34,6 @@ import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.Visual;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.ShatteredPixelDungeon;
-import com.github.dachhack.sprout.effects.BadgeBanner;
 import com.watabou.utils.BitmapCache;
 
 public class PixelScene extends Scene {

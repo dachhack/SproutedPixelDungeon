@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.plants;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
@@ -28,20 +27,21 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.CellEmitter;
-//import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.effects.particles.LeafParticle;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
-//import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.sprites.PlantSprite;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+//import com.github.dachhack.sprout.effects.SpellSprite;
+//import com.github.dachhack.sprout.items.food.Food;
 
 public class Plant implements Bundlable {
 

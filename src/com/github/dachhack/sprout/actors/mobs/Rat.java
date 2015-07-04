@@ -41,19 +41,18 @@ public class Rat extends Mob {
 		loot = new Meat();
 		lootChance = 0.5f;
 
-		maxLvl = 5;
 	}
 
 
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 5+(Dungeon.depth));
+		return Random.NormalIntRange(1, 5+Dungeon.depth);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 8;
+		return 5+Dungeon.depth;
 	}
 
 	@Override

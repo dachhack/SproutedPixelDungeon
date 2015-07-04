@@ -23,6 +23,8 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.DeathRay;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
@@ -87,6 +89,7 @@ public class WandOfDisintegration extends Wand {
 		int lvl = level + chars.size();
 		int dmgMin = lvl;
 		int dmgMax = 8 + lvl * lvl / 3;
+		if (Dungeon.hero.buff(Strength.class) != null){ dmgMin *= (int) 4f; dmgMax *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 		for (Char ch : chars) {
 			ch.damage(Random.NormalIntRange(dmgMin, dmgMax), this);
 			ch.sprite.centerEmitter().burst(PurpleParticle.BURST,

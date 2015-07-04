@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.scrolls;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Amok;
@@ -29,6 +28,7 @@ import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRage extends Scroll {
 

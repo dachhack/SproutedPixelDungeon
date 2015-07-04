@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import java.util.HashSet;
+
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.ui.BuffIndicator;
-
-import java.util.HashSet;
 
 public class Buff extends Actor {
 

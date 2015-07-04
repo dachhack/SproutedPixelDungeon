@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.plants;
 
-import com.watabou.noosa.Camera;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -27,6 +26,7 @@ import com.github.dachhack.sprout.items.potions.PotionOfParalyticGas;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Bundle;
 
 public class Earthroot extends Plant {

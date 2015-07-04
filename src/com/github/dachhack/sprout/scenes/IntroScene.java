@@ -17,8 +17,8 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.windows.WndStory;
+import com.watabou.noosa.Game;
 
 public class IntroScene extends PixelScene {
 

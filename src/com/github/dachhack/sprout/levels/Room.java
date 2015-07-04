@@ -25,7 +25,30 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
-import com.github.dachhack.sprout.levels.painters.*;
+import com.github.dachhack.sprout.levels.painters.ArmoryPainter;
+import com.github.dachhack.sprout.levels.painters.BlacksmithPainter;
+import com.github.dachhack.sprout.levels.painters.BossExitPainter;
+import com.github.dachhack.sprout.levels.painters.CryptPainter;
+import com.github.dachhack.sprout.levels.painters.EntrancePainter;
+import com.github.dachhack.sprout.levels.painters.ExitPainter;
+import com.github.dachhack.sprout.levels.painters.GardenPainter;
+import com.github.dachhack.sprout.levels.painters.LaboratoryPainter;
+import com.github.dachhack.sprout.levels.painters.LibraryPainter;
+import com.github.dachhack.sprout.levels.painters.MagicWellPainter;
+import com.github.dachhack.sprout.levels.painters.Painter;
+import com.github.dachhack.sprout.levels.painters.PassagePainter;
+import com.github.dachhack.sprout.levels.painters.PitPainter;
+import com.github.dachhack.sprout.levels.painters.PoolPainter;
+import com.github.dachhack.sprout.levels.painters.RatKingPainter;
+import com.github.dachhack.sprout.levels.painters.ShopPainter;
+import com.github.dachhack.sprout.levels.painters.StandardPainter;
+import com.github.dachhack.sprout.levels.painters.StatuePainter;
+import com.github.dachhack.sprout.levels.painters.StoragePainter;
+import com.github.dachhack.sprout.levels.painters.TrapsPainter;
+import com.github.dachhack.sprout.levels.painters.TreasuryPainter;
+import com.github.dachhack.sprout.levels.painters.TunnelPainter;
+import com.github.dachhack.sprout.levels.painters.VaultPainter;
+import com.github.dachhack.sprout.levels.painters.WeakFloorPainter;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Graph;
@@ -80,10 +103,16 @@ public class Room extends Rect implements Graph.Node, Bundlable {
 					Type.TREASURY, Type.TRAPS, Type.STORAGE, Type.STATUE,
 					Type.LABORATORY, Type.VAULT));
 	
-	//public static final ArrayList<Type> SPECIALS = new ArrayList<Type>(
-	//		Arrays.asList(Type.GARDEN, Type.VAULT, Type.GARDEN, Type.VAULT, Type.GARDEN, Type.VAULT, Type.VAULT, Type.VAULT));
-
-
+	public static final ArrayList<Type> SPECIALSFORT = new ArrayList<Type>(
+			Arrays.asList(Type.GARDEN, Type.GARDEN, Type.GARDEN, Type.GARDEN,
+					      Type.GARDEN, Type.GARDEN, Type.GARDEN, Type.GARDEN,
+					      Type.GARDEN, Type.GARDEN));
+	
+	public static final ArrayList<Type> SPECIALSTRANSCEND = new ArrayList<Type>(
+			Arrays.asList(Type.MAGIC_WELL, Type.MAGIC_WELL, Type.MAGIC_WELL, Type.MAGIC_WELL,
+					      Type.MAGIC_WELL, Type.MAGIC_WELL, Type.MAGIC_WELL, Type.MAGIC_WELL,
+					       Type.MAGIC_WELL,  Type.MAGIC_WELL));
+	
 	public Type type = Type.NULL;
 
 	public int random() {

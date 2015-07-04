@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.items.quest;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
@@ -33,10 +32,11 @@ import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
+import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;

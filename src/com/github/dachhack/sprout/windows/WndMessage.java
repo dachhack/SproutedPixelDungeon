@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapTextMultiline;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndMessage extends Window {
 

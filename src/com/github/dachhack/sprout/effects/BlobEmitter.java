@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.particles.Emitter;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.blobs.Blob;
+import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Random;
 
 public class BlobEmitter extends Emitter {

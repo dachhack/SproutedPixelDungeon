@@ -17,8 +17,8 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Assets;
+import com.watabou.noosa.Image;
 
 public class Effects {
 

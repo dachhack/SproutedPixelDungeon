@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
-import com.watabou.noosa.Camera;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -35,6 +34,7 @@ import com.github.dachhack.sprout.scenes.CellSelector;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 
 public class WarriorArmor extends ClassArmor {

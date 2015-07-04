@@ -19,8 +19,8 @@ package com.github.dachhack.sprout.levels.painters;
 
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Heap.Type;
+import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfTeleportation;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;

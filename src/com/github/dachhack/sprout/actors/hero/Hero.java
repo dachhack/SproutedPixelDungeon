@@ -17,6 +17,10 @@
  */
 package com.github.dachhack.sprout.actors.hero;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Bones;
@@ -45,6 +49,7 @@ import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Regeneration;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.SnipersMark;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -58,9 +63,9 @@ import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Heap;
+import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
-import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.armor.glyphs.Viscosity;
 import com.github.dachhack.sprout.items.artifacts.CapeOfThorns;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
@@ -113,13 +118,10 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-
 public class Hero extends Char {
 
 	private static final String TXT_LEAVE = "One does not simply leave Pixel Dungeon.";
+	private static final String TXT_OVERFILL = "HP Overfilled by %s";
 
 	private static final String TXT_LEVEL_UP = "level up!";
 	private static final String TXT_NEW_LEVEL = "Welcome to level %d! Now you are healthier and more focused. "
@@ -345,7 +347,13 @@ public class Hero extends Char {
 		}
 		if (dmg < 0)
 			dmg = 0;
-		return buff(Fury.class) != null ? (int) (dmg * 1.5f) : dmg;
+		
+		if (buff(Fury.class) != null){ dmg *= 1.5f; }
+		
+		if (buff(Strength.class) != null){ dmg *= 4f; Buff.detach(this, Strength.class);}
+		
+		return (int) dmg;
+		
 	}
 
 	@Override
@@ -759,13 +767,12 @@ public class Hero extends Char {
 
 	private boolean actDescend(HeroAction.Descend action) {
 		int stairs = action.dst;
-		if (pos == stairs && pos == Dungeon.level.exit) {
+		if (pos == stairs && pos == Dungeon.level.exit && (Dungeon.depth<Statistics.deepestFloor || !Dungeon.sealedlevel)){
 
 			curAction = null;
 
 			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
-			if (buff != null)
-				buff.detach();
+			if (buff != null) buff.detach();
 
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 				if (mob instanceof DriedRose.GhostHero)
@@ -775,7 +782,7 @@ public class Hero extends Char {
 			Game.switchScene(InterlevelScene.class);
 
 			return false;
-
+			
 		} else if (getCloser(stairs)) {
 
 			return true;
@@ -789,7 +796,7 @@ public class Hero extends Char {
 	private boolean actAscend(HeroAction.Ascend action) {
 		int stairs = action.dst;
 		if (pos == stairs && pos == Dungeon.level.entrance) {
-
+			
 			if (Dungeon.depth == 1) {
 
 				if (belongings.getItem(Amulet.class) == null) {
@@ -800,7 +807,28 @@ public class Hero extends Char {
 					Dungeon.deleteGame(Dungeon.hero.heroClass, true);
 					Game.switchScene(SurfaceScene.class);
 				}
+				
+			} else if (Dungeon.depth == 34) {
+				curAction = null;
 
+				Hunger hunger = buff(Hunger.class);
+				if (hunger != null && !hunger.isStarving()) {
+					hunger.satisfy(-Hunger.STARVING / 10);
+				}
+
+				Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
+				if (buff != null)
+					buff.detach();
+
+				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
+					if (mob instanceof DriedRose.GhostHero)
+						mob.destroy();
+                
+				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
+				Game.switchScene(InterlevelScene.class);
+				
+			} else if (Dungeon.depth > 26){
+				ready();
 			} else {
 
 				curAction = null;
@@ -817,7 +845,7 @@ public class Hero extends Char {
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					if (mob instanceof DriedRose.GhostHero)
 						mob.destroy();
-
+                
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 				Game.switchScene(InterlevelScene.class);
 			}
@@ -1093,7 +1121,7 @@ public class Hero extends Char {
 
 			curAction = new HeroAction.Unlock(cell);
 
-		} else if (cell == Dungeon.level.exit && Dungeon.depth < 26) {
+		} else if (cell == Dungeon.level.exit && Dungeon.depth < 26 && !Level.exitsealed) {
 
 			curAction = new HeroAction.Descend(cell);
 
@@ -1151,10 +1179,12 @@ public class Hero extends Char {
 
 		if (subClass == HeroSubClass.WARLOCK) {
 
-			int value = HT - HP;
+			int value = lvl;
 			if (value > 0) {
 				HP += value;
 				sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+				
+				GLog.w(TXT_OVERFILL, lvl);
 			}
 
 			buff(Hunger.class).satisfy(10);

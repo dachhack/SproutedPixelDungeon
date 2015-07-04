@@ -17,13 +17,13 @@
  */
 package com.github.dachhack.sprout.items.scrolls;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfTeleportation extends Scroll {
 

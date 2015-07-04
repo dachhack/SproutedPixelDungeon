@@ -19,11 +19,10 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Badges.Badge;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -41,6 +40,7 @@ import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.TenguSprite;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Tengu extends Mob {

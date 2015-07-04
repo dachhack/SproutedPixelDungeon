@@ -17,16 +17,16 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
-import com.github.dachhack.sprout.items.food.GoldenNut;
+import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.BlueWraithSprite;
+import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
 public class BlueWraith extends Wraith  {
@@ -41,8 +41,8 @@ public class BlueWraith extends Wraith  {
 
 		EXP = 11;
 		
-		loot = new GoldenNut();
-		lootChance = 0.5f; // by default, see die()
+		loot = new RedDewdrop();
+		lootChance = 1.0f; // by default, see die()
 		
 	}
 	
@@ -71,7 +71,7 @@ public class BlueWraith extends Wraith  {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(30, 50);
+		return Random.NormalIntRange(20, 40);
 	}
 
 	@Override

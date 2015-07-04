@@ -20,13 +20,13 @@ package com.github.dachhack.sprout.items;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.scenes.AmuletScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.watabou.noosa.Game;
 
 public class Amulet extends Item {
 

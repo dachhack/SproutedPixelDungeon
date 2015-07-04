@@ -17,12 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.audio.Music;
-import com.watabou.noosa.ui.Button;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Rankings;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
@@ -35,6 +29,12 @@ import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.windows.WndError;
 import com.github.dachhack.sprout.windows.WndRanking;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Music;
+import com.watabou.noosa.ui.Button;
 import com.watabou.utils.GameMath;
 
 public class RankingsScene extends PixelScene {

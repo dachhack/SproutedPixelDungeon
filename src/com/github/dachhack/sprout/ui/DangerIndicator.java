@@ -17,12 +17,12 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.scenes.PixelScene;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Image;
 
 public class DangerIndicator extends Tag {
 

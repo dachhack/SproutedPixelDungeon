@@ -17,6 +17,12 @@
  */
 package com.github.dachhack.sprout.levels;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
@@ -62,7 +68,14 @@ import com.github.dachhack.sprout.levels.features.Chasm;
 import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.levels.features.HighGrass;
 import com.github.dachhack.sprout.levels.painters.Painter;
-import com.github.dachhack.sprout.levels.traps.*;
+import com.github.dachhack.sprout.levels.traps.AlarmTrap;
+import com.github.dachhack.sprout.levels.traps.FireTrap;
+import com.github.dachhack.sprout.levels.traps.GrippingTrap;
+import com.github.dachhack.sprout.levels.traps.LightningTrap;
+import com.github.dachhack.sprout.levels.traps.ParalyticTrap;
+import com.github.dachhack.sprout.levels.traps.PoisonTrap;
+import com.github.dachhack.sprout.levels.traps.SummoningTrap;
+import com.github.dachhack.sprout.levels.traps.ToxicTrap;
 import com.github.dachhack.sprout.mechanics.ShadowCaster;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
 import com.github.dachhack.sprout.plants.Plant;
@@ -74,12 +87,6 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public abstract class Level implements Bundlable {
 
@@ -119,6 +126,7 @@ public abstract class Level implements Bundlable {
 	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
 
 	public static boolean resizingNeeded;
+	public static boolean exitsealed=false;
 	public static int loadedMapSize;
 
 	public int[] map;
@@ -142,11 +150,13 @@ public abstract class Level implements Bundlable {
 
 	public Feeling feeling = Feeling.NONE;
 
+
 	public int entrance;
 	public int exit;
 
 	// when a boss level has become locked.
 	public boolean locked = false;
+	public boolean special = false;
 
 	public HashSet<Mob> mobs;
 	public SparseArray<Heap> heaps;
@@ -172,11 +182,12 @@ public abstract class Level implements Bundlable {
 	private static final String MOBS = "mobs";
 	private static final String BLOBS = "blobs";
 	private static final String FEELING = "feeling";
-
+	
+	
 	public void create() {
 
 		resizingNeeded = false;
-
+		
 		map = new int[LENGTH];
 		visited = new boolean[LENGTH];
 		Arrays.fill(visited, false);
@@ -250,7 +261,7 @@ public abstract class Level implements Bundlable {
 					break;
 				 }
 				}
-			} else if (Dungeon.depth > 5) {
+			} else if (Dungeon.depth > 5 && Dungeon.depth < 22) {
 				switch (Random.Int(10)) {
 				case 0:
 					if (!Dungeon.bossLevel(Dungeon.depth + 1)) {
@@ -271,7 +282,37 @@ public abstract class Level implements Bundlable {
 					viewDistance = (int) Math.ceil(viewDistance / 3f);
 					break;
 				}
+			} else if (Dungeon.depth > 21 && Dungeon.depth < 27) {
+				switch (Random.Int(10)) {
+				case 1:
+					feeling = Feeling.WATER;
+					break;
+				case 2: 
+					feeling = Feeling.GRASS;
+					break;
+				case 3:
+				case 0:
+					feeling = Feeling.DARK;
+					addItemToSpawn(new Torch());
+					addItemToSpawn(new Torch());
+					addItemToSpawn(new Torch());
+					viewDistance = (int) Math.ceil(viewDistance / 3f);
+					break;
+				}
+			} else if (Dungeon.depth==29) {
+				feeling = Feeling.WATER;
+			} else if (Dungeon.depth==31) {
+				feeling = Feeling.DARK;
+				addItemToSpawn(new Torch());
+				addItemToSpawn(new Torch());
+				addItemToSpawn(new Torch());
+				viewDistance = (int) Math.ceil(viewDistance / 3f);
+			} else if (Dungeon.depth==32) {
+				feeling = Feeling.WATER;
+			} else if (Dungeon.depth==33) {
+				feeling = Feeling.CHASM;			
 			}
+			
 		}
 
 		boolean pitNeeded = Dungeon.depth > 1 && weakFloorCreated;
@@ -499,6 +540,14 @@ public abstract class Level implements Bundlable {
 			cell = Random.Int(LENGTH);
 		} while (!passable[cell] || Dungeon.visible[cell]
 				|| Actor.findChar(cell) != null);
+		return cell;
+	}
+	
+	public int randomRespawnCellFish() {
+		int cell;
+		do {
+			cell = Random.Int(LENGTH);
+		} while (!passable[cell] || Actor.findChar(cell) != null || map[cell]!=Terrain.EMPTY);
 		return cell;
 	}
 
@@ -1117,6 +1166,8 @@ public abstract class Level implements Bundlable {
 			return "Bookshelf";
 		case Terrain.ALCHEMY:
 			return "Alchemy pot";
+		case Terrain.SHRUB:
+			return "Overgrown shrub";
 		default:
 			return "???";
 		}
@@ -1138,6 +1189,8 @@ public abstract class Level implements Bundlable {
 			return "Embers cover the floor.";
 		case Terrain.HIGH_GRASS:
 			return "Dense vegetation blocks the view.";
+		case Terrain.SHRUB:
+			return "Dense srubs block the view.";
 		case Terrain.LOCKED_DOOR:
 			return "This door is locked, you need a matching key to unlock it.";
 		case Terrain.LOCKED_EXIT:

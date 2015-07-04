@@ -17,14 +17,14 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Group;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Group;
 
 public class WndClass extends WndTabbed {
 

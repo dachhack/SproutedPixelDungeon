@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
@@ -27,7 +28,8 @@ import com.github.dachhack.sprout.utils.Utils;
 
 public class ImpShopkeeper extends Shopkeeper {
 
-	private static final String TXT_GREETINGS = "Hello, %s!";
+	private static final String TXT_GREETINGS = "Hello, %s! I'll give you a deal on the books once you clear the dungeon.";
+	private static final String TXT_GREETINGS2 = "You did it.... Now you will need these books to chase Yog across the hidden places of the dungeon.";
 	public static final String TXT_THIEF = "I thought I could trust you!";
 
 	{
@@ -36,6 +38,7 @@ public class ImpShopkeeper extends Shopkeeper {
 	}
 
 	private boolean seenBefore = false;
+	private boolean killedYog = false;
 
 	@Override
 	protected boolean act() {
@@ -43,6 +46,11 @@ public class ImpShopkeeper extends Shopkeeper {
 		if (!seenBefore && Dungeon.visible[pos]) {
 			yell(Utils.format(TXT_GREETINGS, Dungeon.hero.givenName()));
 			seenBefore = true;
+		}
+		
+		if (Statistics.amuletObtained && !killedYog && Dungeon.visible[pos]) {
+			yell(Utils.format(TXT_GREETINGS2, Dungeon.hero.givenName()));
+			killedYog = true;
 		}
 
 		return super.act();

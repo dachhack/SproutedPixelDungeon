@@ -17,7 +17,8 @@
  */
 package com.github.dachhack.sprout.items;
 
-import com.watabou.noosa.audio.Sample;
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
@@ -35,10 +36,9 @@ import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 public class Bomb extends Item {
 

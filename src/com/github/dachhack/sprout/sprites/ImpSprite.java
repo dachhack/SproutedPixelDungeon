@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
 import com.github.dachhack.sprout.effects.Speck;
+import com.watabou.noosa.TextureFilm;
 
 public class ImpSprite extends MobSprite {
 

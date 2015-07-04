@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -36,6 +35,7 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.sprites.SuccubusSprite;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Succubus extends Mob {
@@ -101,12 +101,14 @@ public class Succubus extends Mob {
 	private void blink(int target) {
 
 		int cell = Ballistica.cast(pos, target, true, true);
-
+		
 		if (Actor.findChar(cell) != null && Ballistica.distance > 1) {
 			cell = Ballistica.trace[Ballistica.distance - 2];
 		}
-
+		
+       if (!Level.pit[cell]){
 		WandOfBlink.appear(this, cell);
+       }
 
 		delay = BLINK_DELAY;
 	}

@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -34,6 +33,7 @@ import com.github.dachhack.sprout.scenes.CellSelector;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class RogueArmor extends ClassArmor {
 

@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
+import com.watabou.noosa.TextureFilm;
 
 public class SuccubusSprite extends MobSprite {
 

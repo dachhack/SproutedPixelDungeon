@@ -20,18 +20,18 @@ package com.github.dachhack.sprout.scenes;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.watabou.input.Touchscreen.Touch;
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.TouchArea;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.ui.Archs;
 import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.input.Touchscreen.Touch;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.TouchArea;
 
 public class AboutScene extends PixelScene {
 

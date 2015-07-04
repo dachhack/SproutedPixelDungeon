@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.levels;
 
+import java.util.List;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.actors.Actor;
@@ -27,8 +29,6 @@ import com.github.dachhack.sprout.levels.Room.Type;
 import com.watabou.noosa.Scene;
 import com.watabou.utils.Graph;
 import com.watabou.utils.Random;
-
-import java.util.List;
 
 public class LastShopLevel extends RegularLevel {
 

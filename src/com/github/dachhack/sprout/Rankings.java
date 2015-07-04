@@ -26,9 +26,9 @@ import java.util.Comparator;
 
 import android.content.Context;
 
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.Game;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.SystemTime;

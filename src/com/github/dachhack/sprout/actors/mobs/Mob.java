@@ -17,6 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
+import java.util.HashSet;
+
+import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
@@ -32,6 +35,8 @@ import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.Wound;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.RedDewdrop;
+import com.github.dachhack.sprout.items.YellowDewdrop;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
 import com.github.dachhack.sprout.items.rings.RingOfWealth;
@@ -40,10 +45,9 @@ import com.github.dachhack.sprout.levels.Level.Feeling;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.HashSet;
 
 public abstract class Mob extends Char {
 
@@ -430,6 +434,11 @@ public abstract class Mob extends Char {
 			Item lootOther = createLootOther();
 			if (lootOther != null)
 				Dungeon.level.drop(lootOther, pos).sprite.drop();
+		} else if (Random.Float() < lootChanceThird
+				&& Dungeon.hero.lvl <= maxLvl + 20) {
+			Item lootThird = createLootThird();
+			if (lootThird != null)
+				Dungeon.level.drop(lootThird, pos).sprite.drop();
 		}
 
 		if (Dungeon.hero.isAlive() && !Dungeon.visible[pos]) {
@@ -439,8 +448,10 @@ public abstract class Mob extends Char {
 
 	protected Object loot = null;
 	protected Object lootOther = null;
+	protected Object lootThird = null;
 	protected float lootChance = 0;
 	protected float lootChanceOther = 0;
+	protected float lootChanceThird = 0;
 
 	@SuppressWarnings("unchecked")
 	protected Item createLoot() {
@@ -479,7 +490,41 @@ public abstract class Mob extends Char {
 		}
 		return item;
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected Item createLootThird() {
+		Item item;
+		if (lootThird instanceof Generator.Category) {
 
+			item = Generator.random((Generator.Category) lootThird);
+
+		} else if (lootThird instanceof Class<?>) {
+
+			item = Generator.random((Class<? extends Item>) lootThird);
+
+		} else {
+
+			item = (Item) lootThird;
+
+		}
+		return item;
+	}
+
+	public void explodeDew(int cell) {
+		
+		Sample.INSTANCE.play(Assets.SND_BLAST, 2);
+
+
+		for (int n : Level.NEIGHBOURS9) {
+			int c = cell + n;
+			if (c >= 0 && c < Level.LENGTH && Level.passable[c]) {
+						
+				if (Random.Int(10)==1){Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();}
+				else if (Random.Int(3)==1){Dungeon.level.drop(new YellowDewdrop(), c).sprite.drop();}
+			}
+		}		
+	}
+	
 	public boolean reset() {
 		return false;
 	}

@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.ui.Icons;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
 import com.watabou.utils.Random;
 
 public class EmoIcon extends Image {

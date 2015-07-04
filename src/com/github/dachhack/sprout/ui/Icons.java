@@ -17,9 +17,9 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.watabou.noosa.Image;
 
 public enum Icons {
 

@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import java.util.Collection;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -29,6 +28,10 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.EquipableItem;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.SanChikarah;
+import com.github.dachhack.sprout.items.SanChikarahDeath;
+import com.github.dachhack.sprout.items.SanChikarahLife;
+import com.github.dachhack.sprout.items.SanChikarahTranscend;
 import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.quest.Pickaxe;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
@@ -39,6 +42,7 @@ import com.github.dachhack.sprout.sprites.BlacksmithSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndBlacksmith;
 import com.github.dachhack.sprout.windows.WndQuest;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -59,6 +63,7 @@ public class Blacksmith extends NPC {
 	private static final String TXT_GET_LOST = "I'm busy. Get lost!";
 
 	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
+	private static final String COLLECTED = "Finally, the SanChikarah. I will forge them for you...";
 
 	{
 		name = "troll blacksmith";
@@ -146,8 +151,18 @@ public class Blacksmith extends NPC {
 			GameScene.show(new WndBlacksmith(this, Dungeon.hero));
 
 		} else {
-
+            if (checksan()){
+             tell(COLLECTED);	
+             SanChikarah san = new SanChikarah();
+                Dungeon.sanchikarah = true;	
+				if (san.doPickUp(Dungeon.hero)) {
+					GLog.i(Hero.TXT_YOU_NOW_HAVE, san.name());
+				} else {
+					Dungeon.level.drop(san, Dungeon.hero.pos).sprite.drop();
+				}
+            } else {
 			tell(TXT_GET_LOST);
+            }
 
 		}
 	}
@@ -230,6 +245,22 @@ public class Blacksmith extends NPC {
 		Quest.reforged = true;
 
 		Journal.remove(Journal.Feature.TROLL);
+	}
+	
+	public static boolean checksan() {
+		SanChikarahDeath san1 = Dungeon.hero.belongings.getItem(SanChikarahDeath.class);
+		SanChikarahLife san2 = Dungeon.hero.belongings.getItem(SanChikarahLife.class);
+		SanChikarahTranscend san3 = Dungeon.hero.belongings.getItem(SanChikarahTranscend.class);
+		
+		if (san1!=null && san2!=null && san3!=null){
+			san1.detach(Dungeon.hero.belongings.backpack);
+			san2.detach(Dungeon.hero.belongings.backpack);
+			san3.detach(Dungeon.hero.belongings.backpack);
+			return true;			
+		} else {
+			return false;
+		}
+		
 	}
 
 	@Override

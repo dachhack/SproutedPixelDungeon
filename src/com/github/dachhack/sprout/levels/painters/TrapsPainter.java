@@ -37,7 +37,7 @@ public class TrapsPainter extends Painter {
 				Terrain.TOXIC_TRAP,
 				Terrain.PARALYTIC_TRAP,
 				Terrain.PARALYTIC_TRAP,
-				!Dungeon.bossLevel(Dungeon.depth + 1) ? Terrain.CHASM
+				!Dungeon.bossLevel(Dungeon.depth + 1) && (Dungeon.depth < 22 || Dungeon.depth > 26) ? Terrain.CHASM
 						: Terrain.SUMMONING_TRAP };
 		fill(level, room, Terrain.WALL);
 		fill(level, room, 1, Random.element(traps));

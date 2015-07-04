@@ -17,6 +17,11 @@
  */
 package com.github.dachhack.sprout.levels;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
@@ -38,11 +43,6 @@ import com.watabou.utils.Graph;
 import com.watabou.utils.Random;
 import com.watabou.utils.Rect;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
 public abstract class RegularLevel extends Level {
 
 	protected HashSet<Room> rooms;
@@ -51,6 +51,8 @@ public abstract class RegularLevel extends Level {
 	protected Room roomExit;
 
 	protected ArrayList<Room.Type> specials;
+	protected ArrayList<Room.Type> specialsf;
+	protected ArrayList<Room.Type> specialsc;
 
 	public int secretDoors;
 
@@ -152,6 +154,10 @@ public abstract class RegularLevel extends Level {
 		if (Dungeon.isChallenged(Challenges.NO_HERBALISM)) {
 			// sorry warden, no lucky sungrass or blandfruit seeds for you!
 			specials.remove(Room.Type.GARDEN);
+		}
+		
+		if (Dungeon.depth > 21 && Dungeon.depth < 27) {
+				specials.remove(Room.Type.WEAK_FLOOR);
 		}
 		if (!assignRoomType())
 			return false;
@@ -567,6 +573,7 @@ public abstract class RegularLevel extends Level {
 
 	@Override
 	public int randomRespawnCell() {
+						
 		int count = 0;
 		int cell = -1;
 
@@ -587,7 +594,8 @@ public abstract class RegularLevel extends Level {
 				return cell;
 			}
 
-		}
+		 }
+		
 	}
 
 	@Override

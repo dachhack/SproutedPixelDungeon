@@ -21,11 +21,11 @@ import android.annotation.SuppressLint;
 import android.util.FloatMath;
 import android.util.SparseArray;
 
+import com.github.dachhack.sprout.Assets;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.particles.Emitter;
-import com.github.dachhack.sprout.Assets;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 

@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
-import com.watabou.noosa.Camera;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Roots;
@@ -28,6 +27,7 @@ import com.github.dachhack.sprout.items.armor.Armor.Glyph;
 import com.github.dachhack.sprout.plants.Earthroot;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Random;
 
 public class Entanglement extends Glyph {

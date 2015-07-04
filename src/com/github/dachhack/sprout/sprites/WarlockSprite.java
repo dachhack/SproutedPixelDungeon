@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.mobs.Warlock;
 import com.github.dachhack.sprout.effects.MagicMissile;
+import com.watabou.noosa.TextureFilm;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 
 public class WarlockSprite extends MobSprite {

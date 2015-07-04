@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.potions;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -33,6 +32,7 @@ import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.utils.BArray;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PathFinder;
 
 public class PotionOfPurity extends Potion {

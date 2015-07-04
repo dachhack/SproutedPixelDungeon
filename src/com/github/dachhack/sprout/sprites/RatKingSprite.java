@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
-import com.github.dachhack.sprout.Assets;
-
 import java.util.Calendar;
+
+import com.github.dachhack.sprout.Assets;
+import com.watabou.noosa.TextureFilm;
 
 public class RatKingSprite extends MobSprite {
 

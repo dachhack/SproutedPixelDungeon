@@ -20,6 +20,13 @@ package com.github.dachhack.sprout.scenes;
 import java.nio.FloatBuffer;
 import java.util.Calendar;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.github.dachhack.sprout.sprites.RatSprite;
+import com.github.dachhack.sprout.ui.Archs;
+import com.github.dachhack.sprout.ui.RedButton;
 import com.watabou.gltextures.Gradient;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.glwrap.Matrix;
@@ -35,13 +42,6 @@ import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.TouchArea;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.audio.Music;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.sprites.RatSprite;
-import com.github.dachhack.sprout.ui.Archs;
-import com.github.dachhack.sprout.ui.RedButton;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 

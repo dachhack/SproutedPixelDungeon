@@ -1,5 +1,7 @@
 package com.github.dachhack.sprout.items.artifacts;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -10,8 +12,6 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 /**
  * Created by Evan on 24/08/2014.

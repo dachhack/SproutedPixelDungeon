@@ -17,10 +17,35 @@
  */
 package com.github.dachhack.sprout.actors;
 
+import java.util.HashSet;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.actors.buffs.*;
+import com.github.dachhack.sprout.actors.buffs.Amok;
+import com.github.dachhack.sprout.actors.buffs.Bleeding;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Burning;
+import com.github.dachhack.sprout.actors.buffs.Charm;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.EarthImbue;
+import com.github.dachhack.sprout.actors.buffs.FireImbue;
+import com.github.dachhack.sprout.actors.buffs.Frost;
+import com.github.dachhack.sprout.actors.buffs.Haste;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.Levitation;
+import com.github.dachhack.sprout.actors.buffs.Light;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
+import com.github.dachhack.sprout.actors.buffs.MindVision;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Roots;
+import com.github.dachhack.sprout.actors.buffs.Shadows;
+import com.github.dachhack.sprout.actors.buffs.Sleep;
+import com.github.dachhack.sprout.actors.buffs.Slow;
+import com.github.dachhack.sprout.actors.buffs.Speed;
+import com.github.dachhack.sprout.actors.buffs.Terror;
+import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
@@ -34,14 +59,12 @@ import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.Camera;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
-
-import java.util.HashSet;
 
 public abstract class Char extends Actor {
 

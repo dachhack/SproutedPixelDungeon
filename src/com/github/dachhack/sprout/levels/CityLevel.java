@@ -17,14 +17,16 @@
  */
 package com.github.dachhack.sprout.levels;
 
-import com.watabou.noosa.Scene;
-import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.mobs.GoldThief;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
 import com.github.dachhack.sprout.levels.Room.Type;
+import com.watabou.noosa.Scene;
+import com.watabou.noosa.particles.Emitter;
+import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
@@ -93,6 +95,21 @@ public class CityLevel extends RegularLevel {
 		super.createItems();
 
 		Imp.Quest.spawn(this);
+		spawnGoldThief(this);
+	}
+	
+	public static void spawnGoldThief(CityLevel level) {
+		if (Dungeon.depth == 19 && !Dungeon.goldthiefspawned){
+
+			GoldThief thief = new GoldThief();
+			do {
+				thief.pos = level.randomRespawnCell();
+			} while (thief.pos == -1);
+			level.mobs.add(thief);
+			Actor.occupyCell(thief);
+           
+			Dungeon.goldthiefspawned = true;
+		}
 	}
 
 	@Override

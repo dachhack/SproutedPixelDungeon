@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Assets;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.SkinnedBlock;
 import com.watabou.noosa.ui.Component;
-import com.github.dachhack.sprout.Assets;
 
 public class Archs extends Component {
 

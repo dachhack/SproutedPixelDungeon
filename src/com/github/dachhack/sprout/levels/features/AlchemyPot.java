@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.levels.features;
 
+import java.util.Iterator;
+
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Heap;
@@ -25,8 +27,6 @@ import com.github.dachhack.sprout.items.food.Blandfruit;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.github.dachhack.sprout.windows.WndOptions;
-
-import java.util.Iterator;
 
 public class AlchemyPot {
 

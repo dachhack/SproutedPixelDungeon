@@ -17,10 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -32,6 +28,10 @@ import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.ui.Component;
 
 public class WndBlacksmith extends Window {
 

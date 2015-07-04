@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -31,7 +32,7 @@ public class Albino extends Rat {
 		name = "albino rat";
 		spriteClass = AlbinoSprite.class;
 
-		HP = HT = 15;
+		HP = HT = 10+(Dungeon.depth*Random.NormalIntRange(1, 3));
 
 		loot = new Meat();
 		lootChance = 1f;

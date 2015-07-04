@@ -19,12 +19,12 @@ package com.github.dachhack.sprout.effects;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
 import com.watabou.utils.SparseArray;
 
 public class FloatingText extends BitmapText {

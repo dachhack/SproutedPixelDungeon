@@ -1,5 +1,7 @@
 package com.github.dachhack.sprout.items.artifacts;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Awareness;
@@ -12,8 +14,6 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
-
-import java.util.ArrayList;
 
 /**
  * Created by debenhame on 08/09/2014.

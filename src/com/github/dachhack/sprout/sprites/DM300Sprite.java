@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.mobs.DM300;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.Speck;
+import com.watabou.noosa.TextureFilm;
 
 public class DM300Sprite extends MobSprite {
 	

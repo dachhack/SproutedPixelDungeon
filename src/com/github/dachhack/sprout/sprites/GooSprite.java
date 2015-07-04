@@ -17,14 +17,13 @@
  */
 package com.github.dachhack.sprout.sprites;
 
+import com.github.dachhack.sprout.Assets;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.noosa.particles.Emitter.Factory;
+import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
-
-import com.github.dachhack.sprout.Assets;
 
 public class GooSprite extends MobSprite {
 

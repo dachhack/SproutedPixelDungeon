@@ -17,11 +17,10 @@
  */
 package com.github.dachhack.sprout.items.food;
 
-import com.github.dachhack.sprout.actors.buffs.Barkskin;
-import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.plants.Earthroot.NutArmor;
+import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
@@ -46,13 +45,23 @@ public class GoldenNut extends Nut {
 			switch (Random.Int(2)) {
 			case 0:
 				GLog.w("You have recieved the dungeon's blessing.");
-				Buff.affect(hero, Barkskin.class).level(hero.HT);
-				Buff.affect(hero, NutArmor.class).level(hero.HT);
+				
+				hero.HT+=20;
+				hero.STR+=2;
+				hero.sprite.showStatus(CharSprite.POSITIVE, "+2 str, +20 ht");
+				GLog.p("Newfound strength surges through your body.");
+
+				Badges.validateStrengthAttained();
 				break;
 			case 1:
 				GLog.w("You have recieved the dungeon's highest blessing.");
-				Buff.affect(hero, Barkskin.class).level(hero.HT*2);
-				Buff.affect(hero, NutArmor.class).level(hero.HT*2);
+				
+				hero.HT+=50;
+				hero.STR+=5;
+				hero.sprite.showStatus(CharSprite.POSITIVE, "+5 str, +50 ht");
+				GLog.p("Newfound strength surges through your body.");
+
+				Badges.validateStrengthAttained();
 				break;
 			}
 		}
@@ -60,7 +69,7 @@ public class GoldenNut extends Nut {
 	
 	@Override
 	public String info() {
-		return "Unique dungeon nut guilded with enchantment.";
+		return "Unique dungeon nut gilded with enchantment.";
 	}
 
 	@Override

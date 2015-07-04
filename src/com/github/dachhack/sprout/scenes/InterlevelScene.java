@@ -17,6 +17,9 @@
  */
 package com.github.dachhack.sprout.scenes;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
@@ -31,9 +34,6 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 public class InterlevelScene extends PixelScene {
 
 	private static final float TIME_TO_FADE = 0.3f;
@@ -44,6 +44,16 @@ public class InterlevelScene extends PixelScene {
 	private static final String TXT_RESURRECTING = "Resurrecting...";
 	private static final String TXT_RETURNING = "Returning...";
 	private static final String TXT_FALLING = "Falling...";
+	//private static final String TXT_PORT = "Descending...";
+	private static final String TXT_PORTSYOG = "Entering Shadow Den...";
+	private static final String TXT_PORTCATA = "The dead are restless...";
+	private static final String TXT_PORTONI = "Feed us!";
+	private static final String TXT_PORTCHASM = "You dissolve into light...";
+	private static final String TXT_PORTSEWERS = "You hear leaves blowing...";
+	private static final String TXT_PORTPRISON = "Screams and chaos...";
+	private static final String TXT_PORTCAVES = "Let's go fishing...";
+	private static final String TXT_PORTCITY = "Clinking of coins...";
+	private static final String TXT_PORTHALLS = "Prepare to meet doom...";
 
 	private static final String ERR_FILE_NOT_FOUND = "Save file not found. If this error persists after restarting, "
 			+ "it may mean this save game is corrupted. Sorry about that.";
@@ -51,7 +61,8 @@ public class InterlevelScene extends PixelScene {
 			+ "it may mean this save game is corrupted. Sorry about that.";
 
 	public static enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, PORT1, PORT2, PORT3, PORT4,
+		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS
 	};
 
 	public static Mode mode;
@@ -99,6 +110,33 @@ public class InterlevelScene extends PixelScene {
 		case FALL:
 			text = TXT_FALLING;
 			break;
+		case PORT1: 
+			text = TXT_PORTCATA;
+		    break;
+		case PORT2: 
+			text = TXT_PORTONI;
+		    break;
+		case  PORT3:
+			text = TXT_PORTCHASM;
+		    break;
+		case  PORT4:
+			text = TXT_PORTSYOG;
+		    break;
+		case  PORTSEWERS:
+			text = TXT_PORTSEWERS;
+		    break;
+		case  PORTPRISON:
+			text = TXT_PORTPRISON;
+		    break;
+		case  PORTCAVES:
+			text = TXT_PORTCAVES;
+		    break;
+		case  PORTCITY:
+			text = TXT_PORTCITY;
+		    break;
+		case  PORTHALLS:
+			text = TXT_PORTHALLS;
+		    break;
 		}
 
 		message = PixelScene.createText(text, 9);
@@ -136,6 +174,33 @@ public class InterlevelScene extends PixelScene {
 						break;
 					case FALL:
 						fall();
+						break;
+					case PORT1:
+						portal(1);
+						break;
+					case PORT2:
+						portal(2);
+						break;
+					case PORT3:
+						portal(3);
+						break;
+					case PORT4:
+						portal(4);
+						break;
+					case PORTSEWERS:
+						portal(5);
+						break;
+					case PORTPRISON:
+						portal(6);
+						break;
+					case PORTCAVES:
+						portal(7);
+						break;
+					case PORTCITY:
+						portal(8);
+						break;
+					case PORTHALLS:
+						portal(9);
 						break;
 					}
 
@@ -259,9 +324,15 @@ public class InterlevelScene extends PixelScene {
 		Actor.fixTime();
 
 		Dungeon.saveLevel();
-		Dungeon.depth--;
-		Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
-		Dungeon.switchLevel(level, level.exit);
+		if (Dungeon.depth > 26) {
+		  Dungeon.depth=1;
+		  Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
+		  Dungeon.switchLevel(level, level.entrance);
+		} else {
+		  Dungeon.depth--;
+		  Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
+		  Dungeon.switchLevel(level, level.exit);	
+		}
 	}
 
 	private void returnTo() throws IOException {
@@ -305,7 +376,48 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.resetLevel();
 		}
 	}
+	
+	private void portal(int branch) throws IOException {
 
+		Actor.fixTime();
+		Dungeon.saveLevel();
+				
+		Level level;
+		switch(branch){
+		case 1:
+			level=Dungeon.newCatacombLevel();
+			break;
+		case 2:
+			level = Dungeon.newFortressLevel();
+			break;
+		case 3:
+			level = Dungeon.newChasmLevel();
+			break;
+		case 4:
+			level = Dungeon.newInfestLevel();
+			break;
+		case 5:
+			level = Dungeon.newFieldLevel();
+			break;
+		case 6:
+			level = Dungeon.newBattleLevel();
+			break;
+		case 7:
+			level = Dungeon.newFishLevel();
+			break;
+		case 8:
+			level = Dungeon.newVaultLevel();
+			break;
+		case 9:
+			level = Dungeon.newHallsBossLevel();
+			break;
+		default:
+			level = Dungeon.newLevel();
+		}
+		Dungeon.switchLevel(level, level.entrance);
+	}
+	
+		
 	@Override
 	protected void onBackPressed() {
 		// Do nothing

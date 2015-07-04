@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -25,6 +24,7 @@ import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.watabou.noosa.audio.Sample;
 
 public class Dewdrop extends Item {
 
@@ -42,7 +42,7 @@ public class Dewdrop extends Item {
 
 		DewVial vial = hero.belongings.getItem(DewVial.class);
 
-		if (hero.HP < hero.HT || vial == null || vial.isFull()) {
+		if (vial == null || vial.isFull()) {
 
 			int value = 1 + (Dungeon.depth - 1) / 5;
 			if (hero.heroClass == HeroClass.HUNTRESS) {

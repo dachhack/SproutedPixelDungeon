@@ -17,9 +17,12 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
+import java.util.HashSet;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -39,11 +42,14 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.SewersKey;
 import com.github.dachhack.sprout.items.armor.Armor;
+import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.missiles.CurareDart;
+import com.github.dachhack.sprout.items.weapon.missiles.ForestDart;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.SewerLevel;
@@ -53,6 +59,7 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.FetidRatSprite;
 import com.github.dachhack.sprout.sprites.GhostSprite;
+import com.github.dachhack.sprout.sprites.GnollArcherSprite;
 import com.github.dachhack.sprout.sprites.GnollTricksterSprite;
 import com.github.dachhack.sprout.sprites.GreatCrabSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -62,8 +69,6 @@ import com.github.dachhack.sprout.windows.WndSadGhost;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.HashSet;
 
 public class Ghost extends NPC {
 
@@ -599,5 +604,84 @@ public class Ghost extends NPC {
 					+ "The crab holds the claw infront of itself whenever it sees a threat, shielding "
 					+ "itself behind an impenetrable wall of carapace.";
 		}
+	}
+	
+	public static class GnollArcher extends Gnoll {
+		
+	private static final String TXT_KILLCOUNT = "Gnoll Archer Kill Count: %s";
+		{
+			name = "gnoll archer";
+			spriteClass = GnollArcherSprite.class;
+
+			HP = HT = 20;
+			defenseSkill = 5;
+
+			EXP = 1;
+			
+			baseSpeed = (1.5f-(Dungeon.depth/27));
+
+			state = WANDERING;
+
+			loot = new Meat();
+			lootChance = 0.05f; // by default, see die()
+			
+		}
+
+						
+		@Override
+		public int attackSkill(Char target) {
+			return 16;
+		}
+
+		@Override
+		protected boolean canAttack(Char enemy) {
+			if (!Level.adjacent(pos, enemy.pos)
+					&& Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos) {
+					return true;
+			} else {
+				return false;
+			}
+		}
+		
+		@Override
+		public int damageRoll() {
+			return Random.NormalIntRange(3, 5);
+		}
+
+		
+			@Override
+		protected boolean getCloser(int target) {
+			if (Level.adjacent(pos, enemy.pos)) {
+				return getFurther(target);
+			} else {
+				return super.getCloser(target);
+			}
+		}
+
+		@Override
+		public void die(Object cause) {
+			
+			if(Dungeon.depth>25){Dungeon.level.drop(new ForestDart(3), pos).sprite.drop();}
+			
+			Statistics.archersKilled++;
+			GLog.w(TXT_KILLCOUNT, Statistics.archersKilled);
+
+			super.die(cause);
+			if (!Dungeon.limitedDrops.sewerkey.dropped()) {
+				Dungeon.limitedDrops.sewerkey.drop();
+				Dungeon.level.drop(new SewersKey(), pos).sprite.drop();
+				explodeDew(pos);				
+			} else {
+				explodeDew(pos);
+			}
+		}
+		
+		
+		@Override
+		public String description() {
+			return "This gnoll is camouflaged and hiding in the foliage. He's pretty upset you are here. ";
+		}
+
+			
 	}
 }

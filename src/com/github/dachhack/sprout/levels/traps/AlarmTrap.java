@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.levels.traps;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
@@ -25,6 +24,7 @@ import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class AlarmTrap {
 

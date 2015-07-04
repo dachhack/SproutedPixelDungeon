@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
@@ -59,6 +58,7 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndQuest;
 import com.github.dachhack.sprout.windows.WndWandmaker;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 

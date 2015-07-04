@@ -24,7 +24,7 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.actors.mobs.Wraith;
+import com.github.dachhack.sprout.actors.mobs.RedWraith;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.levels.Level;
@@ -75,7 +75,7 @@ public class DwarfLichSprite extends MobSprite {
 					CellEmitter.center(c).start(Speck.factory(Speck.ROCK), 0.07f, 10);
 				}
 
-				if(Random.Int(100)==42){Wraith.spawnAt(c);}
+				if(Random.Int(100)==42){RedWraith.spawnAt(c);}
 				
 				
 				Char ch = Actor.findChar(c);

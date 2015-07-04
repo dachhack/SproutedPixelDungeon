@@ -17,13 +17,13 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Group;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.levels.Level;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Group;
+import com.watabou.noosa.Image;
 
 public class Wound extends Image {
 

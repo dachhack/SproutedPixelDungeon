@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.items;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.weapon.Weapon;
@@ -31,8 +33,6 @@ import com.github.dachhack.sprout.windows.IconTitle;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.audio.Sample;
-
-import java.util.ArrayList;
 
 public class Weightstone extends Item {
 

@@ -17,6 +17,9 @@
  */
 package com.github.dachhack.sprout.levels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
@@ -31,9 +34,6 @@ import com.watabou.noosa.Scene;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Graph;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SewerBossLevel extends RegularLevel {
 
@@ -247,7 +247,11 @@ public class SewerBossLevel extends RegularLevel {
 			drop(item, pos).type = Heap.Type.REMAINS;
 		}
 	}
-
+	
+	@Override
+	public int randomRespawnCell() {
+		return -1;
+	}
 	public void seal() {
 		if (entrance != 0) {
 

@@ -17,15 +17,17 @@
  */
 package com.github.dachhack.sprout.levels;
 
-import com.watabou.noosa.Scene;
-import com.watabou.noosa.particles.Emitter;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.mobs.MossySkeleton;
 import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
 import com.github.dachhack.sprout.effects.Halo;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.levels.Room.Type;
+import com.watabou.noosa.Scene;
+import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
@@ -74,8 +76,24 @@ public class PrisonLevel extends RegularLevel {
 		super.createItems();
 
 		Wandmaker.Quest.spawn(this, roomEntrance);
+		spawnSkeleton(this);
 	}
 
+	public static void spawnSkeleton(PrisonLevel level) {
+		if (Dungeon.depth == 9 && !Dungeon.skeletonspawned){
+
+			MossySkeleton skeleton = new MossySkeleton();
+			do {
+				skeleton.pos = level.randomRespawnCell();
+			} while (skeleton.pos == -1);
+			level.mobs.add(skeleton);
+			Actor.occupyCell(skeleton);
+           
+			Dungeon.skeletonspawned = true;
+		}
+	}
+
+	
 	@Override
 	protected void decorate() {
 

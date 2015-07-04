@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.potions;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -27,6 +26,7 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.audio.Sample;
 
 public class PotionOfLiquidFlame extends Potion {
 

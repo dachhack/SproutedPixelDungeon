@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
-import com.watabou.noosa.Camera;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.Lightning;
@@ -27,6 +26,7 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Random;
 
 public class Potential extends Glyph {

@@ -17,14 +17,14 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.HealthBar;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.ui.Component;
 
 public class WndInfoMob extends WndTitledMessage {
 

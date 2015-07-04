@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.particles.Emitter;
+import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 

@@ -17,16 +17,6 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.input.Touchscreen.Touch;
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.TouchArea;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.ui.Button;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.effects.Speck;
@@ -37,6 +27,16 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.HeroSprite;
 import com.github.dachhack.sprout.windows.WndGame;
 import com.github.dachhack.sprout.windows.WndHero;
+import com.watabou.input.Touchscreen.Touch;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.TouchArea;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.particles.Emitter;
+import com.watabou.noosa.ui.Button;
+import com.watabou.noosa.ui.Component;
 
 public class StatusPane extends Component {
 

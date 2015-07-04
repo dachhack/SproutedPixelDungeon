@@ -19,12 +19,12 @@ package com.github.dachhack.sprout.ui;
 
 import java.util.regex.Pattern;
 
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.ui.Component;
 import com.watabou.utils.Signal;
 
 public class GameLog extends Component implements Signal.Listener<String> {

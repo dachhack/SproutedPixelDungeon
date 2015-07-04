@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.effects;
 
+import com.github.dachhack.sprout.DungeonTilemap;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
-import com.github.dachhack.sprout.DungeonTilemap;
 
 public class CheckedCell extends Image {
 

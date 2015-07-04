@@ -17,10 +17,6 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Group;
-import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.effects.particles.LeafParticle;
@@ -28,6 +24,10 @@ import com.github.dachhack.sprout.effects.particles.PoisonParticle;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.effects.particles.WoolParticle;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Group;
+import com.watabou.noosa.particles.Emitter;
+import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;

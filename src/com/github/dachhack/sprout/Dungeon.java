@@ -17,6 +17,13 @@
  */
 package com.github.dachhack.sprout;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+
 import android.content.Context;
 
 import com.github.dachhack.sprout.actors.Actor;
@@ -36,13 +43,20 @@ import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.levels.BattleLevel;
+import com.github.dachhack.sprout.levels.CatacombLevel;
 import com.github.dachhack.sprout.levels.CavesBossLevel;
 import com.github.dachhack.sprout.levels.CavesLevel;
+import com.github.dachhack.sprout.levels.ChasmLevel;
 import com.github.dachhack.sprout.levels.CityBossLevel;
 import com.github.dachhack.sprout.levels.CityLevel;
 import com.github.dachhack.sprout.levels.DeadEndLevel;
+import com.github.dachhack.sprout.levels.FieldLevel;
+import com.github.dachhack.sprout.levels.FishingLevel;
+import com.github.dachhack.sprout.levels.FortressLevel;
 import com.github.dachhack.sprout.levels.HallsBossLevel;
 import com.github.dachhack.sprout.levels.HallsLevel;
+import com.github.dachhack.sprout.levels.InfestBossLevel;
 import com.github.dachhack.sprout.levels.LastLevel;
 import com.github.dachhack.sprout.levels.LastShopLevel;
 import com.github.dachhack.sprout.levels.Level;
@@ -51,6 +65,7 @@ import com.github.dachhack.sprout.levels.PrisonLevel;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.SewerBossLevel;
 import com.github.dachhack.sprout.levels.SewerLevel;
+import com.github.dachhack.sprout.levels.VaultLevel;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.StartScene;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
@@ -63,13 +78,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 
 public class Dungeon {
 
@@ -89,7 +97,7 @@ public class Dungeon {
 		blandfruitSeed,
 
 		// doesn't use Generator, so we have to enforce one armband drop here
-		armband, spork, royalspork,
+		armband, spork, royalspork, sewerkey, prisonkey, caveskey, citykey, hallskey, ringofwealth,
 
 		// containers
 		dewVial, seedBag, scrollBag, potionBag, wandBag, ankhChain;
@@ -108,7 +116,18 @@ public class Dungeon {
 	}
 	
 	public static boolean earlygrass = false;
+	public static boolean gnollspawned = false;
+	public static boolean skeletonspawned = false;
+	public static boolean goldthiefspawned = false;
+	public static boolean sanchikarah = false;
+	public static boolean sanchikarahdeath = false;
+	public static boolean sanchikarahlife = false;
+	public static boolean sanchikarahtranscend = false;
+	public static boolean shadowyogkilled = false;
 
+	public static boolean sealedlevel = false;
+	
+	
 	public static int challenges;
 	
 	public static int ratChests = 0;
@@ -158,8 +177,6 @@ public class Dungeon {
 		depth = 0;
 		gold = 0;
 		
-		sporkAvail = false;
-
 		droppedItems = new SparseArray<ArrayList<Item>>();
 
 		for (limitedDrops a : limitedDrops.values())
@@ -182,19 +199,195 @@ public class Dungeon {
 		Badges.reset();
 
 		StartScene.curClass.initHero(hero);
+		
+		earlygrass = false;
+		gnollspawned = false;
+		skeletonspawned = false;
+		goldthiefspawned = false;
+		sanchikarah = false;
+		sanchikarahdeath = false;
+		sanchikarahlife = false;
+		sanchikarahtranscend = false;
+		shadowyogkilled = false;
+		sealedlevel = false;
+        ratChests = 0;
+		sporkAvail = false;
+	
 	}
 
 	public static boolean isChallenged(int mask) {
 		return (challenges & mask) != 0;
 	}
 
+	public static Level newFieldLevel(){
+
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 27;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new FieldLevel();
+
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+	public static Level newBattleLevel(){
+
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 28;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new BattleLevel();
+
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+	public static Level newFishLevel(){
+
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 29;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new FishingLevel();
+
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+	public static Level newVaultLevel(){
+
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 30;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new VaultLevel();
+
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+	
+public static Level newHallsBossLevel(){
+
+		
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 25;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new HallsBossLevel();
+	
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+	
+	
+	public static Level newCatacombLevel(){
+
+		
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 31;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new CatacombLevel();
+	
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+	
+public static Level newFortressLevel(){
+		
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 32;
+		
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new FortressLevel();
+	
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
+
+public static Level newChasmLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth = 33;
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new ChasmLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
+public static Level newInfestLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+    depth = 35;
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new InfestBossLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+	
 	public static Level newLevel() {
 
 		Dungeon.level = null;
 		Actor.clear();
 
 		depth++;
-		if (depth > Statistics.deepestFloor) {
+		if (depth > Statistics.deepestFloor && depth < 27) {
 			Statistics.deepestFloor = depth;
 
 			if (Statistics.qualifiedForNoKilling) {
@@ -209,23 +402,29 @@ public class Dungeon {
 		Level level;
 		switch (depth) {
 		case 1:
-			//level = new CavesLevel();
+			//level = new SewerLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
 			//break;
 		case 2:
-			//level = new CavesBossLevel();
+			//level = new HallsLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
 			//break;
 		case 3:
 		case 4:
 			level = new SewerLevel();
+			//hero.HT=999;
+			//hero.HP=hero.HT;
 			break;
 		case 5:
 			level = new SewerBossLevel();
 			break;
 		case 6:
+			//level = new HallsLevel();
+			//hero.HT=999;
+			//hero.HP=hero.HT;
+			//break;
 		case 7:
 		case 8:
 		case 9:
@@ -268,7 +467,7 @@ public class Dungeon {
 			break;
 		default:
 			level = new DeadEndLevel();
-			Statistics.deepestFloor--;
+			if (depth<27){Statistics.deepestFloor--;}
 		}
 
 		level.create();
@@ -394,7 +593,24 @@ public class Dungeon {
 	private static final String CHAPTERS = "chapters";
 	private static final String QUESTS = "quests";
 	private static final String BADGES = "badges";
-
+	
+	
+	private static final String RATCHESTS = "ratChests";
+	private static final String EARLYGRASS = "earlygrass";
+	private static final String GNOLLSPAWN = "gnollspawned";
+	private static final String SKELETONSPAWN = "skeletonspawned";
+	private static final String THIEFSPAWN = "goldthiefspawned";
+	private static final String STRI = "sanchikarah";
+	private static final String STRID = "sanchikarahdeath";
+	private static final String STRIL = "sanchikarahlife";
+	private static final String STRIT = "sanchikarahtranscend";
+	private static final String SYOGKILL = "shadowyogkilled";
+	private static final String SEALEDLEV = "sealedlevel";
+	private static final String SPORK = "sporkAvail";
+	
+	
+	
+	
 	// TODO: to support pre-0.2.3 saves, remove when needed
 	private static final String POS = "potionsOfStrength";
 	private static final String SOU = "scrollsOfEnhancement";
@@ -435,7 +651,20 @@ public class Dungeon {
 			bundle.put(HERO, hero);
 			bundle.put(GOLD, gold);
 			bundle.put(DEPTH, depth);
-
+			
+			bundle.put(RATCHESTS, ratChests);
+			bundle.put(EARLYGRASS, earlygrass);
+			bundle.put(GNOLLSPAWN, gnollspawned);
+			bundle.put(SKELETONSPAWN, skeletonspawned);
+			bundle.put(THIEFSPAWN, goldthiefspawned);
+			bundle.put(STRI, sanchikarah);
+			bundle.put(STRID, sanchikarahdeath);
+			bundle.put(STRIL, sanchikarahlife);
+			bundle.put(STRIT, sanchikarahtranscend);
+			bundle.put(SYOGKILL, shadowyogkilled);
+			bundle.put(SEALEDLEV, sealedlevel);
+			bundle.put(SPORK, sporkAvail);
+	
 			for (int d : droppedItems.keyArray()) {
 				bundle.put(String.format(DROPPED, d), droppedItems.get(d));
 			}
@@ -614,7 +843,20 @@ public class Dungeon {
 
 		gold = bundle.getInt(GOLD);
 		depth = bundle.getInt(DEPTH);
-
+		
+		ratChests = bundle.getInt(RATCHESTS);
+		earlygrass = bundle.getBoolean(EARLYGRASS);
+		gnollspawned = bundle.getBoolean(GNOLLSPAWN);
+		skeletonspawned = bundle.getBoolean(SKELETONSPAWN);
+		goldthiefspawned = bundle.getBoolean(THIEFSPAWN);
+		sanchikarah = bundle.getBoolean(STRI);
+		sanchikarahdeath = bundle.getBoolean(STRID);
+		sanchikarahlife = bundle.getBoolean(STRIL);
+		sanchikarahtranscend = bundle.getBoolean(STRIT);
+		shadowyogkilled = bundle.getBoolean(SYOGKILL);
+		sealedlevel = bundle.getBoolean(SEALEDLEV);
+		sporkAvail = bundle.getBoolean(SPORK);
+		
 		Statistics.restoreFromBundle(bundle);
 		Journal.restoreFromBundle(bundle);
 		Generator.restoreFromBundle(bundle);
@@ -722,6 +964,7 @@ public class Dungeon {
 	}
 
 	private static boolean[] passable = new boolean[Level.LENGTH];
+	
 
 	public static int findPath(Char ch, int from, int to, boolean pass[],
 			boolean[] visible) {

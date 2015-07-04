@@ -17,12 +17,12 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
-
-import java.util.ArrayList;
 
 abstract public class ClassArmor extends Armor {
 

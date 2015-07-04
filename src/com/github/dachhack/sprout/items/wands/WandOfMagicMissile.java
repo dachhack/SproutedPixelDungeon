@@ -17,14 +17,19 @@
  */
 package com.github.dachhack.sprout.items.wands;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -33,8 +38,6 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 public class WandOfMagicMissile extends Wand {
 
@@ -47,6 +50,8 @@ public class WandOfMagicMissile extends Wand {
 	private static final float TIME_TO_DISENCHANT = 2f;
 
 	private boolean disenchantEquipped;
+	
+	private float upgradeChance = 0.5f;
 
 	{
 		name = "Wand of Magic Missile";
@@ -71,8 +76,9 @@ public class WandOfMagicMissile extends Wand {
 		if (ch != null) {
 
 			int level = level();
-
-			ch.damage(Random.Int(1, 6 + level * 2), this);
+            int damage= Random.Int(level+2, 6 + level * 2);
+            if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+			ch.damage(damage, this);
 
 			ch.sprite.burst(0xFF99CCFF, level / 2 + 2);
 
@@ -139,7 +145,29 @@ public class WandOfMagicMissile extends Wand {
 
 				Dungeon.quickslot.clearItem(WandOfMagicMissile.this);
 				WandOfMagicMissile.this.updateQuickslot();
+				
+				DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
+				if (gold!=null){
+				upgradeChance = (upgradeChance + (gold.quantity()*0.01f));
+				}
 
+				 int i=0;
+					while(i<level) {
+						if (i<2){
+						  Sample.INSTANCE.play(Assets.SND_EVOKE);
+						  ScrollOfUpgrade.upgrade(curUser);
+						  evoke(curUser);
+						  item.upgrade();
+						} else if (Random.Float()<upgradeChance){
+					     Sample.INSTANCE.play(Assets.SND_EVOKE);
+					     ScrollOfUpgrade.upgrade(curUser);
+					     evoke(curUser);
+					     item.upgrade();
+					     upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
+					  }
+					i++;
+					}
+				
 				item.upgrade();
 				curUser.spendAndNext(TIME_TO_DISENCHANT);
 

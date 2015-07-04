@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
 import com.github.dachhack.sprout.sprites.RatBossSprite;
@@ -35,32 +36,30 @@ public class RatBoss extends Rat {
 		spriteClass = RatBossSprite.class;
 
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		defenseSkill = 5+(Dungeon.depth);
+		defenseSkill = 5+(Dungeon.depth/4);
 		
-		loot = new Meat();
+		loot = Generator.Category.BERRY;
 		lootChance = 0.5f;
 		
 		lootOther = new ScrollOfRegrowth();
 		lootChanceOther = 0.1f;
-
-		maxLvl = 5;
 	}
 
 	private boolean spawnedRats = false;
 			
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(3, 8+(Dungeon.depth));
+		return Random.NormalIntRange(2+Dungeon.depth/2, 8+(Dungeon.depth));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 12;
+		return 11+Dungeon.depth;
 	}
 
 	@Override
 	public int dr() {
-		return 1;
+		return Dungeon.depth/2;
 	}
 
 	@Override

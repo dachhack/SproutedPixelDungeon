@@ -28,7 +28,6 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.actors.mobs.Acidic;
 import com.github.dachhack.sprout.actors.mobs.Albino;
 import com.github.dachhack.sprout.actors.mobs.Bandit;
@@ -47,6 +46,7 @@ import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 

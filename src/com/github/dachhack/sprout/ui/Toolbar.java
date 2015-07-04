@@ -17,11 +17,6 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Gizmo;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.ui.Button;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
@@ -44,6 +39,11 @@ import com.github.dachhack.sprout.windows.WndInfoMob;
 import com.github.dachhack.sprout.windows.WndInfoPlant;
 import com.github.dachhack.sprout.windows.WndMessage;
 import com.github.dachhack.sprout.windows.WndTradeItem;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Gizmo;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.ui.Button;
+import com.watabou.noosa.ui.Component;
 
 public class Toolbar extends Component {
 
@@ -68,6 +68,8 @@ public class Toolbar extends Component {
 
 		height = btnInventory.height();
 	}
+	
+	
 
 	@Override
 	protected void createChildren() {
@@ -84,7 +86,7 @@ public class Toolbar extends Component {
 				return true;
 			};
 		});
-
+		
 		add(btnSearch = new Tool(20, 7, 20, 24) {
 			@Override
 			protected void onClick() {
@@ -96,7 +98,14 @@ public class Toolbar extends Component {
 			@Override
 			protected void onClick() {
 				GameScene.selectCell(informer);
-			}
+			};
+			
+			@Override
+			protected boolean onLongClick() {
+				Dungeon.hero.rest(true);
+				return true;
+			};
+			
 		});
 
 		/*
@@ -139,6 +148,8 @@ public class Toolbar extends Component {
 		btnQuick2 = new QuickslotTool(105, 7, 22, 24, 1);
 
 		add(pickedUp = new PickedUpItem());
+		
+
 	}
 
 	@Override

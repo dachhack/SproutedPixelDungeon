@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -31,8 +33,6 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 public class ShortSword extends MeleeWeapon {
 
@@ -115,12 +115,12 @@ public class ShortSword extends MeleeWeapon {
 					  Sample.INSTANCE.play(Assets.SND_EVOKE);
 					  ScrollOfUpgrade.upgrade(curUser);
 					  evoke(curUser);
-					  ((MeleeWeapon) item).safeUpgrade();
+					  item.upgrade();
 					} else if (Random.Float()<upgradeChance){
 				     Sample.INSTANCE.play(Assets.SND_EVOKE);
 				     ScrollOfUpgrade.upgrade(curUser);
 				     evoke(curUser);
-				     ((MeleeWeapon) item).safeUpgrade();
+				     item.upgrade();
 				     upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
 				  }
 				i++;

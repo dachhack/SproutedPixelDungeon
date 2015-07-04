@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -26,6 +24,8 @@ import com.github.dachhack.sprout.ui.CheckBox;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Toolbar;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.audio.Sample;
 
 public class WndSettings extends Window {
 

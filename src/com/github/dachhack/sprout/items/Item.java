@@ -17,6 +17,10 @@
  */
 package com.github.dachhack.sprout.items;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -40,10 +44,6 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Item implements Bundlable {
 

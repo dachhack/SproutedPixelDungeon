@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
@@ -31,6 +30,7 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.SkeletonSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Skeleton extends Mob {

@@ -21,10 +21,10 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
 
+import com.github.dachhack.sprout.Assets;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
-import com.github.dachhack.sprout.Assets;
 import com.watabou.utils.PointF;
 
 public class DeathRay extends Image {

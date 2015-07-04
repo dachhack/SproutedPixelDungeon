@@ -17,14 +17,14 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.plants.Plant;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.TextureFilm;
 
 public class PlantSprite extends Image {
 

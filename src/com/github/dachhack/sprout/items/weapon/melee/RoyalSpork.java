@@ -34,6 +34,6 @@ public class RoyalSpork extends MeleeWeapon {
 	public String desc() {
 		return "Is it a spoon? Is it a fork? It is neither and it is both. "
 				+"This one is gold and covered in jewels. Totally special. "
-				+"Mobs better repect!";
+				+"Mobs better respect!";
 	}
 }

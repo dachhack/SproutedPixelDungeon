@@ -17,6 +17,12 @@
  */
 package com.github.dachhack.sprout;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import android.content.Context;
 
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -28,12 +34,6 @@ import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Bones {
 

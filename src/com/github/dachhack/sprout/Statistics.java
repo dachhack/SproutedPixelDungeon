@@ -27,8 +27,14 @@ public class Statistics {
 	public static int foodEaten;
 	public static int potionsCooked;
 	public static int piranhasKilled;
+	public static int archersKilled;
+	public static int skeletonsKilled;
+	public static int albinoPiranhasKilled;
+	public static int goldThievesKilled;
+	public static int shadowYogsKilled;
 	public static int nightHunt;
 	public static int ankhsUsed;
+	public static int ballsCooked;
 
 	public static float duration;
 
@@ -44,9 +50,16 @@ public class Statistics {
 		enemiesSlain = 0;
 		foodEaten = 0;
 		potionsCooked = 0;
+		
 		piranhasKilled = 0;
+		archersKilled = 0;
+		skeletonsKilled = 0;
+		albinoPiranhasKilled = 0;
+		goldThievesKilled = 0;
+		shadowYogsKilled = 0;
 		nightHunt = 0;
 		ankhsUsed = 0;
+		ballsCooked = 0;
 
 		duration = 0;
 
@@ -62,6 +75,14 @@ public class Statistics {
 	private static final String FOOD = "foodEaten";
 	private static final String ALCHEMY = "potionsCooked";
 	private static final String PIRANHAS = "priranhas";
+	
+	private static final String ARCHERS = "archers";
+	private static final String SKELETONS = "skeletons";
+	private static final String APIRANHAS = "apiranhas";
+	private static final String THIEVES = "thieves";
+	private static final String SYOGS = "syogs";
+	private static final String BALLS = "balls";
+	
 	private static final String NIGHT = "nightHunt";
 	private static final String ANKHS = "ankhsUsed";
 	private static final String DURATION = "duration";
@@ -74,6 +95,12 @@ public class Statistics {
 		bundle.put(FOOD, foodEaten);
 		bundle.put(ALCHEMY, potionsCooked);
 		bundle.put(PIRANHAS, piranhasKilled);
+		bundle.put(ARCHERS, archersKilled);
+		bundle.put(SKELETONS, skeletonsKilled);
+		bundle.put(APIRANHAS, albinoPiranhasKilled);
+		bundle.put(THIEVES, goldThievesKilled);
+		bundle.put(SYOGS, shadowYogsKilled);
+		bundle.put(BALLS, ballsCooked);
 		bundle.put(NIGHT, nightHunt);
 		bundle.put(ANKHS, ankhsUsed);
 		bundle.put(DURATION, duration);
@@ -87,10 +114,19 @@ public class Statistics {
 		foodEaten = bundle.getInt(FOOD);
 		potionsCooked = bundle.getInt(ALCHEMY);
 		piranhasKilled = bundle.getInt(PIRANHAS);
+		
+		archersKilled = bundle.getInt(ARCHERS);
+		skeletonsKilled = bundle.getInt(SKELETONS);
+		albinoPiranhasKilled = bundle.getInt(APIRANHAS);
+		goldThievesKilled = bundle.getInt(THIEVES);
+		shadowYogsKilled = bundle.getInt(SYOGS);
+		ballsCooked = bundle.getInt(BALLS);
+		
 		nightHunt = bundle.getInt(NIGHT);
 		ankhsUsed = bundle.getInt(ANKHS);
 		duration = bundle.getFloat(DURATION);
-		amuletObtained = bundle.getBoolean(AMULET);
+		amuletObtained = bundle.getBoolean(AMULET);		
+		
 	}
 
 }

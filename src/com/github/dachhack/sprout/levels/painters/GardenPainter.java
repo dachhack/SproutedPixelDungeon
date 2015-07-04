@@ -20,6 +20,8 @@ package com.github.dachhack.sprout.levels.painters;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.blobs.Foliage;
+import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;
@@ -63,6 +65,27 @@ public class GardenPainter extends Painter {
 			Dungeon.limitedDrops.ankhChain.drop();
 		}
 		
+		if (Dungeon.depth==32 && Random.Float() < 0.75f){
+			int pos;
+			do {pos = room.random();}
+			while (level.heaps.get(pos) != null);
+			level.drop(new Honeypot(), pos);	
+			
+			do {pos = room.random();}
+			while (level.heaps.get(pos) != null);
+			level.drop(new Honeypot(), pos);
+			
+			do {pos = room.random();}
+			while (level.heaps.get(pos) != null);
+			level.drop(new Honeypot(), pos);
+		}
+		
+		if (Dungeon.depth==32 && Random.Float() < 0.75f){
+			int pos;
+			do {pos = room.random();}
+			while (level.heaps.get(pos) != null);
+			level.drop(new Ankh(), pos);		
+		}
 
 		Foliage light = (Foliage) level.blobs.get(Foliage.class);
 		if (light == null) {

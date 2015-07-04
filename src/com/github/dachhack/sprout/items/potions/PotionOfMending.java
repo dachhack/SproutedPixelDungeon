@@ -60,6 +60,6 @@ public class PotionOfMending extends Potion {
 
 	@Override
 	public int price() {
-		return isKnown() ? 30 * quantity : super.price();
+		return isKnown() ? 20 * quantity : super.price();
 	}
 }

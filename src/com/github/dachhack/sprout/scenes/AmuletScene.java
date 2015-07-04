@@ -17,16 +17,16 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
 import com.watabou.utils.Random;
 
 public class AmuletScene extends PixelScene {

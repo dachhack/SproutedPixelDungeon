@@ -17,14 +17,14 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Chrome;
+import com.github.dachhack.sprout.scenes.PixelScene;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Chrome;
-import com.github.dachhack.sprout.scenes.PixelScene;
 
 public class RedButton extends Button {
 

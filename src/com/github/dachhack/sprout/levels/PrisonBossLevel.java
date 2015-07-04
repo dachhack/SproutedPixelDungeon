@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.levels;
 
+import java.util.List;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
@@ -36,8 +38,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Graph;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
-
-import java.util.List;
 
 public class PrisonBossLevel extends RegularLevel {
 

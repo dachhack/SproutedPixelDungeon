@@ -19,12 +19,12 @@ package com.github.dachhack.sprout.effects;
 
 import java.util.HashMap;
 
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.TextureFilm;
 
 public class SpellSprite extends Image {
 

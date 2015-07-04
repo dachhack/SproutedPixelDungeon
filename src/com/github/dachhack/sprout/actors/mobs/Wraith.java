@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -42,6 +41,7 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.WraithSprite;
+import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -55,7 +55,7 @@ public class Wraith extends Mob {
 		name = "wraith";
 		spriteClass = WraithSprite.class;
 
-		HP = HT = 1;
+		HP = HT = 1+level;
 		EXP = 1+level;
 
 		flying = true;

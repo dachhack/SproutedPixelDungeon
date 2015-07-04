@@ -19,15 +19,6 @@ package com.github.dachhack.sprout.scenes;
 
 import java.util.HashMap;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Group;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.ui.Button;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -35,8 +26,8 @@ import com.github.dachhack.sprout.GamesInProgress;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.effects.BannerSprites;
-import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.BannerSprites.Type;
+import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.ui.Archs;
 import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.Icons;
@@ -46,6 +37,15 @@ import com.github.dachhack.sprout.windows.WndChallenges;
 import com.github.dachhack.sprout.windows.WndClass;
 import com.github.dachhack.sprout.windows.WndMessage;
 import com.github.dachhack.sprout.windows.WndOptions;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Group;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.particles.Emitter;
+import com.watabou.noosa.ui.Button;
 import com.watabou.utils.Callback;
 
 public class StartScene extends PixelScene {

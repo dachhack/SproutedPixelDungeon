@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.sprites.CharSprite;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.sprites.CharSprite;
 
 public class HealthIndicator extends Component {
 

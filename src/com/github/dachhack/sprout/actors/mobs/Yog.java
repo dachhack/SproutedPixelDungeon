@@ -41,6 +41,7 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
+import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
@@ -128,9 +129,17 @@ public class Yog extends Mob {
 				sprite.visible = Dungeon.visible[pos];
 				GLog.n("Yog vanishes!");
 			}		
-			Buff.affect(this, BerryRegeneration.class).level(HP);
-			if (Dungeon.level.mobs.size()<12){
+			
+			if (Random.Float() < 0.10f){
+			Buff.affect(this, BerryRegeneration.class).level(Random.Int(0,HP));
+			}
+			
+			if (Dungeon.level.mobs.size()<5){
 			Eye.spawnAroundChance(newPos);
+			}
+			
+			if (fistsCount==0){
+				spawnFists();
 			}
 		}
 
@@ -184,9 +193,10 @@ public class Yog extends Mob {
 
 		GameScene.bossSlain();
 		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
+		Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
 		super.die(cause);
 
-		yell("...");
+		yell("Back to the shadow...");
 	}
 
 	@Override
@@ -222,13 +232,13 @@ public class Yog extends Mob {
 
 	public static class RottingFist extends Mob {
 
-		private static final int REGENERATION = 4;
+		private static final int REGENERATION = 50;
 
 		{
 			name = "rotting fist";
 			spriteClass = RottingFistSprite.class;
 
-			HP = HT = 500;
+			HP = HT = 1000;
 			defenseSkill = 25;
 
 			EXP = 0;
@@ -254,7 +264,7 @@ public class Yog extends Mob {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(24, 36);
+			return Random.NormalIntRange(44, 56);
 		}
 
 		@Override
@@ -322,7 +332,7 @@ public class Yog extends Mob {
 			name = "burning fist";
 			spriteClass = BurningFistSprite.class;
 
-			HP = HT = 400;
+			HP = HT = 1000;
 			defenseSkill = 25;
 
 			EXP = 0;
@@ -348,12 +358,12 @@ public class Yog extends Mob {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(20, 32);
+			return Random.NormalIntRange(40, 52);
 		}
 
 		@Override
 		public int dr() {
-			return 15;
+			return 25;
 		}
 
 		@Override

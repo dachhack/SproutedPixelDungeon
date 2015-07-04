@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.actors.blobs;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
@@ -32,6 +31,7 @@ import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class WaterOfHealth extends WellWater {
 

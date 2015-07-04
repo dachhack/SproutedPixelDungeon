@@ -44,6 +44,7 @@ public class ItemSpriteSheet {
 	public static final int PETAL = ROW1 + 2;
 	public static final int SANDBAG = ROW1 + 3;
 	public static final int REDDEWDROP = ROW8 + 8;
+	public static final int YELLOWDEWDROP = ROW8 + 14;
 	// Heaps (containers)
 	public static final int BONES = ROW1 + 4;
 	public static final int REMAINS = ROW1 + 5;
@@ -77,6 +78,8 @@ public class ItemSpriteSheet {
 	public static final int DBL_BOMB = ROW2 + 13;
 	public static final int HONEYPOT = ROW2 + 14;
 	public static final int SHATTPOT = ROW2 + 15;
+	public static final int RICEBOMB = ROW13 + 10;
+	public static final int HOLY_HAND_GRENADE = ROW13 + 13;
 
 	// Row Three: Melee weapons
 	public static final int KNUCKLEDUSTER = ROW3 + 0;
@@ -150,6 +153,11 @@ public class ItemSpriteSheet {
 	public static final int ARTIFACT_HOURGLASS = ROW8 + 4;
 	public static final int ARTIFACT_TOOLKIT = ROW8 + 5;
 	public static final int ARTIFACT_SPELLBOOK = ROW8 + 6;
+	public static final int BOOKOFDEAD = ROW8 + 9;
+	public static final int BOOKOFLIFE = ROW8 + 10;
+	public static final int BOOKOFTRANSCENDENCE = ROW8 + 11;
+	public static final int DWARFHAMMER = ROW8 + 12;
+	public static final int ANCIENTKEY = ROW8 + 13;
 
 	// Row Nine: Artifacts with Dynamic Images
 	public static final int ARTIFACT_HORN1 = ROW9 + 0;
@@ -214,6 +222,10 @@ public class ItemSpriteSheet {
 	public static final int SEED_TOASTEDDUNGEONNUT = ROW12 + 12;
 	public static final int SEED_GOLDENDUNGEONNUT = ROW12 + 13;
 	public static final int SEED_BLACKBERRY = ROW12 + 14;
+	public static final int SEED_RICE = ROW12 + 15;
+	public static final int SEED_CLOUDBERRY = ROW13 + 11;
+	public static final int SEED_BLUEBERRY = ROW13 + 12;
+	public static final int SEED_MOONBERRY = ROW13 + 14;
 
 	// Row Thirteen: Food
 	public static final int MEAT = ROW13 + 0;
@@ -224,6 +236,7 @@ public class ItemSpriteSheet {
 	public static final int RATION = ROW13 + 5;
 	public static final int PASTY = ROW13 + 6;
 	public static final int MYSTERYMEAT = ROW13 + 7;
+	public static final int RICEBALL = ROW13 + 8;
 
 	// Row Fourteen: Quest Items
 	public static final int SKULL = ROW14 + 0;
@@ -231,6 +244,7 @@ public class ItemSpriteSheet {
 	public static final int PICKAXE = ROW14 + 2;
 	public static final int ORE = ROW14 + 3;
 	public static final int TOKEN = ROW14 + 4;
+	public static final int SANCHIKARAH = ROW13 + 9;
 
 	// Row Fifteen: Containers/Bags
 	public static final int VIAL = ROW15 + 0;

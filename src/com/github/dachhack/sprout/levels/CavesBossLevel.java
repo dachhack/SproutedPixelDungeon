@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.levels;
 
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Scene;
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
@@ -35,6 +32,9 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Scene;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 

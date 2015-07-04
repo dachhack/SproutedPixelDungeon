@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
@@ -44,12 +45,6 @@ public class Bag extends Item implements Iterable<Item> {
 	public ArrayList<Item> items = new ArrayList<Item>();
 
 	public int size = 1;
-
-	@Override
-	public ArrayList<String> actions(Hero hero) {
-		ArrayList<String> actions = super.actions(hero);
-		return actions;
-	}
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -88,6 +83,9 @@ public class Bag extends Item implements Iterable<Item> {
 	@Override
 	public void onDetach() {
 		this.owner = null;
+		 for (Item item : items)
+			    Dungeon.quickslot.clearItem(item);
+			updateQuickslot();
 	}
 
 	@Override

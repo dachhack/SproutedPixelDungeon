@@ -18,8 +18,12 @@
 package com.github.dachhack.sprout.items.bags;
 
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.Rice;
 import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.Blueberry;
+import com.github.dachhack.sprout.items.food.Cloudberry;
 import com.github.dachhack.sprout.items.food.GoldenNut;
+import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.items.food.Nut;
 import com.github.dachhack.sprout.items.food.ToastedNut;
 import com.github.dachhack.sprout.plants.Plant;
@@ -31,14 +35,18 @@ public class SeedPouch extends Bag {
 		name = "seed pouch";
 		image = ItemSpriteSheet.POUCH;
 
-		size = 16;
+		size = 20;
 	}
 
 	@Override
 	public boolean grab(Item item) {
 		if (item instanceof GoldenNut ||  item instanceof ToastedNut || item instanceof Nut 
-			|| item instanceof Blackberry	
-			|| item instanceof Plant.Seed){
+			|| item instanceof Blackberry
+			|| item instanceof Blueberry
+			|| item instanceof Cloudberry
+			|| item instanceof Moonberry
+			|| item instanceof Plant.Seed
+			|| item instanceof Rice){
 		return true;
 		} else {
 		return false;

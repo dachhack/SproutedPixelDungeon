@@ -36,14 +36,14 @@ public class BanditKing extends Thief {
 	{
 		name = "bandit king";
 		spriteClass = BanditKingSprite.class;
-		HP = HT = 100; //200
+		HP = HT = 200; //200
 
 		EXP = 50;
 		maxLvl = 25;
 		
 		// 1 in 30 chance to be a crazy bandit, equates to overall 1/90 chance.
 		lootChance = 0.333f;
-		defenseSkill = 10; //20
+		defenseSkill = 20; //20
 		Dungeon.sporkAvail = false;
 		
 	}
@@ -53,10 +53,10 @@ public class BanditKing extends Thief {
 		return 10; //20
 	}
 
-	//@Override
-	//public float speed() {
-	//	return 2f;
-   //	}
+	@Override
+	public float speed() {
+		return 2f;
+   	}
 	
 	@Override
 	protected boolean steal(Hero hero) {

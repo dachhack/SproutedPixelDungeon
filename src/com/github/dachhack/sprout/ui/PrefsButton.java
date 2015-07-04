@@ -17,11 +17,11 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.windows.WndSettings;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.windows.WndSettings;
 
 public class PrefsButton extends Button {
 

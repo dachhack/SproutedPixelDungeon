@@ -19,9 +19,6 @@ package com.github.dachhack.sprout.windows;
 
 import java.util.Collections;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.ui.Component;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
@@ -29,6 +26,9 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.ScrollPane;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.ui.Component;
 
 public class WndJournal extends Window {
 

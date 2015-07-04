@@ -137,7 +137,9 @@ public class MeleeWeapon extends Weapon {
 			info.append("It is enchanted.");
 		}
 
-		if (levelKnown && Dungeon.hero.belongings.backpack.items.contains(this)) {
+		if (levelKnown 
+				//&& Dungeon.hero.belongings.backpack.items.contains(this)
+				) {
 			if (STR > Dungeon.hero.STR()) {
 				info.append(p);
 				info.append("Because of your inadequate strength the accuracy and speed "

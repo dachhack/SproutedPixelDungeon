@@ -21,14 +21,16 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.actors.mobs.Sentinel;
+import com.github.dachhack.sprout.items.DwarfHammer;
+import com.github.dachhack.sprout.items.Torch;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.PixelParticle;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.DungeonTilemap;
-import com.github.dachhack.sprout.items.Torch;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
@@ -42,7 +44,7 @@ public class HallsLevel extends RegularLevel {
 		color1 = 0x801500;
 		color2 = 0xa68521;
 	}
-
+		
 	@Override
 	public void create() {
 		addItemToSpawn(new Torch());
@@ -103,6 +105,25 @@ public class HallsLevel extends RegularLevel {
 				break;
 			}
 		}
+		
+         for (int i = 0; i < LENGTH; i++) {
+			
+			if (map[i]==Terrain.EXIT){map[i] = Terrain.PEDESTAL; Dungeon.sealedlevel=true;
+			    if(Dungeon.depth==24){
+			    	Sentinel sentinel = new Sentinel();
+				    sentinel.pos = i;
+				    mobs.add(sentinel);}
+			}			
+			
+		}
+		
+		
+	}
+	
+	@Override
+	protected void createItems() {
+		if (Dungeon.depth!=24){addItemToSpawn(new DwarfHammer());}
+		super.createItems();
 	}
 
 	@Override

@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.levels;
 
-import com.watabou.noosa.Scene;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
@@ -31,6 +30,7 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.Scene;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -108,12 +108,13 @@ public class HallsBossLevel extends Level {
 
 		Painter.fill(this, ROOM_LEFT - 1, ROOM_TOP - 1, ROOM_RIGHT - ROOM_LEFT
 				+ 3, ROOM_BOTTOM - ROOM_TOP + 3, Terrain.WALL);
+		
 		Painter.fill(this, ROOM_LEFT, ROOM_TOP, ROOM_RIGHT - ROOM_LEFT + 1,
 				ROOM_BOTTOM - ROOM_TOP + 1, Terrain.EMPTY);
 
 		entrance = Random.Int(ROOM_LEFT + 1, ROOM_RIGHT - 1)
 				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * WIDTH;
-		map[entrance] = Terrain.ENTRANCE;
+		map[entrance] = Terrain.PEDESTAL;
 
 		boolean[] patch = Patch.generate(0.45f, 6);
 		for (int i = 0; i < LENGTH; i++) {
@@ -131,8 +132,10 @@ public class HallsBossLevel extends Level {
 		for (int i = 0; i < LENGTH; i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(10) == 0) {
 				map[i] = Terrain.EMPTY_DECO;
+				if (map[i]==Terrain.ENTRANCE){map[i] = Terrain.PEDESTAL;}
 			}
-		}
+		}		
+		
 	}
 
 	@Override
@@ -211,7 +214,7 @@ public class HallsBossLevel extends Level {
 			locked = false;
 
 			entrance = stairs;
-			set(entrance, Terrain.ENTRANCE);
+			set(entrance, Terrain.PEDESTAL);
 			GameScene.updateMap(entrance);
 		}
 

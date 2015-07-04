@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.levels.features;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -28,6 +27,7 @@ import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndMessage;
+import com.watabou.noosa.audio.Sample;
 
 public class Sign {
 

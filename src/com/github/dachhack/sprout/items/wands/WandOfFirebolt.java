@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.wands;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
@@ -27,6 +26,7 @@ import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.levels.Level;
@@ -34,6 +34,7 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
@@ -60,7 +61,10 @@ public class WandOfFirebolt extends Wand {
 		Char ch = Actor.findChar(cell);
 		if (ch != null) {
 
-			ch.damage(Random.Int(1, 8 + level * level), this);
+			int damage= Random.Int(1, 8 + level * level);
+	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+			ch.damage(damage, this);
+			
 			Buff.affect(ch, Burning.class).reignite(ch);
 
 			ch.sprite.emitter().burst(FlameParticle.FACTORY, 5);

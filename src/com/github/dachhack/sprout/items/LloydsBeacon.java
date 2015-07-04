@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.items;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -28,15 +30,13 @@ import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
-import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
+import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
-
-import java.util.ArrayList;
 
 public class LloydsBeacon extends Item {
 
@@ -99,7 +99,7 @@ public class LloydsBeacon extends Item {
 
 		if (action == AC_SET || action == AC_RETURN) {
 
-			if (Dungeon.bossLevel()) {
+			if (Dungeon.bossLevel() || Dungeon.depth>24) {
 				hero.spend(LloydsBeacon.TIME_TO_USE);
 				GLog.w(TXT_PREVENTING);
 				return;

@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.effects.particles;
 
-import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
-import com.watabou.noosa.particles.Emitter.Factory;
 import com.github.dachhack.sprout.Dungeon;
+import com.watabou.noosa.particles.Emitter;
+import com.watabou.noosa.particles.Emitter.Factory;
+import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.Random;
 

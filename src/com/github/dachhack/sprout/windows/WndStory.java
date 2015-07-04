@@ -17,15 +17,15 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.input.Touchscreen.Touch;
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.TouchArea;
 import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.input.Touchscreen.Touch;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.TouchArea;
 import com.watabou.utils.SparseArray;
 
 public class WndStory extends Window {

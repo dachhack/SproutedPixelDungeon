@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.items.wands;
 
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
@@ -26,6 +24,7 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
@@ -34,6 +33,8 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.utils.BArray;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -67,8 +68,11 @@ public class WandOfAvalanche extends Wand {
 				if (ch != null) {
 
 					ch.sprite.flash();
-
-					ch.damage(Random.Int(2, 6 + (size - d) * 2), this);
+					
+					 int damage= Random.Int(2, 6 + (size - d) * 2);
+			         if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+					 ch.damage(damage, this);
+	
 
 					if (ch.isAlive() && Random.Int(2 + d) == 0) {
 						Buff.prolong(ch, Paralysis.class, Random.IntRange(2, 6));

@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.wands;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -28,8 +27,8 @@ import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Heap.Type;
+import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.levels.Level;
@@ -37,6 +36,7 @@ import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 
 public class WandOfTelekinesis extends Wand {

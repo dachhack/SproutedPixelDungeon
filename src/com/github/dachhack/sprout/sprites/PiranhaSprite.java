@@ -17,9 +17,9 @@
  */
 package com.github.dachhack.sprout.sprites;
 
-import com.watabou.noosa.TextureFilm;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.TextureFilm;
 
 public class PiranhaSprite extends MobSprite {
 

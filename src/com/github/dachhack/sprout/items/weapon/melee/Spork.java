@@ -33,6 +33,6 @@ public class Spork extends MeleeWeapon {
 	@Override
 	public String desc() {
 		return "Is it a spoon? Is it a fork? It is neither and it is both. "
-				+"Mobs better repect!";
+				+"Mobs better respect!";
 	}
 }

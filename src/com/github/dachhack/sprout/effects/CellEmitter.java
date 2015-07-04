@@ -17,9 +17,9 @@
  */
 package com.github.dachhack.sprout.effects;
 
-import com.watabou.noosa.particles.Emitter;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.PointF;
 
 public class CellEmitter {

@@ -21,11 +21,13 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.MasterThievesArmband;
-import com.github.dachhack.sprout.items.food.Meat;
+import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ThiefSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -37,6 +39,8 @@ public class Thief extends Mob {
 
 	protected static final String TXT_STOLE = "%s stole %s from you!";
 	protected static final String TXT_CARRIES = "\n\n%s is carrying a _%s_. Stolen obviously.";
+	protected static final String TXT_RATCHECK1 = "Spork is avail";
+	protected static final String TXT_RATCHECK2 = "Spork is not avail";
 
 	public Item item;
 
@@ -53,8 +57,8 @@ public class Thief extends Mob {
 		loot = new MasterThievesArmband().identify();
 		lootChance = 0.01f;
 		
-		lootOther = new Meat();
-		lootChanceOther = 0.5f; // by default, see die()
+		lootOther = Generator.Category.BERRY;
+		lootChanceOther = 0.1f; // by default, see die()
 
 		FLEEING = new Fleeing();
 	}
@@ -85,7 +89,7 @@ public class Thief extends Mob {
 
 	@Override
 	public void die(Object cause) {
-
+		
 		super.die(cause);
 
 		if (item != null) {
@@ -135,8 +139,10 @@ public class Thief extends Mob {
 		Item item = hero.belongings.randomUnequipped();
 		if (item != null) {
 
+			item.updateQuickslot();
+			
 			GLog.w(TXT_STOLE, this.name, item.name());
-
+					
 			if (item instanceof Honeypot) {
 				this.item = ((Honeypot) item).shatter(this, this.pos);
 				item.detach(hero.belongings.backpack);

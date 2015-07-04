@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Game;
 import com.github.dachhack.sprout.Rankings;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -28,6 +26,8 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
+import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Game;
 
 public class WndResurrect extends Window {
 

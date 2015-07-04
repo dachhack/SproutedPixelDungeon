@@ -17,6 +17,10 @@
  */
 package com.github.dachhack.sprout.items;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -25,8 +29,8 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.BlueWraith;
 import com.github.dachhack.sprout.actors.mobs.Mimic;
+import com.github.dachhack.sprout.actors.mobs.RedWraith;
 import com.github.dachhack.sprout.actors.mobs.Wraith;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -55,10 +59,6 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 
 public class Heap implements Bundlable {
 
@@ -147,19 +147,14 @@ public class Heap implements Bundlable {
 			}
 			break;
 		case TOMB:
-			if(Random.Float()<.99f){
 			  Wraith.spawnAround(hero.pos);
 			  break;
-			} else {
-			  BlueWraith.spawnAt(pos);
-			  break;
-			}
 		case SKELETON:
 		case REMAINS:
 			CellEmitter.center(pos).start(Speck.factory(Speck.RATTLE), 0.1f, 3);
 			for (Item item : items) {
 				if (item.cursed) {
-					if (Wraith.spawnAt(pos) == null) {
+					if (RedWraith.spawnAt(pos) == null) {
 						hero.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 						hero.damage(hero.HP / 2, this);
 					}
@@ -232,7 +227,7 @@ public class Heap implements Bundlable {
 			items.add(index, b);
 		}
 	}
-
+	
 	public void burn() {
 
 		if (type == Type.MIMIC) {
@@ -335,6 +330,71 @@ public class Heap implements Bundlable {
 				destroy();
 		}
 	}
+	
+	// Note: should not be called to initiate an explosion, but rather by an
+		// explosion that is happening.
+		public void holyexplode() {
+			
+			if (type == Type.MIMIC ||  type == Type.CHEST || type == Type.SKELETON) {
+				type = Type.HEAP;
+				return;
+			}
+		
+			if (type != Type.HEAP) {
+
+				return;
+
+			} else {
+
+				for (Item item : items.toArray(new Item[0])) {
+
+					if (item.cursed) {
+						item.cursed = false;
+						if(item.isUpgradable() && item.level<0){item.upgrade(-item.level);} //upgrade to even
+					} else if (item instanceof HolyHandGrenade) {
+						items.remove(item);
+						((HolyHandGrenade) item).explode(pos);
+						// stop processing current explosion, it will be replaced by
+						// the new one.
+						return;
+						// unique and upgraded items can endure the blast
+					} 
+
+				}
+
+				if (items.isEmpty())
+					destroy();
+			}
+		}
+	
+	// Note: should not be called to initiate an explosion, but rather by an
+		// explosion that is happening.
+		public void dumpexplode() {
+
+			
+			if (type != Type.HEAP) {
+
+				return;
+
+			} else {
+
+				for (Item item : items.toArray(new Item[0])) {
+
+					
+				   if (item instanceof DumplingBomb) {
+						items.remove(item);
+						((DumplingBomb) item).explode(pos);
+						// stop processing current explosion, it will be replaced by
+						// the new one.
+						return;
+						// unique and upgraded items can endure the blast
+					} 
+				}
+
+				if (items.isEmpty())
+					destroy();
+			}
+		}
 
 	public void freeze() {
 

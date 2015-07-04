@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.watabou.noosa.BitmapTextMultiline;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -25,6 +24,7 @@ import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndChooseWay extends Window {
 

@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -31,6 +30,7 @@ import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class MageArmor extends ClassArmor {
 

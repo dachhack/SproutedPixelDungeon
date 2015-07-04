@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Image;
 import com.watabou.utils.PointF;
 
 public class Compass extends Image {

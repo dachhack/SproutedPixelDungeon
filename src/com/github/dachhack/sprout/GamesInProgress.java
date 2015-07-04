@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout;
 
+import java.util.HashMap;
+
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.watabou.utils.Bundle;
-
-import java.util.HashMap;
 
 public class GamesInProgress {
 

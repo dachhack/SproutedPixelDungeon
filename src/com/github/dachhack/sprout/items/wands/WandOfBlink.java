@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.items.wands;
 
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
@@ -26,6 +24,8 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Callback;
 
 public class WandOfBlink extends Wand {

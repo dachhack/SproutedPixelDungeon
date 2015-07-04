@@ -19,12 +19,12 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.particles.Emitter;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.watabou.noosa.particles.Emitter;
 
 public class Torch extends Item {
 

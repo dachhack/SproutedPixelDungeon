@@ -17,6 +17,9 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Belongings;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -24,6 +27,9 @@ import com.github.dachhack.sprout.actors.mobs.npcs.ImpShopkeeper;
 import com.github.dachhack.sprout.actors.mobs.npcs.Shopkeeper;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Bomb;
+import com.github.dachhack.sprout.items.BookOfDead;
+import com.github.dachhack.sprout.items.BookOfLife;
+import com.github.dachhack.sprout.items.BookOfTranscendence;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Honeypot;
@@ -33,7 +39,6 @@ import com.github.dachhack.sprout.items.Torch;
 import com.github.dachhack.sprout.items.Weightstone;
 import com.github.dachhack.sprout.items.armor.LeatherArmor;
 import com.github.dachhack.sprout.items.armor.MailArmor;
-import com.github.dachhack.sprout.items.armor.PlateArmor;
 import com.github.dachhack.sprout.items.armor.ScaleArmor;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.bags.PotionBandolier;
@@ -48,18 +53,15 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.BattleAxe;
-import com.github.dachhack.sprout.items.weapon.melee.Glaive;
 import com.github.dachhack.sprout.items.weapon.melee.Longsword;
 import com.github.dachhack.sprout.items.weapon.melee.Mace;
 import com.github.dachhack.sprout.items.weapon.melee.Quarterstaff;
 import com.github.dachhack.sprout.items.weapon.melee.Spear;
 import com.github.dachhack.sprout.items.weapon.melee.Sword;
-import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
 import com.github.dachhack.sprout.items.weapon.missiles.CurareDart;
 import com.github.dachhack.sprout.items.weapon.missiles.IncendiaryDart;
 import com.github.dachhack.sprout.items.weapon.missiles.Javelin;
 import com.github.dachhack.sprout.items.weapon.missiles.Shuriken;
-import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
 import com.github.dachhack.sprout.levels.LastShopLevel;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;
@@ -67,9 +69,6 @@ import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.plants.Plant;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class ShopPainter extends Painter {
 
@@ -149,15 +148,18 @@ public class ShopPainter extends Painter {
 			break;
 
 		case 21:
-			itemsToSpawn.add(Random.Int(2) == 0 ? new Glaive().identify()
-					: new WarHammer().identify());
-			itemsToSpawn.add(Random.Int(2) == 0 ? new Javelin().quantity(Random
-					.NormalIntRange(4, 7)) : new Tamahawk().quantity(Random
-					.NormalIntRange(4, 7)));
-			itemsToSpawn.add(new PlateArmor().identify());
+			//itemsToSpawn.add(Random.Int(2) == 0 ? new Glaive().identify()
+			//	: new WarHammer().identify());
+			//itemsToSpawn.add(Random.Int(2) == 0 ? new Javelin().quantity(Random
+			//		.NormalIntRange(4, 7)) : new Tamahawk().quantity(Random
+			//		.NormalIntRange(4, 7)));
+			//itemsToSpawn.add(new PlateArmor().identify());
 			itemsToSpawn.add(new Torch());
 			itemsToSpawn.add(new Torch());
 			itemsToSpawn.add(new Torch());
+			itemsToSpawn.add(new BookOfDead());
+			itemsToSpawn.add(new BookOfLife());
+			itemsToSpawn.add(new BookOfTranscendence());
 			break;
 		}
 

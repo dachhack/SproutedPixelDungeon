@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Roots;
+import com.github.dachhack.sprout.items.CavesKey;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.PiranhaSprite;
@@ -98,6 +99,13 @@ public class Piranha extends Mob {
 	@Override
 	public void die(Object cause) {
 		Dungeon.level.drop(new Meat(), pos).sprite.drop();
+		
+		if (!Dungeon.limitedDrops.caveskey.dropped() && Statistics.deepestFloor > 10) {
+			Dungeon.limitedDrops.caveskey.drop();
+			Dungeon.level.drop(new CavesKey(), pos).sprite.drop();
+			explodeDew(pos);				
+		}
+		
 		super.die(cause);
 
 		Statistics.piranhasKilled++;

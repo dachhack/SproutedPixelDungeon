@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
@@ -34,6 +33,7 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndChooseWay;
+import com.watabou.noosa.audio.Sample;
 
 public class TomeOfMastery extends Item {
 

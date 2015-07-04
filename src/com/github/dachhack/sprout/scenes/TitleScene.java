@@ -21,13 +21,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
 
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
-import com.watabou.noosa.Image;
-import com.watabou.noosa.audio.Music;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.ui.Button;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.effects.BannerSprites;
@@ -35,6 +28,13 @@ import com.github.dachhack.sprout.effects.Fireball;
 import com.github.dachhack.sprout.ui.Archs;
 import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.PrefsButton;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Music;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.ui.Button;
 
 public class TitleScene extends PixelScene {
 

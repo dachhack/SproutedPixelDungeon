@@ -19,10 +19,10 @@ package com.github.dachhack.sprout.levels;
 
 import java.util.Arrays;
 
-import com.watabou.noosa.Scene;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.items.Amulet;
 import com.github.dachhack.sprout.levels.painters.Painter;
+import com.watabou.noosa.Scene;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 

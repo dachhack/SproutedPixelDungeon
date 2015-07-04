@@ -17,14 +17,16 @@
  */
 package com.github.dachhack.sprout.items.wands;
 
-import com.watabou.noosa.audio.Sample;
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 
 public class WandOfPoison extends Wand {
@@ -37,9 +39,13 @@ public class WandOfPoison extends Wand {
 	protected void onZap(int cell) {
 		Char ch = Actor.findChar(cell);
 		if (ch != null) {
-
+            
+			int poisonbase=5;
+			
+			if (Dungeon.hero.buff(Strength.class) != null){ poisonbase *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+			
 			Buff.affect(ch, Poison.class).set(
-					Poison.durationFactor(ch) * (5 + level()*2));
+					Poison.durationFactor(ch) * (poisonbase + level()*2));
 
 		} else {
 

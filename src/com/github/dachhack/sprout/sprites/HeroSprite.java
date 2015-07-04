@@ -19,15 +19,15 @@ package com.github.dachhack.sprout.sprites;
 
 import android.graphics.RectF;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.watabou.utils.Callback;
 
 public class HeroSprite extends CharSprite {

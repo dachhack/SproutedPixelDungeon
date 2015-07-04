@@ -60,10 +60,11 @@ public class Bestiary {
 	}
 
 	private static Class<?> mobClass(int depth) {
-
+		
 		float[] chances;
 		Class<?>[] classes;
-
+		
+				
 		switch (depth) {
 		case 1:
 			chances = new float[] { 1, 0.02f };
@@ -105,9 +106,8 @@ public class Bestiary {
 			break;
 		case 9:
 			if (Dungeon.sporkAvail){
-			chances = new float[] { 3, 3, 1, 1, 3, 0.02f, 0.01f, 0.1f };
-			classes = new Class<?>[] { Skeleton.class, Shaman.class,
-					Thief.class, Swarm.class, Assassin.class, Bat.class, Brute.class, BanditKing.class };
+			chances = new float[] { 1, 1,  0.06f };
+			classes = new Class<?>[] {Skeleton.class, Thief.class, BanditKing.class };
 			} else {
 				chances = new float[] { 3, 3, 1, 1, 3, 0.02f, 0.01f };
 				classes = new Class<?>[] { Skeleton.class, Shaman.class,
@@ -187,12 +187,49 @@ public class Bestiary {
 			chances = new float[] { 1 };
 			classes = new Class<?>[] { Yog.class };
 			break;
+		
+		case 27:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { Ghost.GnollArcher.class};
+			    break;
+			case 28:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { MossySkeleton.class};
+			    break;	
+			case 29:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { AlbinoPiranha.class};
+			    break;	
+			case 30:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { GoldThief.class};
+			    break;	
+				
+			case 31:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { BlueWraith.class, Wraith.class, DwarfLich.class};
+			    break;
+			    
+			case 32:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { Oni.class };
+			    break;
+			case 33:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { FlyingProtector.class };
+			    break;
+			case 35:
+				chances = new float[] { 0.2f, 1, 1 };
+				classes = new Class<?>[] { RatBoss.class, Albino.class, Rat.class };
+			    break;
 
-		default:
-			chances = new float[] { 1 };
-			classes = new Class<?>[] { Eye.class };
-		}
-
+			default:
+				chances = new float[] { 1 };
+				classes = new Class<?>[] { Eye.class };
+			}
+			
+			
+		
 		return classes[Random.chances(chances)];
 	}
 
@@ -203,7 +240,6 @@ public class Bestiary {
 				|| mob instanceof Yog.RottingFist
 				|| mob instanceof Ghost.FetidRat
 				|| mob instanceof Ghost.GnollTrickster
-				|| mob instanceof Ghost.GreatCrab
-				|| mob instanceof BanditKing;
+				|| mob instanceof Ghost.GreatCrab;
 	}
 }

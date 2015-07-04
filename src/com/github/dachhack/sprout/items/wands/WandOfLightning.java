@@ -20,11 +20,12 @@ package com.github.dachhack.sprout.items.wands;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.watabou.noosa.Camera;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
@@ -32,6 +33,7 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
@@ -66,6 +68,7 @@ public class WandOfLightning extends Wand {
 		}
 
 		affected.add(ch);
+		if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 		ch.damage(Level.water[ch.pos] && !ch.flying ? (int) (damage * 2)
 				: damage, LightningTrap.LIGHTNING);
 

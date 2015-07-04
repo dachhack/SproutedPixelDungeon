@@ -30,7 +30,7 @@ import com.watabou.utils.Random;
 public class Blackberry extends Food {
 
 	{
-		name = "dungeon berry";
+		name = "dungeon black berry";
 		image = ItemSpriteSheet.SEED_BLACKBERRY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
 		message = "Juicy!";
@@ -62,7 +62,7 @@ public class Blackberry extends Food {
 			case 0: case 2: case 3: case 4: case 5: 
 			case 6: case 7: case 8: case 9: case 10:
 				GLog.w("The berry releases energy into your body!");
-				Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
+				Buff.affect(hero, BerryRegeneration.class).level(hero.HT/2);
 				break;
 			}
 		}
@@ -70,11 +70,20 @@ public class Blackberry extends Food {
 	
 	@Override
 	public String info() {
-		return "A delectable berry found in the depths of the dungeon.";
+		return "A delectable berry found in the depths of the dungeon. "
+				+"These berries harvest the magical dew around them to grow healthy ";
 	}
 
 	@Override
 	public int price() {
 		return 20 * quantity;
+	}
+	
+	public Blackberry() {
+		this(1);
+	}
+
+	public Blackberry(int value) {
+		this.quantity = value;
 	}
 }

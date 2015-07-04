@@ -17,8 +17,8 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import com.watabou.noosa.Image;
 import com.github.dachhack.sprout.Dungeon;
+import com.watabou.noosa.Image;
 
 public class BusyIndicator extends Image {
 

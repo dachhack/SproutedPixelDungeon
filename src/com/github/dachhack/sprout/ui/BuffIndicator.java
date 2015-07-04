@@ -17,16 +17,16 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.noosa.ui.Component;
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.watabou.utils.SparseArray;
 
 public class BuffIndicator extends Component {

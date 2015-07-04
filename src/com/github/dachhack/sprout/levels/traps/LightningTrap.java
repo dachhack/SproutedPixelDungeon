@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.levels.traps;
 
-import com.watabou.noosa.Camera;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
@@ -28,6 +27,7 @@ import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Random;
 
 public class LightningTrap {

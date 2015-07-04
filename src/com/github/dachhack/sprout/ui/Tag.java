@@ -17,10 +17,10 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import com.github.dachhack.sprout.Chrome;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.ui.Button;
-import com.github.dachhack.sprout.Chrome;
 
 public class Tag extends Button {
 
