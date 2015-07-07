@@ -338,7 +338,7 @@ public class InterlevelScene extends PixelScene {
 	private void returnTo() throws IOException {
 
 		Actor.fixTime();
-
+        Dungeon.hero.invisible=0;
 		Dungeon.saveLevel();
 		Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);

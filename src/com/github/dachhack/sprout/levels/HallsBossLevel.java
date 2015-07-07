@@ -134,7 +134,10 @@ public class HallsBossLevel extends Level {
 				map[i] = Terrain.EMPTY_DECO;
 				if (map[i]==Terrain.ENTRANCE){map[i] = Terrain.PEDESTAL;}
 			}
-		}		
+		}	
+		
+		if (Dungeon.sealedlevel==true){Dungeon.sealedlevel=false;}
+		
 		
 	}
 

@@ -18,10 +18,12 @@
 package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
@@ -29,6 +31,7 @@ import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Blueberry;
 import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.FullMoonberry;
 import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
@@ -128,6 +131,9 @@ public class CavesKey extends Item {
 				FishingBomb bomb = Dungeon.hero.belongings.getItem(FishingBomb.class);
 				if (bomb!=null){bomb.detachAll(Dungeon.hero.belongings.backpack);}
 				updateQuickslot();
+				 
+				hero.invisible=0;
+								
 				this.doDrop(hero);
 				
 				if (Statistics.albinoPiranhasKilled>99){
@@ -138,13 +144,18 @@ public class CavesKey extends Item {
 					Blueberry berry3 = new Blueberry(10);
 					berry3.doPickUp(Dungeon.hero);	
 					Blackberry berry4 = new Blackberry(10);
-					berry4.doPickUp(Dungeon.hero);	
+					berry4.doPickUp(Dungeon.hero);
+					
+					if (Dungeon.checkNight()){
+						FullMoonberry berry = new FullMoonberry();
+						berry.doPickUp(Dungeon.hero);
+						}
 				}
 				
-				
+								
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;	
 			}
-               
+                hero.invisible=0;
 				InterlevelScene.returnDepth = returnDepth;
 				InterlevelScene.returnPos = returnPos;
 				Game.switchScene(InterlevelScene.class);

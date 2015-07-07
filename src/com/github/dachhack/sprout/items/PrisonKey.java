@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
@@ -26,6 +27,7 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.items.food.FullMoonberry;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -121,14 +123,19 @@ public class PrisonKey extends Item {
        			returnPos = hero.pos;
 				InterlevelScene.mode = InterlevelScene.Mode.PORTPRISON;
 			} else {
+											
 				HolyHandGrenade bomb = Dungeon.hero.belongings.getItem(HolyHandGrenade.class);
 				if (bomb!=null){bomb.detachAll(Dungeon.hero.belongings.backpack);}
 				updateQuickslot();
 				this.doDrop(hero);
 				if (Statistics.skeletonsKilled>99){
 					HolyHandGrenade newbomb = new HolyHandGrenade(10);
-					newbomb.doPickUp(Dungeon.hero);					
-				}
+					newbomb.doPickUp(Dungeon.hero); 	
+					}
+				if (Statistics.skeletonsKilled>149 && Dungeon.checkNight()){
+					  FullMoonberry berry = new FullMoonberry();
+					  berry.doPickUp(Dungeon.hero);
+					}
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;	
 			}
                

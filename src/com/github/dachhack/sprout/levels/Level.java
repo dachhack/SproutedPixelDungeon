@@ -39,6 +39,7 @@ import com.github.dachhack.sprout.actors.buffs.MindVision;
 import com.github.dachhack.sprout.actors.buffs.Shadows;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.github.dachhack.sprout.actors.mobs.AlbinoPiranha;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.particles.FlowParticle;
@@ -122,7 +123,7 @@ public abstract class Level implements Bundlable {
 			-2 - 2 * WIDTH };
 
 	protected static final float TIME_TO_RESPAWN = 50;
-
+		
 	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
 
 	public static boolean resizingNeeded;
@@ -187,6 +188,8 @@ public abstract class Level implements Bundlable {
 	public void create() {
 
 		resizingNeeded = false;
+		
+		 Dungeon.sealedlevel=false;
 		
 		map = new int[LENGTH];
 		visited = new boolean[LENGTH];
@@ -1048,7 +1051,7 @@ public abstract class Level implements Bundlable {
 						fieldOfView[p - WIDTH] = true;
 					}
 				}
-			}
+		} 
 			if (c.buff(Awareness.class) != null) {
 				for (Heap heap : heaps.values()) {
 					int p = heap.pos;

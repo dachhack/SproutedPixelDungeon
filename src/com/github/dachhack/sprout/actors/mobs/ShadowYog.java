@@ -211,6 +211,13 @@ public class ShadowYog extends Mob implements Callback {
 		 if(yogsAlive==0){
 			GameScene.bossSlain();
 			Dungeon.shadowyogkilled=true;
+			
+			for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
+				if (mob instanceof Rat || mob instanceof RatBoss || mob instanceof SpectralRat || mob instanceof Eye) {
+					mob.die(cause);
+				}
+			}
+			
 			yell("...");
 		 }
 	}

@@ -32,6 +32,7 @@ import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
+import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.LloydsBeacon;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
@@ -56,7 +57,7 @@ public class Goo extends Mob {
 		defenseSkill = 12;
 		spriteClass = GooSprite.class;
 
-		loot = new LloydsBeacon();
+		loot = new Ankh();
 		lootChance = 0.333f;
 	}
 

@@ -18,32 +18,25 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ui.BuffIndicator;
+import com.github.dachhack.sprout.Statistics;
 
-public class Strength extends Buff {
+public class FullMoonStrength extends Buff {
 
 	public static float LEVEL = 0.4f;
-
-	@Override
-	public int icon() {
-		return BuffIndicator.FURY;
-	}
+	
+	private int hits = (Dungeon.checkNight() ? Math.max(8, Math.round(Statistics.deepestFloor/5)+8) : Math.max(2, Math.round(Statistics.deepestFloor/5)+2));
 
 	@Override
 	public String toString() {
-		return "Moon Fury";
+		return "Full Moon Fury";
 	}
 	
 	@Override
 	public void detach() {
-		
-		Buff buff = Dungeon.hero.buff(FullMoonStrength.class);
-		if (buff != null){
-		
-			buff.detach();
-		} else {		
+		hits--;
+		if(hits==0){
 		super.detach();
 		}
-		
 	}
+	
 }

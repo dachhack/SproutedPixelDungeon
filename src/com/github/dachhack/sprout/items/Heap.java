@@ -335,23 +335,14 @@ public class Heap implements Bundlable {
 		// explosion that is happening.
 		public void holyexplode() {
 			
-			if (type == Type.MIMIC ||  type == Type.CHEST || type == Type.SKELETON) {
-				type = Type.HEAP;
-				return;
-			}
-		
-			if (type != Type.HEAP) {
-
-				return;
-
-			} else {
-
 				for (Item item : items.toArray(new Item[0])) {
 
 					if (item.cursed) {
 						item.cursed = false;
 						if(item.isUpgradable() && item.level<0){item.upgrade(-item.level);} //upgrade to even
-					} else if (item instanceof HolyHandGrenade) {
+					}
+					
+					if (item instanceof HolyHandGrenade) {
 						items.remove(item);
 						((HolyHandGrenade) item).explode(pos);
 						// stop processing current explosion, it will be replaced by
@@ -362,10 +353,10 @@ public class Heap implements Bundlable {
 
 				}
 
+				
 				if (items.isEmpty())
 					destroy();
-			}
-		}
+					}
 	
 	// Note: should not be called to initiate an explosion, but rather by an
 		// explosion that is happening.

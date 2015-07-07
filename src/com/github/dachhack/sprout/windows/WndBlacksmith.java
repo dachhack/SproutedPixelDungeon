@@ -47,7 +47,10 @@ public class WndBlacksmith extends Window {
 	private RedButton btnReforge;
 
 	private static final String TXT_PROMPT = "Ok, a deal is a deal, dat's what I can do for you: I can reforge "
-			+ "2 items and turn them into one of a better quality.";
+			+ "any 2 items and turn them into one of a better quality. "
+			+ "The first item will get some or all of the upgrades from the second. "
+			+ "The second item will be destroyed. "
+			+ "I'm more successful when you bring me lots of dark gold. ";
 	private static final String TXT_SELECT1 = "Select an item to enhance.";
 	private static final String TXT_SELECT2 = "Select an item to melt down.";
 	private static final String TXT_REFORGE = "Reforge them";

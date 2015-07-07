@@ -41,6 +41,7 @@ import com.github.dachhack.sprout.actors.mobs.Rat;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Generator;
+import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.SewersKey;
 import com.github.dachhack.sprout.items.armor.Armor;
@@ -622,8 +623,8 @@ public class Ghost extends NPC {
 
 			state = WANDERING;
 
-			loot = new Meat();
-			lootChance = 0.05f; // by default, see die()
+			loot = Gold.class;
+			lootChance = 0.05f;
 			
 		}
 

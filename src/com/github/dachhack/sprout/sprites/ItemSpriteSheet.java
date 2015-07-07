@@ -226,6 +226,7 @@ public class ItemSpriteSheet {
 	public static final int SEED_CLOUDBERRY = ROW13 + 11;
 	public static final int SEED_BLUEBERRY = ROW13 + 12;
 	public static final int SEED_MOONBERRY = ROW13 + 14;
+	public static final int SEED_FULLMOONBERRY = ROW13 + 15;
 
 	// Row Thirteen: Food
 	public static final int MEAT = ROW13 + 0;

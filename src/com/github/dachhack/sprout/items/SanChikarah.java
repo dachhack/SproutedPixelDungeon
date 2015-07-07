@@ -117,6 +117,7 @@ public class SanChikarah extends Item {
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;	
 			}
                
+                this.doDrop(hero);
 				InterlevelScene.returnDepth = returnDepth;
 				InterlevelScene.returnPos = returnPos;
 				Game.switchScene(InterlevelScene.class);

@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashSet;
 
 import android.content.Context;
@@ -1015,5 +1016,10 @@ public static Level newInfestLevel(){
 		return PathFinder.getStepBack(cur, from, passable);
 
 	}
+	
+    public static boolean checkNight(){
+	   int hour=Calendar.HOUR_OF_DAY;
+	   return (hour > 19 || hour < 7);
+    }
 
 }

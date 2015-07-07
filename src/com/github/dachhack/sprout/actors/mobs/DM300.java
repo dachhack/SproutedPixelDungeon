@@ -202,11 +202,11 @@ public class DM300 extends Mob implements Callback {
 
 		super.die(cause);
 
-for (Mob mob : Dungeon.level.mobs) {
+           for (Mob mob : Dungeon.level.mobs) {
 			
-			if (mob instanceof Tower || mob instanceof DM300){
+			  if (mob instanceof Tower){
 				   bossAlive++;
-				 }
+				   }
 			
 			}
 			

@@ -21,13 +21,17 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
+import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Roots;
+import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.sprites.AlbinoPiranhaSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -54,12 +58,19 @@ public class AlbinoPiranha extends Mob {
 		defenseSkill = 10 + Dungeon.depth * 2;
 	}
 
+	protected boolean checkwater(int cell){
+		return Level.water[cell];		
+	}
+	
+		
 	@Override
 	protected boolean act() {
 		if (!Level.water[pos]) {
 			damage(HT, this);
 			die(null);
 			return true;
+					
+				
 		} else {
 			// this causes pirahna to move away when a door is closed on them.
 			Dungeon.level.updateFieldOfView(this);
@@ -89,6 +100,9 @@ public class AlbinoPiranha extends Mob {
 		}
 	}
 
+	
+	
+	
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(Dungeon.depth, 4 + Dungeon.depth * 2);

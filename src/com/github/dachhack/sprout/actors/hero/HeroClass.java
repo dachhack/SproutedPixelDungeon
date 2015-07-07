@@ -22,10 +22,18 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.items.CavesKey;
+import com.github.dachhack.sprout.items.CityKey;
+import com.github.dachhack.sprout.items.HallsKey;
+import com.github.dachhack.sprout.items.HolyHandGrenade;
+import com.github.dachhack.sprout.items.PrisonKey;
+import com.github.dachhack.sprout.items.SewersKey;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
 import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.food.FullMoonberry;
+import com.github.dachhack.sprout.items.food.GoldenNut;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
@@ -52,7 +60,7 @@ public enum HeroClass {
 			"Warriors start with 11 points of Strength.",
 			"Warriors start with a unique short sword. This sword can be later \"reforged\" to upgrade another melee weapon.",
 			"Warriors are less proficient with missile weapons.",
-			"Any piece of food restores some health when eaten.",
+			"Any piece of food restores more health when eaten.",
 			"Potions of Strength are identified from the beginning.", };
 
 	public static final String[] MAG_PERKS = {
@@ -141,10 +149,10 @@ public enum HeroClass {
 		darts.identify().collect();
 		
 		//Playtest
-		/*
-		hero.HT=hero.HP=999;
-		hero.STR = hero.STR + 20;
 		
+		//hero.HT=hero.HP=999;
+		//hero.STR = hero.STR + 20;
+		/*
 		//PotionOfLiquidFlame potion5 = new PotionOfLiquidFlame(); potion5.collect();
 		BookOfDead dbook = new BookOfDead(); dbook.collect();
 		BookOfLife lbook = new BookOfLife(); lbook.collect();
@@ -171,15 +179,17 @@ public enum HeroClass {
         }
          
         Wand wand = new WandOfDisintegration(); wand.collect();
-        GoldenNut nut = new GoldenNut(); nut.collect();
-        SewersKey key1 = new SewersKey(); key1.collect();
-        PrisonKey key2 = new PrisonKey(); key2.collect();
-        CavesKey key3 = new CavesKey(); key3.collect();
-        CityKey key4 = new CityKey(); key4.collect();
-        HallsKey key5 = new HallsKey(); key5.collect();
+        */
+        //GoldenNut nut = new GoldenNut(); nut.collect();
+        //SewersKey key1 = new SewersKey(); key1.collect();
+        //PrisonKey key2 = new PrisonKey(); key2.collect();
+        //CavesKey key3 = new CavesKey(); key3.collect();
+        //CityKey key4 = new CityKey(); key4.collect();
+        //HallsKey key5 = new HallsKey(); key5.collect();
+        //FullMoonberry berry = new FullMoonberry(); berry.collect();
        
-        HolyHandGrenade bomb = new HolyHandGrenade(10); bomb.collect();
-		*/    	
+        //HolyHandGrenade bomb = new HolyHandGrenade(10); bomb.collect();
+		    	
 		Dungeon.quickslot.setSlot(0, darts);
 
 		new PotionOfStrength().setKnown();

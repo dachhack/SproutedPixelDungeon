@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
 import com.github.dachhack.sprout.items.armor.Armor;
@@ -251,8 +252,13 @@ public class Generator {
 				Moonberry.class};
 		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 12, 8, 1, 4, 1};
 		
+		//if (Statistics.nightHunt==1){
+		//Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class, Moonberry.class};
+		//Category.BERRY.probs = new float[] {8,2,2,1};
+		//} else {
 		Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class,Moonberry.class};
-		Category.BERRY.probs = new float[] {8,2,2,1};
+		Category.BERRY.probs = new float[] {8,2,2,1};	
+		//}
 	}
 
 	public static void reset() {

@@ -97,11 +97,12 @@ public class HolyHandGrenade extends Item {
 		if (!Level.pit[cell] && lightingFuse) {
 			Actor.addDelayed(fuse = new Fuse().ignite(this), 2);
 		}
-		if (Actor.findChar(cell) != null
-				&& !(Actor.findChar(cell) instanceof Hero)) {
+		if ((Actor.findChar(cell) != null
+				&& !(Actor.findChar(cell) instanceof Hero))|| 
+				Dungeon.level.heaps.get(cell) != null) {
 			ArrayList<Integer> candidates = new ArrayList<>();
 			for (int i : Level.NEIGHBOURS9DIST2)
-				if (Level.passable[cell + i])
+				if (Level.passable[cell + i] && Dungeon.level.heaps.get(cell + i) == null)
 					candidates.add(cell + i);
 			int newCell = candidates.isEmpty() ? cell : Random
 					.element(candidates);
@@ -156,17 +157,19 @@ public class HolyHandGrenade extends Item {
 						) {
                    if(Random.Int(2)==0){
 					Buff.affect(ch, Terror.class, Terror.DURATION).object = curUser.id();
-					int dmg = Random.NormalIntRange(75, 135 - Random.Int(ch.dr()));
+					int dmg = Random.NormalIntRange(75, 155 - Random.Int(ch.dr()));
 					if (dmg > 0) {ch.damage(dmg, this);}
                    } else {
                 	 Buff.affect(ch, Terror.class, Terror.DURATION).object = curUser.id();
-                	 int dmg = Random.NormalIntRange(75, 135);
+                	 int dmg = Random.NormalIntRange(75, 155);
  					if (dmg > 0) {ch.damage(dmg, this);}
                    }
 					
 				}
 			}
 		}
+	     	
+	     Dungeon.observe();
 	}
 
 	@Override
@@ -194,6 +197,7 @@ public class HolyHandGrenade extends Item {
 	public String info() {
 		return "The power of the heavens concentrates in the Holy Hand Grenade. "
 				+"It will rip apart the dead and undead mobs when it explodes. "
+				+"It disdains being on top of other items and will bounce off them when thrown. "
 				+ (fuse != null ? "\n\nIt is glowing with power and could explode at any moment!"
 						: "\n\nBlessing the grenade with clean water would charge it up.");
 	}
@@ -239,9 +243,6 @@ public class HolyHandGrenade extends Item {
 
 					bomb.explode(heap.pos);
 
-					Actor.remove(this);
-					return true;
-				} else {
 					Actor.remove(this);
 					return true;
 				}

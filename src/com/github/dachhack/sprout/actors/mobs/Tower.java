@@ -146,7 +146,7 @@ public class Tower extends Mob implements Callback {
 		}
 
 		boolean terrainAffected = false;
-		for (int n : Level.NEIGHBOURS9) {
+		for (int n : Level.NEIGHBOURS8) {
 			int c = cell + n;
 			if (c >= 0 && c < Level.LENGTH) {
 				if (Dungeon.visible[c]) {
