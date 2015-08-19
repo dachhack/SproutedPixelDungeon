@@ -199,7 +199,7 @@ public class HolyHandGrenade extends Item {
 				+"It will rip apart the dead and undead mobs when it explodes. "
 				+"It disdains being on top of other items and will bounce off them when thrown. "
 				+ (fuse != null ? "\n\nIt is glowing with power and could explode at any moment!"
-						: "\n\nBlessing the grenade with clean water would charge it up.");
+						: "\n\nPulling the pin would set it off. ");
 	}
 
 	private static final String FUSE = "fuse";

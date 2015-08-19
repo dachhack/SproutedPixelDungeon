@@ -22,28 +22,60 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.actors.mobs.Lichen;
+import com.github.dachhack.sprout.items.ActiveMrDestructo;
+import com.github.dachhack.sprout.items.ActiveMrDestructo2;
+import com.github.dachhack.sprout.items.BookOfDead;
+import com.github.dachhack.sprout.items.BookOfLife;
+import com.github.dachhack.sprout.items.BookOfTranscendence;
 import com.github.dachhack.sprout.items.CavesKey;
 import com.github.dachhack.sprout.items.CityKey;
+import com.github.dachhack.sprout.items.DwarfHammer;
 import com.github.dachhack.sprout.items.HallsKey;
 import com.github.dachhack.sprout.items.HolyHandGrenade;
+import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.PrisonKey;
+import com.github.dachhack.sprout.items.SanChikarah;
 import com.github.dachhack.sprout.items.SewersKey;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
+import com.github.dachhack.sprout.items.armor.PlateArmor;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
+import com.github.dachhack.sprout.items.bags.PotionBandolier;
+import com.github.dachhack.sprout.items.bags.ScrollHolder;
+import com.github.dachhack.sprout.items.food.BlueMilk;
+import com.github.dachhack.sprout.items.food.DeathCap;
+import com.github.dachhack.sprout.items.food.Earthstar;
 import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.food.FullMoonberry;
+import com.github.dachhack.sprout.items.food.GoldenJelly;
 import com.github.dachhack.sprout.items.food.GoldenNut;
+import com.github.dachhack.sprout.items.food.JackOLantern;
+import com.github.dachhack.sprout.items.food.PixieParasol;
+import com.github.dachhack.sprout.items.potions.PotionOfExperience;
+import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfInvisibility;
+import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
+import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
+import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
 import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
 import com.github.dachhack.sprout.items.weapon.melee.Knuckles;
 import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
+import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
+import com.github.dachhack.sprout.plants.Phaseshift;
+import com.github.dachhack.sprout.plants.Plant;
+import com.github.dachhack.sprout.plants.Starflower;
 import com.watabou.utils.Bundle;
 
 public enum HeroClass {
@@ -68,6 +100,7 @@ public enum HeroClass {
 			"Mages recharge their wands faster.",
 			"When eaten, any piece of food restores 1 charge for all wands in the inventory.",
 			"Mages can use wands as a melee weapon.",
+			"Dew blessings are more effective for mages.",
 			"Scrolls of Identify are identified from the beginning." };
 
 	public static final String[] ROG_PERKS = {
@@ -147,52 +180,12 @@ public enum HeroClass {
 		(hero.belongings.weapon = new ShortSword()).identify();
 		Dart darts = new Dart(8);
 		darts.identify().collect();
-		
-		//Playtest
-		
-		//hero.HT=hero.HP=999;
-		//hero.STR = hero.STR + 20;
-		/*
-		//PotionOfLiquidFlame potion5 = new PotionOfLiquidFlame(); potion5.collect();
-		BookOfDead dbook = new BookOfDead(); dbook.collect();
-		BookOfLife lbook = new BookOfLife(); lbook.collect();
-		BookOfTranscendence tbook = new BookOfTranscendence(); tbook.collect();
-		SanChikarah san = new SanChikarah(); san.collect();
-		PotionBandolier bag1 = new PotionBandolier(); bag1.collect();
-		ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
-		
-		
-		for(int i=0; i<40; i++){
-		Scroll scroll = new ScrollOfMagicalInfusion();
-        scroll.identify().collect();
-        Scroll scroll2 = new ScrollOfUpgrade();
-        scroll2.identify().collect();      
-       }		
-		PlateArmor armor = new PlateArmor();
-      armor.identify().collect();
-      for(int i=1; i<40; i++){
-        PotionOfExperience potion1 = new PotionOfExperience(); potion1.collect();
-       PotionOfInvisibility potion2 = new PotionOfInvisibility(); potion2.collect();
-       PotionOfHealing potion3 = new PotionOfHealing(); potion3.collect();
-       PotionOfMindVision potion4 = new PotionOfMindVision(); potion4.collect();
-      PotionOfLevitation potion5 = new PotionOfLevitation(); potion5.collect();
-        }
-         
-        Wand wand = new WandOfDisintegration(); wand.collect();
-        */
-        //GoldenNut nut = new GoldenNut(); nut.collect();
-        //SewersKey key1 = new SewersKey(); key1.collect();
-        //PrisonKey key2 = new PrisonKey(); key2.collect();
-        //CavesKey key3 = new CavesKey(); key3.collect();
-        //CityKey key4 = new CityKey(); key4.collect();
-        //HallsKey key5 = new HallsKey(); key5.collect();
-        //FullMoonberry berry = new FullMoonberry(); berry.collect();
-       
-        //HolyHandGrenade bomb = new HolyHandGrenade(10); bomb.collect();
 		    	
 		Dungeon.quickslot.setSlot(0, darts);
 
 		new PotionOfStrength().setKnown();
+		
+		//playtest(hero);
 	}
 
 	private static void initMage(Hero hero) {
@@ -200,10 +193,12 @@ public enum HeroClass {
 
 		WandOfMagicMissile wand = new WandOfMagicMissile();
 		wand.identify().collect();
-
+		
 		Dungeon.quickslot.setSlot(0, wand);
 
 		new ScrollOfIdentify().setKnown();
+		
+		//playtest(hero);
 	}
 
 	private static void initRogue(Hero hero) {
@@ -236,6 +231,74 @@ public enum HeroClass {
 		new PotionOfMindVision().setKnown();
 	}
 
+	public void playtest(Hero hero) {
+		//Playtest
+		
+				//TomeOfMastery tome = new TomeOfMastery(); tome.collect();
+				
+				hero.HT=hero.HP=999;
+				hero.STR = hero.STR + 20;
+				
+				PotionBandolier bag1 = new PotionBandolier(); bag1.collect();
+				ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
+				
+				for(int i=0; i<40; i++){
+					Scroll scroll = new ScrollOfMagicalInfusion();
+			        scroll.identify().collect();
+			        Scroll scroll2 = new ScrollOfUpgrade();
+			        scroll2.identify().collect();      
+			       }	
+					
+				  PlateArmor armor = new PlateArmor();
+			      armor.identify().collect();
+			      WarHammer hammer = new WarHammer();
+			      hammer.identify().collect();
+			      
+			      for(int i=1; i<40; i++){
+				        PotionOfExperience potion1 = new PotionOfExperience(); potion1.collect();
+				       PotionOfInvisibility potion2 = new PotionOfInvisibility(); potion2.collect();
+				       PotionOfHealing potion3 = new PotionOfHealing(); potion3.collect();
+				       PotionOfMindVision potion4 = new PotionOfMindVision(); potion4.collect();
+				      PotionOfLevitation potion5 = new PotionOfLevitation(); potion5.collect();
+				        }
+				         
+				        Wand wand = new WandOfDisintegration(); wand.collect();
+				        Wand wand2 = new WandOfFirebolt(); wand2.collect();
+				
+				//DeathCap mush1 = new DeathCap(); mush1.collect();
+				//GoldenJelly mush2 = new GoldenJelly(); mush2.collect();
+				//BlueMilk mush3 = new BlueMilk(); mush3.collect();
+				//JackOLantern mush4 = new JackOLantern(); mush4.collect();
+				//Earthstar mush5 = new Earthstar(); mush5.collect();
+				//Lichen mush6 = new Lichen(); mush6.collect();
+				//PixieParasol mush7 = new PixieParasol(); mush7.collect();
+				
+				//ActiveMrDestructo mrd = new ActiveMrDestructo(); mrd.collect();
+				//OrbOfZot orb = new OrbOfZot(); orb.collect();
+				        
+				Phaseshift.Seed seed = new Phaseshift.Seed(); seed.collect();
+				Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
+				Starflower.Seed seed3 = new Starflower.Seed(); seed3.collect();
+				
+								
+				//PotionOfLiquidFlame potion5 = new PotionOfLiquidFlame(); potion5.collect();
+				//BookOfDead dbook = new BookOfDead(); dbook.collect();
+				///BookOfLife lbook = new BookOfLife(); lbook.collect();
+				//BookOfTranscendence tbook = new BookOfTranscendence(); tbook.collect();
+				//SanChikarah san = new SanChikarah(); san.collect();	
+				
+		        SewersKey key1 = new SewersKey(); key1.collect();
+		        PrisonKey key2 = new PrisonKey(); key2.collect();
+		        CavesKey key3 = new CavesKey(); key3.collect();
+		        CityKey key4 = new CityKey(); key4.collect();
+		        HallsKey key5 = new HallsKey(); key5.collect();
+		        FullMoonberry berry = new FullMoonberry(10); berry.collect();
+		       
+		 
+		
+
+	}
+	
 	public String title() {
 		return title;
 	}

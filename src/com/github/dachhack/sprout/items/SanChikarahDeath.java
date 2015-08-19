@@ -28,6 +28,7 @@ public class SanChikarahDeath extends Item {
 		image = ItemSpriteSheet.SANCHIKARAH;
 
 		stackable = false;
+		unique = true;
 	}
 	
 	@Override
@@ -61,6 +62,6 @@ public class SanChikarahDeath extends Item {
 
 	@Override
 	public String info() {
-		return "A powerful piece of the puzzle.";
+		return "A powerful piece of the puzzle. Three pieces will need to be forged together.";
 	}
 }

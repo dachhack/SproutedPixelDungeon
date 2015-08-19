@@ -38,6 +38,7 @@ public class DwarfHammer extends Item {
 		{
 		name = "dwarf demon hammer";
 		image = ItemSpriteSheet.DWARFHAMMER;
+		unique = true;
 
 		}
 
@@ -61,11 +62,11 @@ public class DwarfHammer extends Item {
 				return;
 			}
 			
-			if (Dungeon.depth > 24 || Dungeon.depth < 22) {
-				hero.spend(DwarfHammer.TIME_TO_USE);
-				GLog.w(TXT_PREVENTING);
-				return;
-			}
+		//	if (Dungeon.depth > 24 || Dungeon.depth < 22) {
+		//		hero.spend(DwarfHammer.TIME_TO_USE);
+		//		GLog.w(TXT_PREVENTING);
+		//		return;
+		//	}
 			
 			if (!Dungeon.visible[Dungeon.level.exit]) {
 				hero.spend(DwarfHammer.TIME_TO_USE);

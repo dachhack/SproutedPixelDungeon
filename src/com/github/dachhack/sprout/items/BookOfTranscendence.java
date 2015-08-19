@@ -36,12 +36,13 @@ import com.watabou.utils.Bundle;
 public class BookOfTranscendence extends Item {
 
 	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from reading the book!";
-	private static final String TXT_PREVENTING2 = "A Piercing light blinds your eyes as you try to read! You will need to find the exit...";
+	private static final String TXT_PREVENTING2 = "A Piercing light blinds your eyes as you try to read! You will need to find the exit pedestal with the SanChikarah...";
 	
 	public static final float TIME_TO_USE = 1;
 
 	public static final String AC_PORT = "READ";
 
+	private int specialLevel = 33;
 	private int returnDepth = -1;
 	private int returnPos;
 
@@ -86,23 +87,30 @@ public class BookOfTranscendence extends Item {
 		if (action == AC_PORT) {
 
 			if (Dungeon.bossLevel()) {
-				hero.spend(BookOfTranscendence.TIME_TO_USE);
+				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING);
 				return;
 			}
 			
-			if (Dungeon.depth>30 && hero.pos != Dungeon.level.exit) {
-				hero.spend(BookOfTranscendence.TIME_TO_USE);
+			if (Dungeon.depth==specialLevel && hero.pos != Dungeon.level.exit) {
+				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING2);
 				return;
 			}
+			
+			if (Dungeon.depth!=specialLevel && Dungeon.depth>26) {
+				hero.spend(TIME_TO_USE);
+				GLog.w(TXT_PREVENTING2);
+				return;
+			}
+
 
 
 		}
 
 		if (action == AC_PORT) {
 
-			if (Dungeon.depth>30){
+			if (Dungeon.depth==specialLevel){
 				this.doDrop(hero);
 			}
 			Buff buff = Dungeon.hero
@@ -113,7 +121,7 @@ public class BookOfTranscendence extends Item {
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					if (mob instanceof DriedRose.GhostHero)
 						mob.destroy();
-              if (Dungeon.depth<30){
+              if (Dungeon.depth<27){
             	returnDepth = Dungeon.depth;
        			returnPos = hero.pos;
 				InterlevelScene.mode = InterlevelScene.Mode.PORT3;

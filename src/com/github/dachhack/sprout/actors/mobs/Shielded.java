@@ -27,12 +27,12 @@ public class Shielded extends Brute {
 		name = "shielded brute";
 		spriteClass = ShieldedSprite.class;
 
-		defenseSkill = 20+(Dungeon.depth);
+		defenseSkill = 20+adj(0);
 	}
 
 	@Override
 	public int dr() {
-		return 20;
+		return 20+adj(0);
 	}
 
 	@Override

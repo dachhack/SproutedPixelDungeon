@@ -21,9 +21,13 @@ import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.Journal.Feature;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.ActiveMrDestructo;
+import com.github.dachhack.sprout.items.ActiveMrDestructo2;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Generator.Category;
 import com.github.dachhack.sprout.items.Honeypot.ShatteredPot;
+import com.github.dachhack.sprout.items.InactiveMrDestructo;
+import com.github.dachhack.sprout.items.InactiveMrDestructo2;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.items.food.Food;
@@ -72,6 +76,12 @@ public class WaterOfTransmutation extends WellWater {
 			item = changeArtifact((Artifact) item);
 		} else if (item instanceof ShatteredPot) {
 			item = changeHoneypot((ShatteredPot) item);
+		} else if (item instanceof InactiveMrDestructo) {
+			item = rechargeDestructo((InactiveMrDestructo) item);
+		} else if (item instanceof ActiveMrDestructo) {
+			item = upgradeDestructo((ActiveMrDestructo) item);
+		} else if (item instanceof InactiveMrDestructo2) {
+			item = rechargeDestructo2((InactiveMrDestructo2) item);
 		} else {
 			item = null;
 		}
@@ -202,7 +212,7 @@ public class WaterOfTransmutation extends WellWater {
 		Plant.Seed n;
 
 		do {
-			n = (Plant.Seed) Generator.random(Category.SEED);
+			n = (Plant.Seed) Generator.random(Category.SEED2);
 		} while (n.getClass() == s.getClass());
 
 		return n;
@@ -252,6 +262,18 @@ public class WaterOfTransmutation extends WellWater {
 
 	private Food changeHoneypot(ShatteredPot s) {
 		return new PotionOfConstitution();
+	}
+	
+	private Item rechargeDestructo(InactiveMrDestructo d) {
+		return new ActiveMrDestructo();
+	}
+	
+	private Item upgradeDestructo(ActiveMrDestructo d) {
+		return new ActiveMrDestructo2();
+	}
+	
+	private Item rechargeDestructo2(InactiveMrDestructo2 d) {
+		return new ActiveMrDestructo2();
 	}
 	
 	

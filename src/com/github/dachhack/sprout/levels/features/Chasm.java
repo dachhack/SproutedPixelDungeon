@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.items.SanChikarahTranscend;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.levels.RegularLevel;
@@ -73,6 +74,12 @@ public class Chasm {
 		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 			if (mob instanceof DriedRose.GhostHero)
 				mob.destroy();
+		
+		SanChikarahTranscend san3 = Dungeon.hero.belongings.getItem(SanChikarahTranscend.class);
+		if (Dungeon.depth==33 && san3 != null) {			
+			san3.detach(Dungeon.hero.belongings.backpack);
+			Dungeon.sanchikarahtranscend= false;						
+		}
 
 		if (Dungeon.hero.isAlive()) {
 			Dungeon.hero.interrupt();

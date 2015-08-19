@@ -40,8 +40,8 @@ public class DwarfLich extends Mob {
 		name = "dwarf lich";
 		spriteClass = DwarfLichSprite.class;
 
-		HP = HT = 75+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 24+(Math.round((Dungeon.depth)/2));
+		HP = HT = 100+(adj(0)*Random.NormalIntRange(7, 5));
+		defenseSkill = 24+adj(1);
 	
 		EXP = 14;
 		
@@ -59,12 +59,12 @@ public class DwarfLich extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 36+(Math.round((Dungeon.depth)/2));
+		return 36+adj(1);
 	}
 
 	@Override
 	public int dr() {
-		return 16;
+		return 16+adj(0);
 	}
 
 	@Override

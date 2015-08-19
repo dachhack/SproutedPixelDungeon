@@ -120,7 +120,15 @@ public class WndHero extends WndTabbed {
 				protected void onClick() {
 					hide();
 					GameScene.show(new WndCatalogus());
-				}
+				};
+				@Override
+				protected boolean onLongClick() {
+					Hero heroToBuff = Dungeon.hero;
+					if (heroToBuff.pos==Dungeon.level.entrance && heroToBuff.belongings.weapon == null ){
+					heroToBuff.heroClass.playtest(heroToBuff);
+					}
+					return true;
+				};
 			};
 			btnCatalogus.setRect(0, title.height(),
 					btnCatalogus.reqWidth() + 2, btnCatalogus.reqHeight() + 2);

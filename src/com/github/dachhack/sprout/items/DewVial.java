@@ -23,13 +23,20 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
+import com.github.dachhack.sprout.actors.blobs.Blob;
+import com.github.dachhack.sprout.actors.blobs.Water;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Haste;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.Levitation;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
+import com.github.dachhack.sprout.items.bags.Bag;
+import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.Terrain;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
@@ -41,17 +48,23 @@ import com.watabou.utils.Random;
 public class DewVial extends Item {
 
 	private static final int MAX_VOLUME = 100;
+	private static final int EXT_VOLUME = 300;
 	private static final int BLESS_VOLUME = 10;
+	
+	
+	private static final int MAX_VOLUME(){
+		return Dungeon.wings ? EXT_VOLUME : MAX_VOLUME;
+	}
 
 	private static final String AC_SIP = "SIP";
 	private static final String AC_DRINK = "DRINK";
-	//private static final String AC_WATER = "WATER";
+	private static final String AC_WATER = "WATER";
 	private static final String AC_SPLASH = "SPLASH";
 	private static final String AC_BLESS = "BLESS";
 
 
 	private static final float TIME_TO_DRINK = 1f;
-	//private static final float TIME_TO_WATER = 3f;
+	private static final float TIME_TO_WATER = 3f;
 	protected static final float TIME_TO_BLESS = 1f;
 
 	private static final String TXT_VALUE = "%+dHP";
@@ -59,7 +72,7 @@ public class DewVial extends Item {
 
 	//private static final String TXT_AUTO_DRINK = "The dew vial was emptied to heal your wounds.";
 	private static final String TXT_COLLECTED = "You collected a dewdrop into your dew vial.";
-	//private static final String TXT_WATERED = "The dungeon regrows around you.";
+	private static final String TXT_WATERED = "The dungeon regrows around you.";
 	private static final String TXT_REFRESHED = "You splash the dew on your face.";
 	private static final String TXT_BLESSED = "You feel the dew blessing items in your backpack.";
 	private static final String TXT_PROCCED = "Your pack glows with a cleansing light, and a malevolent energy disperses.";
@@ -78,7 +91,15 @@ public class DewVial extends Item {
 	}
 
 	private int volume = 0;
+	
+	public int checkVol () {
+		return volume;
+	}
 
+	public void setVol (int vol) {
+		volume=vol;		
+	}
+	
 	private static final String VOLUME = "volume";
 
 	@Override
@@ -92,17 +113,34 @@ public class DewVial extends Item {
 		super.restoreFromBundle(bundle);
 		volume = bundle.getInt(VOLUME);
 	}
-
+	
+	
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
 		if (volume > 99) {
 			actions.add(AC_DRINK);
-			actions.add(AC_SIP);
+					
+			if (Dungeon.dewWater){
+				actions.add(AC_WATER);
+			} else {
+				actions.add(AC_SIP);
+			}
+			
 			actions.add(AC_SPLASH);
 			actions.add(AC_BLESS);
-		}		
+		}	
 		else if (volume > 49) {
+			actions.add(AC_DRINK);
+			if (Dungeon.dewWater){
+				actions.add(AC_WATER);
+			} else {
+				actions.add(AC_SIP);
+			}
+			actions.add(AC_SPLASH);
+		}
+		
+		else if (volume > 29) {
 			actions.add(AC_DRINK);
 			actions.add(AC_SIP);
 			actions.add(AC_SPLASH);
@@ -204,8 +242,9 @@ public class DewVial extends Item {
 				GLog.w(TXT_EMPTY);
 			}
 
-		/*} else if (action.equals(AC_WATER)) {
+		} else if (action.equals(AC_WATER)) {
 			
+			Statistics.waters++;			
 			int positive = 0;
 			int negative = 0;
 
@@ -253,10 +292,14 @@ public class DewVial extends Item {
 			hero.sprite.operate(hero.pos);
 			hero.busy();
 			hero.spend(TIME_TO_WATER);
-		*/
+		
 		} else if (action.equals(AC_SPLASH)) {	
 			Buff.affect(hero, Haste.class, Haste.DURATION);
 			Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
+			if(Dungeon.wings){
+				Buff.affect(hero, Levitation.class, Levitation.DURATION);
+			    GLog.i("You float into the air!");
+			}
 			GLog.i(TXT_REFRESHED);
 			GLog.i("You see your hands turn invisible!");
 			GLog.i("You are moving much faster!");
@@ -289,7 +332,7 @@ public class DewVial extends Item {
 		
 		
         int levelLimit = Math.max(5, 5+Math.round(Statistics.deepestFloor/3));
-        if (hero.heroClass == HeroClass.MAGE){levelLimit += 1;}
+        if (hero.heroClass == HeroClass.MAGE){levelLimit++;}
         
         float lvlchance = 0.33f;
         if (hero.heroClass == HeroClass.MAGE){lvlchance = 0.38f;}
@@ -304,6 +347,7 @@ public class DewVial extends Item {
 				procced = true;
 				hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
 			}
+			
 			if (item != null && Random.Float()<lvlchance && item.isUpgradable() && item.level < levelLimit){
 			    item.upgrade();
 			    proccedUp = true;
@@ -311,6 +355,24 @@ public class DewVial extends Item {
 			    GLog.p(TXT_LOOKS_BETTER, item.name());
 			    Badges.validateItemLevelAquired(item);
 			}
+			
+			if (item instanceof Bag) {
+				for (Item bagItem: ((Bag)item).items){
+                   if (bagItem != null && bagItem.cursed) {
+                	   bagItem.cursed = false;
+                	   if(bagItem.level<0){bagItem.upgrade(-bagItem.level);}
+                	   procced = true;
+                   }
+                   
+                   if (bagItem != null && Random.Float()<lvlchance && bagItem.isUpgradable() && bagItem.level < levelLimit){
+                	   bagItem.upgrade();
+					    proccedUp = true;
+					    hero.sprite.emitter().start(Speck.factory(Speck.UP), 0.2f, 3);
+					    GLog.p(TXT_LOOKS_BETTER, bagItem.name());
+					    Badges.validateItemLevelAquired(bagItem);
+					}
+				}   
+			}			
 		}
 		
 		if (proccedUp){GLog.i(TXT_BLESSED);}
@@ -341,15 +403,15 @@ public class DewVial extends Item {
 	
 
 	public boolean isFull() {
-		return volume >= MAX_VOLUME;
+		return volume >= MAX_VOLUME();
 	}
 
 	public void collectDew(Dewdrop dew) {
 
 		GLog.i(TXT_COLLECTED);
 		volume += dew.quantity;
-		if (volume >= MAX_VOLUME) {
-			volume = MAX_VOLUME;
+		if (volume >= MAX_VOLUME()) {
+			volume = MAX_VOLUME();
 			GLog.p(TXT_FULL);
 		}
 
@@ -360,8 +422,8 @@ public class DewVial extends Item {
 
 		GLog.i(TXT_COLLECTED);
 		volume += (dew.quantity*5);
-		if (volume >= MAX_VOLUME) {
-			volume = MAX_VOLUME;
+		if (volume >= MAX_VOLUME()) {
+			volume = MAX_VOLUME();
 			GLog.p(TXT_FULL);
 		}
 
@@ -372,19 +434,31 @@ public class DewVial extends Item {
 
 		GLog.i(TXT_COLLECTED);
 		volume += (dew.quantity*2);
-		if (volume >= MAX_VOLUME) {
-			volume = MAX_VOLUME;
+		if (volume >= MAX_VOLUME()) {
+			volume = MAX_VOLUME();
 			GLog.p(TXT_FULL);
 		}
 
 		updateQuickslot();
 	}
 
+	public void collectDew(VioletDewdrop dew) {
+
+		GLog.i(TXT_COLLECTED);
+		volume += (dew.quantity*50);
+		if (volume >= MAX_VOLUME()) {
+			volume = MAX_VOLUME();
+			GLog.p(TXT_FULL);
+		}
+
+		updateQuickslot();
+	}
+	
 	
 	public void fill() {
 		volume = volume + 50;
-		if (volume >= MAX_VOLUME) {
-			volume = MAX_VOLUME;
+		if (volume >= MAX_VOLUME()) {
+			volume = MAX_VOLUME();
 			GLog.p(TXT_FULL);
 		}
 		updateQuickslot();
@@ -400,7 +474,7 @@ public class DewVial extends Item {
 
 	@Override
 	public String status() {
-		return Utils.format(TXT_STATUS, volume, MAX_VOLUME);
+		return Utils.format(TXT_STATUS, volume, MAX_VOLUME());
 	}
 
 	@Override

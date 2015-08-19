@@ -50,7 +50,7 @@ public class MossySkeleton extends Mob {
 		EXP = 1;
 		maxLvl = 10;
 		
-		baseSpeed = 0.5f;
+		baseSpeed = 0.5f+(Statistics.skeletonsKilled/50);
 
 		loot = new YellowDewdrop();
 		lootChance = 0.5f; // by default, see die()
@@ -61,12 +61,13 @@ public class MossySkeleton extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 35);
+		return Random.NormalIntRange(20+Math.round(Statistics.skeletonsKilled/10), 45+Math.round(Statistics.skeletonsKilled/5));
+		
 	}
 
 	@Override
 	protected float attackDelay() {
-		return 2f;
+		return 2f-(Statistics.skeletonsKilled/100);
 	}
 	
 	@Override
@@ -77,7 +78,7 @@ public class MossySkeleton extends Mob {
 		Statistics.skeletonsKilled++;
 		GLog.w(TXT_KILLCOUNT, Statistics.skeletonsKilled);
 		
-		if (!Dungeon.limitedDrops.prisonkey.dropped()) {
+		if (!Dungeon.limitedDrops.prisonkey.dropped() && Dungeon.depth<27) {
 			Dungeon.limitedDrops.prisonkey.drop();
 			Dungeon.level.drop(new PrisonKey(), pos).sprite.drop();
 			explodeDew(pos);				
@@ -114,7 +115,7 @@ public class MossySkeleton extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 12;
+		return 28;
 	}
 
 	@Override

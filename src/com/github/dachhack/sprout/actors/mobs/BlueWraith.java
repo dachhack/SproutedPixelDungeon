@@ -35,7 +35,7 @@ public class BlueWraith extends Wraith  {
 		name = "blue wraith";
 		spriteClass = BlueWraithSprite.class;
 
-		HP = HT = 95;
+		HP = HT = 195;
 		defenseSkill = 24;
 		baseSpeed = 4f;
 
@@ -48,13 +48,12 @@ public class BlueWraith extends Wraith  {
 	
 	@Override
 	public String description() {
-		return "A Blue Wraith has been dispatched to avenge the dungeon. "
-				+ "Being an ethereal entity, it is very hard to hit with a regular weapon.";
+		return "A Blue Wraith has been dispatched to avenge the dungeon. ";
 	}
 
 	@Override
 	public int attackProc(Char enemy, int damage) {
-		if (Random.Int(2) == 0) {
+		if (Random.Int(10) == 0) {
 			Buff.affect(enemy, Vertigo.class, Vertigo.duration(enemy));
 			Buff.affect(enemy, Terror.class, Terror.DURATION).object = enemy.id();
 		}
@@ -65,13 +64,13 @@ public class BlueWraith extends Wraith  {
 	@Override
 	public void adjustStats(int level) {
 		this.level = level;
-		defenseSkill = attackSkill(null) * 5;
+		defenseSkill = 24;
 		enemySeen = true;
 	}
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 40);
+		return Random.NormalIntRange(20, 90);
 	}
 
 	@Override

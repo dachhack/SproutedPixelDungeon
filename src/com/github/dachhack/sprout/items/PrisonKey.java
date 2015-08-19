@@ -53,6 +53,7 @@ public class PrisonKey extends Item {
 		image = ItemSpriteSheet.ANCIENTKEY;
 
 		stackable = false;
+		unique = true;
 	}
 	
 	private static final String DEPTH = "depth";
@@ -129,7 +130,7 @@ public class PrisonKey extends Item {
 				updateQuickslot();
 				this.doDrop(hero);
 				if (Statistics.skeletonsKilled>99){
-					HolyHandGrenade newbomb = new HolyHandGrenade(10);
+					HolyHandGrenade newbomb = new HolyHandGrenade(20);
 					newbomb.doPickUp(Dungeon.hero); 	
 					}
 				if (Statistics.skeletonsKilled>149 && Dungeon.checkNight()){

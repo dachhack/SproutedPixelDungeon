@@ -34,7 +34,7 @@ public class MagicalSleep extends Buff {
 				&& !target.immunities().contains(Sleep.class)) {
 
 			if (target instanceof Hero)
-				if (target.HP == target.HT) {
+				if (target.HP >= target.HT) {
 					GLog.i("You are too healthy, and resist the urge to sleep.");
 					detach();
 					return true;

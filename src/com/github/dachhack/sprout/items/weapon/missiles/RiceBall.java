@@ -96,8 +96,8 @@ public class RiceBall extends MissileWeapon {
 			Buff.affect(defender, Drowsy.class);
 			defender.sprite.centerEmitter().start(Speck.factory(Speck.NOTE), 0.3f, 5);
 			
-			if  (defender.HP/defender.HT > 0.25f){ 
-			int count = 10;
+			if  (defender.HP/defender.HT > 0.01f){ 
+			int count = 20;
 			int pos;
 			do {
 				pos = Dungeon.level.randomRespawnCell();

@@ -46,8 +46,8 @@ public class Shaman extends Mob implements Callback {
 		name = "gnoll shaman";
 		spriteClass = ShamanSprite.class;
 
-		HP = HT = 18+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		defenseSkill = 8+(Math.round((Dungeon.depth)/2));
+		HP = HT = 18+(adj(0)*Random.NormalIntRange(2, 5));
+		defenseSkill = 8+adj(1);
 
 		EXP = 6;
 		maxLvl = 14;
@@ -56,17 +56,17 @@ public class Shaman extends Mob implements Callback {
 		lootChance = 0.33f;
 		
 		lootOther = new Meat();
-		lootChanceOther = 0.5f;
+		lootChanceOther = 0.1f;
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(2, 6);
+		return Random.NormalIntRange(2, 6+adj(1));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 11;
+		return 11+adj(0);
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class Shaman extends Mob implements Callback {
 			spend(TIME_TO_ZAP);
 
 			if (hit(this, enemy, true)) {
-				int dmg = Random.Int(2, 12);
+				int dmg = Random.Int(2+adj(0), 12+adj(3));
 				if (Level.water[enemy.pos] && !enemy.flying) {
 					dmg *= 1.5f;
 				}

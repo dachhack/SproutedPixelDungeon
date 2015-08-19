@@ -36,20 +36,20 @@ public class Assassin extends Mob {
 		spriteClass = AssassinSprite.class;
 		baseSpeed = 2f;
 
-		HP = HT = 25+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		HP = HT = 25+(adj(0)*Random.NormalIntRange(2, 5));
 		EXP = 10;
-		defenseSkill = 10+(Math.round((Dungeon.depth)/2));
+		defenseSkill = 10+adj(0);
 	}
 
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(10, 18);
+		return Random.NormalIntRange(10, 18+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 20+(Dungeon.depth);
+		return 20+adj(0);
 	}
 
 	@Override

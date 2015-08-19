@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -52,8 +53,10 @@ public class FrozenCarpaccio extends Food {
 
 			switch (Random.Int(5)) {
 			case 0:
+				if(Dungeon.depth != 29){
 				GLog.i("You see your hands turn invisible!");
 				Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
+				}
 				break;
 			case 1:
 				GLog.i("You feel your skin harden!");

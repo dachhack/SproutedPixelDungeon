@@ -43,7 +43,7 @@ public class Window extends Group implements Signal.Listener<Key> {
 	protected NinePatch chrome;
 
 	public static final int TITLE_COLOR = 0xFFFF44;
-	public static final int SHPX_COLOR = 0x00FF00;
+	public static final int SHPX_COLOR = 0xCCFFCC;
 
 	public Window() {
 		this(0, 0, Chrome.get(Chrome.Type.WINDOW));

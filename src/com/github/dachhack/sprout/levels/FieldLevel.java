@@ -23,8 +23,12 @@ import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.effects.CellEmitter;
+import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.levels.Level.Feeling;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.Scene;
 import com.watabou.utils.Random;
 
@@ -37,6 +41,8 @@ public class FieldLevel extends Level {
 		viewDistance = 6;
 	}
 
+
+	
 	private static final int ROOM_LEFT = WIDTH / 2 - 2;
 	private static final int ROOM_RIGHT = WIDTH / 2 + 2;
 	private static final int ROOM_TOP = HEIGHT / 2 - 2;
@@ -52,7 +58,8 @@ public class FieldLevel extends Level {
 		return Assets.WATER_SEWERS;
 	}
 
-	
+	protected static final float TIME_TO_RESPAWN = 20;
+	protected static final int REGROW_TIMER = 4;
 
 	@Override
 	protected boolean build() {
@@ -188,7 +195,7 @@ public class FieldLevel extends Level {
 	}
 	@Override
 	public int nMobs() {
-		return 8;
+		return 10;
 	}
 	
 	@Override
@@ -228,4 +235,6 @@ public class FieldLevel extends Level {
 			}
 		};
 	}
+	
+	
 }

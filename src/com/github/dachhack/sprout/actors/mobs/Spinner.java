@@ -38,8 +38,8 @@ public class Spinner extends Mob {
 		name = "cave spinner";
 		spriteClass = SpinnerSprite.class;
 
-		HP = HT = 50+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 14+(Math.round((Dungeon.depth)/2));
+		HP = HT = 50+(adj(0)*Random.NormalIntRange(5, 7));
+		defenseSkill = 14+adj(1);
 
 		EXP = 9;
 		maxLvl = 16;
@@ -52,17 +52,17 @@ public class Spinner extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(12, 16);
+		return Random.NormalIntRange(12, 26+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 20+(Dungeon.depth);
+		return 20+adj(0);
 	}
 
 	@Override
 	public int dr() {
-		return 6;
+		return 6+adj(0);
 	}
 
 	@Override

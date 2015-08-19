@@ -34,6 +34,8 @@ import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
+import com.github.dachhack.sprout.items.Gold;
+import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
@@ -49,12 +51,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
-public class ShadowYog extends Mob implements Callback {
+public class ShadowYog extends Mob  {
 	
-	private static final float TIME_TO_ZAP = 2f;
-
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
-
 	{
 		name = "Shadow Yog-Dzewa";
 		spriteClass = ShadowYogSprite.class;
@@ -62,6 +60,7 @@ public class ShadowYog extends Mob implements Callback {
 		HP = HT = 50*Dungeon.hero.lvl;
 		
 		baseSpeed = 2f;
+		defenseSkill = 32;
 
 		EXP = 100;
 
@@ -70,19 +69,26 @@ public class ShadowYog extends Mob implements Callback {
 	
 	private int yogsAlive = 0;
 	
-	private static final String TXT_DESC = "Yog-Dzewa is an Old God, a powerful entity from the realms of chaos. A century ago, the ancient dwarves "
-			+ "barely won the war against its army of demons, but were unable to kill the god itself. Instead, they then "
-			+ "imprisoned it in the halls below their city, believing it to be too weak to rise ever again."
-			+ "Yog has retreated to his den in Shadow form.";
+	private static final String TXT_DESC =  "Yog has retreated to his den in Shadow form."
+			                               +"The legion of Yog is being fed strength from the mobs in the den, ";
 
-	
+	@Override
+	public int damageRoll() {
+		return Random.NormalIntRange(45, 125);
+	}
+
+	@Override
+	public int attackSkill(Char target) {
+		return 50;
+	}
+
 	public ShadowYog() {
 		super();
 	}
 
 	@Override
 	public int dr() {
-		return (Dungeon.level.mobs.size()/2);
+		return (Dungeon.level.mobs.size());
 	}
 	
 	@Override
@@ -134,62 +140,7 @@ public class ShadowYog extends Mob implements Callback {
 	}
 	
 
-	@Override
-	protected boolean canAttack(Char enemy) {
-		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
-	}
-
-	@Override
-	protected boolean doAttack(Char enemy) {
-
-		if (Level.distance(pos, enemy.pos) <= 1) {
-
-			return super.doAttack(enemy);
-
-		} else {
-
-			boolean visible = Level.fieldOfView[pos]
-					|| Level.fieldOfView[enemy.pos];
-			if (visible) {
-				((ShadowYogSprite) sprite).zap(enemy.pos);
-			}
-
-			spend(TIME_TO_ZAP);
-
-			if (hit(this, enemy, true)) {
-				int dmg = Random.Int(35, 75);
-				if (Level.water[enemy.pos] && !enemy.flying) {
-					dmg *= 1.5f;
-				}
-				enemy.damage(dmg, LightningTrap.LIGHTNING);
-
-				enemy.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
-				enemy.sprite.flash();
-
-				if (enemy == Dungeon.hero) {
-
-					Camera.main.shake(2, 0.3f);
-
-					if (!enemy.isAlive()) {
-						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
-								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
-					}
-				}
-			} else {
-				enemy.sprite
-						.showStatus(CharSprite.NEUTRAL, enemy.defenseVerb());
-			}
-
-			return !visible;
-		}
-	}
-
-	@Override
-	public void call() {
-		next();
-	}
-
+	
 	@Override
 	public void beckon(int cell) {
 	}
@@ -212,8 +163,10 @@ public class ShadowYog extends Mob implements Callback {
 			GameScene.bossSlain();
 			Dungeon.shadowyogkilled=true;
 			
+			Dungeon.level.drop(new OrbOfZot(), pos).sprite.drop();
+			
 			for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
-				if (mob instanceof Rat || mob instanceof RatBoss || mob instanceof SpectralRat || mob instanceof Eye) {
+				if (mob instanceof Rat || mob instanceof GreyOni || mob instanceof SpectralRat || mob instanceof Eye) {
 					mob.die(cause);
 				}
 			}

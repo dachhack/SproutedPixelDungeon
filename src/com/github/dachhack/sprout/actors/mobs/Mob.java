@@ -365,6 +365,21 @@ public abstract class Mob extends Char {
 	public void aggro(Char ch) {
 		enemy = ch;
 	}
+	
+	public int adj(int type){
+		switch (type){
+		case 0:
+				return Dungeon.depth;
+		case 1:
+			    return (int) Dungeon.depth/2;
+		case 2:
+		    return (int) Dungeon.depth/4;
+		case 3:
+		    return (int) Dungeon.depth*2;
+		default:
+			    return 1;		
+		}
+	}
 
 	@Override
 	public void damage(int dmg, Object src) {
@@ -401,9 +416,9 @@ public abstract class Mob extends Char {
 				Badges.validateNightHunter();
 			}
 
-			if (Dungeon.hero.lvl <= maxLvl && EXP > 0) {
-				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, TXT_EXP,
-						EXP);
+			//if (Dungeon.hero.lvl <= maxLvl && EXP > 0) {
+				if (EXP > 0) {
+				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, TXT_EXP, EXP);
 				Dungeon.hero.earnExp(EXP);
 			}
 		}
@@ -512,17 +527,18 @@ public abstract class Mob extends Char {
 
 	public void explodeDew(int cell) {
 		
-		Sample.INSTANCE.play(Assets.SND_BLAST, 2);
+		if (Dungeon.dewDraw){
+		  Sample.INSTANCE.play(Assets.SND_BLAST, 2);
 
-
-		for (int n : Level.NEIGHBOURS9) {
-			int c = cell + n;
-			if (c >= 0 && c < Level.LENGTH && Level.passable[c]) {
+		  for (int n : Level.NEIGHBOURS9) {
+			 int c = cell + n;
+			 if (c >= 0 && c < Level.LENGTH && Level.passable[c]) {
 						
 				if (Random.Int(10)==1){Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();}
 				else if (Random.Int(3)==1){Dungeon.level.drop(new YellowDewdrop(), c).sprite.drop();}
 			}
-		}		
+		  }	
+		}
 	}
 	
 	public boolean reset() {

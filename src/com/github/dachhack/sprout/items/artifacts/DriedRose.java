@@ -11,6 +11,7 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.RedWraith;
 import com.github.dachhack.sprout.actors.mobs.Wraith;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -220,7 +221,7 @@ public class DriedRose extends Artifact {
 				}
 
 				if (spawnPoints.size() > 0) {
-					Wraith.spawnAt(Random.element(spawnPoints));
+					RedWraith.spawnAt(Random.element(spawnPoints));
 					Sample.INSTANCE.play(Assets.SND_CURSED);
 				}
 

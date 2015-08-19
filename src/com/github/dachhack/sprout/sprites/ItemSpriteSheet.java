@@ -45,6 +45,7 @@ public class ItemSpriteSheet {
 	public static final int SANDBAG = ROW1 + 3;
 	public static final int REDDEWDROP = ROW8 + 8;
 	public static final int YELLOWDEWDROP = ROW8 + 14;
+	public static final int VIOLETDEWDROP = ROW8 + 15;
 	// Heaps (containers)
 	public static final int BONES = ROW1 + 4;
 	public static final int REMAINS = ROW1 + 5;
@@ -227,6 +228,8 @@ public class ItemSpriteSheet {
 	public static final int SEED_BLUEBERRY = ROW13 + 12;
 	public static final int SEED_MOONBERRY = ROW13 + 14;
 	public static final int SEED_FULLMOONBERRY = ROW13 + 15;
+	public static final int SEED_STARFLOWER = ROW9 + 15;
+	public static final int SEED_PHASEPITCHER = ROW14 + 5;
 
 	// Row Thirteen: Food
 	public static final int MEAT = ROW13 + 0;
@@ -246,6 +249,14 @@ public class ItemSpriteSheet {
 	public static final int ORE = ROW14 + 3;
 	public static final int TOKEN = ROW14 + 4;
 	public static final int SANCHIKARAH = ROW13 + 9;
+	public static final int MUSHROOM = ROW9 + 14;
+	public static final int MUSHROOM_DEATHCAP = ROW14 + 9;
+	public static final int MUSHROOM_LANTERN =  ROW14 + 6;
+	public static final int MUSHROOM_LICHEN = ROW14 + 8;
+	public static final int MUSHROOM_EARTHSTAR = ROW14 + 7;
+	public static final int MUSHROOM_BLUEMILK = ROW14 + 12;
+	public static final int MUSHROOM_GOLDENJELLY = ROW14 + 11;
+	public static final int MUSHROOM_PIXIEPARASOL= ROW14 + 10;
 
 	// Row Fifteen: Containers/Bags
 	public static final int VIAL = ROW15 + 0;
@@ -254,6 +265,11 @@ public class ItemSpriteSheet {
 	public static final int BANDOLIER = ROW15 + 3;
 	public static final int HOLSTER = ROW15 + 4;
 	public static final int CHAIN = ROW15 + 5;
+	public static final int ACTIVEMRD = ROW15 + 6;
+	public static final int INACTIVEMRD = ROW15 + 7;
+	public static final int ACTIVEMRD2 = ROW15 + 8;
+	public static final int INACTIVEMRD2 = ROW15 + 9;
+	public static final int ORBOFZOT = ROW15 + 10;
 
 	// Row Sixteen: Unused
 

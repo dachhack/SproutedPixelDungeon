@@ -331,6 +331,22 @@ public class Heap implements Bundlable {
 		}
 	}
 	
+	/*
+	public void dewcollect() {
+
+		
+			for (Item item : items.toArray(new Item[0])) {
+
+				if (item instanceof Dewdrop ||
+					item instanceof YellowDewdrop ||
+					item instanceof RedDewdrop) {
+					
+					item.doPickUp(Dungeon.hero);
+				}
+		}
+	}
+	*/
+	
 	// Note: should not be called to initiate an explosion, but rather by an
 		// explosion that is happening.
 		public void holyexplode() {

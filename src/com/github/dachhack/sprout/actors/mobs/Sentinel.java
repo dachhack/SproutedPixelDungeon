@@ -42,7 +42,7 @@ public class Sentinel extends Mob {
 		name = "animated statue";
 		spriteClass = SentinelSprite.class;
 
-		EXP = 5 + Dungeon.depth * 2;
+		EXP = 18;
 		state = PASSIVE;
 	}
 

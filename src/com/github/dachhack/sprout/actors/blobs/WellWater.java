@@ -60,6 +60,7 @@ public class WellWater extends Blob {
 		}
 	}
 
+	
 	protected boolean affect() {
 
 		Heap heap;
@@ -142,5 +143,24 @@ public class WellWater extends Blob {
 				return;
 			}
 		}
+	}
+	
+	public static boolean affectCellPlant(int cell) {
+		
+		boolean transmuted = false;
+
+		Class<?>[] waters = { WaterOfHealth.class, WaterOfAwareness.class,
+				WaterOfTransmutation.class };
+
+		for (Class<?> waterClass : waters) {
+			WellWater water = (WellWater) Dungeon.level.blobs.get(waterClass);
+			if (water != null && water.volume > 0 && water.pos == cell
+					&& water.affect()) {
+
+				GameScene.updateMap(cell);
+                transmuted = true;
+			}
+		}
+	    return transmuted;
 	}
 }

@@ -67,6 +67,8 @@ public class InfestBossLevel extends Level {
 	private static final String DOOR = "door";
 	private static final String ENTERED = "entered";
 	private static final String DROPPED = "droppped";
+	
+	protected static final float TIME_TO_RESPAWN = 20;
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
@@ -118,7 +120,7 @@ public class InfestBossLevel extends Level {
 		map[exit] = Terrain.WALL;
 
 		for (int i = 0; i < LENGTH; i++) {
-			if (map[i] == Terrain.EMPTY && Random.Int(4) == 0) {
+			if (map[i] == Terrain.EMPTY && Random.Int(20) == 0) {
 				map[i] = Terrain.SECRET_SUMMONING_TRAP;
 			}
 		}
@@ -204,7 +206,7 @@ public class InfestBossLevel extends Level {
 			locked = true;
 
 			ShadowYog boss = new ShadowYog();
-			boss.state = boss.HUNTING;
+			boss.state = boss.SLEEPING;
 			do {
 				boss.pos = Random.Int(LENGTH);
 			} while (!passable[boss.pos] || !outsideEntraceRoom(boss.pos)
@@ -213,7 +215,7 @@ public class InfestBossLevel extends Level {
 			GLog.n("we are legion");
 			
 			ShadowYog boss2 = new ShadowYog();
-			boss2.state = boss2.HUNTING;
+			boss2.state = boss2.SLEEPING;
 			do {
 				boss2.pos = Random.Int(LENGTH);
 			} while (!passable[boss2.pos] || !outsideEntraceRoom(boss2.pos)
@@ -222,7 +224,7 @@ public class InfestBossLevel extends Level {
 			GLog.n("we are legion");
 			
 			ShadowYog boss3 = new ShadowYog();
-			boss3.state = boss3.HUNTING;
+			boss3.state = boss3.SLEEPING;
 			do {
 				boss3.pos = Random.Int(LENGTH);
 			} while (!passable[boss3.pos] || !outsideEntraceRoom(boss3.pos)
@@ -231,15 +233,69 @@ public class InfestBossLevel extends Level {
 			GLog.n("we are legion");
 			
 			ShadowYog boss4 = new ShadowYog();
-			boss4.state = boss4.HUNTING;
+			boss4.state = boss4.SLEEPING;
 			do {
 				boss4.pos = Random.Int(LENGTH);
 			} while (!passable[boss4.pos] || !outsideEntraceRoom(boss4.pos)
 					|| Dungeon.visible[boss4.pos]);
 			GameScene.add(boss4);
 			GLog.n("we are legion");
+			
+			ShadowYog boss5 = new ShadowYog();
+			boss5.state = boss5.SLEEPING;
+			do {
+				boss5.pos = Random.Int(LENGTH);
+			} while (!passable[boss5.pos] || !outsideEntraceRoom(boss5.pos)
+					|| Dungeon.visible[boss5.pos]);
+			GameScene.add(boss5);
+			GLog.n("we are legion");
+			
+			ShadowYog boss6 = new ShadowYog();
+			boss6.state = boss6.SLEEPING;
+			do {
+				boss6.pos = Random.Int(LENGTH);
+			} while (!passable[boss6.pos] || !outsideEntraceRoom(boss6.pos)
+					|| Dungeon.visible[boss6.pos]);
+			GameScene.add(boss6);
+			GLog.n("we are legion");
+			
+			ShadowYog boss7 = new ShadowYog();
+			boss7.state = boss7.SLEEPING;
+			do {
+				boss7.pos = Random.Int(LENGTH);
+			} while (!passable[boss7.pos] || !outsideEntraceRoom(boss7.pos)
+					|| Dungeon.visible[boss7.pos]);
+			GameScene.add(boss7);
+			GLog.n("we are legion");
+			
+			ShadowYog boss8 = new ShadowYog();
+			boss8.state = boss8.SLEEPING;
+			do {
+				boss8.pos = Random.Int(LENGTH);
+			} while (!passable[boss8.pos] || !outsideEntraceRoom(boss8.pos)
+					|| Dungeon.visible[boss8.pos]);
+			GameScene.add(boss8);
+			GLog.n("we are legion");
+			
+			ShadowYog boss9 = new ShadowYog();
+			boss9.state = boss9.SLEEPING;
+			do {
+				boss9.pos = Random.Int(LENGTH);
+			} while (!passable[boss9.pos] || !outsideEntraceRoom(boss9.pos)
+					|| Dungeon.visible[boss9.pos]);
+			GameScene.add(boss9);
+			GLog.n("we are legion");
+			
+			ShadowYog boss10 = new ShadowYog();
+			boss10.state = boss10.SLEEPING;
+			do {
+				boss10.pos = Random.Int(LENGTH);
+			} while (!passable[boss10.pos] || !outsideEntraceRoom(boss10.pos)
+					|| Dungeon.visible[boss10.pos]);
+			GameScene.add(boss10);
+			GLog.n("we are legion");
 
-			set(arenaDoor, Terrain.WALL);
+			//set(arenaDoor, Terrain.WALL);
 			GameScene.updateMap(arenaDoor);
 			Dungeon.observe();
 
@@ -293,7 +349,7 @@ public class InfestBossLevel extends Level {
 	}
 	@Override
 	public int nMobs() {
-		return 30;
+		return 20;
 	}
 	
 	@Override

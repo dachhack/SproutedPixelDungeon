@@ -48,8 +48,8 @@ public class Warlock extends Mob implements Callback {
 		name = "dwarf warlock";
 		spriteClass = WarlockSprite.class;
 
-		HP = HT = 70+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 18+(Math.round((Dungeon.depth)/2));
+		HP = HT = 70+(adj(0)*Random.NormalIntRange(5, 7));
+		defenseSkill = 18+adj(0);
 
 		EXP = 11;
 		maxLvl = 21;
@@ -63,17 +63,17 @@ public class Warlock extends Mob implements Callback {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(12, 20);
+		return Random.NormalIntRange(12, 25+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 25+(Dungeon.depth);
+		return 25+adj(0);
 	}
 
 	@Override
 	public int dr() {
-		return 8;
+		return 8+adj(1);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class Warlock extends Mob implements Callback {
 				Buff.prolong(enemy, Weakness.class, Weakness.duration(enemy));
 			}
 
-			int dmg = Random.Int(12, 18);
+			int dmg = Random.Int(16, 24+adj(0));
 			enemy.damage(dmg, this);
 
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {

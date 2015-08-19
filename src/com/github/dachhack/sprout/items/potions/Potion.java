@@ -30,10 +30,12 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.Splash;
+import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.ItemStatusHandler;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
+import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -190,7 +192,7 @@ public class Potion extends Item {
 
 	@Override
 	protected void onThrow(int cell) {
-		if (Dungeon.level.map[cell] == Terrain.WELL || Level.pit[cell]) {
+		if (Dungeon.level.map[cell] == Terrain.WELL || Level.pit[cell] || Plant.checkPhase(cell)) {
 
 			super.onThrow(cell);
 

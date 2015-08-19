@@ -54,7 +54,8 @@ public class BattleLevel extends Level {
 		return Assets.WATER_PRISON;
 	}
 
-	
+	protected static final int REGROW_TIMER = 4;
+	protected static final int TIME_TO_RESPAWN = 30;
 
 	@Override
 	protected boolean build() {

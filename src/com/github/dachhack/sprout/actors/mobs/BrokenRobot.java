@@ -56,8 +56,8 @@ public class BrokenRobot extends Mob {
 		name = "broken robot";
 		spriteClass = BrokenRobotSprite.class;
 
-		HP = HT = 75+(Dungeon.depth*Random.NormalIntRange(4, 7));
-		defenseSkill = 20+(Math.round((Dungeon.depth)/2));
+		HP = HT = 75+(adj(0)*Random.NormalIntRange(4, 7));
+		defenseSkill = 20+adj(1);
 		viewDistance = Light.DISTANCE;
 
 		EXP = 13;
@@ -110,7 +110,7 @@ public class BrokenRobot extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 20+(Dungeon.depth);
+		return 20+adj(0);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class BrokenRobot extends Mob {
 			}
 
 			if (hit(this, ch, true)) {
-				ch.damage(Random.NormalIntRange(14, 20), this);
+				ch.damage(Random.NormalIntRange(10, 12+adj(0)), this);
 
 				if (Dungeon.visible[pos]) {
 					ch.sprite.flash();

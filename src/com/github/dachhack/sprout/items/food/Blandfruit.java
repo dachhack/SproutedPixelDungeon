@@ -1,5 +1,6 @@
 package com.github.dachhack.sprout.items.food;
 
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Statistics;
@@ -20,11 +21,13 @@ import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.Potion;
+import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfFrost;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfInvisibility;
 import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
 import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
+import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfParalyticGas;
 import com.github.dachhack.sprout.items.potions.PotionOfPurity;
@@ -221,6 +224,12 @@ public class Blandfruit extends Food {
 			name = "Rotfruit";
 			potionGlow = new ItemSprite.Glowing(0xCC0022);
 			info += "It looks delicious and powerful, ready to be eaten!";
+			
+		} else if (potionAttrib instanceof PotionOfMight) {
+
+			name = "Mightyfruit";
+			potionGlow = new ItemSprite.Glowing(0xFF3300);
+			info += "It looks delicious and super powerful, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfParalyticGas) {
 
@@ -269,6 +278,12 @@ public class Blandfruit extends Food {
 			name = "Dreamfruit";
 			potionGlow = new ItemSprite.Glowing(0x8E2975);
 			info += "It looks delicious and clean, ready to be eaten!";
+			
+		} else if (potionAttrib instanceof PotionOfExperience) {
+
+			name = "Starfruit";
+			potionGlow = new ItemSprite.Glowing( 0xA79400 );
+			info += "It looks delicious and glorious, ready to be eaten!";
 
 		}
 

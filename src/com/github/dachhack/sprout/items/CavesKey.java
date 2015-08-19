@@ -58,6 +58,7 @@ public class CavesKey extends Item {
 		image = ItemSpriteSheet.ANCIENTKEY;
 
 		stackable = false;
+		unique = true;
 	}
 	
 	private static final String DEPTH = "depth";

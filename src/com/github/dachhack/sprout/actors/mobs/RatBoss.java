@@ -76,7 +76,7 @@ public class RatBoss extends Rat {
 	
 	@Override
 	public String description() {
-		return "Marsupial rats are aggressive but rather weak denizens "
-				+ "of the sewers. They have a nasty bite, but are only life threatening in large numbers.";
+		return "Larger and stronger than other Marsupial Rats, the "
+				+ "Rat Boss can summon a pack of rats from the shadows of the dungeon.";
 	}
 }

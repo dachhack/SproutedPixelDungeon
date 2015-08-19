@@ -41,27 +41,27 @@ public class Monk extends Mob {
 		name = "dwarf monk";
 		spriteClass = MonkSprite.class;
 
-		HP = HT = 70+(Dungeon.depth*Random.NormalIntRange(3, 5));
-		defenseSkill = 30;
+		HP = HT = 100+(adj(0)*Random.NormalIntRange(3, 5));
+		defenseSkill = 30+adj(1);
 
 		EXP = 11;
 		maxLvl = 21;
 
 		loot = new Food();
-		lootChance = 0.5f;
+		lootChance = 0.1f;
 		
 		lootOther = new Meat();
-		lootChanceOther = 0.5f; // by default, see die()
+		lootChanceOther = 0.1f; // by default, see die()
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(12, 16);
+		return Random.NormalIntRange(22, 36+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 30;
+		return 30+adj(01);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class Monk extends Mob {
 
 	@Override
 	public int dr() {
-		return 2;
+		return 2+adj(0);
 	}
 
 	@Override

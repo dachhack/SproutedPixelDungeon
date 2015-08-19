@@ -18,11 +18,14 @@
 package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
+import com.github.dachhack.sprout.windows.WndOptions;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
@@ -34,6 +37,8 @@ public class PotionOfInvisibility extends Potion {
 		name = "Potion of Invisibility";
 	}
 
+	private static final String TXT_PREVENTING = "Enemies on this level are all blind. No point using invisibility.";
+	
 	@Override
 	public void apply(Hero hero) {
 		setKnown();
@@ -47,6 +52,21 @@ public class PotionOfInvisibility extends Potion {
 		return "Drinking this potion will render you temporarily invisible. While invisible, "
 				+ "enemies will be unable to see you. Attacking an enemy, as well as using a wand or a scroll "
 				+ "before enemy's eyes, will dispel the effect.";
+	}
+	
+	@Override
+	public void execute(final Hero hero, String action) {
+		if (action.equals(AC_DRINK)) {
+			
+		  if (Dungeon.depth==29) {
+				GLog.w(TXT_PREVENTING);
+				return;
+		
+		   } 
+		}
+		
+	   super.execute(hero, action);
+		 	
 	}
 
 	@Override

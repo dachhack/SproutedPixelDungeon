@@ -44,7 +44,7 @@ public class FlyingProtector extends Mob implements Callback {
 		name = "flying protector";
 		spriteClass = FlyingProtectorSprite.class;
 
-		EXP = 5 + Dungeon.depth * 2;
+		EXP = 18;
 		state = HUNTING;
 		flying = true;
 		
@@ -125,7 +125,7 @@ public class FlyingProtector extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "These sentinant statues gaurd this level from the unclean. That means you. ";
+		return "These sentinant statues guard this level from the unclean. That means you. ";
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

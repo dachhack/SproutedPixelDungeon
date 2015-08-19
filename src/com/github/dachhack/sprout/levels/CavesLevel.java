@@ -20,7 +20,18 @@ package com.github.dachhack.sprout.levels;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
+import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
+import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
+import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer2;
+import com.github.dachhack.sprout.items.DewVial;
+import com.github.dachhack.sprout.items.Mushroom;
+import com.github.dachhack.sprout.items.bags.SeedPouch;
+import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.Blueberry;
+import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.watabou.noosa.Game;
@@ -60,6 +71,24 @@ public class CavesLevel extends RegularLevel {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.55f : 0.35f, 3);
 	}
 
+
+	@Override
+	protected void createItems() {
+		
+		if (Dungeon.depth == 12){
+			addItemToSpawn(new Mushroom());
+			Tinkerer2 npc = new Tinkerer2();
+			do {
+				npc.pos = randomRespawnCell();
+			} while (npc.pos == -1 || heaps.get(npc.pos) != null);
+			mobs.add(npc);
+			Actor.occupyCell(npc);
+		}
+
+		super.createItems();
+	}
+	
+	
 	@Override
 	protected boolean assignRoomType() {
 		super.assignRoomType();

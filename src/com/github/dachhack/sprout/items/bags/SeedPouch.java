@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.items.Rice;
 import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Blueberry;
 import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.FullMoonberry;
 import com.github.dachhack.sprout.items.food.GoldenNut;
 import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.items.food.Nut;
@@ -45,6 +46,7 @@ public class SeedPouch extends Bag {
 			|| item instanceof Blueberry
 			|| item instanceof Cloudberry
 			|| item instanceof Moonberry
+			|| item instanceof FullMoonberry
 			|| item instanceof Plant.Seed
 			|| item instanceof Rice){
 		return true;

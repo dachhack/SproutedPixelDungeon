@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap.Type;
@@ -25,6 +27,7 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfTeleportation;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.Terrain;
+import com.github.dachhack.sprout.plants.Fadeleaf;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
@@ -58,7 +61,15 @@ public class PitPainter extends Painter {
 		while (level.map[remains] == Terrain.EMPTY_WELL) {
 			remains = room.random();
 		}
+		
+		int sign = room.random();
+		while (level.map[sign] == Terrain.EMPTY_WELL || sign == remains) {
+			sign = room.random();
+		}
 
+		level.map[sign] = Terrain.SIGN;
+		level.pitSign=sign;
+		
 		level.drop(new ScrollOfTeleportation(), remains).type = Type.SKELETON;
 		int loot = Random.Int(3);
 		if (loot == 0) {
@@ -70,6 +81,7 @@ public class PitPainter extends Painter {
 					Generator.Category.ARMOR)), remains);
 		}
 		level.drop(new Ankh(), remains);
+		level.drop(new Fadeleaf.Seed(), remains);
 		int n = Random.IntRange(1, 2);
 		for (int i = 0; i < n; i++) {
 			level.drop(prize(level), remains);

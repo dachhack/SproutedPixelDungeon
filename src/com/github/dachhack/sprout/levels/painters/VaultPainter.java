@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.levels.painters;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
@@ -39,11 +40,11 @@ public class VaultPainter extends Painter {
 		int cy = (room.top + room.bottom) / 2;
 		int c = cx + cy * Level.WIDTH;
 
-		switch (Random.Int(0)) {
+		switch (Random.Int(3)) {
 
 		case 0:
 			//if (Random.Int(1)==2){
-			level.drop(prize(level), c).type = Type.LOCKED_CHEST;
+			level.drop(prizeUncursed(level), c).type = Type.LOCKED_CHEST;
 			//} else {
 			//level.drop(prize(level), c).type = Type.MONSTERBOX;	
 			//}
@@ -54,8 +55,8 @@ public class VaultPainter extends Painter {
 			Item i1,
 			i2;
 			do {
-				i1 = prize(level);
-				i2 = prize(level);
+				i1 = prizeUncursed(level);
+				i2 = prizeUncursed(level);
 			} while (i1.getClass() == i2.getClass());
 			level.drop(i1, c).type = Type.CRYSTAL_CHEST;
 			level.drop(i2, c + Level.NEIGHBOURS8[Random.Int(8)]).type = Type.CRYSTAL_CHEST;
@@ -63,7 +64,7 @@ public class VaultPainter extends Painter {
 			break;
 
 		case 2:
-			level.drop(prize(level), c);
+			level.drop(prizeUncursed(level), c);
 			set(level, c, Terrain.PEDESTAL);
 			break;
 		}
@@ -76,4 +77,18 @@ public class VaultPainter extends Painter {
 		return Generator.random(Random.oneOf(Generator.Category.WAND,
 				Generator.Category.RING, Generator.Category.ARTIFACT));
 	}
+	
+	
+	private static Item prizeUncursed(Level level) {
+				
+	   Item item = Generator.random(Random.oneOf(Generator.Category.WAND, Generator.Category.RING, Generator.Category.ARTIFACT));
+			
+	   if (item != null && item.cursed && item.isUpgradable()) {	
+			item.cursed = false;
+			if(item.level<0){item.upgrade(-item.level);} //upgrade to even	
+		}	
+	   
+	   return item;
+	}
+	
 }

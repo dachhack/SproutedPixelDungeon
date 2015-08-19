@@ -89,7 +89,7 @@ public class Dungeon {
 	// nicer for bundling/initializing.
 	public static enum limitedDrops {
 		// limited world drops
-		strengthPotions, upgradeScrolls, arcaneStyli,
+		strengthPotions, upgradeScrolls, arcaneStyli, berries,
 
 		// all unlimited health potion sources
 		swarmHP, batHP, warlockHP, scorpioHP, cookingHP,
@@ -125,6 +125,9 @@ public class Dungeon {
 	public static boolean sanchikarahlife = false;
 	public static boolean sanchikarahtranscend = false;
 	public static boolean shadowyogkilled = false;
+	public static boolean dewDraw = false;
+	public static boolean dewWater = false;
+	public static boolean wings = false;
 
 	public static boolean sealedlevel = false;
 	
@@ -213,6 +216,9 @@ public class Dungeon {
 		sealedlevel = false;
         ratChests = 0;
 		sporkAvail = false;
+		dewDraw = false;
+		dewWater = false;
+		wings = false;
 	
 	}
 
@@ -378,6 +384,7 @@ public static Level newInfestLevel(){
 	level.create();
 
 	Statistics.qualifiedForNoKilling = !bossLevel();
+	if (Statistics.deepestFloor>24){Statistics.deepestFloor = depth;}
 
 	return level;
 }
@@ -500,6 +507,10 @@ public static Level newInfestLevel(){
 		return depth == 5 || depth == 10 || depth == 15 || depth == 20
 				|| depth == 25;
 	}
+	
+	public static boolean growLevel(int depth) {
+		return depth == 27 || depth == 28 || depth == 32 || depth == 30;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static void switchLevel(final Level level, int pos) {
@@ -512,6 +523,11 @@ public static Level newInfestLevel(){
 			Actor.add(level.respawner());
 		}
 
+		Actor regrower = level.regrower();
+		if (regrower != null && growLevel(depth)) {
+			Actor.add(level.regrower());
+		}
+		
 		hero.pos = pos != -1 ? pos : level.exit;
 
 		Light light = hero.buff(Light.class);
@@ -608,7 +624,9 @@ public static Level newInfestLevel(){
 	private static final String SYOGKILL = "shadowyogkilled";
 	private static final String SEALEDLEV = "sealedlevel";
 	private static final String SPORK = "sporkAvail";
-	
+	private static final String DEWDRAW = "dewDraw";
+	private static final String DEWWATER = "dewWater";
+	private static final String WINGS = "wings";
 	
 	
 	
@@ -665,6 +683,9 @@ public static Level newInfestLevel(){
 			bundle.put(SYOGKILL, shadowyogkilled);
 			bundle.put(SEALEDLEV, sealedlevel);
 			bundle.put(SPORK, sporkAvail);
+			bundle.put(DEWDRAW, dewDraw);
+			bundle.put(DEWWATER, dewWater);
+			bundle.put(WINGS, wings);
 	
 			for (int d : droppedItems.keyArray()) {
 				bundle.put(String.format(DROPPED, d), droppedItems.get(d));
@@ -857,6 +878,9 @@ public static Level newInfestLevel(){
 		shadowyogkilled = bundle.getBoolean(SYOGKILL);
 		sealedlevel = bundle.getBoolean(SEALEDLEV);
 		sporkAvail = bundle.getBoolean(SPORK);
+		dewDraw = bundle.getBoolean(DEWDRAW);
+		dewWater = bundle.getBoolean(DEWWATER);
+		wings = bundle.getBoolean(WINGS);
 		
 		Statistics.restoreFromBundle(bundle);
 		Journal.restoreFromBundle(bundle);
@@ -883,6 +907,13 @@ public static Level newInfestLevel(){
 				limitedDrops.scrollBag.count = 1;
 			if (deepest > 5)
 				limitedDrops.seedBag.count = 1;
+		}
+		
+		// logic for pre 0.2.1 saves in progress
+		if (version < 58 && Statistics.deepestFloor > 1){
+			dewWater = false;
+			dewDraw = true;
+			wings = false;
 		}
 	}
 
@@ -1018,7 +1049,7 @@ public static Level newInfestLevel(){
 	}
 	
     public static boolean checkNight(){
-	   int hour=Calendar.HOUR_OF_DAY;
+	   int hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 	   return (hour > 19 || hour < 7);
     }
 

@@ -158,6 +158,7 @@ public class WndRanking extends WndTabbed {
 		private static final String TXT_FOOD = "Food Eaten";
 		private static final String TXT_ALCHEMY = "Potions Cooked";
 		private static final String TXT_ANKHS = "Ankhs Used";
+		private static final String TXT_WATERS = "Dew Waters";
 		private static final String TXT_SHADOW = "Shadow Yogs Killed";
 
 		public StatsTab() {
@@ -222,7 +223,8 @@ public class WndRanking extends WndTabbed {
 					Integer.toString(Statistics.ankhsUsed), pos);
 			
 			pos += GAP;
-			
+			pos = statSlot(this, TXT_WATERS,
+					Integer.toString(Statistics.waters), pos);
 			pos = statSlot(this, TXT_SHADOW,
 					Integer.toString(Statistics.shadowYogsKilled), pos);
 		}

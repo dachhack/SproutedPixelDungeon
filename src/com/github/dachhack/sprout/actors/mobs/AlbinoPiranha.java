@@ -27,9 +27,15 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Frost;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Terror;
+import com.github.dachhack.sprout.items.Generator;
+import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.food.Meat;
+import com.github.dachhack.sprout.items.food.MysteryMeat;
+import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.sprites.AlbinoPiranhaSprite;
@@ -49,6 +55,9 @@ public class AlbinoPiranha extends Mob {
 
 		EXP = 0;
 		
+		loot = new Meat();
+		lootChance = 0.1f;
+		
 	}
 
 	public AlbinoPiranha() {
@@ -65,9 +74,10 @@ public class AlbinoPiranha extends Mob {
 		
 	@Override
 	protected boolean act() {
+		
 		if (!Level.water[pos]) {
 			damage(HT, this);
-			die(null);
+			//die(null);
 			return true;
 					
 				
@@ -90,6 +100,11 @@ public class AlbinoPiranha extends Mob {
 				} while (!getCloser(target));
 				moveSprite(oldPos, pos);
 				return true;
+			}
+			
+			if (enemy.invisible>1){
+				enemy.remove(Invisibility.class);
+				GLog.w("No point being invisible when all the fish are blind!");
 			}
 			
 			if (!Level.water[enemy.pos] || enemy.flying){
@@ -121,6 +136,10 @@ public class AlbinoPiranha extends Mob {
 	@Override
 	public void die(Object cause) {
 		explodeDew(pos);
+		if(Random.Int(105-Math.min(Statistics.albinoPiranhasKilled,100))==0){
+		  Item mushroom = Generator.random(Generator.Category.MUSHROOM);
+		  Dungeon.level.drop(mushroom, pos).sprite.drop();	
+		}
 		super.die(cause);
 
 		Statistics.albinoPiranhasKilled++;

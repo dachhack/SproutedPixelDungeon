@@ -144,7 +144,7 @@ public class DumplingBomb extends Item {
 					Buff.affect(ch, Drowsy.class);
 					ch.sprite.centerEmitter().start(Speck.factory(Speck.NOTE), 0.3f, 5);
 
-					if (ch.HP / ch.HT > 0.25f) {
+					if (ch.HP / ch.HT > 0.05f) {
 						int count = 10;
 						int pos;
 						do {

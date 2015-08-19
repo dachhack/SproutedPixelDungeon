@@ -159,11 +159,6 @@ public class Tower extends Mob implements Callback {
 					terrainAffected = true;
 				}
 
-				// destroys items / triggers bombs caught in the blast.
-				Heap heap = Dungeon.level.heaps.get(c);
-				if (heap != null)
-					heap.explode();
-
 				Char ch = Actor.findChar(c);
 				if (ch != null) {
 					// those not at the center of the blast take damage less
@@ -183,7 +178,7 @@ public class Tower extends Mob implements Callback {
 						Dungeon.fail(Utils.format(ResultDescriptions.ITEM,
 								"bomb"));
 				}
-				if (Random.Int(2)==1){Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();}		
+						
 			}
 		}
 
@@ -220,6 +215,7 @@ public class Tower extends Mob implements Callback {
 
 					Badges.validateBossSlain();
 			 }
+			 explodeDew(pos);
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

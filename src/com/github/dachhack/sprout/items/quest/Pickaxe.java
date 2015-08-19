@@ -60,8 +60,8 @@ public class Pickaxe extends Weapon {
 		defaultAction = AC_MINE;
 
 		STR = 14;
-		MIN = 3;
-		MAX = 12;
+		MIN = 10;
+		MAX = 22;
 	}
 
 	public boolean bloodStained = false;

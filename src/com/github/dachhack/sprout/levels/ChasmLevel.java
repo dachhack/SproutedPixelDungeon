@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.mobs.Sentinel;
 import com.github.dachhack.sprout.items.SanChikarahTranscend;
 import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
 import com.github.dachhack.sprout.levels.Room.Type;
+import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Scene;
@@ -193,6 +194,7 @@ public class ChasmLevel extends RegularLevel {
 			}
 		}
 		
+			
 		int length = Level.LENGTH;
 		
 		for (int i = 0; i < length; i++) {
@@ -205,6 +207,9 @@ public class ChasmLevel extends RegularLevel {
 				Sentinel sentinel = new Sentinel();
 				sentinel.pos = i;
 				mobs.add(sentinel);	
+			}
+			if (map[i]==Terrain.EMPTY && heaps.get(i) == null && Random.Float()<.02){
+				drop(new Phaseshift.Seed(), i);
 			}
 			
 			

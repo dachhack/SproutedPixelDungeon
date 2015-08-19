@@ -82,6 +82,8 @@ public class Assets {
 	public static final String SCORPIO = "scorpio.png";
 	public static final String ROTTING = "rotting_fist.png";
 	public static final String BURNING = "burning_fist.png";
+	public static final String PINNING = "pinning_fist.png";
+	public static final String INFECTING = "infecting_fist.png";
 	public static final String YOG = "yog.png";
 	public static final String LARVA = "larva.png";
 	public static final String GHOST = "ghost.png";
@@ -107,7 +109,12 @@ public class Assets {
 	public static final String SPECTRALRAT = "spectralrat.png";
 	public static final String REDWRAITH = "redwraith.png";
 	public static final String GOLDTHIEF = "goldthief.png";
-
+	public static final String MRDESTRUCTO = "mrdestructo.png";
+	public static final String MRDESTRUCTO2 = "mrdestructo2.png";
+	public static final String GREYONI = "greyoni.png";
+	public static final String TINKERER1 = "tinkerer.png";
+	public static final String DEWPROTECTOR = "dewprotector.png";
+	public static final String ORBOFZOT = "orbofzot.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";
@@ -117,6 +124,7 @@ public class Assets {
 	public static final String TILES_CAVES = "tiles2.png";
 	public static final String TILES_CITY = "tiles3.png";
 	public static final String TILES_HALLS = "tiles4.png";
+	public static final String TILES_SEAL = "tiles_magic_cave.png";
 
 	public static final String WATER_SEWERS = "water0.png";
 	public static final String WATER_PRISON = "water1.png";

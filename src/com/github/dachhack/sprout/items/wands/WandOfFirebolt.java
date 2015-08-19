@@ -27,9 +27,15 @@ import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Strength;
+import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
+import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
+import com.github.dachhack.sprout.effects.particles.SmokeParticle;
+import com.github.dachhack.sprout.items.Bomb;
+import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
@@ -65,6 +71,16 @@ public class WandOfFirebolt extends Wand {
 	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
 			
+			if (damage>255){
+				GLog.n("Your wand of Firebolt is burning your hands!");
+			}
+			
+			float backfireChance = Math.max(((damage-255)/10000),0);
+			
+			if (Random.Float() < backfireChance){
+				backfire(damage);
+			}
+	
 			Buff.affect(ch, Burning.class).reignite(ch);
 
 			ch.sprite.emitter().burst(FlameParticle.FACTORY, 5);
@@ -75,7 +91,67 @@ public class WandOfFirebolt extends Wand {
 			}
 		}
 	}
+	
+	public void backfire(int damage){
+		wandEmpty();
+		explode(curUser.pos, damage);
+		GLog.n("Your wand of firebolt backfires!");
+	}
+	
+	public void explode(int cell, int damage) {
+		// We're blowing up, so no need for a fuse anymore.
+		
+		Sample.INSTANCE.play(Assets.SND_BLAST, 2);
 
+		if (Dungeon.visible[cell]) {
+			CellEmitter.center(cell).burst(BlastParticle.FACTORY, 30);
+		}
+
+		boolean terrainAffected = false;
+		for (int n : Level.NEIGHBOURS9) {
+			int c = cell + n;
+			if (c >= 0 && c < Level.LENGTH) {
+				if (Dungeon.visible[c]) {
+					CellEmitter.get(c).burst(SmokeParticle.FACTORY, 4);
+				}
+
+				if (Level.flamable[c]) {
+					Level.set(c, Terrain.EMBERS);
+					GameScene.updateMap(c);
+					terrainAffected = true;
+				}
+
+				// destroys items / triggers bombs caught in the blast.
+				Heap heap = Dungeon.level.heaps.get(c);
+				if (heap != null)
+					heap.explode();
+
+				Char ch = Actor.findChar(c);
+				if (ch != null) {
+					// those not at the center of the blast take damage less
+					// consistently.
+					int minDamage = c == cell ? Math.round(damage/10) : 1;
+					int maxDamage = c == cell ? Math.round(damage/4) : Math.round(damage/10);
+
+					int dmg = Random.NormalIntRange(minDamage, maxDamage)
+							- Random.Int(ch.dr());
+					if (dmg > 0) {
+						ch.damage(dmg, this);
+					}
+
+					if (ch == Dungeon.hero && !ch.isAlive())
+						// constant is used here in the rare instance a player
+						// is killed by a double bomb.
+						Dungeon.fail(Utils.format(ResultDescriptions.ITEM,"wand of firebolt"));
+				}
+			}
+		}
+
+		if (terrainAffected) {
+			Dungeon.observe();
+		}
+	}
+	
 	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.fire(curUser.sprite.parent, curUser.pos, cell, callback);
@@ -85,6 +161,7 @@ public class WandOfFirebolt extends Wand {
 	@Override
 	public String desc() {
 		return "This wand unleashes bursts of magical fire. It will ignite "
-				+ "flammable terrain, and will damage and burn a creature it hits.";
+				+ "flammable terrain, and will damage and burn a creature it hits."
+				+ "It is very unstable at higher levels. Use with caution.";
 	}
 }

@@ -29,8 +29,8 @@ public class Crab extends Mob {
 		name = "sewer crab";
 		spriteClass = CrabSprite.class;
 
-		HP = HT = 15+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 5;
+		HP = HT = 15+(adj(0)*Random.NormalIntRange(1, 3));
+		defenseSkill = 5+adj(1);
 		baseSpeed = 2f;
 
 		EXP = 3;
@@ -42,12 +42,12 @@ public class Crab extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(3, 6+(Dungeon.depth));
+		return Random.NormalIntRange(3, 6+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 12+(Math.round((Dungeon.depth)/2));
+		return 12+adj(0);
 	}
 
 	@Override

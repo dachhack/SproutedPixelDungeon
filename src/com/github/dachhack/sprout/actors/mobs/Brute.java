@@ -38,8 +38,8 @@ public class Brute extends Mob {
 		name = "gnoll brute";
 		spriteClass = BruteSprite.class;
 
-		HP = HT = 40+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		defenseSkill = 15+(Math.round((Dungeon.depth)/2));
+		HP = HT = 50+(adj(0)*Random.NormalIntRange(3, 7));
+		defenseSkill = 15+adj(0);
 
 		EXP = 8;
 		maxLvl = 15;
@@ -61,18 +61,17 @@ public class Brute extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return enraged ? Random.NormalIntRange(10, 40) : Random.NormalIntRange(
-				8, 18);
+		return enraged ? Random.NormalIntRange(30+adj(0), 80+adj(0)) : Random.NormalIntRange(20+adj(0), 50+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 20+(Math.round((Dungeon.depth)/2));
+		return 20+adj(1);
 	}
 
 	@Override
 	public int dr() {
-		return 8;
+		return 10+adj(0);
 	}
 
 	@Override

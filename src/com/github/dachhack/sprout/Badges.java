@@ -108,7 +108,9 @@ public class Badges {
 				"500 games played", 62, true), GAMES_PLAYED_4(
 				"2000 games played", 63, true), HAPPY_END("Happy end", 38), CHAMPION(
 				"Challenge won", 39, true), SUPPORTER(
-				"Thanks for your support!", 31, true);
+				"Thanks for your support!", 31, true),
+				 ORB("Orb of Zot obtained!", 68)
+				 ;
 
 		public boolean meta;
 
@@ -668,6 +670,16 @@ public class Badges {
 			}
 		}
 	}
+	
+	public static void validateOrbObtained()  {
+			if (!local.contains(Badge.ORB)) {
+				Badge badge = Badge.ORB;
+				local.add(badge);
+				displayBadge(badge);
+			}
+		}
+
+
 
 	public static void validateMastery() {
 

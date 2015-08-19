@@ -624,14 +624,17 @@ public class Ghost extends NPC {
 			state = WANDERING;
 
 			loot = Gold.class;
-			lootChance = 0.05f;
+			lootChance = 0.01f;
+			
+			lootOther = Gold.class;
+			lootChanceOther = 0.01f; 
 			
 		}
 
 						
 		@Override
 		public int attackSkill(Char target) {
-			return 16;
+			return 26;
 		}
 
 		@Override
@@ -646,7 +649,7 @@ public class Ghost extends NPC {
 		
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(3, 5);
+			return Random.NormalIntRange(1+Math.round(Statistics.archersKilled/10), 8+Math.round(Statistics.archersKilled/5));
 		}
 
 		
@@ -668,7 +671,7 @@ public class Ghost extends NPC {
 			GLog.w(TXT_KILLCOUNT, Statistics.archersKilled);
 
 			super.die(cause);
-			if (!Dungeon.limitedDrops.sewerkey.dropped()) {
+			if (!Dungeon.limitedDrops.sewerkey.dropped() && Dungeon.depth<27) {
 				Dungeon.limitedDrops.sewerkey.drop();
 				Dungeon.level.drop(new SewersKey(), pos).sprite.drop();
 				explodeDew(pos);				

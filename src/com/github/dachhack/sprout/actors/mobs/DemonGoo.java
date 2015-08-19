@@ -27,6 +27,7 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Light;
+import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.effects.Pushing;
@@ -40,6 +41,7 @@ import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DemonGooSprite;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.Camera;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -53,9 +55,9 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 
 	{
 		name = "demon goo";
-		HP = HT = 100;
+		HP = HT = 200+(adj(0)*Random.NormalIntRange(4, 7));
 		EXP = 10;
-		defenseSkill = 10;
+		defenseSkill = 10+adj(1);
 		//10
 		spriteClass = DemonGooSprite.class;
 		baseSpeed = 2f;
@@ -85,17 +87,17 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 		
 	@Override
 	public int damageRoll() {
-			return Random.NormalIntRange(10, 20);
+			return Random.NormalIntRange(30+adj(1), 60+adj(1));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 35;
+		return 35+adj(1);
 	}
 
 	@Override
 	public int dr() {
-		return 10;
+		return 20+adj(1);
 		//10
 	}
 
@@ -160,6 +162,14 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 		return clone;
 	}
 	
+	@Override
+	public int attackProc(Char enemy, int damage) {
+		if (Random.Int(3) == 0) {
+			Buff.affect(enemy, Ooze.class);
+			enemy.sprite.burst(0x000000, 5);
+		}				
+		return damage;
+	}
 
 	@Override
 	public void notice() {

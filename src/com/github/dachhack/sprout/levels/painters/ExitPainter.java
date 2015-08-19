@@ -33,7 +33,8 @@ public class ExitPainter extends Painter {
 		}
 
 		level.exit = room.random(1);
-		set(level, level.exit, Terrain.EXIT);
+		set(level, level.exit, Terrain.EXIT);					
+		
 	}
 
 }

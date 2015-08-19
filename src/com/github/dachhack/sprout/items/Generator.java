@@ -45,13 +45,19 @@ import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.artifacts.UnstableSpellbook;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.BlueMilk;
 import com.github.dachhack.sprout.items.food.Blueberry;
 import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.DeathCap;
+import com.github.dachhack.sprout.items.food.Earthstar;
 import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.food.GoldenJelly;
+import com.github.dachhack.sprout.items.food.JackOLantern;
 import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.food.Nut;
 import com.github.dachhack.sprout.items.food.Pasty;
+import com.github.dachhack.sprout.items.food.PixieParasol;
 import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfFrost;
@@ -133,8 +139,10 @@ import com.github.dachhack.sprout.plants.Earthroot;
 import com.github.dachhack.sprout.plants.Fadeleaf;
 import com.github.dachhack.sprout.plants.Firebloom;
 import com.github.dachhack.sprout.plants.Icecap;
+import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.plants.Sorrowmoss;
+import com.github.dachhack.sprout.plants.Starflower;
 import com.github.dachhack.sprout.plants.Stormvine;
 import com.github.dachhack.sprout.plants.Sungrass;
 import com.watabou.utils.Bundle;
@@ -146,7 +154,7 @@ public class Generator {
 		WEAPON(150, Weapon.class), ARMOR(100, Armor.class), POTION(500,
 				Potion.class), SCROLL(400, Scroll.class), WAND(40, Wand.class), RING(
 				15, Ring.class), ARTIFACT(20, Artifact.class), SEED(0,
-				Plant.Seed.class), FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class);
+				Plant.Seed.class), SEED2(0,	Plant.Seed.class), FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class), MUSHROOM(0, Food.class);
 
 		public Class<?>[] classes;
 		public float[] probs;
@@ -231,7 +239,7 @@ public class Generator {
 				RingOfFuror.class, RingOfHaste.class, RingOfMagic.class,
 				RingOfMight.class, RingOfSharpshooting.class,
 				RingOfTenacity.class, RingOfWealth.class };
-		Category.RING.probs = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+		Category.RING.probs = new float[] { 10, 10, 10, 10, 10, 10, 2, 10, 10, 10, 0 };
 
 		Category.ARTIFACT.classes = new Class<?>[] { CapeOfThorns.class,
 				ChaliceOfBlood.class, CloakOfShadows.class, HornOfPlenty.class,
@@ -249,16 +257,26 @@ public class Generator {
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
 				Nut.class, Blackberry.class, Blueberry.class, Cloudberry.class,
-				Moonberry.class};
-		Category.SEED.probs = new float[] { 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 12, 8, 1, 4, 1};
+				Moonberry.class, Starflower.Seed.class, Phaseshift.Seed.class};
 		
-		//if (Statistics.nightHunt==1){
-		//Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class, Moonberry.class};
-		//Category.BERRY.probs = new float[] {8,2,2,1};
-		//} else {
-		Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class,Moonberry.class};
+		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 48, 20, 4, 16, 2, 2, 2};
+		
+		
+		Category.SEED2.classes = new Class<?>[] { Firebloom.Seed.class,
+				Icecap.Seed.class, Sorrowmoss.Seed.class, Blindweed.Seed.class,
+				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
+				Rotberry.Seed.class, BlandfruitBush.Seed.class,
+				Dreamfoil.Seed.class, Stormvine.Seed.class,
+				Starflower.Seed.class, Phaseshift.Seed.class};
+		
+		Category.SEED2.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 2, 2};
+		
+		Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class, Moonberry.class};
 		Category.BERRY.probs = new float[] {8,2,2,1};	
-		//}
+		
+		Category.MUSHROOM.classes = new Class<?>[] {BlueMilk.class, DeathCap.class, Earthstar.class, JackOLantern.class, PixieParasol.class, GoldenJelly.class};
+		Category.MUSHROOM.probs = new float[] {2,2,2,2,2,2};
+		
 	}
 
 	public static void reset() {

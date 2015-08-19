@@ -26,6 +26,7 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
@@ -52,6 +53,7 @@ public class HallsKey extends Item {
 		image = ItemSpriteSheet.ANCIENTKEY;
 
 		stackable = false;
+		unique = true;
 	}
 	
 	private static final String DEPTH = "depth";
@@ -125,7 +127,9 @@ public class HallsKey extends Item {
 				InterlevelScene.mode = InterlevelScene.Mode.PORTHALLS;
 			} else {
 				
-				if (Statistics.amuletObtained){this.doDrop(hero);}
+				if (Statistics.amuletObtained){this.detach(Dungeon.hero.belongings.backpack);}
+				SkeletonKey key = Dungeon.hero.belongings.getItem(SkeletonKey.class);
+				if (key!=null){key.detachAll(Dungeon.hero.belongings.backpack);}
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;	
 				
 			}

@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 
@@ -68,7 +69,8 @@ public class ScrollOfRemoveCurse extends Scroll {
 	public String desc() {
 		return "The incantation on this scroll will instantly strip from "
 				+ "the reader's weapon, armor, rings and carried items any evil "
-				+ "enchantments that might prevent the wearer from removing them.";
+				+ "enchantments that might prevent the wearer from removing them."
+				+ "The powerful magic in this scroll also upgrades cursed items.";
 	}
 
 	public static boolean uncurse(Hero hero, Item... items) {
@@ -78,8 +80,17 @@ public class ScrollOfRemoveCurse extends Scroll {
 			Item item = items[i];
 			if (item != null && item.cursed) {
 				item.cursed = false;
-				if(item.level<0){item.upgrade(((-item.level)*2)-1);} //upgrade to one less than negatives
+				if(item.level<0){item.upgrade((-item.level)*2);} //upgrade to reverse of negatives
 				procced = true;
+			}
+			if (item instanceof Bag) {
+				for (Item bagItem: ((Bag)item).items){
+                   if (bagItem != null && bagItem.cursed) {
+                	   bagItem.cursed = false;
+                	   if(bagItem.level<0){bagItem.upgrade((-bagItem.level)*2);}
+                	   procced = true;
+                     }
+				}
 			}
 		}
 

@@ -42,7 +42,7 @@ public class Oni extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(50, 70);
+		return Random.NormalIntRange(50, 90);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class Oni extends Mob {
 
 	@Override
 	public int dr() {
-		return 22;
+		return 32;
 	}
 
 	@Override

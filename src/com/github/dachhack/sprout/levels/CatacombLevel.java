@@ -122,6 +122,7 @@ public class CatacombLevel extends RegularLevel {
 			}
 		}
 		
+				
 		int length = Level.LENGTH;
 		
 		for (int i = 0; i < length; i++) {

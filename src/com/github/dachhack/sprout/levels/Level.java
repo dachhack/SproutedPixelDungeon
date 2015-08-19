@@ -95,6 +95,7 @@ public abstract class Level implements Bundlable {
 		NONE, CHASM, WATER, GRASS, DARK
 	};
 
+	
 	public static final int WIDTH = 48;
 	public static final int HEIGHT = 48;
 	public static final int LENGTH = WIDTH * HEIGHT;
@@ -107,7 +108,7 @@ public abstract class Level implements Bundlable {
 
 	// Note that use of these without checking values is unsafe, mobs can be
 	// within 2 tiles of the
-	// edge of the map, unsafe use in that cause will cause an array out of
+	// edge of the map, unsafe use in that case will cause an array out of
 	// bounds exception.
 	public static final int[] NEIGHBOURS8DIST2 = { +2 + 2 * WIDTH,
 			+1 + 2 * WIDTH, 2 * WIDTH, -1 + 2 * WIDTH, -2 + 2 * WIDTH,
@@ -123,13 +124,14 @@ public abstract class Level implements Bundlable {
 			-2 - 2 * WIDTH };
 
 	protected static final float TIME_TO_RESPAWN = 50;
+	protected static final int REGROW_TIMER = 10;
 		
 	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
 
 	public static boolean resizingNeeded;
 	public static boolean exitsealed=false;
 	public static int loadedMapSize;
-
+		
 	public int[] map;
 	public boolean[] visited;
 	public boolean[] mapped;
@@ -154,6 +156,7 @@ public abstract class Level implements Bundlable {
 
 	public int entrance;
 	public int exit;
+	public int pitSign;
 
 	// when a boss level has become locked.
 	public boolean locked = false;
@@ -183,6 +186,7 @@ public abstract class Level implements Bundlable {
 	private static final String MOBS = "mobs";
 	private static final String BLOBS = "blobs";
 	private static final String FEELING = "feeling";
+	private static final String PITSIGN = "pitSign";
 	
 	
 	public void create() {
@@ -361,6 +365,7 @@ public abstract class Level implements Bundlable {
 
 		entrance = bundle.getInt(ENTRANCE);
 		exit = bundle.getInt(EXIT);
+		pitSign = bundle.getInt(PITSIGN);
 
 		locked = bundle.getBoolean(LOCKED);
 
@@ -425,6 +430,7 @@ public abstract class Level implements Bundlable {
 		bundle.put(MOBS, mobs);
 		bundle.put(BLOBS, blobs.values());
 		bundle.put(FEELING, feeling);
+		bundle.put(PITSIGN, pitSign);
 	}
 
 	public int tunnelTile() {
@@ -527,7 +533,45 @@ public abstract class Level implements Bundlable {
 			}
 		};
 	}
-
+	
+	public Actor regrower() {
+		return new Actor() {
+			@Override
+			protected boolean act() {
+				
+				int growPos = -1;
+				for (int i = 0; i < 20; i++) {
+					growPos = randomRegrowthCell();
+					
+				if (growPos != -1) {
+					break;
+				}
+			}
+			if (growPos != -1) {
+				  if (map[growPos] == Terrain.GRASS){
+				  Level.set(growPos, Terrain.HIGH_GRASS);
+				  } 
+				  GameScene.updateMap();
+				  Dungeon.observe();
+			}		
+				
+			
+				spend(REGROW_TIMER);
+				return true;
+			}
+		};
+	}
+	
+	public int randomRegrowthCell() {
+		int cell;
+		int count = 1;
+		do {
+			cell = Random.Int(LENGTH);
+			count++;
+		} while (map[cell] != Terrain.GRASS && count < 100);
+		     return cell;
+	}
+	
 	public int randomRespawnCell() {
 		int cell;
 		do {

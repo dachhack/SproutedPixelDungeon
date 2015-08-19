@@ -28,6 +28,7 @@ public class SanChikarahTranscend extends Item {
 		image = ItemSpriteSheet.SANCHIKARAH;
 
 		stackable = false;
+		unique = true;
 	}
 	
 	@Override
@@ -45,7 +46,7 @@ public class SanChikarahTranscend extends Item {
 	public boolean doPickUp(Hero hero) {
 		if (super.doPickUp(hero)) {
 
-			if (Dungeon.level != null && Dungeon.depth==32) {
+			if (Dungeon.level != null && Dungeon.depth==33) {
 				Dungeon.sanchikarahtranscend= true;							
 			}
 
@@ -62,6 +63,6 @@ public class SanChikarahTranscend extends Item {
 
 	@Override
 	public String info() {
-		return "A powerful piece of the puzzle.";
+		return "A powerful piece of the puzzle. Three pieces will need to be forged together.";
 	}
 }

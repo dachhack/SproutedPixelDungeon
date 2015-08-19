@@ -50,6 +50,7 @@ public class SanChikarah extends Item {
 		image = ItemSpriteSheet.SANCHIKARAH;
 
 		stackable = false;
+		unique = true;
 	}
 	
 	private static final String DEPTH = "depth";
@@ -90,7 +91,7 @@ public class SanChikarah extends Item {
 				return;
 			}
 			
-			if (Dungeon.depth>30 && !Dungeon.shadowyogkilled) {
+			if (Dungeon.depth>26 && !Dungeon.shadowyogkilled) {
 				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING2);
 				return;
@@ -109,15 +110,16 @@ public class SanChikarah extends Item {
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					if (mob instanceof DriedRose.GhostHero)
 						mob.destroy();
-              if (Dungeon.depth<30){
+           if (Dungeon.depth<27){
             	returnDepth = Dungeon.depth;
        			returnPos = hero.pos;
 				InterlevelScene.mode = InterlevelScene.Mode.PORT4;
 			} else {
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;	
+				this.doDrop(hero);
 			}
                
-                this.doDrop(hero);
+                
 				InterlevelScene.returnDepth = returnDepth;
 				InterlevelScene.returnPos = returnPos;
 				Game.switchScene(InterlevelScene.class);

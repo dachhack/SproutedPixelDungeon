@@ -19,6 +19,17 @@ package com.github.dachhack.sprout.items.bags;
 
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.Rice;
+import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.Blueberry;
+import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.FullMoonberry;
+import com.github.dachhack.sprout.items.food.GoldenNut;
+import com.github.dachhack.sprout.items.food.Moonberry;
+import com.github.dachhack.sprout.items.food.Nut;
+import com.github.dachhack.sprout.items.food.ToastedNut;
+import com.github.dachhack.sprout.items.rings.Ring;
+import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class AnkhChain extends Bag {
@@ -27,12 +38,16 @@ public class AnkhChain extends Bag {
 		name = "chain";
 		image = ItemSpriteSheet.CHAIN;
 
-		size = 12;
+		size = 20;
 	}
 
 	@Override
 	public boolean grab(Item item) {
-		return item instanceof Ankh;
+		if (item instanceof Ankh ||  item instanceof Ring ){
+			return true;
+			} else {
+			return false;
+			}
 	}
 
 	@Override

@@ -34,8 +34,8 @@ public class Golem extends Mob {
 		name = "golem";
 		spriteClass = GolemSprite.class;
 
-		HP = HT = 85+(Dungeon.depth*Random.NormalIntRange(4, 7));
-		defenseSkill = 18+(Math.round((Dungeon.depth)/2));
+		HP = HT = 85+(adj(0)*Random.NormalIntRange(4, 7));
+		defenseSkill = 18+adj(1);
 
 		EXP = 12;
 		maxLvl = 22;
@@ -43,12 +43,12 @@ public class Golem extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 40);
+		return Random.NormalIntRange(20+adj(1), 50+adj(0));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 28;
+		return 28+adj(1);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Golem extends Mob {
 
 	@Override
 	public int dr() {
-		return 12;
+		return 12+adj(0);
 	}
 
 	@Override

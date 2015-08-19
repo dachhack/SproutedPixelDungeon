@@ -29,7 +29,14 @@ import com.github.dachhack.sprout.effects.particles.LeafParticle;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.RedDewdrop;
+import com.github.dachhack.sprout.items.VioletDewdrop;
+import com.github.dachhack.sprout.items.YellowDewdrop;
 import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
+import com.github.dachhack.sprout.items.food.Blackberry;
+import com.github.dachhack.sprout.items.food.Blueberry;
+import com.github.dachhack.sprout.items.food.Cloudberry;
+import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
@@ -70,13 +77,37 @@ public class HighGrass {
 							level.drop(seed, pos).sprite.drop();
 							Dungeon.limitedDrops.blandfruitSeed.count++;
 						}
+						
+					  }	else if (seed instanceof Blackberry
+								|| seed instanceof Cloudberry
+								|| seed instanceof Blueberry
+								|| seed instanceof Moonberry								
+								) {
+							if (Random.Int(40)- Dungeon.limitedDrops.berries.count >= 0) {
+								level.drop(seed, pos).sprite.drop();
+								Dungeon.limitedDrops.berries.count++;
+							}
 					} else
 						level.drop(seed, pos).sprite.drop();
 				}
-
+				
+				// Mushroom
+				if (Dungeon.growLevel(Dungeon.depth) && Random.Int(40 - ((int) (naturalismLevel * 3.34))) == 0) {
+					Item mushroom = Generator.random(Generator.Category.MUSHROOM);
+					level.drop(mushroom, pos).sprite.drop();
+				}
+				
 				// Dew
 				if (Random.Int(3 - naturalismLevel) == 0) {
-					level.drop(new Dewdrop(), pos).sprite.drop();
+					if (Random.Int(30 - naturalismLevel) == 0 && naturalismLevel>0) {
+						level.drop(new YellowDewdrop(), pos).sprite.drop();
+					} else if (Random.Int(50 - naturalismLevel) == 0 && naturalismLevel>2) {
+						level.drop(new RedDewdrop(), pos).sprite.drop();
+					} else if (Random.Int(100 - naturalismLevel) == 0 && naturalismLevel>4){
+						level.drop(new VioletDewdrop(), pos).sprite.drop();
+					} else {
+					   level.drop(new Dewdrop(), pos).sprite.drop();
+					}
 				}
 			}
 		}

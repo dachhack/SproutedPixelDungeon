@@ -48,8 +48,8 @@ public class Thief extends Mob {
 		name = "crazy thief";
 		spriteClass = ThiefSprite.class;
 
-		HP = HT = 20+(Dungeon.depth*Random.NormalIntRange(3, 5));
-		defenseSkill = 8+(Math.round((Dungeon.depth)/2));
+		HP = HT = 20+(adj(0)*Random.NormalIntRange(3, 5));
+		defenseSkill = 8+adj(0);
 
 		EXP = 5;
 		maxLvl = 10;
@@ -79,7 +79,7 @@ public class Thief extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 7);
+		return Random.NormalIntRange(1, 7+adj(0));
 	}
 
 	@Override

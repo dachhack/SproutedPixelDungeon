@@ -23,6 +23,10 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
+import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer3;
+import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.items.Rice;
 import com.github.dachhack.sprout.items.SanChikarahLife;
 import com.github.dachhack.sprout.levels.Room.Type;
@@ -35,6 +39,8 @@ public class FortressLevel extends RegularLevel {
 		color2 = 0xf2f2f2;
 	}
 
+	protected static final int REGROW_TIMER = 4;
+	
 	@Override
 	public String tilesTex() {
 		return Assets.TILES_CITY;
@@ -152,6 +158,7 @@ public class FortressLevel extends RegularLevel {
 			}
 		}
 		
+				
    int length = Level.LENGTH;
 		
 		for (int i = 0; i < length; i++) {
@@ -167,9 +174,22 @@ public class FortressLevel extends RegularLevel {
 
 	@Override
 		protected void createItems() {
+		
+		addItemToSpawn(new Mushroom());
+		
+		Tinkerer3 npc = new Tinkerer3();
+		do {
+			npc.pos = randomRespawnCell();
+		} while (npc.pos == -1 || heaps.get(npc.pos) != null);
+		mobs.add(npc);
+		Actor.occupyCell(npc);
+
+		
 			super.createItems();
 
 			spawn(this, roomEntrance);
+			
+	
 			
 		}
 

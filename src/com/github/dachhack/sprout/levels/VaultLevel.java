@@ -42,6 +42,8 @@ public class VaultLevel extends Level {
 	private static final int ROOM_TOP = HEIGHT / 2 - 2;
 	private static final int ROOM_BOTTOM = HEIGHT / 2 + 2;
 
+	protected static final float TIME_TO_RESPAWN = 20;
+	protected static final int REGROW_TIMER = 4;
 		@Override
 	public String tilesTex() {
 		return Assets.TILES_CITY;
@@ -130,6 +132,8 @@ public class VaultLevel extends Level {
 			}
 			if (map[i]==Terrain.ENTRANCE){map[i] = Terrain.EMPTY;}			
 			if (map[i]==Terrain.EMPTY && heaps.get(i) == null && Random.Float()<.15){map[i] = Terrain.STATUE;}
+			if (map[i]==Terrain.EMPTY && heaps.get(i) == null && Random.Float()<.10){map[i] = Terrain.HIGH_GRASS;}
+			if (map[i]==Terrain.EMPTY && heaps.get(i) == null && Random.Float()<.10){map[i] = Terrain.GRASS;}
 		}
 
 	}
@@ -204,7 +208,7 @@ public class VaultLevel extends Level {
 	}
 	@Override
 	public int nMobs() {
-		return 10;
+		return 16;
 	}
 	
 	@Override

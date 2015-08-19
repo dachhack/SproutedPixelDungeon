@@ -48,7 +48,7 @@ public class SpectralRat extends Mob  implements Callback {
 		baseSpeed = 4f;
 
 		HP = HT = 80+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		defenseSkill = 3+(Math.round((Dungeon.depth)/4));
+		defenseSkill = 2;
 		
 		loot = new Meat();
 		lootChance = 0.5f;
@@ -64,12 +64,12 @@ public class SpectralRat extends Mob  implements Callback {
 
 	@Override
 	public int attackSkill(Char target) {
-		return Dungeon.depth/2;
+		return 50;
 	}
 
 	@Override
 	public int dr() {
-		return Dungeon.depth/2;
+		return 10;
 	}
 	
 	@Override
@@ -132,8 +132,8 @@ public class SpectralRat extends Mob  implements Callback {
 
 	@Override
 	public String description() {
-		return "Marsupial rats are aggressive but rather weak denizens "
-				+ "of the sewers. They have a nasty bite, but are only life threatening in large numbers.";
+		return "This shadowy rat is phasing in and out of this plane. "
+				+ "It's eyes burn with an uncanny hatred.";
 	}
 	
 	public static void spawnAround(int pos) {

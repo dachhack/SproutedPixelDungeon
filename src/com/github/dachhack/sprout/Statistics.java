@@ -35,6 +35,7 @@ public class Statistics {
 	public static int nightHunt;
 	public static int ankhsUsed;
 	public static int ballsCooked;
+	public static int waters;
 
 	public static float duration;
 
@@ -42,6 +43,8 @@ public class Statistics {
 	public static boolean completedWithNoKilling = false;
 
 	public static boolean amuletObtained = false;
+	public static boolean orbObtained = false;
+
 
 	public static void reset() {
 
@@ -60,12 +63,14 @@ public class Statistics {
 		nightHunt = 0;
 		ankhsUsed = 0;
 		ballsCooked = 0;
+		waters = 0;
 
 		duration = 0;
 
 		qualifiedForNoKilling = false;
 
 		amuletObtained = false;
+		orbObtained = false;
 
 	}
 
@@ -75,6 +80,7 @@ public class Statistics {
 	private static final String FOOD = "foodEaten";
 	private static final String ALCHEMY = "potionsCooked";
 	private static final String PIRANHAS = "priranhas";
+	private static final String WATERS = "waters";
 	
 	private static final String ARCHERS = "archers";
 	private static final String SKELETONS = "skeletons";
@@ -87,6 +93,7 @@ public class Statistics {
 	private static final String ANKHS = "ankhsUsed";
 	private static final String DURATION = "duration";
 	private static final String AMULET = "amuletObtained";
+	private static final String ORB = "orbObtained";
 
 	public static void storeInBundle(Bundle bundle) {
 		bundle.put(GOLD, goldCollected);
@@ -105,6 +112,8 @@ public class Statistics {
 		bundle.put(ANKHS, ankhsUsed);
 		bundle.put(DURATION, duration);
 		bundle.put(AMULET, amuletObtained);
+		bundle.put(ORB, orbObtained);
+		bundle.put(WATERS, waters);
 	}
 
 	public static void restoreFromBundle(Bundle bundle) {
@@ -114,6 +123,7 @@ public class Statistics {
 		foodEaten = bundle.getInt(FOOD);
 		potionsCooked = bundle.getInt(ALCHEMY);
 		piranhasKilled = bundle.getInt(PIRANHAS);
+		waters = bundle.getInt(WATERS);
 		
 		archersKilled = bundle.getInt(ARCHERS);
 		skeletonsKilled = bundle.getInt(SKELETONS);
@@ -125,7 +135,8 @@ public class Statistics {
 		nightHunt = bundle.getInt(NIGHT);
 		ankhsUsed = bundle.getInt(ANKHS);
 		duration = bundle.getFloat(DURATION);
-		amuletObtained = bundle.getBoolean(AMULET);		
+		amuletObtained = bundle.getBoolean(AMULET);
+		orbObtained = bundle.getBoolean(ORB);	
 		
 	}
 

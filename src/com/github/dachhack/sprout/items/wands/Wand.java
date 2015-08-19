@@ -35,6 +35,7 @@ import com.github.dachhack.sprout.items.ItemStatusHandler;
 import com.github.dachhack.sprout.items.KindOfWeapon;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.rings.RingOfMagic.Magic;
+import com.github.dachhack.sprout.items.weapon.melee.Knuckles;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.CellSelector;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -203,9 +204,14 @@ public abstract class Wand extends KindOfWeapon {
 	}
 
 	public int level() {
+		
+		int magicLevel = 0;
 		if (charger != null) {
 			Magic magic = charger.target.buff(Magic.class);
-			return magic == null ? level : Math.max(level + magic.level, 0);
+			if  (magic != null ){
+			    magicLevel = magic.level;
+			}
+			return magic == null ? level : Math.max(level + magicLevel, 0);
 		} else {
 			return level;
 		}
@@ -305,7 +311,7 @@ public abstract class Wand extends KindOfWeapon {
 	}
 
 	public void updateLevel() {
-		maxCharges = Math.min(initialCharges() + level, 9);
+		maxCharges = Math.min(initialCharges() + level, 14);
 		curCharges = Math.min(curCharges, maxCharges);
 
 		calculateDamage();
@@ -337,6 +343,11 @@ public abstract class Wand extends KindOfWeapon {
 		}
 
 		curUser.spendAndNext(TIME_TO_ZAP);
+	}
+	
+	protected void wandEmpty() {
+		curCharges=0;
+		updateQuickslot();
 	}
 
 	@Override
@@ -374,6 +385,7 @@ public abstract class Wand extends KindOfWeapon {
 		return price;
 	}
 
+		
 	private static final String UNFAMILIRIARITY = "unfamiliarity";
 	private static final String MAX_CHARGES = "maxCharges";
 	private static final String CUR_CHARGES = "curCharges";
@@ -405,18 +417,18 @@ public abstract class Wand extends KindOfWeapon {
 		public void onSelect(Integer target) {
 
 			if (target != null) {
-
-				if (target == curUser.pos) {
-					GLog.i(TXT_SELF_TARGET);
-					return;
-				}
-
+				
 				final Wand curWand = (Wand) Item.curItem;
 
 				curWand.setKnown();
 
-				final int cell = Ballistica.cast(curUser.pos, target, true,
-						curWand.hitChars);
+				final int cell = Ballistica.cast(curUser.pos, target, true,	curWand.hitChars);
+				
+				if (target == curUser.pos || cell == curUser.pos) {
+					GLog.i(TXT_SELF_TARGET);
+					return;
+				}
+				
 				curUser.sprite.zap(cell);
 
 				QuickSlotButton.target(Actor.findChar(cell));

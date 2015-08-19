@@ -35,6 +35,7 @@ import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.sprites.PlantSprite;
+import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
@@ -63,6 +64,15 @@ public class Plant implements Bundlable {
 		wither();
 	}
 
+	public static boolean checkPhase(int cell) {
+	Plant plant = Dungeon.level.plants.get(cell);
+	if (plant instanceof Phaseshift) {
+		return true; 
+		}	else {
+			return false;
+			}
+	}
+	
 	public void wither() {
 		Dungeon.level.uproot(pos);
 
@@ -142,7 +152,10 @@ public class Plant implements Bundlable {
 
 		@Override
 		protected void onThrow(int cell) {
-			if (Dungeon.level.map[cell] == Terrain.ALCHEMY || Level.pit[cell]) {
+			if (this instanceof Phaseshift.Seed && Phaseshift.checkWater()){
+				GLog.n("Phaseshift pitchers only grow when there are no active Wells of Transmutation on a level.");
+				super.onThrow(cell);
+			}	else if (Dungeon.level.map[cell] == Terrain.ALCHEMY || Level.pit[cell]) {
 				super.onThrow(cell);
 			} else {
 				Dungeon.level.plant(this, cell);

@@ -45,39 +45,39 @@ public class GoldThief extends Mob {
 		name = "crazy gold thief";
 		spriteClass = GoldThiefSprite.class;
 
-		HP = HT = 10;
-		defenseSkill = 8+(Math.round((Dungeon.depth)/2));
+		HP = HT = 30+Statistics.goldThievesKilled;
+		defenseSkill = 26;
 
 		EXP = 1;
 		
 		loot = new Shuriken(3);
-		lootChance = 0.5f;
+		lootChance = 1f;
 		
-		lootOther = new Cloudberry();
-		lootChanceOther = 0.1f; // by default, see die()
+		//lootOther = new Cloudberry();
+		//lootChanceOther = 0.1f; // by default, see die()
 
 		FLEEING = new Fleeing();
 	}
 
 	private int goldtodrop = 0;
 	
-	private static final String ITEM = "item";
+	private static final String GOLDTODROP = "goldtodrop";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
-		bundle.put(ITEM, item);
+		bundle.put(GOLDTODROP, goldtodrop);
 	}
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
-		item = (Item) bundle.get(ITEM);
+		goldtodrop = bundle.getInt(GOLDTODROP);
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 7);
+		return Random.NormalIntRange(30, 50);
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class GoldThief extends Mob {
 	@Override
 	public void die(Object cause) {
 		
-		if (!Dungeon.limitedDrops.citykey.dropped()) {
+		if (!Dungeon.limitedDrops.citykey.dropped() && Dungeon.depth<27) {
 			Dungeon.limitedDrops.citykey.drop();
 			Dungeon.level.drop(new CityKey(), pos).sprite.drop();
 			explodeDew(pos);				
@@ -107,17 +107,17 @@ public class GoldThief extends Mob {
 
 	@Override
 	protected Item createLoot() {
-		return new Gold(Random.NormalIntRange(goldtodrop, goldtodrop+100));
+		return new Gold(Random.NormalIntRange(goldtodrop+50, goldtodrop+100));
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 12;
+		return 32;
 	}
 
 	@Override
 	public int dr() {
-		return 3;
+		return 13+Math.round((Statistics.goldThievesKilled+1/10)+1);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class GoldThief extends Mob {
 	protected boolean steal(Hero hero) {
 
 							
-			Gold gold = new Gold(Random.Int(Dungeon.gold / 10, Dungeon.gold / 2));
+			Gold gold = new Gold(Random.Int(100, 500));
 			if (gold.quantity() > 0) {
 				goldtodrop = Math.min((gold.quantity()+100),Dungeon.gold);
 				Dungeon.gold -= goldtodrop;

@@ -22,9 +22,13 @@ import com.github.dachhack.sprout.actors.mobs.Assassin;
 import com.github.dachhack.sprout.actors.mobs.Bat;
 import com.github.dachhack.sprout.actors.mobs.Brute;
 import com.github.dachhack.sprout.actors.mobs.Gnoll;
+import com.github.dachhack.sprout.actors.mobs.GoldThief;
+import com.github.dachhack.sprout.actors.mobs.PoisonGoo;
 import com.github.dachhack.sprout.actors.mobs.Rat;
 import com.github.dachhack.sprout.actors.mobs.RatBoss;
 import com.github.dachhack.sprout.actors.mobs.Shaman;
+import com.github.dachhack.sprout.actors.mobs.SpectralRat;
+import com.github.dachhack.sprout.actors.mobs.Thief;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost.GnollArcher;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
@@ -64,7 +68,11 @@ public class ForestDart extends MissileWeapon {
     		|| defender instanceof Bat
     		|| defender instanceof Rat
     		|| defender instanceof RatBoss
-    		|| defender instanceof Assassin  
+    		|| defender instanceof Assassin 
+    		|| defender instanceof Thief 
+    		|| defender instanceof GoldThief 
+    		|| defender instanceof PoisonGoo 
+    		|| defender instanceof SpectralRat 
     		){
     	   defender.damage(Random.Int(damage*2,damage*5), this);
        } else {

@@ -48,8 +48,8 @@ public class Succubus extends Mob {
 		name = "succubus";
 		spriteClass = SuccubusSprite.class;
 
-		HP = HT = 80+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 25+(Math.round((Dungeon.depth)/2));
+		HP = HT = 80+(adj(0)*Random.NormalIntRange(5, 7));
+		defenseSkill = 25+adj(1);
 		viewDistance = Light.DISTANCE;
 
 		EXP = 12;
@@ -59,12 +59,12 @@ public class Succubus extends Mob {
 		lootChance = 0.05f;
 		
 		lootOther = new Meat();
-		lootChanceOther = 0.5f; // by default, see die()
+		lootChanceOther = 0.1f; // by default, see die()
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(15, 25);
+		return Random.NormalIntRange(15, 25+adj(0));
 	}
 
 	@Override
@@ -115,12 +115,12 @@ public class Succubus extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 40;
+		return 40+adj(1);
 	}
 
 	@Override
 	public int dr() {
-		return 10;
+		return 10+adj(1);
 	}
 
 	@Override

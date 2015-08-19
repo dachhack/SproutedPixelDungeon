@@ -82,6 +82,11 @@ public class Sign {
 
 			// hmm.. I wonder what this is?
 			"standOfF roW", "fraCtion doWnpOur", "gaffe MaSts" };
+	
+	
+	private static final String PIT = "Note to self: Always leave a teleport scroll in the vault.";
+	//private static final String BOOKLVL = "Note to self: Always leave a teleport scroll in the vault.";
+
 
 	private static final String TXT_BURN = "As you try to read the sign it bursts into greenish flames.";
 
@@ -113,4 +118,10 @@ public class Sign {
 			}
 		}
 	}
+	
+	public static void readPit(int pos) {
+				GameScene.show(new WndMessage(PIT));			
+			}
+			
+	
 }

@@ -42,6 +42,7 @@ import com.github.dachhack.sprout.actors.buffs.Drowsy;
 import com.github.dachhack.sprout.actors.buffs.Fury;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.LichenDrop;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
@@ -52,6 +53,7 @@ import com.github.dachhack.sprout.actors.buffs.SnipersMark;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
+import com.github.dachhack.sprout.actors.mobs.Lichen;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -430,6 +432,13 @@ public class Hero extends Char {
 			spendAndNext(TICK);
 			return false;
 		}
+	
+		/*
+		Heap heap = Dungeon.level.heaps.get(pos);
+		if (heap != null){
+			heap.dewcollect();
+		}
+		*/
 
 		checkVisibleMobs();
 
@@ -530,6 +539,9 @@ public class Hero extends Char {
 		act();
 	}
 
+	
+
+	
 	private boolean actMove(HeroAction.Move action) {
 
 		if (getCloser(action.dst)) {
@@ -537,15 +549,17 @@ public class Hero extends Char {
 			return true;
 
 		} else {
-			if (Dungeon.level.map[pos] == Terrain.SIGN) {
+			if (Dungeon.level.map[pos] == Terrain.SIGN && pos != Dungeon.level.pitSign) {
 				Sign.read(pos);
+			} else if (Dungeon.level.map[pos] == Terrain.SIGN && pos == Dungeon.level.pitSign){
+				Sign.readPit(pos);
 			}
 			ready();
 
 			return false;
 		}
 	}
-
+	
 	private boolean actInteract(HeroAction.Interact action) {
 
 		NPC npc = action.npc;
@@ -767,7 +781,7 @@ public class Hero extends Char {
 
 	private boolean actDescend(HeroAction.Descend action) {
 		int stairs = action.dst;
-		if (pos == stairs && pos == Dungeon.level.exit && (Dungeon.depth<Statistics.deepestFloor || !Dungeon.sealedlevel)){
+		if (pos == stairs && pos == Dungeon.level.exit && (Dungeon.depth!=24) && (Dungeon.depth<Statistics.deepestFloor || !Dungeon.sealedlevel)){
 
 			curAction = null;
 
@@ -828,6 +842,8 @@ public class Hero extends Char {
 				Game.switchScene(InterlevelScene.class);
 				
 			} else if (Dungeon.depth > 26){
+				ready();
+			} else if (Dungeon.depth == 25){
 				ready();
 			} else {
 
@@ -1173,21 +1189,32 @@ public class Hero extends Char {
 				HP += value;
 				sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 			}
+			
+			if (subClass == HeroSubClass.WARLOCK) {
+
+				int value2 = lvl;
+				if (value2 > 0) {
+					HP = HT+value2;
+					sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+					
+					GLog.w(TXT_OVERFILL, lvl);
+				}
+
+				
+			}
 
 			buff(Hunger.class).satisfy(10);
 		}
 
 		if (subClass == HeroSubClass.WARLOCK) {
 
-			int value = lvl;
+			int value = Math.min(HT - HP, 1 + (Dungeon.depth - 1) / 5);
 			if (value > 0) {
 				HP += value;
 				sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
-				
-				GLog.w(TXT_OVERFILL, lvl);
 			}
 
-			buff(Hunger.class).satisfy(10);
+			buff(Hunger.class).satisfy(100);
 		}
 	}
 
@@ -1404,6 +1431,8 @@ public class Hero extends Char {
 			}
 			Dungeon.level.press(pos, this);
 		}
+		
+		if (buff(LichenDrop.class) != null){Lichen.spawnAroundChance(pos);}
 	}
 
 	@Override

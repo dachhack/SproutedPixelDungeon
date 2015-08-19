@@ -109,7 +109,7 @@ public class RedWraith extends Mob {
 	@Override
 	public void die(Object cause) {
 		
-		if (!Dungeon.limitedDrops.ringofwealth.dropped() && Random.Float()<0.1f) {
+		if (!Dungeon.limitedDrops.ringofwealth.dropped() && Random.Float()<0.04f) {
 			Dungeon.limitedDrops.ringofwealth.drop();
 			Dungeon.level.drop(new RingOfWealth(), pos).sprite.drop();
 			explodeDew(pos);				
