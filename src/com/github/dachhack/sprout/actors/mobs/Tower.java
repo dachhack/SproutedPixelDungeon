@@ -25,7 +25,9 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
@@ -35,6 +37,8 @@ import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
+import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
@@ -220,6 +224,8 @@ public class Tower extends Mob implements Callback {
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
+		RESISTANCES.add(Death.class);
+		RESISTANCES.add(ScrollOfPsionicBlast.class);
 		RESISTANCES.add(LightningTrap.Electricity.class);
 	}
 
@@ -227,4 +233,17 @@ public class Tower extends Mob implements Callback {
 	public HashSet<Class<?>> resistances() {
 		return RESISTANCES;
 	}
+
+	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
+	static {
+		IMMUNITIES.add(ToxicGas.class);
+		IMMUNITIES.add(Terror.class);
+	}
+
+	@Override
+	public HashSet<Class<?>> immunities() {
+		return IMMUNITIES;
+	}
+
+	
 }

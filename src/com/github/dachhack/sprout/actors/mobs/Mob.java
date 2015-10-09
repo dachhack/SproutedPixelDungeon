@@ -28,10 +28,12 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
+import com.github.dachhack.sprout.effects.Surprise;
 import com.github.dachhack.sprout.effects.Wound;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
@@ -155,9 +157,18 @@ public abstract class Mob extends Char {
 		}
 
 		enemy = chooseEnemy();
+		
+		/*
+		boolean invisibleCheck=false;
 
+		if (enemy.invisible > 0 && this.resistances().contains(Invisibility.class)){
+			invisibleCheck=false;			
+		} else if (enemy.invisible > 0) {
+			invisibleCheck=true;
+		}
+		*/
 		boolean enemyInFOV = enemy != null && enemy.isAlive()
-				&& Level.fieldOfView[enemy.pos] && enemy.invisible <= 0;
+				&& Level.fieldOfView[enemy.pos] && enemy.invisible<=0 ;
 
 		return state.act(enemyInFOV, justAlerted);
 	}
@@ -354,12 +365,15 @@ public abstract class Mob extends Char {
 
 	@Override
 	public int defenseProc(Char enemy, int damage) {
-		if (!enemySeen && enemy == Dungeon.hero
-				&& ((Hero) enemy).subClass == HeroSubClass.ASSASSIN) {
-			damage *= 1.34f;
-			Wound.hit(this);
+		if (!enemySeen && enemy == Dungeon.hero) {
+			if (((Hero)enemy).subClass == HeroSubClass.ASSASSIN) {
+				damage *= 1.34f;
+				Wound.hit(this);
+			} else {
+				Surprise.hit(this);
+			}
 		}
-		return damage;
+			return damage;
 	}
 
 	public void aggro(Char ch) {
@@ -439,18 +453,18 @@ public abstract class Mob extends Char {
 		lootChance *= Math.pow(1.1, bonus);
 		lootChanceOther *= Math.pow(1.1, bonus);
 
-		if (Random.Float() < lootChance && Dungeon.hero.lvl <= maxLvl + 20) {
+		if (Random.Float() < lootChance && Dungeon.hero.lvl <= maxLvl + 80) {
 			Item loot = createLoot();
 			if (loot != null)
 				Dungeon.level.drop(loot, pos).sprite.drop();
 
 		} else if (Random.Float() < lootChanceOther
-				&& Dungeon.hero.lvl <= maxLvl + 20) {
+				&& Dungeon.hero.lvl <= maxLvl + 80) {
 			Item lootOther = createLootOther();
 			if (lootOther != null)
 				Dungeon.level.drop(lootOther, pos).sprite.drop();
 		} else if (Random.Float() < lootChanceThird
-				&& Dungeon.hero.lvl <= maxLvl + 20) {
+				&& Dungeon.hero.lvl <= maxLvl + 80) {
 			Item lootThird = createLootThird();
 			if (lootThird != null)
 				Dungeon.level.drop(lootThird, pos).sprite.drop();

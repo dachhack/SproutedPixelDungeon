@@ -21,10 +21,12 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer2;
+import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
@@ -85,6 +87,7 @@ public class CavesLevel extends RegularLevel {
 			Actor.occupyCell(npc);
 		}
 
+		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Random.Int(3) == 0){addItemToSpawn(new Bomb());}
 		super.createItems();
 	}
 	

@@ -24,12 +24,17 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.actors.hero.Belongings;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.items.AdamantArmor;
+import com.github.dachhack.sprout.items.AdamantRing;
+import com.github.dachhack.sprout.items.AdamantWand;
+import com.github.dachhack.sprout.items.AdamantWeapon;
 import com.github.dachhack.sprout.items.EquipableItem;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.armor.Armor;
 import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.items.bags.Bag;
+import com.github.dachhack.sprout.items.bags.KeyRing;
 import com.github.dachhack.sprout.items.bags.PotionBandolier;
 import com.github.dachhack.sprout.items.bags.ScrollHolder;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
@@ -57,7 +62,9 @@ import com.watabou.noosa.audio.Sample;
 public class WndBag extends WndTabbed {
 
 	public static enum Mode {
-		ALL, UNIDENTIFED, UPGRADEABLE, QUICKSLOT, FOR_SALE, WEAPON, ARMOR, ENCHANTABLE, WAND, SEED, FOOD, POTION, SCROLL, EQUIPMENT
+		ALL, UNIDENTIFED, UPGRADEABLE, QUICKSLOT, FOR_SALE, WEAPON, ARMOR, ENCHANTABLE, 
+		WAND, SEED, FOOD, POTION, SCROLL, EQUIPMENT, ADAMANT, REINFORCED, UPGRADEABLESIMPLE,
+		NOTREINFORCED
 	}
 
 	protected static final int COLS_P = 4;
@@ -117,6 +124,7 @@ public class WndBag extends WndTabbed {
 				stuff.getItem(ScrollHolder.class),
 				stuff.getItem(PotionBandolier.class),
 				stuff.getItem(WandHolster.class), 
+				stuff.getItem(KeyRing.class), 
 				stuff.getItem(AnkhChain.class)};
 
 		for (Bag b : bags) {
@@ -278,6 +286,8 @@ public class WndBag extends WndTabbed {
 				return Icons.get(Icons.POTION_BANDOLIER);
 			} else if (bag instanceof AnkhChain) {
 				return Icons.get(Icons.ANKH_CHAIN);
+			} else if (bag instanceof KeyRing) {
+				return Icons.get(Icons.KEYRING);
 			} else {
 				return Icons.get(Icons.BACKPACK);
 			}
@@ -362,8 +372,18 @@ public class WndBag extends WndTabbed {
 					enable(mode == Mode.FOR_SALE
 							&& (item.price() > 0)
 							&& (!item.isEquipped(Dungeon.hero) || !item.cursed)
+							
 							|| mode == Mode.UPGRADEABLE
-							&& item.isUpgradable()
+							&& ((item.isUpgradable() && item.level<15 && !item.isReinforced())
+									||  item.isUpgradable() && item.isReinforced())		
+							|| mode == Mode.UPGRADEABLESIMPLE
+							&& item.isUpgradable()			
+							|| mode == Mode.ADAMANT
+							&& (item instanceof AdamantArmor || item instanceof AdamantRing || item instanceof AdamantWand || item instanceof AdamantWeapon)
+							|| mode == Mode.REINFORCED
+							&& item.isReinforced()
+							|| mode == Mode.NOTREINFORCED
+							&& (!item.isReinforced() && item.isUpgradable())
 							|| mode == Mode.UNIDENTIFED
 							&& !item.isIdentified()
 							|| mode == Mode.QUICKSLOT
@@ -373,8 +393,7 @@ public class WndBag extends WndTabbed {
 							|| mode == Mode.ARMOR
 							&& (item instanceof Armor)
 							|| mode == Mode.ENCHANTABLE
-							&& (item instanceof MeleeWeapon
-									|| item instanceof Boomerang || item instanceof Armor)
+							&& (item instanceof MeleeWeapon	|| item instanceof Boomerang || item instanceof Armor)
 							|| mode == Mode.WAND && (item instanceof Wand)
 							|| mode == Mode.SEED && (item instanceof Seed)
 							|| mode == Mode.FOOD && (item instanceof Food)

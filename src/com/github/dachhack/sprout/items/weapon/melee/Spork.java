@@ -24,10 +24,11 @@ public class Spork extends MeleeWeapon {
 	{
 		name = "spork";
 		image = ItemSpriteSheet.SPORK;
+		reinforced=true;
 	}
 
 	public Spork() {
-		super(1, 1f, 0.25f);
+		super(3, 1.2f, 0.25f);
 	}
 
 	@Override

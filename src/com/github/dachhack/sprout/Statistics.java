@@ -23,6 +23,7 @@ public class Statistics {
 
 	public static int goldCollected;
 	public static int deepestFloor;
+	public static int realdeepestFloor;
 	public static int enemiesSlain;
 	public static int foodEaten;
 	public static int potionsCooked;
@@ -36,11 +37,14 @@ public class Statistics {
 	public static int ankhsUsed;
 	public static int ballsCooked;
 	public static int waters;
+	public static int sewerKills;
+	public static int prisonKills;
 
 	public static float duration;
 
 	public static boolean qualifiedForNoKilling = false;
 	public static boolean completedWithNoKilling = false;
+	
 
 	public static boolean amuletObtained = false;
 	public static boolean orbObtained = false;
@@ -50,6 +54,7 @@ public class Statistics {
 
 		goldCollected = 0;
 		deepestFloor = 0;
+		realdeepestFloor = 0;
 		enemiesSlain = 0;
 		foodEaten = 0;
 		potionsCooked = 0;
@@ -64,6 +69,8 @@ public class Statistics {
 		ankhsUsed = 0;
 		ballsCooked = 0;
 		waters = 0;
+		sewerKills = 0;
+		prisonKills = 0;
 
 		duration = 0;
 
@@ -76,6 +83,7 @@ public class Statistics {
 
 	private static final String GOLD = "score";
 	private static final String DEEPEST = "maxDepth";
+	private static final String REALDEEPEST = "maxDepthReal";
 	private static final String SLAIN = "enemiesSlain";
 	private static final String FOOD = "foodEaten";
 	private static final String ALCHEMY = "potionsCooked";
@@ -88,6 +96,8 @@ public class Statistics {
 	private static final String THIEVES = "thieves";
 	private static final String SYOGS = "syogs";
 	private static final String BALLS = "balls";
+	private static final String PRISONKILLS = "prisonKills";
+	private static final String SEWERKILLS = "sewerKills";
 	
 	private static final String NIGHT = "nightHunt";
 	private static final String ANKHS = "ankhsUsed";
@@ -98,6 +108,7 @@ public class Statistics {
 	public static void storeInBundle(Bundle bundle) {
 		bundle.put(GOLD, goldCollected);
 		bundle.put(DEEPEST, deepestFloor);
+		bundle.put(REALDEEPEST, realdeepestFloor);
 		bundle.put(SLAIN, enemiesSlain);
 		bundle.put(FOOD, foodEaten);
 		bundle.put(ALCHEMY, potionsCooked);
@@ -114,16 +125,22 @@ public class Statistics {
 		bundle.put(AMULET, amuletObtained);
 		bundle.put(ORB, orbObtained);
 		bundle.put(WATERS, waters);
+		bundle.put(SEWERKILLS, sewerKills);
+		bundle.put(PRISONKILLS, prisonKills);
 	}
 
 	public static void restoreFromBundle(Bundle bundle) {
 		goldCollected = bundle.getInt(GOLD);
 		deepestFloor = bundle.getInt(DEEPEST);
+		realdeepestFloor = bundle.getInt(REALDEEPEST);
 		enemiesSlain = bundle.getInt(SLAIN);
 		foodEaten = bundle.getInt(FOOD);
 		potionsCooked = bundle.getInt(ALCHEMY);
 		piranhasKilled = bundle.getInt(PIRANHAS);
 		waters = bundle.getInt(WATERS);
+		sewerKills = bundle.getInt(SEWERKILLS);
+		prisonKills = bundle.getInt(PRISONKILLS);
+		
 		
 		archersKilled = bundle.getInt(ARCHERS);
 		skeletonsKilled = bundle.getInt(SKELETONS);

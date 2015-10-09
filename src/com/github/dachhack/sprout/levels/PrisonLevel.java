@@ -21,10 +21,13 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.MossySkeleton;
 import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
 import com.github.dachhack.sprout.effects.Halo;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
+import com.github.dachhack.sprout.items.Bomb;
+import com.github.dachhack.sprout.items.DwarfHammer;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.Emitter;
@@ -73,6 +76,8 @@ public class PrisonLevel extends RegularLevel {
 
 	@Override
 	protected void createItems() {
+		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Random.Int(1) == 0){addItemToSpawn(new Bomb());}
+		
 		super.createItems();
 
 		Wandmaker.Quest.spawn(this, roomEntrance);

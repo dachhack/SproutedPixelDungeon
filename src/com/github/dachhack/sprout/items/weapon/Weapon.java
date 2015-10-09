@@ -26,6 +26,7 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
 import com.github.dachhack.sprout.items.rings.RingOfFuror;
 import com.github.dachhack.sprout.items.rings.RingOfSharpshooting;
+import com.github.dachhack.sprout.items.weapon.enchantments.BuzzSaw;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
 import com.github.dachhack.sprout.items.weapon.enchantments.Horror;
@@ -267,7 +268,12 @@ public class Weapon extends KindOfWeapon {
 		return enchant(ench);
 	}
 	
+	public Weapon enchantBuzz() {
 
+		Enchantment ench = Enchantment.randomBuzz();
+		return enchant(ench);
+	}
+	
 	public boolean isEnchanted() {
 		return enchantment != null;
 	}
@@ -282,15 +288,18 @@ public class Weapon extends KindOfWeapon {
 		private static final Class<?>[] enchants = new Class<?>[] { Fire.class,
 				Poison.class, Death.class, Paralysis.class, Leech.class,
 				Slow.class, Shock.class, Instability.class, Horror.class,
-				Luck.class, Nomnom.class };
+				Luck.class, Nomnom.class, BuzzSaw.class };
 		private static final float[] chances = new float[] { 10, 10, 1, 2, 1,
-				2, 6, 3, 2, 2, 0 };
+				2, 6, 3, 2, 2, 0, 0 };
 		
 		private static final float[] chancesAdv = new float[] { 2, 2, 2, 2, 2,
-			2, 2, 2, 2, 2, 0 };
+			2, 2, 2, 2, 2, 0, 0 };
 		
 		private static final float[] chancesNom = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 1 };
+			0, 0, 0, 0, 0, 1, 0 };
+		
+		private static final float[] chancesBuzz = new float[] { 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 1 };
 		
 
 		public abstract boolean proc(Weapon weapon, Char attacker,
@@ -334,6 +343,15 @@ public class Weapon extends KindOfWeapon {
 		public static Enchantment randomNom() {
 			try {
 				return ((Class<Enchantment>) enchants[Random.chances(chancesNom)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		@SuppressWarnings("unchecked")
+		public static Enchantment randomBuzz() {
+			try {
+				return ((Class<Enchantment>) enchants[Random.chances(chancesBuzz)])
 						.newInstance();
 			} catch (Exception e) {
 				return null;

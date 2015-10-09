@@ -75,7 +75,7 @@ public class WndBlacksmith extends Window {
 			@Override
 			protected void onClick() {
 				btnPressed = btnItem1;
-				GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEABLE,
+				GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEABLESIMPLE,
 						TXT_SELECT1);
 			}
 		};
@@ -87,7 +87,7 @@ public class WndBlacksmith extends Window {
 			@Override
 			protected void onClick() {
 				btnPressed = btnItem2;
-				GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEABLE,
+				GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEABLESIMPLE,
 						TXT_SELECT2);
 			}
 		};

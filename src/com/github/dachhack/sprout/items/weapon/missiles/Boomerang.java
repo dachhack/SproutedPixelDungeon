@@ -116,6 +116,9 @@ public class Boomerang extends MissileWeapon {
 			break;
 		case NONE:
 		}
+		if(reinforced){
+			info += "\n\nIt is reinforced. ";
+		}
 		return info;
 	}
 }

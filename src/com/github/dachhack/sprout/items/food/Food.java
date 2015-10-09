@@ -67,7 +67,7 @@ public class Food extends Item {
 
 			hero.buff(Hunger.class).satisfy(energy);
 			GLog.i(message);
-            int healEnergy = Math.max(7, Math.round(energy/20));
+            int healEnergy = Math.max(7, Math.round(energy/40));
 			switch (hero.heroClass) {
 			case WARRIOR:
 				if (hero.HP < hero.HT) {

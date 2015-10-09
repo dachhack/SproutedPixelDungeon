@@ -18,9 +18,12 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.CountDown;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
@@ -34,23 +37,24 @@ public class BanditKing extends Thief {
 	public Item item;
 
 	{
-		name = "bandit king";
+		name = "shadow bandit";
 		spriteClass = BanditKingSprite.class;
 		HP = HT = 200; //200
 
-		EXP = 50;
+		EXP = 10;
 		maxLvl = 25;
+		flying = true;
 		
 		// 1 in 30 chance to be a crazy bandit, equates to overall 1/90 chance.
 		lootChance = 0.333f;
 		defenseSkill = 20; //20
-		Dungeon.sporkAvail = false;
+		if (Dungeon.depth<25){Dungeon.sporkAvail = false;}
 		
 	}
 	
 	@Override
 	public int dr() {
-		return 10; //20
+		return 20; //20
 	}
 
 	@Override
@@ -59,14 +63,29 @@ public class BanditKing extends Thief {
    	}
 	
 	@Override
+	public int attackProc(Char enemy, int damage) {
+		if(enemy.buff(CountDown.class) == null){
+			Buff.affect(enemy, CountDown.class);	
+			state = FLEEING;
+		}
+
+		return damage;
+	}
+	
+	@Override
 	protected boolean steal(Hero hero) {
 		if (super.steal(hero)) {
 
+			
+			if (Dungeon.depth<25){
 			Buff.prolong(hero, Blindness.class, Random.Int(5, 12));
 			Buff.affect(hero, Poison.class).set(
 					Random.Int(5, 7) * Poison.durationFactor(enemy));
 			Buff.prolong(hero, Cripple.class, Cripple.DURATION);
 			Dungeon.observe();
+			} else if(hero.buff(CountDown.class) == null){
+				Buff.affect(enemy, CountDown.class);			
+		    }	
 
 			return true;
 		} else {
@@ -77,13 +96,15 @@ public class BanditKing extends Thief {
 	@Override
 	public void die(Object cause) {
 		super.die(cause);
+		if (Dungeon.depth<25){
 		yell("Fine! Take it back!");
-		GLog.n("Bandit King dissolves away.");
+		GLog.n("Shadow Bandit dissolves away.");
 		if (!Dungeon.limitedDrops.spork.dropped()) {
 			Dungeon.level.drop(new Spork(), pos).sprite.drop();
 			Dungeon.limitedDrops.spork.drop();
 			Dungeon.sporkAvail = false;
 		yell("Doh! Dropped my spork!");	
 		}
+	  }
 	}
 }

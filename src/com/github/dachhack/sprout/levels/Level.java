@@ -125,6 +125,7 @@ public abstract class Level implements Bundlable {
 
 	protected static final float TIME_TO_RESPAWN = 50;
 	protected static final int REGROW_TIMER = 10;
+	protected static final int DROP_TIMER = 10;
 		
 	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
 
@@ -546,7 +547,7 @@ public abstract class Level implements Bundlable {
 				if (growPos != -1) {
 					break;
 				}
-			}
+			} 
 			if (growPos != -1) {
 				  if (map[growPos] == Terrain.GRASS){
 				  Level.set(growPos, Terrain.HIGH_GRASS);
@@ -569,6 +570,75 @@ public abstract class Level implements Bundlable {
 			cell = Random.Int(LENGTH);
 			count++;
 		} while (map[cell] != Terrain.GRASS && count < 100);
+		     return cell;
+	}
+	
+	public Actor floordropper() {
+		return new Actor() {
+			@Override
+			protected boolean act() {
+				
+							
+				int dropPos = -1;
+				for (int i = 0; i < 20; i++) {
+					dropPos = randomChasmCell();
+					
+				if (dropPos != -1) {
+					//GLog.i("one ");
+					break;
+				}
+			}
+			if (dropPos != -1) {
+				
+				//GLog.i("two %s",dropPos);
+				  if (map[dropPos] == Terrain.EMPTY && Actor.findChar(dropPos) == null){
+					  
+					  //GLog.i("three ");
+					  //if the tile above is not chasm then set to chasm floor. If is chasm then set to chasm
+					 
+					  if  (map[dropPos-WIDTH]==Terrain.WALL ||
+							  map[dropPos-WIDTH]==Terrain.WALL_DECO){
+						  
+							  set(dropPos, Terrain.CHASM_WALL); 
+							  //GLog.i("four ");
+						   }
+					  else if (map[dropPos-WIDTH]!=Terrain.CHASM && 
+						  map[dropPos-WIDTH]!=Terrain.CHASM_FLOOR &&
+						  map[dropPos-WIDTH]!=Terrain.CHASM_WALL)
+					        {
+								  set(dropPos, Terrain.CHASM_FLOOR); 
+					         }  
+						 else {
+						   set(dropPos, Terrain.CHASM);
+						  // GLog.i("five ");
+					   }
+					  	
+					  if (map[dropPos+WIDTH]==Terrain.CHASM_FLOOR){
+						  set(dropPos+WIDTH, Terrain.CHASM);
+						 // GLog.i("six ");
+					  }
+					  
+				
+				    } 
+				  GameScene.updateMap(dropPos);
+				  GameScene.updateMap(dropPos-WIDTH);
+				  GameScene.updateMap(dropPos+WIDTH);
+				  Dungeon.observe();				  
+			}				
+			
+				spend(DROP_TIMER);
+				return true;
+			}
+		};
+	}
+	
+	public int randomChasmCell() {
+		int cell;
+		int count = 1;
+		do {
+			cell = Random.Int(WIDTH+1, LENGTH-(WIDTH+1));
+			count++;
+		} while (map[cell] != Terrain.EMPTY && count < 100);
 		     return cell;
 	}
 	
@@ -771,6 +841,7 @@ public abstract class Level implements Bundlable {
 		if (heap == null) {
 
 			heap = new Heap();
+			heap.seen = Dungeon.visible[cell];
 			heap.pos = cell;
 			if (map[cell] == Terrain.CHASM
 					|| (Dungeon.level != null && pit[cell])) {
@@ -1112,6 +1183,10 @@ public abstract class Level implements Bundlable {
 			}
 		}
 
+		for (Heap heap : heaps.values())
+						if (!heap.seen && fieldOfView[heap.pos])
+							heap.seen = true;
+		
 		return fieldOfView;
 	}
 

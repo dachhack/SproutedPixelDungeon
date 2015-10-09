@@ -342,9 +342,9 @@ public class DewVial extends Item {
 		for (int i = 0; i < items.length; i++) {
 			Item item = items[i];
 			if (item != null && item.cursed) {
-				item.cursed = false;
+				item.uncurse();
 				if(item.level<0){item.upgrade(-item.level);} //upgrade to even
-				procced = true;
+				if (item.cursed==false) {procced = true;}
 				hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
 			}
 			
@@ -359,9 +359,9 @@ public class DewVial extends Item {
 			if (item instanceof Bag) {
 				for (Item bagItem: ((Bag)item).items){
                    if (bagItem != null && bagItem.cursed) {
-                	   bagItem.cursed = false;
+                	   bagItem.uncurse();
                 	   if(bagItem.level<0){bagItem.upgrade(-bagItem.level);}
-                	   procced = true;
+                	   if (bagItem.cursed==false) {procced = true;}
                    }
                    
                    if (bagItem != null && Random.Float()<lvlchance && bagItem.isUpgradable() && bagItem.level < levelLimit){
@@ -384,6 +384,11 @@ public class DewVial extends Item {
 	
 	public void empty() {
 		volume = volume - 10;
+		updateQuickslot();
+	}
+	
+	public void sip() {
+		volume = volume - 1;
 		updateQuickslot();
 	}
 

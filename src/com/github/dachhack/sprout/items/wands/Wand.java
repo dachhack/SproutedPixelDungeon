@@ -61,6 +61,8 @@ public abstract class Wand extends KindOfWeapon {
 	private static final String TXT_SELF_TARGET = "You can't target yourself";
 
 	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s.";
+	
+	private static final String TXT_REINFORCED = "\n\nIt is reinforced. ";
 
 	private static final float TIME_TO_ZAP = 1f;
 
@@ -270,6 +272,10 @@ public abstract class Wand extends KindOfWeapon {
 			} else {
 				info.append(String.format(TXT_WEAPON));
 			}
+			
+		}
+		if(reinforced){
+			info.append(String.format(TXT_REINFORCED));
 		}
 		return info.toString();
 	}

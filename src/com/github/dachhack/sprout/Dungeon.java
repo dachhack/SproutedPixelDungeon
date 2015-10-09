@@ -51,6 +51,7 @@ import com.github.dachhack.sprout.levels.CavesLevel;
 import com.github.dachhack.sprout.levels.ChasmLevel;
 import com.github.dachhack.sprout.levels.CityBossLevel;
 import com.github.dachhack.sprout.levels.CityLevel;
+import com.github.dachhack.sprout.levels.CrabBossLevel;
 import com.github.dachhack.sprout.levels.DeadEndLevel;
 import com.github.dachhack.sprout.levels.FieldLevel;
 import com.github.dachhack.sprout.levels.FishingLevel;
@@ -66,6 +67,11 @@ import com.github.dachhack.sprout.levels.PrisonLevel;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.SewerBossLevel;
 import com.github.dachhack.sprout.levels.SewerLevel;
+import com.github.dachhack.sprout.levels.SkeletonBossLevel;
+import com.github.dachhack.sprout.levels.TenguDenLevel;
+import com.github.dachhack.sprout.levels.TenguHideoutLevel;
+import com.github.dachhack.sprout.levels.ThiefBossLevel;
+import com.github.dachhack.sprout.levels.ThiefCatchLevel;
 import com.github.dachhack.sprout.levels.VaultLevel;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.StartScene;
@@ -99,6 +105,7 @@ public class Dungeon {
 
 		// doesn't use Generator, so we have to enforce one armband drop here
 		armband, spork, royalspork, sewerkey, prisonkey, caveskey, citykey, hallskey, ringofwealth,
+		conchshell, ancientcoin, tengukey, bone, 
 
 		// containers
 		dewVial, seedBag, scrollBag, potionBag, wandBag, ankhChain;
@@ -117,6 +124,7 @@ public class Dungeon {
 	}
 	
 	public static boolean earlygrass = false;
+	public static boolean playtest = false;
 	public static boolean gnollspawned = false;
 	public static boolean skeletonspawned = false;
 	public static boolean goldthiefspawned = false;
@@ -125,6 +133,11 @@ public class Dungeon {
 	public static boolean sanchikarahlife = false;
 	public static boolean sanchikarahtranscend = false;
 	public static boolean shadowyogkilled = false;
+	public static boolean crabkingkilled = false;
+	public static boolean banditkingkilled = false;
+	public static boolean skeletonkingkilled = false;
+	public static boolean tengukilled = false;
+	public static boolean tengudenkilled = false;
 	public static boolean dewDraw = false;
 	public static boolean dewWater = false;
 	public static boolean wings = false;
@@ -135,6 +148,8 @@ public class Dungeon {
 	public static int challenges;
 	
 	public static int ratChests = 0;
+	public static int zotDrains = 0;
+	public static int shellCharge = 20;
 	public static boolean sporkAvail = false;
 
 	public static Hero hero;
@@ -205,6 +220,7 @@ public class Dungeon {
 		StartScene.curClass.initHero(hero);
 		
 		earlygrass = false;
+		playtest = false;
 		gnollspawned = false;
 		skeletonspawned = false;
 		goldthiefspawned = false;
@@ -213,8 +229,15 @@ public class Dungeon {
 		sanchikarahlife = false;
 		sanchikarahtranscend = false;
 		shadowyogkilled = false;
+		crabkingkilled = false;
+		banditkingkilled = false;
+		tengukilled = false;
+		tengudenkilled = false;
+		skeletonkingkilled = false;
 		sealedlevel = false;
         ratChests = 0;
+        zotDrains = 0;
+        shellCharge = 20;
 		sporkAvail = false;
 		dewDraw = false;
 		dewWater = false;
@@ -231,6 +254,8 @@ public class Dungeon {
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 27;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -248,6 +273,8 @@ public class Dungeon {
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 28;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -265,6 +292,8 @@ public class Dungeon {
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 29;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -282,6 +311,8 @@ public class Dungeon {
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 30;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -301,6 +332,8 @@ public static Level newHallsBossLevel(){
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 25;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -321,6 +354,8 @@ public static Level newHallsBossLevel(){
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 31;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -339,6 +374,8 @@ public static Level newFortressLevel(){
 		Dungeon.level = null;
 		Actor.clear();
 		depth = 32;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
 		
 		Arrays.fill(visible, false);
 
@@ -357,6 +394,8 @@ public static Level newChasmLevel(){
 	Dungeon.level = null;
 	Actor.clear();
 	depth = 33;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
 	
 	Arrays.fill(visible, false);
 
@@ -375,6 +414,8 @@ public static Level newInfestLevel(){
 	Dungeon.level = null;
 	Actor.clear();
     depth = 35;
+    if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
 	
 	Arrays.fill(visible, false);
 
@@ -388,6 +429,89 @@ public static Level newInfestLevel(){
 
 	return level;
 }
+
+
+
+public static Level newTenguHideoutLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth = 36;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new TenguDenLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
+public static Level newSkeletonBossLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth = 37;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new SkeletonBossLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
+public static Level newCrabBossLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth = 38;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new CrabBossLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
+public static Level newThiefBossLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth = 40;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new ThiefBossLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
 	
 	public static Level newLevel() {
 
@@ -395,6 +519,9 @@ public static Level newInfestLevel(){
 		Actor.clear();
 
 		depth++;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
+		
 		if (depth > Statistics.deepestFloor && depth < 27) {
 			Statistics.deepestFloor = depth;
 
@@ -404,12 +531,20 @@ public static Level newInfestLevel(){
 				Statistics.completedWithNoKilling = false;
 			}
 		}
+		
+		if (depth==6){
+			Statistics.sewerKills=Statistics.enemiesSlain;
+		}
+		if (depth==10){
+			Statistics.prisonKills=Statistics.enemiesSlain-Statistics.sewerKills;
+		}
 
 		Arrays.fill(visible, false);
 
 		Level level;
 		switch (depth) {
 		case 1:
+			//level = new PrisonBossLevel();
 			//level = new SewerLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
@@ -421,6 +556,7 @@ public static Level newInfestLevel(){
 			//break;
 		case 3:
 		case 4:
+			//level = new CavesLevel();
 			level = new SewerLevel();
 			//hero.HT=999;
 			//hero.HP=hero.HT;
@@ -473,6 +609,9 @@ public static Level newInfestLevel(){
 		case 26:
 			level = new LastLevel();
 			break;
+		case 41:
+			level = new ThiefCatchLevel();
+			break;
 		default:
 			level = new DeadEndLevel();
 			if (depth<27){Statistics.deepestFloor--;}
@@ -505,12 +644,17 @@ public static Level newInfestLevel(){
 
 	public static boolean bossLevel(int depth) {
 		return depth == 5 || depth == 10 || depth == 15 || depth == 20
-				|| depth == 25;
+				|| depth == 25 ||  depth ==  36 ||  depth ==  41;
 	}
 	
 	public static boolean growLevel(int depth) {
 		return depth == 27 || depth == 28 || depth == 32 || depth == 30;
 	}
+	
+	public static boolean dropLevel(int depth) {
+		return depth == 40;
+	}
+
 
 	@SuppressWarnings("deprecation")
 	public static void switchLevel(final Level level, int pos) {
@@ -526,6 +670,11 @@ public static Level newInfestLevel(){
 		Actor regrower = level.regrower();
 		if (regrower != null && growLevel(depth)) {
 			Actor.add(level.regrower());
+		}
+		
+		Actor floordropper = level.floordropper();
+		if (floordropper != null && dropLevel(depth)) {
+			Actor.add(level.floordropper());
 		}
 		
 		hero.pos = pos != -1 ? pos : level.exit;
@@ -622,12 +771,19 @@ public static Level newInfestLevel(){
 	private static final String STRIL = "sanchikarahlife";
 	private static final String STRIT = "sanchikarahtranscend";
 	private static final String SYOGKILL = "shadowyogkilled";
+	private static final String CRABKILL = "crabkingkilled";
+	private static final String TENGUKILL = "tengukilled";
+	private static final String TENGUDENKILL = "tengudenkilled";
+	private static final String SKELETONKILL = "skeletonkingkilled";
+	private static final String BANDITKILL = "banditkingkilled";
 	private static final String SEALEDLEV = "sealedlevel";
 	private static final String SPORK = "sporkAvail";
 	private static final String DEWDRAW = "dewDraw";
 	private static final String DEWWATER = "dewWater";
 	private static final String WINGS = "wings";
-	
+	private static final String ZOTDRAINS = "zotDrains";
+	private static final String SHELLCHARGE = "shellCharge";
+	private static final String PLAYTEST = "playtest";
 	
 	
 	// TODO: to support pre-0.2.3 saves, remove when needed
@@ -672,6 +828,7 @@ public static Level newInfestLevel(){
 			bundle.put(DEPTH, depth);
 			
 			bundle.put(RATCHESTS, ratChests);
+			bundle.put(ZOTDRAINS, zotDrains);
 			bundle.put(EARLYGRASS, earlygrass);
 			bundle.put(GNOLLSPAWN, gnollspawned);
 			bundle.put(SKELETONSPAWN, skeletonspawned);
@@ -681,11 +838,18 @@ public static Level newInfestLevel(){
 			bundle.put(STRIL, sanchikarahlife);
 			bundle.put(STRIT, sanchikarahtranscend);
 			bundle.put(SYOGKILL, shadowyogkilled);
+			bundle.put(CRABKILL, crabkingkilled);
+			bundle.put(TENGUKILL, tengukilled);
+			bundle.put(TENGUDENKILL, tengudenkilled);
+			bundle.put(BANDITKILL, banditkingkilled);
+			bundle.put(SKELETONKILL, skeletonkingkilled);
 			bundle.put(SEALEDLEV, sealedlevel);
 			bundle.put(SPORK, sporkAvail);
 			bundle.put(DEWDRAW, dewDraw);
 			bundle.put(DEWWATER, dewWater);
 			bundle.put(WINGS, wings);
+			bundle.put(SHELLCHARGE, shellCharge);
+			bundle.put(PLAYTEST, playtest);
 	
 			for (int d : droppedItems.keyArray()) {
 				bundle.put(String.format(DROPPED, d), droppedItems.get(d));
@@ -867,6 +1031,8 @@ public static Level newInfestLevel(){
 		depth = bundle.getInt(DEPTH);
 		
 		ratChests = bundle.getInt(RATCHESTS);
+		zotDrains = bundle.getInt(ZOTDRAINS);
+		shellCharge = bundle.getInt(SHELLCHARGE);
 		earlygrass = bundle.getBoolean(EARLYGRASS);
 		gnollspawned = bundle.getBoolean(GNOLLSPAWN);
 		skeletonspawned = bundle.getBoolean(SKELETONSPAWN);
@@ -876,18 +1042,24 @@ public static Level newInfestLevel(){
 		sanchikarahlife = bundle.getBoolean(STRIL);
 		sanchikarahtranscend = bundle.getBoolean(STRIT);
 		shadowyogkilled = bundle.getBoolean(SYOGKILL);
+		crabkingkilled = bundle.getBoolean(CRABKILL);
+		tengukilled = bundle.getBoolean(TENGUKILL);
+		tengudenkilled = bundle.getBoolean(TENGUDENKILL);
+		banditkingkilled = bundle.getBoolean(BANDITKILL);
+		skeletonkingkilled = bundle.getBoolean(SKELETONKILL);
 		sealedlevel = bundle.getBoolean(SEALEDLEV);
 		sporkAvail = bundle.getBoolean(SPORK);
 		dewDraw = bundle.getBoolean(DEWDRAW);
 		dewWater = bundle.getBoolean(DEWWATER);
 		wings = bundle.getBoolean(WINGS);
+		playtest = bundle.getBoolean(PLAYTEST);
 		
 		Statistics.restoreFromBundle(bundle);
 		Journal.restoreFromBundle(bundle);
 		Generator.restoreFromBundle(bundle);
 
 		droppedItems = new SparseArray<ArrayList<Item>>();
-		for (int i = 2; i <= Statistics.deepestFloor + 1; i++) {
+		for (int i = 2; i <= Statistics.realdeepestFloor + 1; i++) {
 			ArrayList<Item> dropped = new ArrayList<Item>();
 			for (Bundlable b : bundle.getCollection(String.format(DROPPED, i))) {
 				dropped.add((Item) b);

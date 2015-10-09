@@ -35,6 +35,7 @@ import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
@@ -78,7 +79,7 @@ public class Tengu extends Mob {
 	@Override
 	public void die(Object cause) {
 
-		
+		//note
 		Badges.Badge badgeToCheck = null;
 		switch (Dungeon.hero.heroClass) {
 		case WARRIOR:
@@ -96,7 +97,7 @@ public class Tengu extends Mob {
 		}
 		if (!Badges.isUnlocked(badgeToCheck)) {
 			Dungeon.level.drop(new TomeOfMastery(), pos).sprite.drop();
-		}
+		} 
 
 		GameScene.bossSlain();
 		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
@@ -104,8 +105,10 @@ public class Tengu extends Mob {
 		super.die(cause);
 
 		Badges.validateBossSlain();
+		Dungeon.tengukilled=true;
 
-		yell("Free at last...");
+		yell("Time to flee");
+		TenguEscape.spawnAt(pos);
 					
 	}
 

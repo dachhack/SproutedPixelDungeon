@@ -22,6 +22,7 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.VioletDewdrop;
@@ -74,6 +75,7 @@ public class FishProtector extends Mob implements Callback {
 		return 15;
 	}
 
+		
 	@Override
 	protected boolean canAttack(Char enemy) {
 		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
@@ -144,6 +146,7 @@ public class FishProtector extends Mob implements Callback {
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
 		RESISTANCES.add(LightningTrap.Electricity.class);
+		RESISTANCES.add(Invisibility.class);
 	}
 
 	@Override

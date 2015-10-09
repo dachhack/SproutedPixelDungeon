@@ -22,7 +22,9 @@ import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.items.AncientCoin;
 import com.github.dachhack.sprout.items.CityKey;
+import com.github.dachhack.sprout.items.ConchShell;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.food.Cloudberry;
@@ -94,6 +96,11 @@ public class GoldThief extends Mob {
 			explodeDew(pos);				
 		} else {
 			explodeDew(pos);
+		}
+		
+		if(!Dungeon.limitedDrops.ancientcoin.dropped() && Statistics.goldThievesKilled > 50 && Random.Int(10)==0) {
+			Dungeon.limitedDrops.ancientcoin.drop();
+			Dungeon.level.drop(new AncientCoin(), pos).sprite.drop();
 		}
 
 		Statistics.goldThievesKilled++;

@@ -46,7 +46,7 @@ public class VaultLevel extends Level {
 	protected static final int REGROW_TIMER = 4;
 		@Override
 	public String tilesTex() {
-		return Assets.TILES_CITY;
+		return Assets.TILES_VAULT;
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public class VaultLevel extends Level {
 		case Terrain.WATER:
 			return "Suspiciously colored water";
 		case Terrain.HIGH_GRASS:
-			return "High blooming flowers";
+			return "Flowers with little gem-shaped leaves";
 		default:
 			return super.tileName(tile);
 		}
@@ -188,12 +188,12 @@ public class VaultLevel extends Level {
 			return "A ramp leads down to the lower depth.";
 		case Terrain.WALL_DECO:
 		case Terrain.EMPTY_DECO:
-			return "Several tiles are missing here.";
+			return "Rough-hewn gold ore adorns the dungeon.";
 		case Terrain.EMPTY_SP:
 			return "Thick carpet covers the floor.";
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "The statue depicts some dwarf standing in a heroic stance.";
+			return "The statue is made of solid gold.";
 		case Terrain.BOOKSHELF:
 			return "The rows of books on different disciplines fill the bookshelf.";
 		default:

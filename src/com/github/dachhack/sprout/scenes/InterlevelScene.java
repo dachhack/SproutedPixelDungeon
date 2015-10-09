@@ -54,6 +54,10 @@ public class InterlevelScene extends PixelScene {
 	private static final String TXT_PORTCAVES = "Let's go fishing...";
 	private static final String TXT_PORTCITY = "Clinking of coins...";
 	private static final String TXT_PORTHALLS = "Prepare to meet doom...";
+	private static final String TXT_PORTCRAB = "A rushing of water...";
+	private static final String TXT_PORTTENGU = "Entering Tengu hideout...";
+	private static final String TXT_PORTCOIN = "Coins spilling...";
+	private static final String TXT_PORTBONE = "War drums and fire...";
 
 	private static final String ERR_FILE_NOT_FOUND = "Save file not found. If this error persists after restarting, "
 			+ "it may mean this save game is corrupted. Sorry about that.";
@@ -62,7 +66,7 @@ public class InterlevelScene extends PixelScene {
 
 	public static enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, PORT1, PORT2, PORT3, PORT4,
-		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS
+		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS, PORTCRAB, PORTTENGU, PORTCOIN, PORTBONE, RETURNSAVE
 	};
 
 	public static Mode mode;
@@ -105,6 +109,7 @@ public class InterlevelScene extends PixelScene {
 			text = TXT_RESURRECTING;
 			break;
 		case RETURN:
+		case RETURNSAVE:
 			text = TXT_RETURNING;
 			break;
 		case FALL:
@@ -136,6 +141,18 @@ public class InterlevelScene extends PixelScene {
 		    break;
 		case  PORTHALLS:
 			text = TXT_PORTHALLS;
+		    break;
+		case  PORTCRAB:
+			text = TXT_PORTCRAB;
+		    break;
+		case  PORTTENGU:
+			text = TXT_PORTTENGU;
+		    break;
+		case  PORTCOIN:
+			text = TXT_PORTCOIN;
+		    break;
+		case  PORTBONE:
+			text = TXT_PORTBONE;
 		    break;
 		}
 
@@ -172,6 +189,9 @@ public class InterlevelScene extends PixelScene {
 					case RETURN:
 						returnTo();
 						break;
+					case RETURNSAVE:
+						returnToSave();
+						break;
 					case FALL:
 						fall();
 						break;
@@ -201,6 +221,18 @@ public class InterlevelScene extends PixelScene {
 						break;
 					case PORTHALLS:
 						portal(9);
+						break;
+					case PORTCRAB:
+						portal(10);
+						break;
+					case PORTTENGU:
+						portal(11);
+						break;
+					case PORTCOIN:
+						portal(12);
+						break;
+					case PORTBONE:
+						portal(13);
 						break;
 					}
 
@@ -324,7 +356,11 @@ public class InterlevelScene extends PixelScene {
 		Actor.fixTime();
 
 		Dungeon.saveLevel();
-		if (Dungeon.depth > 26) {
+		if (Dungeon.depth == 41) {
+			  Dungeon.depth=40;
+			  Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
+			  Dungeon.switchLevel(level, level.entrance);
+		} else if (Dungeon.depth > 26) {
 		  Dungeon.depth=1;
 		  Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
 		  Dungeon.switchLevel(level, level.entrance);
@@ -344,6 +380,20 @@ public class InterlevelScene extends PixelScene {
 		Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
 		Dungeon.switchLevel(level,
 				Level.resizingNeeded ? level.adjustPos(returnPos) : returnPos);
+	}
+	
+	private void returnToSave() throws IOException {
+
+		Actor.fixTime();
+        Dungeon.hero.invisible=0;
+		Dungeon.saveLevel();
+		if (Dungeon.bossLevel(Statistics.deepestFloor)){
+			Dungeon.depth = Statistics.deepestFloor-1;
+		} else {
+			Dungeon.depth = Statistics.deepestFloor;
+		}
+		Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
+		Dungeon.switchLevel(level, level.entrance);
 	}
 
 	private void restore() throws IOException {
@@ -410,6 +460,18 @@ public class InterlevelScene extends PixelScene {
 			break;
 		case 9:
 			level = Dungeon.newHallsBossLevel();
+			break;
+		case 10:
+			level = Dungeon.newCrabBossLevel();
+			break;
+		case 11:
+			level = Dungeon.newTenguHideoutLevel();
+			break;
+		case 12:
+			level = Dungeon.newThiefBossLevel();
+			break;
+		case 13:
+			level = Dungeon.newSkeletonBossLevel();
 			break;
 		default:
 			level = Dungeon.newLevel();

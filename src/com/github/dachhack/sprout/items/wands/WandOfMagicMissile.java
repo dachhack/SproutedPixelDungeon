@@ -159,11 +159,16 @@ public class WandOfMagicMissile extends Wand {
 						  evoke(curUser);
 						  item.upgrade();
 						} else if (Random.Float()<upgradeChance){
-					     Sample.INSTANCE.play(Assets.SND_EVOKE);
-					     ScrollOfUpgrade.upgrade(curUser);
-					     evoke(curUser);
-					     item.upgrade();
-					     upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
+							if (item.level<15 || item.reinforced){
+					            Sample.INSTANCE.play(Assets.SND_EVOKE);
+					            ScrollOfUpgrade.upgrade(curUser);
+					            evoke(curUser);
+					            item.upgrade();
+					            upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
+							 } else {
+								 GLog.w("%s is not strong enough to recieve anymore upgrades!", item.name());
+								 i=level;
+							 }
 					  }
 					i++;
 					}

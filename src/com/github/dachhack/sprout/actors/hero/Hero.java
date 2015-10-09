@@ -111,8 +111,10 @@ import com.github.dachhack.sprout.ui.AttackIndicator;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.GLog;
+import com.github.dachhack.sprout.windows.WndDewVial;
 import com.github.dachhack.sprout.windows.WndMessage;
 import com.github.dachhack.sprout.windows.WndResurrect;
+import com.github.dachhack.sprout.windows.WndTinkerer;
 import com.github.dachhack.sprout.windows.WndTradeItem;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -656,6 +658,7 @@ public class Hero extends Char {
 						// after this... I'm done, I'm just done.
 						if (item instanceof DewVial) {
 							GLog.w("Its revival power seems to have faded.");
+							GameScene.show(new WndDewVial(item));
 						}
 					}
 
@@ -841,7 +844,27 @@ public class Hero extends Char {
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 				Game.switchScene(InterlevelScene.class);
 				
-			} else if (Dungeon.depth > 26){
+			
+		    } else if (Dungeon.depth == 41) {
+			curAction = null;
+
+			Hunger hunger = buff(Hunger.class);
+			if (hunger != null && !hunger.isStarving()) {
+				hunger.satisfy(-Hunger.STARVING / 10);
+			}
+
+			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
+			if (buff != null)
+				buff.detach();
+
+			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
+				if (mob instanceof DriedRose.GhostHero)
+					mob.destroy();
+            
+			InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
+			Game.switchScene(InterlevelScene.class);
+			
+		   } else if (Dungeon.depth > 26){
 				ready();
 			} else if (Dungeon.depth == 25){
 				ready();
@@ -905,6 +928,7 @@ public class Hero extends Char {
 	}
 
 	public void rest(boolean tillHealthy) {
+		//search(true);
 		spendAndNext(TIME_TO_REST);
 		if (!tillHealthy) {
 			sprite.showStatus(CharSprite.DEFAULT, TXT_WAIT);
@@ -1014,6 +1038,7 @@ public class Hero extends Char {
 		ArrayList<Mob> visible = new ArrayList<Mob>();
 
 		boolean newMob = false;
+		Mob closest = null;
 
 		for (Mob m : Dungeon.level.mobs) {
 			if (Level.fieldOfView[m.pos] && m.hostile) {
@@ -1021,7 +1046,18 @@ public class Hero extends Char {
 				if (!visibleEnemies.contains(m)) {
 					newMob = true;
 				}
+				if (closest == null){
+									closest = m;
+								} else if (distance(closest) > distance(m)) {
+									closest = m;
+								}
 			}
+		}
+			
+			if (closest != null && (QuickSlotButton.lastTarget == null ||
+												!QuickSlotButton.lastTarget.isAlive() ||
+												!Dungeon.visible[QuickSlotButton.lastTarget.pos])){
+								QuickSlotButton.target(closest);
 		}
 
 		if (newMob) {
@@ -1350,7 +1386,8 @@ public class Hero extends Char {
 			reallyDie(cause);
 
 		} else {
-
+			
+			ankh.detach(belongings.backpack);
 			Dungeon.deleteGame(Dungeon.hero.heroClass, false);
 			GameScene.show(new WndResurrect(ankh, cause));
 

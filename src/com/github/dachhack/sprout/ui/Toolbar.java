@@ -91,7 +91,12 @@ public class Toolbar extends Component {
 			@Override
 			protected void onClick() {
 				Dungeon.hero.search(true);
-			}
+			};
+			@Override
+			protected boolean onLongClick() {
+				GameScene.selectCell(informer);
+				return true;
+			};
 		});
 
 		add(btnInfo = new Tool(40, 7, 21, 24) {
@@ -234,7 +239,9 @@ public class Toolbar extends Component {
 			}
 
 			Heap heap = Dungeon.level.heaps.get(cell);
-			if (heap != null) {
+			if (heap != null 
+					//&& heap.seen
+					) {
 				if (heap.type == Heap.Type.FOR_SALE && heap.size() == 1
 						&& heap.peek().price() > 0) {
 					GameScene.show(new WndTradeItem(heap, false));

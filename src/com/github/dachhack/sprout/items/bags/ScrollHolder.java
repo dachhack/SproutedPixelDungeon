@@ -17,7 +17,23 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.actors.mobs.SeekingBomb;
+import com.github.dachhack.sprout.actors.mobs.SeekingClusterBomb;
+import com.github.dachhack.sprout.items.ActiveMrDestructo;
+import com.github.dachhack.sprout.items.ActiveMrDestructo2;
+import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.Bomb;
+import com.github.dachhack.sprout.items.ClusterBomb;
+import com.github.dachhack.sprout.items.DizzyBomb;
+import com.github.dachhack.sprout.items.HolyHandGrenade;
+import com.github.dachhack.sprout.items.InactiveMrDestructo;
+import com.github.dachhack.sprout.items.InactiveMrDestructo2;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.OrbOfZot;
+import com.github.dachhack.sprout.items.SeekingBombItem;
+import com.github.dachhack.sprout.items.SeekingClusterBombItem;
+import com.github.dachhack.sprout.items.SmartBomb;
+import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
@@ -27,12 +43,29 @@ public class ScrollHolder extends Bag {
 		name = "scroll holder";
 		image = ItemSpriteSheet.HOLDER;
 
-		size = 12;
+		size = 20;
 	}
 
 	@Override
 	public boolean grab(Item item) {
-		return item instanceof Scroll;
+		if (item instanceof Scroll 
+				||  item instanceof Bomb 
+				||  item instanceof DizzyBomb 
+				||  item instanceof SmartBomb 
+				||  item instanceof SeekingBombItem 
+				||  item instanceof ClusterBomb 
+				||  item instanceof SeekingClusterBombItem 
+				||  item instanceof ActiveMrDestructo
+				||  item instanceof ActiveMrDestructo2
+				||  item instanceof InactiveMrDestructo
+				||  item instanceof InactiveMrDestructo2
+				||  item instanceof OrbOfZot
+				||  item instanceof HolyHandGrenade
+				){
+			return true;
+			} else {
+			return false;
+			}
 	}
 
 	@Override
@@ -43,6 +76,7 @@ public class ScrollHolder extends Bag {
 	@Override
 	public String info() {
 		return "This tubular container looks like it would hold an astronomer's charts, but your scrolls will fit just as well.\n\n"
-				+ "The holder doesn't look very flammable, so your scrolls should be safe from fire inside it.";
+				+ "The holder doesn't look very flammable, so your scrolls should be safe from fire inside it."
+				+ "There is a handy little compartment for your bombs and other explosives too. Nice!";
 	}
 }

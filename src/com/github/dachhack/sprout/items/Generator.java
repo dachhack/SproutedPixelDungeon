@@ -259,7 +259,7 @@ public class Generator {
 				Nut.class, Blackberry.class, Blueberry.class, Cloudberry.class,
 				Moonberry.class, Starflower.Seed.class, Phaseshift.Seed.class};
 		
-		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 48, 20, 4, 16, 2, 2, 2};
+		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 2, 12, 12, 48, 20, 4, 16, 2, 1, 1};
 		
 		
 		Category.SEED2.classes = new Class<?>[] { Firebloom.Seed.class,

@@ -21,8 +21,10 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.GoldThief;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
+import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.Emitter;
@@ -92,6 +94,7 @@ public class CityLevel extends RegularLevel {
 
 	@Override
 	protected void createItems() {
+		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Random.Int(1) == 0){addItemToSpawn(new Bomb());}
 		super.createItems();
 
 		Imp.Quest.spawn(this);

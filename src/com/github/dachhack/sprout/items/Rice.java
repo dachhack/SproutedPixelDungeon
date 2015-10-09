@@ -46,7 +46,6 @@ public class Rice extends Item {
 		stackable = false;
 
 		defaultAction = AC_COOK;
-		defaultAction = AC_COOKBOMB;
 	}
 
 	private int bombcost=5;

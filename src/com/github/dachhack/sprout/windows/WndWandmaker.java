@@ -18,8 +18,11 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
+import com.github.dachhack.sprout.items.AdamantWand;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -37,6 +40,8 @@ public class WndWandmaker extends Window {
 	private static final String TXT_BATTLE = "Battle wand";
 	private static final String TXT_NON_BATTLE = "Non-battle wand";
 
+	private static final String TXT_ADAMANT = "You might find this raw material useful later on. I'm not powerful enough to work with it.";
+	private static final String TXT_WOW = "How did you make it all this way!? I have another reward for you. ";
 	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
 
 	private static final int WIDTH = 120;
@@ -95,7 +100,20 @@ public class WndWandmaker extends Window {
 			Dungeon.level.drop(reward, wandmaker.pos).sprite.drop();
 		}
 
+		
+		
 		wandmaker.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
+		
+		if(Dungeon.hero.heroClass==HeroClass.MAGE){
+		  Dungeon.level.drop(new AdamantWand(), wandmaker.pos).sprite.drop();
+		  wandmaker.yell(TXT_ADAMANT);
+		}
+		
+		if(Dungeon.hero.heroClass!=HeroClass.MAGE && Statistics.sewerKills==Statistics.enemiesSlain){
+			Dungeon.level.drop(new AdamantWand(), wandmaker.pos).sprite.drop();
+			  wandmaker.yell(TXT_WOW);
+		}
+		
 		wandmaker.destroy();
 
 		wandmaker.sprite.die();

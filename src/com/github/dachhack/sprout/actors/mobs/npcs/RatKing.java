@@ -87,8 +87,8 @@ public class RatKing extends NPC {
 			yell("Please don't take my treasures!");
 			state = WANDERING;
 		//} else if (Statistics.deepestFloor>9 && checkChests >= Dungeon.ratChests && spork==null && royalspork==null){ 
-		} else if (Statistics.deepestFloor>20 && checkChests >= Dungeon.ratChests && spork==null){ 
-			yell("Thank you for not stealing my treasures! You can have my spork if you can kill the Bandit King who took it from me.");
+		} else if (Statistics.deepestFloor>10 && checkChests >= Dungeon.ratChests && spork==null){ 
+			yell("Thank you for not stealing my treasures! You can have my spork if you can kill the Shadow Bandit who took it from me.");
 			Dungeon.sporkAvail = true;
 		} else if (checkChests < Dungeon.ratChests){
 			Dungeon.sporkAvail = false;

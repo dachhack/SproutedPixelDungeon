@@ -36,7 +36,7 @@ public class DeathRay extends Image {
 	private float timeLeft;
 
 	public DeathRay(PointF s, PointF e) {
-		super(Effects.get(Effects.Type.RAY));
+		super(Effects.get(Effects.Type.DEATH_RAY));
 
 		origin.set(0, height / 2);
 

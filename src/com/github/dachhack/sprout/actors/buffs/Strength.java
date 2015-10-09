@@ -26,7 +26,7 @@ public class Strength extends Buff {
 
 	@Override
 	public int icon() {
-		return BuffIndicator.FURY;
+		return BuffIndicator.MOON_FURY;
 	}
 
 	@Override

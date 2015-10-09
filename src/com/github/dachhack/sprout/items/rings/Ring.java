@@ -217,8 +217,11 @@ public class Ring extends KindofMisc {
 					+ "The "
 					+ name()
 					+ " is on your finger"
-					+ (cursed ? ", and because it is cursed, you are powerless to remove it."
-							: ".");
+					+ (cursed ? ", and because it is cursed, you are powerless to remove it. "
+							: ".")
+					+ (reinforced ? "\n\nIt is reinforced."
+							: "")
+							;
 
 		} else if (cursed && cursedKnown) {
 
@@ -228,7 +231,7 @@ public class Ring extends KindofMisc {
 
 		} else {
 
-			return desc();
+			return desc() + (reinforced ? "\n\nIt is reinforced." : "");
 
 		}
 	}

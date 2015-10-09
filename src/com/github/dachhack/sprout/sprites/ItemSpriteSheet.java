@@ -35,7 +35,7 @@ public class ItemSpriteSheet {
 	private static final int ROW13 = 12 * 16;
 	private static final int ROW14 = 13 * 16;
 	private static final int ROW15 = 14 * 16;
-	//private static final int ROW16 = 15 * 16;
+	private static final int ROW16 = 15 * 16;
 
 	// Row One: Items which can't be obtained
 	// null warning occupies space 0, should only show up if there's a bug.
@@ -45,7 +45,9 @@ public class ItemSpriteSheet {
 	public static final int SANDBAG = ROW1 + 3;
 	public static final int REDDEWDROP = ROW8 + 8;
 	public static final int YELLOWDEWDROP = ROW8 + 14;
-	public static final int VIOLETDEWDROP = ROW8 + 15;
+	public static final int VIOLETDEWDROP =  ROW14 + 13;
+	public static final int COIN =  ROW14 + 14;
+	public static final int ARTIFACT =  ROW14 + 15;
 	// Heaps (containers)
 	public static final int BONES = ROW1 + 4;
 	public static final int REMAINS = ROW1 + 5;
@@ -81,6 +83,14 @@ public class ItemSpriteSheet {
 	public static final int SHATTPOT = ROW2 + 15;
 	public static final int RICEBOMB = ROW13 + 10;
 	public static final int HOLY_HAND_GRENADE = ROW13 + 13;
+	public static final int CLUSTER_BOMB = ROW15 + 11;
+	public static final int SEEKING_BOMB = ROW15 + 12;
+	public static final int DIZZY_BOMB = ROW15 + 13;
+	public static final int SMART_BOMB = ROW15 + 14;
+	public static final int SEEKING_CLUSTER_BOMB = ROW15 + 15;
+	public static final int SHELL = ROW5 + 10;
+	public static final int BONE = ROW5 + 11;
+	
 
 	// Row Three: Melee weapons
 	public static final int KNUCKLEDUSTER = ROW3 + 0;
@@ -94,6 +104,8 @@ public class ItemSpriteSheet {
 	public static final int LONG_SWORD = ROW3 + 8;
 	public static final int WAR_HAMMER = ROW3 + 9;
 	public static final int GLAIVE = ROW3 + 10;
+	public static final int ADAMANT_WEAPON = ROW3 + 11;
+	public static final int CHAINSAW = ROW3 + 12;
 
 	// Row Four: Missile weapons and sporks
 	public static final int DART = ROW4 + 0;
@@ -105,6 +117,9 @@ public class ItemSpriteSheet {
 	public static final int TOMAHAWK = ROW4 + 6;
 	public static final int SPORK = ROW4 + 7;
 	public static final int ROYALSPORK = ROW4 + 8;
+	public static final int WAVE = ROW4 + 9;
+	public static final int STL_HONEYPOT = ROW4 + 11;
+	public static final int STL_SHATTPOT = ROW4 + 12;
 
 	// Row Five: Armors
 	public static final int ARMOR_CLOTH = ROW5 + 0;
@@ -116,6 +131,7 @@ public class ItemSpriteSheet {
 	public static final int ARMOR_MAGE = ROW5 + 6;
 	public static final int ARMOR_ROGUE = ROW5 + 7;
 	public static final int ARMOR_HUNTRESS = ROW5 + 8;
+	public static final int ARMOR_ADAMANT = ROW5 + 9;
 
 	// Row Six: Wands
 	public static final int WAND_MAGIC_MISSILE = ROW6 + 0;
@@ -131,6 +147,7 @@ public class ItemSpriteSheet {
 	public static final int WAND_PURPLEHEART = ROW6 + 10;
 	public static final int WAND_OAK = ROW6 + 11;
 	public static final int WAND_BIRCH = ROW6 + 12;
+	public static final int WAND_ADAMANT = ROW6 + 13;
 
 	// Row Seven: Rings
 	public static final int RING_GARNET = ROW7 + 0;
@@ -145,6 +162,7 @@ public class ItemSpriteSheet {
 	public static final int RING_QUARTZ = ROW7 + 9;
 	public static final int RING_AGATE = ROW7 + 10;
 	public static final int RING_DIAMOND = ROW7 + 11;
+	public static final int RING_ADAMANT = ROW7 + 12;
 
 	// Row Eight: Artifacts with Static Images
 	public static final int ARTIFACT_CLOAK = ROW8 + 0;
@@ -159,6 +177,7 @@ public class ItemSpriteSheet {
 	public static final int BOOKOFTRANSCENDENCE = ROW8 + 11;
 	public static final int DWARFHAMMER = ROW8 + 12;
 	public static final int ANCIENTKEY = ROW8 + 13;
+	public static final int OTILUKES_JOURNAL = ROW8 + 7;
 
 	// Row Nine: Artifacts with Dynamic Images
 	public static final int ARTIFACT_HORN1 = ROW9 + 0;
@@ -190,6 +209,7 @@ public class ItemSpriteSheet {
 	public static final int SCROLL_NCOSRANE = ROW10 + 10;
 	public static final int SCROLL_TIWAZ = ROW10 + 11;
 	public static final int SCROLL_NENDIL = ROW10 + 12;
+	public static final int JOURNAL_PAGE = ROW10 + 13;
 
 	// Row Eleven: Potions
 	public static final int POTION_CRIMSON = ROW11 + 0;
@@ -206,6 +226,7 @@ public class ItemSpriteSheet {
 	public static final int POTION_IVORY = ROW11 + 11;
 	public static final int POTION_AQUA = ROW11 + 12;
 	public static final int POTION_HONEY = ROW11 + 13;
+	public static final int POTION_VIOLET = ROW11 + 14;
 
 	// Row Twelve: Seeds
 	public static final int SEED_ROTBERRY = ROW12 + 0;
@@ -230,6 +251,7 @@ public class ItemSpriteSheet {
 	public static final int SEED_FULLMOONBERRY = ROW13 + 15;
 	public static final int SEED_STARFLOWER = ROW9 + 15;
 	public static final int SEED_PHASEPITCHER = ROW14 + 5;
+	public static final int SEED_FLYTRAP = ROW5 + 12;
 
 	// Row Thirteen: Food
 	public static final int MEAT = ROW13 + 0;
@@ -270,7 +292,11 @@ public class ItemSpriteSheet {
 	public static final int ACTIVEMRD2 = ROW15 + 8;
 	public static final int INACTIVEMRD2 = ROW15 + 9;
 	public static final int ORBOFZOT = ROW15 + 10;
+	public static final int KEYRING = ROW4 + 10;
 
 	// Row Sixteen: Unused
+	public static final int UPGRADEGOO_YELLOW = ROW16 + 0;
+	public static final int UPGRADEGOO_RED = ROW16 + 1;
+	public static final int UPGRADEGOO_VIOLET = ROW16 + 2;
 
 }

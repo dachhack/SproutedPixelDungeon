@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.levels.painters;
 
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
+import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith2;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;
@@ -33,6 +34,7 @@ public class BlacksmithPainter extends Painter {
 		fill(level, room, 1, Terrain.FIRE_TRAP);
 		fill(level, room, 2, Terrain.EMPTY_SP);
 
+		
 		for (int i = 0; i < 2; i++) {
 			int pos;
 			do {
@@ -41,6 +43,7 @@ public class BlacksmithPainter extends Painter {
 			level.drop(Generator.random(Random.oneOf(Generator.Category.ARMOR,
 					Generator.Category.WEAPON)), pos);
 		}
+		
 
 		for (Room.Door door : room.connected.values()) {
 			door.set(Room.Door.Type.UNLOCKED);
@@ -53,5 +56,14 @@ public class BlacksmithPainter extends Painter {
 		} while (level.heaps.get(npc.pos) != null);
 		level.mobs.add(npc);
 		Actor.occupyCell(npc);
+		
+		
+		Blacksmith2 npc2 = new Blacksmith2();
+		do {
+			npc2.pos = room.random(1);
+		} while (level.heaps.get(npc2.pos) != null || Actor.findChar(npc2.pos) != null);
+		level.mobs.add(npc2);
+		Actor.occupyCell(npc2);
+		
 	}
 }

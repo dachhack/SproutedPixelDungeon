@@ -154,7 +154,7 @@ public class ItemSprite extends MovieClip {
 	public void update() {
 		super.update();
 
-		visible = (heap == null || Dungeon.visible[heap.pos]);
+		visible = (heap == null || heap.seen);
 
 		if (dropInterval > 0 && (dropInterval -= Game.elapsed) <= 0) {
 

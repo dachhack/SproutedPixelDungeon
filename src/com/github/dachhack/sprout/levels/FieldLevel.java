@@ -50,7 +50,7 @@ public class FieldLevel extends Level {
 
 		@Override
 	public String tilesTex() {
-		return Assets.TILES_SEWERS;
+		return Assets.TILES_FOREST;
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class FieldLevel extends Level {
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.EMPTY_DECO:
-			return "Wet yellowish moss covers the floor.";
+			return "The grass is worn away to reveal bedrock.";
 		case Terrain.BOOKSHELF:
 			return "The bookshelf is packed with cheap useless books. Might it burn?";
 		default:

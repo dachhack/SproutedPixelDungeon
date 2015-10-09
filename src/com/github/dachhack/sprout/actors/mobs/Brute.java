@@ -38,7 +38,7 @@ public class Brute extends Mob {
 		name = "gnoll brute";
 		spriteClass = BruteSprite.class;
 
-		HP = HT = 50+(adj(0)*Random.NormalIntRange(3, 7));
+		HP = HT = 50+(adj(0)*Random.NormalIntRange(4, 8));
 		defenseSkill = 15+adj(0);
 
 		EXP = 8;
@@ -61,7 +61,7 @@ public class Brute extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return enraged ? Random.NormalIntRange(30+adj(0), 80+adj(0)) : Random.NormalIntRange(20+adj(0), 50+adj(0));
+		return enraged ? Random.NormalIntRange(30+adj(0), 70+adj(0)) : Random.NormalIntRange(15+adj(0), 40+adj(0));
 	}
 
 	@Override
@@ -69,6 +69,10 @@ public class Brute extends Mob {
 		return 20+adj(1);
 	}
 
+	@Override
+	protected float attackDelay() {
+		return 1.2f;
+	}
 	@Override
 	public int dr() {
 		return 10+adj(0);

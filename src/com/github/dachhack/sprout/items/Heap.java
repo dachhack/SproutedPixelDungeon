@@ -32,6 +32,7 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mimic;
 import com.github.dachhack.sprout.actors.mobs.RedWraith;
 import com.github.dachhack.sprout.actors.mobs.Wraith;
+import com.github.dachhack.sprout.actors.mobs.npcs.SeekingBombNPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.Splash;
@@ -76,6 +77,7 @@ public class Heap implements Bundlable {
 	public int pos = 0;
 
 	public ItemSprite sprite;
+	public boolean seen = false;
 
 	public LinkedList<Item> items = new LinkedList<Item>();
 
@@ -289,6 +291,15 @@ public class Heap implements Bundlable {
 		}
 	}
 
+	public void removeSeekingBomb(){
+		for (Item item : items.toArray(new Item[0])) {
+			if (item instanceof SeekingBombItem) {
+				items.remove(item);
+			}
+			
+		}
+	}
+	
 	// Note: should not be called to initiate an explosion, but rather by an
 	// explosion that is happening.
 	public void explode() {
@@ -309,7 +320,7 @@ public class Heap implements Bundlable {
 
 			for (Item item : items.toArray(new Item[0])) {
 
-				if (item instanceof Potion) {
+				if (item instanceof Potion && Random.Float() < 0.10f ) {
 					items.remove(item);
 					((Potion) item).shatter(pos);
 
@@ -319,9 +330,39 @@ public class Heap implements Bundlable {
 					// stop processing current explosion, it will be replaced by
 					// the new one.
 					return;
+				} else if (item instanceof DizzyBomb) {
+					items.remove(item);
+					((DizzyBomb) item).explode(pos);
+					// stop processing current explosion, it will be replaced by
+					// the new one.
+					return;
+				} else if (item instanceof SmartBomb) {
+					items.remove(item);
+					((SmartBomb) item).explode(pos);
+					// stop processing current explosion, it will be replaced by
+					// the new one.
+					return;
+				} else if (item instanceof SeekingBombItem) {
+					items.remove(item);
+					((Bomb) item).explode(pos);
+					// stop processing current explosion, it will be replaced by
+					// the new one.
+					return;
+				} else if (item instanceof SeekingClusterBombItem) {
+					items.remove(item);
+					((ClusterBomb) item).explode(pos);
+					// stop processing current explosion, it will be replaced by
+					// the new one.
+					return;
+				} else if (item instanceof ClusterBomb) {
+					items.remove(item);
+					((ClusterBomb) item).explode(pos);
+					// stop processing current explosion, it will be replaced by
+					// the new one.
+					return;
 
 					// unique and upgraded items can endure the blast
-				} else if (!(item.level > 0 || item.unique))
+				} else if (!(item.level > 0 || item.unique) && Random.Float() < 0.10f)
 					items.remove(item);
 
 			}
@@ -568,6 +609,7 @@ public class Heap implements Bundlable {
 	}
 
 	private static final String POS = "pos";
+	private static final String SEEN	= "seen";
 	private static final String TYPE = "type";
 	private static final String ITEMS = "items";
 
@@ -575,6 +617,7 @@ public class Heap implements Bundlable {
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		pos = bundle.getInt(POS);
+		seen = bundle.getBoolean( SEEN );
 		type = Type.valueOf(bundle.getString(TYPE));
 		items = new LinkedList<Item>(
 				(Collection<Item>) ((Collection<?>) bundle.getCollection(ITEMS)));
@@ -584,6 +627,7 @@ public class Heap implements Bundlable {
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		bundle.put(POS, pos);
+		bundle.put( SEEN, seen );
 		bundle.put(TYPE, type.toString());
 		bundle.put(ITEMS, items);
 	}

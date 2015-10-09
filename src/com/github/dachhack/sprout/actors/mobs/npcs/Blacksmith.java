@@ -35,6 +35,7 @@ import com.github.dachhack.sprout.items.SanChikarahTranscend;
 import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.quest.Pickaxe;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -51,11 +52,11 @@ public class Blacksmith extends NPC {
 	private static final String TXT_GOLD_1 = "Hey human! Wanna be useful, eh? Take dis pickaxe and mine me some _dark gold ore_, _15 pieces_ should be enough. "
 			+ "What do you mean, how am I gonna pay? You greedy...\n"
 			+ "Ok, ok, I don't have money to pay, but I can do some smithin' for you. Consider yourself lucky, "
-			+ "I'm the only blacksmith around.";
+			+ "We're the only blacksmiths around.";
 	private static final String TXT_BLOOD_1 = "Hey human! Wanna be useful, eh? Take dis pickaxe and _kill a bat_ wit' it, I need its blood on the head. "
 			+ "What do you mean, how am I gonna pay? You greedy...\n"
 			+ "Ok, ok, I don't have money to pay, but I can do some smithin' for you. Consider yourself lucky, "
-			+ "I'm the only blacksmith around.";
+			+ "We're the only blacksmiths around.";
 	private static final String TXT2 = "Are you kiddin' me? Where is my pickaxe?!";
 	private static final String TXT3 = "Dark gold ore. 15 pieces. Seriously, is it dat hard?";
 	private static final String TXT4 = "I said I need bat blood on the pickaxe. Chop chop!";
@@ -191,6 +192,10 @@ public class Blacksmith extends NPC {
 
 		if (item1.level < 0 || item2.level < 1) {
 			return "It's a junk, the quality is too poor!";
+		}
+		
+		if ((item1.level + item2.level > 15) && !item1.isReinforced()) {
+			return "You item needs to be reinforced to handle the upgrades. Take it to my brother!";
 		}
 
 		if (!item1.isUpgradable() || !item2.isUpgradable()) {
@@ -342,7 +347,8 @@ public class Blacksmith extends NPC {
 		}
 
 		public static boolean spawn(Collection<Room> rooms) {
-			if (!spawned && Dungeon.depth > 11 && Random.Int( 15 - Dungeon.depth ) == 0) {
+			//if (!spawned && Dungeon.depth > 11 && Random.Int( 15 - Dungeon.depth ) == 0) {
+			if (!spawned ) {
 				    
 				Room blacksmith = null;
 				for (Room r : rooms) {
@@ -352,8 +358,13 @@ public class Blacksmith extends NPC {
 						blacksmith.type = Type.BLACKSMITH;
 
 						spawned = true;
-						alternative = Random.Int(2) == 0;
-
+						
+						Chainsaw saw = Dungeon.hero.belongings.getItem(Chainsaw.class);
+						if (saw==null){
+						   alternative = Random.Int(2) == 0;
+						} else {
+							alternative = false;
+						}
 						given = false;
 
 						break;

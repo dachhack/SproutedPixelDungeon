@@ -64,6 +64,11 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 
 			angularSpeed = 0;
 			angle = 135 - (float) (Math.atan2(d.x, d.y) / 3.1415926 * 180);
+			
+		}	else if (image == ItemSpriteSheet.WAVE) {
+
+				angularSpeed = 0;
+				angle = 90 - (float) (Math.atan2(d.x, d.y) / 3.1415926 * 180);
 
 		} else {
 

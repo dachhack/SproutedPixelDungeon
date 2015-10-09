@@ -40,6 +40,7 @@ import com.github.dachhack.sprout.levels.painters.PassagePainter;
 import com.github.dachhack.sprout.levels.painters.PitPainter;
 import com.github.dachhack.sprout.levels.painters.PoolPainter;
 import com.github.dachhack.sprout.levels.painters.RatKingPainter;
+import com.github.dachhack.sprout.levels.painters.RatKingPainter2;
 import com.github.dachhack.sprout.levels.painters.ShopPainter;
 import com.github.dachhack.sprout.levels.painters.StandardPainter;
 import com.github.dachhack.sprout.levels.painters.StatuePainter;
@@ -76,7 +77,8 @@ public class Room extends Rect implements Graph.Node, Bundlable {
 				MagicWellPainter.class), GARDEN(GardenPainter.class), CRYPT(
 				CryptPainter.class), STATUE(StatuePainter.class), POOL(
 				PoolPainter.class), RAT_KING(RatKingPainter.class), WEAK_FLOOR(
-				WeakFloorPainter.class), PIT(PitPainter.class);
+				WeakFloorPainter.class), PIT(PitPainter.class), 
+				RAT_KING2(RatKingPainter2.class);
 
 		private Method paint;
 

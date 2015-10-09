@@ -136,6 +136,10 @@ public class MeleeWeapon extends Weapon {
 		if (enchantment != null) {
 			info.append("It is enchanted.");
 		}
+		
+		if (reinforced) {
+			info.append("\n\nIt is reinforced.");
+		}
 
 		if (levelKnown 
 				//&& Dungeon.hero.belongings.backpack.items.contains(this)

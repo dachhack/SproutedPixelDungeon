@@ -74,6 +74,7 @@ public class Item implements Bundlable {
 
 	public boolean cursed;
 	public boolean cursedKnown;
+	public boolean reinforced;
 
 	// Unique items persist through revival
 	public boolean unique = false;
@@ -261,10 +262,15 @@ public class Item implements Bundlable {
 
 	protected void onDetach() {
 	}
+	
+	public Item uncurse(){
+		cursed=false;
+		return this;
+	}
 
 	public Item upgrade() {
 
-		cursed = false;
+		uncurse();
 		cursedKnown = true;
 		this.level++;
 
@@ -308,6 +314,10 @@ public class Item implements Bundlable {
 		return true;
 	}
 
+	public boolean isReinforced() {
+		return reinforced;
+	}
+	
 	public boolean isIdentified() {
 		return levelKnown && cursedKnown;
 	}
@@ -412,6 +422,7 @@ public class Item implements Bundlable {
 	private static final String LEVEL = "level";
 	private static final String LEVEL_KNOWN = "levelKnown";
 	private static final String CURSED = "cursed";
+	private static final String REINFORCED = "reinforced";
 	private static final String CURSED_KNOWN = "cursedKnown";
 	private static final String OLDSLOT = "quickslot";
 	private static final String QUICKSLOT = "quickslotpos";
@@ -422,6 +433,7 @@ public class Item implements Bundlable {
 		bundle.put(LEVEL, level);
 		bundle.put(LEVEL_KNOWN, levelKnown);
 		bundle.put(CURSED, cursed);
+		bundle.put(REINFORCED, reinforced);
 		bundle.put(CURSED_KNOWN, cursedKnown);
 		if (Dungeon.quickslot.contains(this)) {
 			bundle.put(QUICKSLOT, Dungeon.quickslot.getSlot(this));
@@ -442,6 +454,7 @@ public class Item implements Bundlable {
 		}
 
 		cursed = bundle.getBoolean(CURSED);
+		reinforced = bundle.getBoolean(REINFORCED);
 
 		// only want to populate slot on first load.
 		if (Dungeon.hero == null) {

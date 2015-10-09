@@ -33,6 +33,7 @@ import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.RedDewdrop;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;

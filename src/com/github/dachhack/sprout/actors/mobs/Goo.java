@@ -39,6 +39,7 @@ import com.github.dachhack.sprout.items.LloydsBeacon;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.SewerBossLevel;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -59,7 +60,10 @@ public class Goo extends Mob {
 		spriteClass = GooSprite.class;
 
 		loot = new ActiveMrDestructo();
-		lootChance = 0.333f;
+		lootChance = 0.5f;
+		
+		lootOther = new Chainsaw();
+		lootChanceOther = 1f;
 	}
 
 	private int pumpedUp = 0;

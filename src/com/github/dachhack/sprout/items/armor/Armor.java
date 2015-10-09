@@ -242,6 +242,10 @@ public class Armor extends EquipableItem {
 		if (glyph != null) {
 			info.append("It is inscribed.");
 		}
+		
+		if (reinforced) {
+			info.append("\n\nIt is reinforced.");
+		}
 
 		if (isEquipped(Dungeon.hero)) {
 			info.append("\n\nYou are wearing the "

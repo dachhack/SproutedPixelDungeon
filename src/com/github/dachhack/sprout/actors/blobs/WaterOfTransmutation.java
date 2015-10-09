@@ -25,10 +25,13 @@ import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.ActiveMrDestructo2;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Generator.Category;
+import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Honeypot.ShatteredPot;
 import com.github.dachhack.sprout.items.InactiveMrDestructo;
 import com.github.dachhack.sprout.items.InactiveMrDestructo2;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.SteelHoneypot;
+import com.github.dachhack.sprout.items.SteelHoneypot.SteelShatteredPot;
 import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.food.PotionOfConstitution;
@@ -82,6 +85,10 @@ public class WaterOfTransmutation extends WellWater {
 			item = upgradeDestructo((ActiveMrDestructo) item);
 		} else if (item instanceof InactiveMrDestructo2) {
 			item = rechargeDestructo2((InactiveMrDestructo2) item);
+		} else if (item instanceof SteelShatteredPot) {
+			item = changeHoneypot((SteelShatteredPot) item);
+		} else if (item instanceof Honeypot) {
+			item = changeHoneypot((Honeypot) item);
 		} else {
 			item = null;
 		}
@@ -262,6 +269,14 @@ public class WaterOfTransmutation extends WellWater {
 
 	private Food changeHoneypot(ShatteredPot s) {
 		return new PotionOfConstitution();
+	}
+	
+	private Item changeHoneypot(SteelShatteredPot s) {
+		return new SteelHoneypot();
+	}
+	
+	private Item changeHoneypot(Honeypot d) {
+		return new SteelHoneypot();
 	}
 	
 	private Item rechargeDestructo(InactiveMrDestructo d) {

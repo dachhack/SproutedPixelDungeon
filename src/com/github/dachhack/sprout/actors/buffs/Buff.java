@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import java.text.DecimalFormat;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.actors.Actor;
@@ -55,6 +56,15 @@ public class Buff extends Actor {
 
 	public int icon() {
 		return BuffIndicator.NONE;
+	}
+	
+	public String desc(){
+		return "";
+	}
+
+	//to handle the common case of showing how many turns are remaining in a buff description.
+	protected String dispTurns(float input){
+		return input == 1 ? "1 more turn" : new DecimalFormat("#.##").format(input) + " more turns";
 	}
 
 	public static <T extends Buff> T append(Char target, Class<T> buffClass) {

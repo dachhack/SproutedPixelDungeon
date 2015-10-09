@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
+import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.windows.WndBag;
@@ -43,7 +44,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 	private static Image crossM;
 
 	private static boolean targeting = false;
-	private static Char lastTarget = null;
+	public static Char lastTarget = null;
 
 	public QuickSlotButton(int slotNum) {
 		super();
@@ -178,6 +179,8 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 		}
 	}
 
+	
+	
 	public static void refresh() {
 		for (int i = 0; i < instance.length; i++) {
 			if (instance[i] != null) {

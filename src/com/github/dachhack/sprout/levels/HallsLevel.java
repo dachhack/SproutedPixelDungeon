@@ -24,7 +24,9 @@ import android.opengl.GLES20;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.Sentinel;
+import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.DwarfHammer;
 import com.github.dachhack.sprout.items.Torch;
 import com.watabou.noosa.Game;
@@ -123,6 +125,7 @@ public class HallsLevel extends RegularLevel {
 	@Override
 	protected void createItems() {
 		if (Dungeon.depth!=24){addItemToSpawn(new DwarfHammer());}
+		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Random.Int(1) == 0){addItemToSpawn(new Bomb());}
 		super.createItems();
 	}
 

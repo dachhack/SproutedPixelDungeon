@@ -79,16 +79,16 @@ public class ScrollOfRemoveCurse extends Scroll {
 		for (int i = 0; i < items.length; i++) {
 			Item item = items[i];
 			if (item != null && item.cursed) {
-				item.cursed = false;
+				item.uncurse();
 				if(item.level<0){item.upgrade((-item.level)*2);} //upgrade to reverse of negatives
-				procced = true;
+         	   if (item.cursed==false) {procced = true;}
 			}
 			if (item instanceof Bag) {
 				for (Item bagItem: ((Bag)item).items){
                    if (bagItem != null && bagItem.cursed) {
-                	   bagItem.cursed = false;
+                	   bagItem.uncurse();
                 	   if(bagItem.level<0){bagItem.upgrade((-bagItem.level)*2);}
-                	   procced = true;
+                	   if (bagItem.cursed==false) {procced = true;}
                      }
 				}
 			}

@@ -31,6 +31,8 @@ import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Terror;
+import com.github.dachhack.sprout.items.CavesKey;
+import com.github.dachhack.sprout.items.ConchShell;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.food.Meat;
@@ -140,6 +142,12 @@ public class AlbinoPiranha extends Mob {
 		  Item mushroom = Generator.random(Generator.Category.MUSHROOM);
 		  Dungeon.level.drop(mushroom, pos).sprite.drop();	
 		}
+		
+		if(!Dungeon.limitedDrops.conchshell.dropped() && Statistics.albinoPiranhasKilled > 50 && Random.Int(10)==0) {
+			Dungeon.limitedDrops.conchshell.drop();
+			Dungeon.level.drop(new ConchShell(), pos).sprite.drop();
+		}
+		
 		super.die(cause);
 
 		Statistics.albinoPiranhasKilled++;

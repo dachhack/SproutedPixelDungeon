@@ -148,6 +148,7 @@ public class WndRanking extends WndTabbed {
 
 		private static final String TXT_HEALTH = "Health";
 		private static final String TXT_STR = "Strength";
+		private static final String TXT_TEST = "Playtest Activated";
 
 		private static final String TXT_DURATION = "Game Duration";
 
@@ -201,7 +202,7 @@ public class WndRanking extends WndTabbed {
 
 			pos += GAP;
 
-			pos = statSlot(this, TXT_DURATION,
+			pos = statSlot(this, (Dungeon.playtest ? TXT_TEST:TXT_DURATION),
 					Integer.toString((int) Statistics.duration), pos);
 
 			pos += GAP;

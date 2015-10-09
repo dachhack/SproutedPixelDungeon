@@ -22,12 +22,16 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.github.dachhack.sprout.actors.mobs.SeekingBomb;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
+import com.github.dachhack.sprout.items.weapon.missiles.RiceBall;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -56,6 +60,14 @@ public class Bomb extends Item {
 	private static boolean lightingFuse = false;
 
 	private static final String AC_LIGHTTHROW = "Light & Throw";
+	
+	public static final String AC_DIZZYBOMB = "Make Dizzy Bomb";
+	public static final String AC_SMARTBOMB = "Make Smart Bomb";
+	public static final String AC_SEEKINGBOMB = "Make Seeking Bomb";
+	public static final String AC_CLUSTERBOMB = "Make Cluster Bomb";
+	public static final String AC_SEEKINGCLUSTERBOMB = "Make Seeking Cluster Bomb";
+	
+	public static final float TIME_TO_COOK_BOMB = 4;
 
 	@Override
 	public boolean isSimilar(Item item) {
@@ -66,6 +78,22 @@ public class Bomb extends Item {
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
 		actions.add(AC_LIGHTTHROW);
+		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Dungeon.hero.lvl>4){
+		  actions.add(AC_DIZZYBOMB);
+		} 
+         if (Dungeon.hero.heroClass==HeroClass.ROGUE && Dungeon.hero.lvl>9){
+		  actions.add(AC_SMARTBOMB);
+		}
+         if (Dungeon.hero.heroClass==HeroClass.ROGUE && Dungeon.hero.lvl>14){
+		  actions.add(AC_SEEKINGBOMB);
+		}
+         if (Dungeon.hero.heroClass==HeroClass.ROGUE && Dungeon.hero.lvl>19){
+		  actions.add(AC_CLUSTERBOMB);
+		}
+          if (Dungeon.hero.heroClass==HeroClass.ROGUE && Dungeon.hero.lvl>29){
+		  actions.add(AC_SEEKINGCLUSTERBOMB);
+		}
+		
 		return actions;
 	}
 
@@ -74,8 +102,89 @@ public class Bomb extends Item {
 		if (action.equals(AC_LIGHTTHROW)) {
 			lightingFuse = true;
 			action = AC_THROW;
-		} else
+		} else {
 			lightingFuse = false;
+		}
+		
+		if (action.equals(AC_DIZZYBOMB)) {
+
+			hero.spend(TIME_TO_COOK_BOMB);
+			hero.busy();
+
+			hero.sprite.operate(hero.pos);
+			
+			DizzyBomb dbomb = new DizzyBomb();
+			if (dbomb.doPickUp(Dungeon.hero)) {
+				GLog.i(Hero.TXT_YOU_NOW_HAVE, dbomb.name());
+				} else {
+				Dungeon.level.drop(dbomb, Dungeon.hero.pos).sprite.drop();	
+				}
+			  detach(Dungeon.hero.belongings.backpack);
+		   }
+		
+		if (action.equals(AC_SMARTBOMB)) {
+
+			hero.spend(TIME_TO_COOK_BOMB);
+			hero.busy();
+
+			hero.sprite.operate(hero.pos);
+			
+			SmartBomb smbomb = new SmartBomb();
+			if (smbomb.doPickUp(Dungeon.hero)) {
+				GLog.i(Hero.TXT_YOU_NOW_HAVE, smbomb.name());
+				} else {
+				Dungeon.level.drop(smbomb, Dungeon.hero.pos).sprite.drop();	
+				}
+			  detach(Dungeon.hero.belongings.backpack);
+		   }
+		
+		if (action.equals(AC_SEEKINGBOMB)) {
+
+			hero.spend(TIME_TO_COOK_BOMB);
+			hero.busy();
+
+			hero.sprite.operate(hero.pos);
+			
+			SeekingBombItem sbomb = new SeekingBombItem();
+			if (sbomb.doPickUp(Dungeon.hero)) {
+				GLog.i(Hero.TXT_YOU_NOW_HAVE, sbomb.name());
+				} else {
+				Dungeon.level.drop(sbomb, Dungeon.hero.pos).sprite.drop();	
+				}
+			  detach(Dungeon.hero.belongings.backpack);
+		   }
+		
+		if (action.equals(AC_CLUSTERBOMB)) {
+
+			hero.spend(TIME_TO_COOK_BOMB);
+			hero.busy();
+
+			hero.sprite.operate(hero.pos);
+			
+			ClusterBomb cbomb = new ClusterBomb();
+			if (cbomb.doPickUp(Dungeon.hero)) {
+				GLog.i(Hero.TXT_YOU_NOW_HAVE, cbomb.name());
+				} else {
+				Dungeon.level.drop(cbomb, Dungeon.hero.pos).sprite.drop();	
+				}
+			  detach(Dungeon.hero.belongings.backpack);
+		   }
+	
+	if (action.equals(AC_SEEKINGCLUSTERBOMB)) {
+
+		hero.spend(TIME_TO_COOK_BOMB);
+		hero.busy();
+
+		hero.sprite.operate(hero.pos);
+		
+		SeekingClusterBombItem scbomb = new SeekingClusterBombItem();
+		if (scbomb.doPickUp(Dungeon.hero)) {
+			GLog.i(Hero.TXT_YOU_NOW_HAVE, scbomb.name());
+			} else {
+			Dungeon.level.drop(scbomb, Dungeon.hero.pos).sprite.drop();	
+			}
+		  detach(Dungeon.hero.belongings.backpack);
+	   }
 
 		super.execute(hero, action);
 	}
@@ -161,6 +270,13 @@ public class Bomb extends Item {
 		if (terrainAffected) {
 			Dungeon.observe();
 		}
+		
+	}
+	
+	public void genBomb(){
+		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Random.Int(1) == 0){
+			Dungeon.level.drop(new Bomb(), Dungeon.level.randomDestination()).sprite.drop();
+		}
 	}
 
 	@Override
@@ -241,6 +357,7 @@ public class Bomb extends Item {
 					heap.items.remove(bomb);
 
 					bomb.explode(heap.pos);
+					bomb.genBomb();
 
 					Actor.remove(this);
 					return true;

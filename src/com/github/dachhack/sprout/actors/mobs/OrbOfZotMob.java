@@ -75,23 +75,7 @@ public class OrbOfZotMob extends Mob {
 	
 	private static final float SPAWN_DELAY = 0.1f;
 	
-    public static int drains=0;
-	
-	private static final String DRAINS = "drains";
-
-	@Override
-	public void storeInBundle(Bundle bundle) {
-		super.storeInBundle(bundle);
-		bundle.put(DRAINS, drains);
-	}
-
-	@Override
-	public void restoreFromBundle(Bundle bundle) {
-		super.restoreFromBundle(bundle);
-		drains = bundle.getInt(DRAINS);
-	}
-	
-
+    
 	@Override
 	public int dr() {
 		return 55;
@@ -212,15 +196,15 @@ public class OrbOfZotMob extends Mob {
 				ch.damage(Random.NormalIntRange(100, 300), this);
 				yell("ZOT!");
 				damage(Random.NormalIntRange(10, 20), this);
-				Dungeon.hero.earnExp(5);
-				drains++;
-				if(drains>=100){
-					Dungeon.hero.STR++;
-					Dungeon.hero.HT += 5;
-					Dungeon.hero.HP += 5;
-					Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, "+1 str, +5 ht");
-					drains=0;
-				}
+				//Dungeon.hero.earnExp(5);
+				//Dungeon.zotDrains++;
+				//if(Dungeon.zotDrains>=100){
+				//	Dungeon.hero.STR++;
+				//	Dungeon.hero.HT += 5;
+				//	Dungeon.hero.HP += 5;
+				//	Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, "+1 str, +5 ht");
+				//	Dungeon.zotDrains=0;
+				//}
 
 				if (Dungeon.visible[pos]) {
 					ch.sprite.flash();

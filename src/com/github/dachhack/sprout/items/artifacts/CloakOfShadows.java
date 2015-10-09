@@ -60,6 +60,8 @@ public class CloakOfShadows extends Artifact {
 				else if (cooldown > 0)
 					GLog.i("Your cloak needs " + cooldown
 							+ " more rounds to re-energize.");
+				else if (Dungeon.depth == 29)
+					GLog.i("An ancient magic in this place prevents you from using your cloak.");
 				else if (charge <= 1)
 					GLog.i("Your cloak hasn't recharged enough to be usable yet.");
 				else {

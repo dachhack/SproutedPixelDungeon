@@ -24,6 +24,8 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.items.Bone;
+import com.github.dachhack.sprout.items.ConchShell;
 import com.github.dachhack.sprout.items.PrisonKey;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.YellowDewdrop;
@@ -84,6 +86,11 @@ public class MossySkeleton extends Mob {
 			explodeDew(pos);				
 		} else {
 			explodeDew(pos);
+		}
+		
+		if(!Dungeon.limitedDrops.bone.dropped() && Statistics.skeletonsKilled > 50 && Random.Int(10)==0) {
+			Dungeon.limitedDrops.bone.drop();
+			Dungeon.level.drop(new Bone(), pos).sprite.drop();
 		}
 
 		boolean heroKilled = false;

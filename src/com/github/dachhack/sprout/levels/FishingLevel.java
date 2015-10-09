@@ -47,12 +47,12 @@ public class FishingLevel extends Level {
 
 		@Override
 	public String tilesTex() {
-		return Assets.TILES_CAVES;
+		return Assets.TILES_BEACH;
 	}
 
 	@Override
 	public String waterTex() {
-		return Assets.WATER_CAVES;
+		return Assets.WATER_PRISON;
 	}
 
 	
@@ -175,6 +175,8 @@ public class FishingLevel extends Level {
 		switch (tile) {
 		case Terrain.WATER:
 			return "Dark cold water.";
+		case Terrain.HIGH_GRASS:
+			return "Seaweed tangles. ";
 		default:
 			return super.tileName(tile);
 		}
@@ -183,10 +185,20 @@ public class FishingLevel extends Level {
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
+		case Terrain.ENTRANCE:
+			return "A ramp leads up to the upper depth.";
+		case Terrain.EXIT:
+			return "A ramp leads down to the lower depth.";
+		case Terrain.WALL_DECO:
 		case Terrain.EMPTY_DECO:
-			return "There are old blood stains on the floor.";
+			return "Small crabs and shell fish litter the sandy floor.";
+		case Terrain.EMPTY_SP:
+			return "Thick carpet covers the floor.";
+		case Terrain.STATUE:
+		case Terrain.STATUE_SP:
+			return "A large sea shell is propped up in the sand.";
 		case Terrain.BOOKSHELF:
-			return "The bookshelf is packed with cheap useless books. Might it burn?";
+			return "Mostly beach reads.";
 		default:
 			return super.tileDesc(tile);
 		}

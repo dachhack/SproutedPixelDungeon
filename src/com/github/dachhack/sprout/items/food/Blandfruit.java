@@ -40,6 +40,7 @@ import com.github.dachhack.sprout.plants.Earthroot;
 import com.github.dachhack.sprout.plants.Fadeleaf;
 import com.github.dachhack.sprout.plants.Firebloom;
 import com.github.dachhack.sprout.plants.Icecap;
+import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant.Seed;
 import com.github.dachhack.sprout.plants.Sorrowmoss;
 import com.github.dachhack.sprout.plants.Stormvine;
@@ -345,6 +346,8 @@ public class Blandfruit extends Food {
 				cook(new Stormvine.Seed());
 			else if (name.equals("Purefruit"))
 				cook(new Dreamfoil.Seed());
+			else if (name.equals("Mightyfruit"))
+				cook(new Phaseshift.Seed());
 		}
 
 	}

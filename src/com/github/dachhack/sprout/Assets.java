@@ -115,6 +115,16 @@ public class Assets {
 	public static final String TINKERER1 = "tinkerer.png";
 	public static final String DEWPROTECTOR = "dewprotector.png";
 	public static final String ORBOFZOT = "orbofzot.png";
+	public static final String SEEKINGBOMB = "seekingbomb.png";
+	public static final String CRABKING = "crabking.png";
+	public static final String HERMITCRAB = "hermitcrab.png";
+	public static final String SHELL = "shell.png";
+	public static final String FOSSILSKELETON = "fossilskeleton.png";
+	public static final String THIEFKING = "thiefking.png";
+	public static final String SKELETONKING = "skeletonkingskull.png";
+	public static final String SKELETONHAND1 = "skeletonhand1.png";
+	public static final String SKELETONHAND2 = "skeletonhand2.png";
+	
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";
@@ -125,7 +135,11 @@ public class Assets {
 	public static final String TILES_CITY = "tiles3.png";
 	public static final String TILES_HALLS = "tiles4.png";
 	public static final String TILES_SEAL = "tiles_magic_cave.png";
-
+	public static final String TILES_BEACH = "tiles_beach.png";
+	public static final String TILES_SKELETON = "tiles_skeleton.png";
+	public static final String TILES_VAULT = "tiles_vault.png";
+	public static final String TILES_FOREST = "tiles_forest.png";
+	
 	public static final String WATER_SEWERS = "water0.png";
 	public static final String WATER_PRISON = "water1.png";
 	public static final String WATER_CAVES = "water2.png";

@@ -203,7 +203,7 @@ public class InfestBossLevel extends Level {
 		if (!enteredArena && outsideEntraceRoom(cell) && hero == Dungeon.hero) {
 
 			enteredArena = true;
-			locked = true;
+			//locked = true;
 
 			ShadowYog boss = new ShadowYog();
 			boss.state = boss.SLEEPING;

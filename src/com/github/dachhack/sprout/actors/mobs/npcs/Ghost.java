@@ -44,6 +44,7 @@ import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.SewersKey;
+import com.github.dachhack.sprout.items.TenguKey;
 import com.github.dachhack.sprout.items.armor.Armor;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
@@ -678,6 +679,11 @@ public class Ghost extends NPC {
 			} else {
 				explodeDew(pos);
 			}
+			
+			 if(!Dungeon.limitedDrops.tengukey.dropped() && Dungeon.tengukilled && Statistics.archersKilled > 50 && Random.Int(10)==0) {
+					Dungeon.limitedDrops.tengukey.drop();
+					Dungeon.level.drop(new TenguKey(), pos).sprite.drop();
+				}
 		}
 		
 		
