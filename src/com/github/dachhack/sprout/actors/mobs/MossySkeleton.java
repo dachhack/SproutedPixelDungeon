@@ -52,7 +52,7 @@ public class MossySkeleton extends Mob {
 		EXP = 1;
 		maxLvl = 10;
 		
-		baseSpeed = 0.5f+(Statistics.skeletonsKilled/50);
+		baseSpeed = 0.5f+(Math.min(2.5f, Statistics.skeletonsKilled/50));
 
 		loot = new YellowDewdrop();
 		lootChance = 0.5f; // by default, see die()

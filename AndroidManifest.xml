@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.github.dachhack.sprout"
-	android:versionCode="87"
+	android:versionCode="91"
 	android:versionName="0.3.0"
 	android:installLocation="auto">
 

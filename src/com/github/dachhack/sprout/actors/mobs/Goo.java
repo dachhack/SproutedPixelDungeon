@@ -62,7 +62,7 @@ public class Goo extends Mob {
 		loot = new ActiveMrDestructo();
 		lootChance = 0.5f;
 		
-		lootOther = new Chainsaw();
+		lootOther = new Chainsaw().enchantBuzz();
 		lootChanceOther = 1f;
 	}
 

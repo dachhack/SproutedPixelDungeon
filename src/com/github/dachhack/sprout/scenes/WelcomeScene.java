@@ -19,7 +19,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.2.5: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
+	private static final String TTL_Update = "v0.3.0: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
 
 	private static final String TTL_Future = "Wait What?";
 
@@ -91,6 +91,7 @@ public class WelcomeScene extends PixelScene {
 			+"\n\n"
 			+"Special Halloween Item!\n\n"
 			+"The Goo will drop a Bloodlust Enchanted Chainsaw if he doesn't drop a Mr Destucto\n\n"
+			+"Also added a giant Venus Flytrap plant that converts your spare upgraded items to upgrade goo.\n\n"
 			+"Happy Halloween!\n\n"
 			+"\n\n"
 			+"This new update features many new sprites from Pavel Provotorov. He's done a great job making Sprouted come alive. Many thanks!\n\n"

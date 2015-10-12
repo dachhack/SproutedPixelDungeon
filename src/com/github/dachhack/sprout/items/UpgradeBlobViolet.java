@@ -43,7 +43,7 @@ public class UpgradeBlobViolet extends Item {
 	private static final int upgrades = 5;
 
 	{
-		name = "yellow upgrade goo";
+		name = "violet upgrade goo";
 		image = ItemSpriteSheet.UPGRADEGOO_VIOLET;
 
 		stackable = true;
@@ -89,13 +89,19 @@ public class UpgradeBlobViolet extends Item {
 
 		GLog.w(TXT_UPGRADED, item.name());
 
-		item.upgrade(5);
-
-		curUser.spend(TIME_TO_INSCRIBE);
-		curUser.busy();
+		if (item.reinforced){		
+			item.upgrade(upgrades);
+			} else {
+			item.upgrade(Math.min(upgrades, 15-item.level));
+			}
 		
+		detach(curUser.belongings.backpack);
+		curUser.sprite.operate(curUser.pos);
 		curUser.sprite.emitter().start(Speck.factory(Speck.UP), 0.2f, 3);
 		Badges.validateItemLevelAquired(item);
+		
+		curUser.spend(TIME_TO_INSCRIBE);
+		curUser.busy();
 		
 	}
 
@@ -106,7 +112,7 @@ public class UpgradeBlobViolet extends Item {
 
 	@Override
 	public String info() {
-		return "This blob of yellow goo holds a powerful magic. It can upgrade your gear when applied. ";
+		return "This blob of violet goo holds a powerful magic. It can upgrade your gear when applied. ";
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {

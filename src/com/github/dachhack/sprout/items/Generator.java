@@ -138,6 +138,7 @@ import com.github.dachhack.sprout.plants.Dreamfoil;
 import com.github.dachhack.sprout.plants.Earthroot;
 import com.github.dachhack.sprout.plants.Fadeleaf;
 import com.github.dachhack.sprout.plants.Firebloom;
+import com.github.dachhack.sprout.plants.Flytrap;
 import com.github.dachhack.sprout.plants.Icecap;
 import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant;
@@ -154,7 +155,8 @@ public class Generator {
 		WEAPON(150, Weapon.class), ARMOR(100, Armor.class), POTION(500,
 				Potion.class), SCROLL(400, Scroll.class), WAND(40, Wand.class), RING(
 				15, Ring.class), ARTIFACT(20, Artifact.class), SEED(0,
-				Plant.Seed.class), SEED2(0,	Plant.Seed.class), FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class), MUSHROOM(0, Food.class);
+				Plant.Seed.class), SEED2(0,	Plant.Seed.class), SEEDRICH(0,	Plant.Seed.class),
+				FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class), MUSHROOM(0, Food.class);
 
 		public Class<?>[] classes;
 		public float[] probs;
@@ -257,9 +259,9 @@ public class Generator {
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
 				Nut.class, Blackberry.class, Blueberry.class, Cloudberry.class,
-				Moonberry.class, Starflower.Seed.class, Phaseshift.Seed.class};
+				Moonberry.class, Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.class};
 		
-		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 2, 12, 12, 48, 20, 4, 16, 2, 1, 1};
+		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 2, 12, 12, 48, 20, 4, 16, 2, 1, 1, 4};
 		
 		
 		Category.SEED2.classes = new Class<?>[] { Firebloom.Seed.class,
@@ -267,9 +269,18 @@ public class Generator {
 				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
-				Starflower.Seed.class, Phaseshift.Seed.class};
+				Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.class};
 		
-		Category.SEED2.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 2, 2};
+		Category.SEED2.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 2, 2, 6};
+		
+		Category.SEEDRICH.classes = new Class<?>[] { Firebloom.Seed.class,
+				Icecap.Seed.class, Sorrowmoss.Seed.class, Blindweed.Seed.class,
+				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
+				Rotberry.Seed.class, BlandfruitBush.Seed.class,
+				Dreamfoil.Seed.class, Stormvine.Seed.class,
+				Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.class};
+		
+		Category.SEEDRICH.probs = new float[] { 1, 1, 1, 1, 2, 1, 1, 0, 4, 1, 1, 4, 4, 8};
 		
 		Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class, Moonberry.class};
 		Category.BERRY.probs = new float[] {8,2,2,1};	

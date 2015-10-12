@@ -273,10 +273,11 @@ public enum HeroClass {
 		if (!Dungeon.playtest){
 		//Playtest
 		//TomeOfMastery tome = new TomeOfMastery(); tome.collect();
-				/*
+				
 				hero.HT=hero.HP=999;
 				hero.STR = hero.STR + 20;
 				
+				/*
 				PotionBandolier bag1 = new PotionBandolier(); bag1.collect();
 				ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
 				PlateArmor armor = new PlateArmor();
@@ -295,18 +296,18 @@ public enum HeroClass {
 				//AncientCoin coin = new AncientCoin(); coin.collect();
 				//TenguKey key = new TenguKey(); key.collect();
 			    //SanChikarah san = new SanChikarah(); san.collect();	
-			    //ReturnBeacon beacon = new ReturnBeacon(); beacon.collect();
+			    ReturnBeacon beacon = new ReturnBeacon(); beacon.collect();
 				
-				PotionOfFrost pot = new PotionOfFrost(); pot.collect();
-				SteelHoneypot hpot = new SteelHoneypot(); hpot.collect();
-				Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
-				Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
-				Starflower.Seed seed3 = new Starflower.Seed(); seed3.collect();
-				BlandfruitBush.Seed seed4 = new BlandfruitBush.Seed(); seed4.collect();
+				//PotionOfFrost pot = new PotionOfFrost(); pot.collect();
+				//SteelHoneypot hpot = new SteelHoneypot(); hpot.collect();
+				//Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
+				//Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
+				//Starflower.Seed seed3 = new Starflower.Seed(); seed3.collect();
+				//BlandfruitBush.Seed seed4 = new BlandfruitBush.Seed(); seed4.collect();
 				
-				Chainsaw saw = new Chainsaw(); saw.enchantBuzz(); saw.collect();
+				//Chainsaw saw = new Chainsaw(); saw.enchantBuzz(); saw.collect();
 				//PotionBandolier bag1 = new PotionBandolier(); bag1.collect();
-				ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
+				//ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
 				//AnkhChain chain = new AnkhChain(); chain.collect();
 				//WandHolster holster = new WandHolster(); holster.collect();
 				
@@ -319,7 +320,7 @@ public enum HeroClass {
 				GLog.i("Playtest Activated");
 				
 		
-		
+		/*
 				for(int i=0; i<61; i++){
 					Scroll scroll = new ScrollOfMagicalInfusion();
 			        scroll.identify().collect();
@@ -330,8 +331,10 @@ public enum HeroClass {
 			        Scroll scroll4 = new ScrollOfRemoveCurse();
 			        scroll4.identify().collect();  
 			       }	
+			       */
 				
 		}
+		
 				/*
 							 			      
 			      for(int i=1; i<61; i++){

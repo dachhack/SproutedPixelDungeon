@@ -42,8 +42,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Flytrap extends Plant {
 
-	private static final String TXT_DESC = "This plant has a giant mouth and drips caustic ooze."
-			                               +"Tossing an item into it's mouth has a chance to harvest upgrade goo.";
+	private static final String TXT_DESC = "This plant has a giant mouth and drips caustic ooze. "
+			                               +"Tossing an item into its mouth has a chance to harvest upgrade goo.";
 
 	{
 		image = 15;

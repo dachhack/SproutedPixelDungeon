@@ -29,6 +29,7 @@ import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
 import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
 import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
+import com.github.dachhack.sprout.items.potions.PotionOfOverHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfParalyticGas;
 import com.github.dachhack.sprout.items.potions.PotionOfPurity;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
@@ -39,6 +40,7 @@ import com.github.dachhack.sprout.plants.Dreamfoil;
 import com.github.dachhack.sprout.plants.Earthroot;
 import com.github.dachhack.sprout.plants.Fadeleaf;
 import com.github.dachhack.sprout.plants.Firebloom;
+import com.github.dachhack.sprout.plants.Flytrap;
 import com.github.dachhack.sprout.plants.Icecap;
 import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant.Seed;
@@ -222,7 +224,7 @@ public class Blandfruit extends Food {
 
 		} else if (potionAttrib instanceof PotionOfStrength) {
 
-			name = "Rotfruit";
+			name = "Powerfruit";
 			potionGlow = new ItemSprite.Glowing(0xCC0022);
 			info += "It looks delicious and powerful, ready to be eaten!";
 			
@@ -285,6 +287,12 @@ public class Blandfruit extends Food {
 			name = "Starfruit";
 			potionGlow = new ItemSprite.Glowing( 0xA79400 );
 			info += "It looks delicious and glorious, ready to be eaten!";
+			
+		} else if (potionAttrib instanceof PotionOfOverHealing) {
+
+			name = "Heartfruit";
+			potionGlow = new ItemSprite.Glowing( 0xB20000 );
+			info += "It is pulsating with energy, ready to be eaten!";
 
 		}
 
@@ -348,6 +356,8 @@ public class Blandfruit extends Food {
 				cook(new Dreamfoil.Seed());
 			else if (name.equals("Mightyfruit"))
 				cook(new Phaseshift.Seed());
+			else if (name.equals("Heartfruit"))
+				cook(new Flytrap.Seed());
 		}
 
 	}

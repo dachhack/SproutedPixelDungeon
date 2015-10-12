@@ -66,7 +66,7 @@ public class Plant implements Bundlable {
 
 	public static boolean checkPhase(int cell) {
 	Plant plant = Dungeon.level.plants.get(cell);
-	if (plant instanceof Phaseshift) {
+	if (plant instanceof Phaseshift || plant instanceof Flytrap) {
 		return true; 
 		}	else {
 			return false;

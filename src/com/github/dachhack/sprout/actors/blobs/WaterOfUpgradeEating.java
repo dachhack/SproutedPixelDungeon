@@ -106,7 +106,10 @@ public class WaterOfUpgradeEating extends WellWater {
 			
 			n =  new UpgradeBlobYellow();
 		
-		} 
+		} else {
+			
+			n = (Plant.Seed) Generator.random(Category.SEEDRICH);
+		}
 		
 		return n;
 	}
@@ -117,7 +120,9 @@ public class WaterOfUpgradeEating extends WellWater {
         
 		if (Random.Float()<0.1f){
 			n = new UpgradeBlobYellow();
-		} 
+		} else {
+			n = (Plant.Seed) Generator.random(Category.SEEDRICH);
+		}
 		
 		return n;
 	}

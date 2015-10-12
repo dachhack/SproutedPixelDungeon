@@ -89,14 +89,19 @@ public class UpgradeBlobYellow extends Item {
 
 		GLog.w(TXT_UPGRADED, item.name());
 
-		item.upgrade(1);
+		if (item.reinforced){		
+			item.upgrade(upgrades);
+			} else {
+			item.upgrade(Math.min(upgrades, 15-item.level));
+			}
 
-		curUser.spend(TIME_TO_INSCRIBE);
-		curUser.busy();
-		
+		detach(curUser.belongings.backpack);
+		curUser.sprite.operate(curUser.pos);
 		curUser.sprite.emitter().start(Speck.factory(Speck.UP), 0.2f, 3);
 		Badges.validateItemLevelAquired(item);
 		
+		curUser.spend(TIME_TO_INSCRIBE);
+		curUser.busy();
 	}
 
 	@Override
