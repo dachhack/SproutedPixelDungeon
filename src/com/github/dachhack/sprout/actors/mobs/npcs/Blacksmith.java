@@ -67,7 +67,7 @@ public class Blacksmith extends NPC {
 	private static final String COLLECTED = "Finally, the SanChikarah. I will forge them for you...";
 
 	{
-		name = "troll blacksmith";
+		name = "troll blacksmith named Bop";
 		spriteClass = BlacksmithSprite.class;
 	}
 	
@@ -82,6 +82,17 @@ public class Blacksmith extends NPC {
 	public void interact() {
 
 		sprite.turnTo(pos, Dungeon.hero.pos);
+		
+		if (checksan()){
+            tell(COLLECTED);	
+            SanChikarah san = new SanChikarah();
+               Dungeon.sanchikarah = true;	
+				if (san.doPickUp(Dungeon.hero)) {
+					GLog.i(Hero.TXT_YOU_NOW_HAVE, san.name());
+				} else {
+					Dungeon.level.drop(san, Dungeon.hero.pos).sprite.drop();
+				}
+           }
 
 		if (!Quest.given) {
 
@@ -152,18 +163,9 @@ public class Blacksmith extends NPC {
 			GameScene.show(new WndBlacksmith(this, Dungeon.hero));
 
 		} else {
-            if (checksan()){
-             tell(COLLECTED);	
-             SanChikarah san = new SanChikarah();
-                Dungeon.sanchikarah = true;	
-				if (san.doPickUp(Dungeon.hero)) {
-					GLog.i(Hero.TXT_YOU_NOW_HAVE, san.name());
-				} else {
-					Dungeon.level.drop(san, Dungeon.hero.pos).sprite.drop();
-				}
-            } else {
-			tell(TXT_GET_LOST);
-            }
+            
+		   tell(TXT_GET_LOST);
+         
 
 		}
 	}

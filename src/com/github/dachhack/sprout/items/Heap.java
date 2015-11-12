@@ -20,7 +20,6 @@ package com.github.dachhack.sprout.items;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -240,7 +239,11 @@ public class Heap implements Bundlable {
 				destroy();
 			}
 		}
-
+				
+		if (type != Type.HEAP) {
+			return;
+		}
+		
 		boolean burnt = false;
 		boolean evaporated = false;
 
@@ -251,9 +254,9 @@ public class Heap implements Bundlable {
 			} else if (item instanceof Dewdrop) {
 				items.remove(item);
 				evaporated = true;
-			} else if (item instanceof Blackberry) {
-				items.remove(item);
-				evaporated = true;
+			} else if (item instanceof Egg) {
+				((Egg) item).burns++;
+				burnt = true;
 			} else if (item instanceof MysteryMeat) {
 				replace(item, ChargrilledMeat.cook((MysteryMeat) item));
 				burnt = true;
@@ -442,7 +445,107 @@ public class Heap implements Bundlable {
 				if (items.isEmpty())
 					destroy();
 			}
+	}
+		
+	public void dryup(){
+					
+		if (type != Type.HEAP) {
+			return;
 		}
+		
+		boolean evaporated = false;
+
+		for (Item item : items.toArray(new Item[0])) {
+			 if (item instanceof Dewdrop) {
+				items.remove(item);
+				evaporated = true;
+			} else if (item instanceof VioletDewdrop) {
+				items.remove(item);
+				evaporated = true;
+			} else if (item instanceof RedDewdrop) {
+				items.remove(item);
+				evaporated = true;
+			} else if (item instanceof YellowDewdrop) {
+				items.remove(item);
+				evaporated = true;
+			} 
+		}
+
+		if (evaporated) {
+
+			if (Dungeon.visible[pos]) {
+				
+					evaporateFX(pos);
+				
+			}
+
+			if (isEmpty()) {
+				destroy();
+			} else if (sprite != null) {
+				sprite.view(image(), glowing());
+			}
+
+		}
+	}
+	
+	
+	public int dewdrops(){
+		
+		if (type != Type.HEAP) {
+			return 0;
+		}
+		
+		int drops=0;
+		
+		for (Item item : items.toArray(new Item[0])) {
+			 if (item instanceof Dewdrop) {
+				drops++;
+			} else if (item instanceof VioletDewdrop) {
+				drops++;
+			} else if (item instanceof RedDewdrop) {
+				drops++;
+			} else if (item instanceof YellowDewdrop) {
+				drops++;
+			} 
+		}
+		
+		return drops;		
+	}
+	
+	
+	public void lit() {
+		if (type != Type.HEAP) {
+			return;
+		}		
+		for (Item item : items.toArray(new Item[0])) {
+			if (item instanceof Egg) {	
+				((Egg) item).lits++;
+			}			
+		}		
+	}
+	
+
+	public void summon() {
+		if (type != Type.HEAP) {
+			return;
+		}		
+		for (Item item : items.toArray(new Item[0])) {
+			if (item instanceof Egg) {	
+				((Egg) item).summons++;
+			}			
+		}		
+	}
+	
+	public void poison() {
+		if (type != Type.HEAP) {
+			return;
+		}		
+		for (Item item : items.toArray(new Item[0])) {
+			if (item instanceof Egg) {	
+				((Egg) item).poisons++;
+			}			
+		}		
+	}
 
 	public void freeze() {
 
@@ -468,6 +571,9 @@ public class Heap implements Bundlable {
 			} else if (item instanceof Potion) {
 				items.remove(item);
 				((Potion) item).shatter(pos);
+				frozen = true;
+			}else if (item instanceof Egg) {	
+				((Egg) item).freezes++;
 				frozen = true;
 			} else if (item instanceof Bomb) {
 				((Bomb) item).fuse = null;

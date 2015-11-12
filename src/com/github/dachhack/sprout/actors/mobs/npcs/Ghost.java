@@ -685,6 +685,12 @@ public class Ghost extends NPC {
 					Dungeon.level.drop(new TenguKey(), pos).sprite.drop();
 				}
 			 
+			 if(!Dungeon.limitedDrops.tengukey.dropped() && Dungeon.tengukilled && Statistics.archersKilled > 100) {
+					Dungeon.limitedDrops.tengukey.drop();
+					Dungeon.level.drop(new TenguKey(), pos).sprite.drop();
+				}
+			 
+			 
 			 if(!Dungeon.tengukilled && Statistics.archersKilled > 70 && Dungeon.depth>26) {
 				 GLog.w("There are no keys to find on this level. Just dew, seeds, and mushrooms.");
 

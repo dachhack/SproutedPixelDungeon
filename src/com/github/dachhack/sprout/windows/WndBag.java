@@ -22,8 +22,10 @@ import android.graphics.RectF;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Belongings;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.items.AdamantArmor;
 import com.github.dachhack.sprout.items.AdamantRing;
 import com.github.dachhack.sprout.items.AdamantWand;
@@ -64,13 +66,13 @@ public class WndBag extends WndTabbed {
 	public static enum Mode {
 		ALL, UNIDENTIFED, UPGRADEABLE, QUICKSLOT, FOR_SALE, WEAPON, ARMOR, ENCHANTABLE, 
 		WAND, SEED, FOOD, POTION, SCROLL, EQUIPMENT, ADAMANT, REINFORCED, UPGRADEABLESIMPLE,
-		NOTREINFORCED
+		NOTREINFORCED, UPGRADEDEW
 	}
 
 	protected static final int COLS_P = 4;
 	protected static final int COLS_L = 6;
 
-	protected static final int SLOT_SIZE = 28;
+	protected static final int SLOT_SIZE = 26;
 	protected static final int SLOT_MARGIN = 1;
 
 	protected static final int TITLE_HEIGHT = 12;
@@ -369,6 +371,10 @@ public class WndBag extends WndTabbed {
 				if (item.name() == null) {
 					enable(false);
 				} else {
+					
+					 int levelLimit = Math.max(5, 5+Math.round(Statistics.deepestFloor/3));
+				     if (Dungeon.hero.heroClass == HeroClass.MAGE){levelLimit++;}
+					
 					enable(mode == Mode.FOR_SALE
 							&& (item.price() > 0)
 							&& (!item.isEquipped(Dungeon.hero) || !item.cursed)
@@ -376,6 +382,8 @@ public class WndBag extends WndTabbed {
 							|| mode == Mode.UPGRADEABLE
 							&& ((item.isUpgradable() && item.level<15 && !item.isReinforced())
 									||  item.isUpgradable() && item.isReinforced())		
+							|| mode == Mode.UPGRADEDEW
+							&& (item.isUpgradable() && item.level < levelLimit)	
 							|| mode == Mode.UPGRADEABLESIMPLE
 							&& item.isUpgradable()			
 							|| mode == Mode.ADAMANT

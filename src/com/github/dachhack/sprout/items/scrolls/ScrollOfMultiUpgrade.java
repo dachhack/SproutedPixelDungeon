@@ -33,6 +33,7 @@ public class ScrollOfMultiUpgrade extends InventoryScroll {
 		name = "Scroll of Multi Upgrade";
 		inventoryTitle = "Select an item to upgrade";
 		mode = WndBag.Mode.UPGRADEABLE;
+		consumedValue = 10;
 
 		bones = true;
 	}

@@ -34,7 +34,7 @@ public class DungeonTilemap extends Tilemap {
 	public DungeonTilemap() {
 		super(Dungeon.level.tilesTex(), new TextureFilm(
 				Dungeon.level.tilesTex(), SIZE, SIZE));
-		map(Dungeon.level.map, Level.WIDTH);
+		map(Dungeon.level.map, Level.getWidth());
 
 		instance = this;
 	}
@@ -42,8 +42,8 @@ public class DungeonTilemap extends Tilemap {
 	public int screenToTile(int x, int y) {
 		Point p = camera().screenToCamera(x, y).offset(this.point().negate())
 				.invScale(SIZE).floor();
-		return p.x >= 0 && p.x < Level.WIDTH && p.y >= 0 && p.y < Level.HEIGHT ? p.x
-				+ p.y * Level.WIDTH
+		return p.x >= 0 && p.x < Level.getWidth() && p.y >= 0 && p.y < Level.HEIGHT ? p.x
+				+ p.y * Level.getWidth()
 				: -1;
 	}
 
@@ -72,12 +72,12 @@ public class DungeonTilemap extends Tilemap {
 	}
 
 	public static PointF tileToWorld(int pos) {
-		return new PointF(pos % Level.WIDTH, pos / Level.WIDTH).scale(SIZE);
+		return new PointF(pos % Level.getWidth(), pos / Level.getWidth()).scale(SIZE);
 	}
 
 	public static PointF tileCenterToWorld(int pos) {
-		return new PointF((pos % Level.WIDTH + 0.5f) * SIZE,
-				(pos / Level.WIDTH + 0.5f) * SIZE);
+		return new PointF((pos % Level.getWidth() + 0.5f) * SIZE,
+				(pos / Level.getWidth() + 0.5f) * SIZE);
 	}
 
 	public static Image tile(int index) {

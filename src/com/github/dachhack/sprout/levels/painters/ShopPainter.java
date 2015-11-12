@@ -93,7 +93,7 @@ public class ShopPainter extends Painter {
 		for (Item item : itemsToSpawn) {
 
 			Point xy = p2xy(room, (pos + per) % per);
-			int cell = xy.x + xy.y * Level.WIDTH;
+			int cell = xy.x + xy.y * Level.getWidth();
 
 			if (level.heaps.get(cell) != null) {
 				do {

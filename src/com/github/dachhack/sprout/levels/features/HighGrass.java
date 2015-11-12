@@ -40,6 +40,7 @@ import com.github.dachhack.sprout.items.food.Moonberry;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
+import com.github.dachhack.sprout.plants.Flytrap;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.utils.Random;
 
@@ -78,7 +79,14 @@ public class HighGrass {
 							Dungeon.limitedDrops.blandfruitSeed.count++;
 						}
 						
-					  }	else if (seed instanceof Blackberry
+					  }	else if (seed instanceof Flytrap.Seed) {
+						if (Random.Int(15)
+								- Dungeon.limitedDrops.upgradeEaterSeed.count >= 0) {
+							level.drop(seed, pos).sprite.drop();
+							Dungeon.limitedDrops.upgradeEaterSeed.count++;
+						}
+						
+					  }else if (seed instanceof Blackberry
 								|| seed instanceof Cloudberry
 								|| seed instanceof Blueberry
 								|| seed instanceof Moonberry								

@@ -70,6 +70,7 @@ public class Item implements Bundlable {
 	protected int quantity = 1;
 
 	public int level = 0;
+	public int consumedValue = 0;
 	public boolean levelKnown = false;
 
 	public boolean cursed;
@@ -235,6 +236,42 @@ public class Item implements Bundlable {
 			}
 		}
 	}
+	
+	public final Item detach(Bag container, Integer quant) {
+
+		if (quantity <= 0) {
+
+			return null;
+
+		} else if (quantity == 1) {
+
+			if (stackable || this instanceof Boomerang) {
+				Dungeon.quickslot.convertToPlaceholder(this);
+			}
+
+			return detachAll(container);
+
+		} else {
+
+			quantity-=quant;
+			updateQuickslot();
+
+			try {
+
+				// pssh, who needs copy constructors?
+				Item detached = getClass().newInstance();
+				Bundle copy = new Bundle();
+				this.storeInBundle(copy);
+				detached.restoreFromBundle(copy);
+				detached.quantity(quant);
+
+				detached.onDetach();
+				return detached;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
 
 	public final Item detachAll(Bag container) {
 		Dungeon.quickslot.clearItem(this);
@@ -267,6 +304,12 @@ public class Item implements Bundlable {
 		cursed=false;
 		return this;
 	}
+	
+	public Item reinforce(){
+		reinforced=true;
+		return this;
+	}
+
 
 	public Item upgrade() {
 

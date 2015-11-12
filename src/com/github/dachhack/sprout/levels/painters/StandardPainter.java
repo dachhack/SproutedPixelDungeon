@@ -134,7 +134,7 @@ public class StandardPainter extends Painter {
 					t = Terrain.INACTIVE_TRAP;
 					break;
 				}
-				level.map[i * Level.WIDTH + j] = t;
+				level.map[i * Level.getWidth() + j] = t;
 			}
 		}
 	}
@@ -152,9 +152,9 @@ public class StandardPainter extends Painter {
 		int shift = Random.Int(2);
 		for (int i = 0; i < nGraves; i++) {
 			int pos = w > h ? room.left + 1 + shift + i * 2
-					+ (room.top + 2 + Random.Int(h - 2)) * Level.WIDTH
+					+ (room.top + 2 + Random.Int(h - 2)) * Level.getWidth()
 					: (room.left + 2 + Random.Int(w - 2))
-							+ (room.top + 1 + shift + i * 2) * Level.WIDTH;
+							+ (room.top + 1 + shift + i * 2) * Level.getWidth();
 			level.drop(i == index ? Generator.random() : new Gold().random(),
 					pos).type = Heap.Type.TOMB;
 		}
@@ -201,14 +201,14 @@ public class StandardPainter extends Painter {
 		if (Random.Int(2) != 0) {
 			Item prize = level.findPrizeItem();
 			if (prize != null) {
-				level.drop(prize, (room.center().x + center.y * Level.WIDTH));
+				level.drop(prize, (room.center().x + center.y * Level.getWidth()));
 				return;
 			}
 		}
 
 		level.drop(Generator.random(Random.oneOf(Generator.Category.POTION,
 				Generator.Category.SCROLL)), (room.center().x + center.y
-				* Level.WIDTH));
+				* Level.getWidth()));
 	}
 
 	private static void paintBridge(Level level, Room room) {

@@ -56,7 +56,7 @@ public class Blueberry extends Food {
 
 			if (Random.Float()<0.75f) {
 			
-				int length = Level.LENGTH;
+				int length = Level.getLength();
 				int[] map = Dungeon.level.map;
 				boolean[] mapped = Dungeon.level.mapped;
 				boolean[] discoverable = Level.discoverable;
@@ -101,7 +101,7 @@ public class Blueberry extends Food {
 				GLog.w("The berry releases energy into your body!");
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT+hero.HT);
 				
-				int length = Level.LENGTH;
+				int length = Level.getLength();
 				int[] map = Dungeon.level.map;
 				boolean[] mapped = Dungeon.level.mapped;
 				boolean[] discoverable = Level.discoverable;

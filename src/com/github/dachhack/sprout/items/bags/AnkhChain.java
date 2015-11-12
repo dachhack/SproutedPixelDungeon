@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.items.AdamantRing;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.CavesKey;
 import com.github.dachhack.sprout.items.CityKey;
@@ -26,6 +27,7 @@ import com.github.dachhack.sprout.items.PrisonKey;
 import com.github.dachhack.sprout.items.Rice;
 import com.github.dachhack.sprout.items.SewersKey;
 import com.github.dachhack.sprout.items.TenguKey;
+import com.github.dachhack.sprout.items.artifacts.RingOfDisintegration;
 import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Blueberry;
 import com.github.dachhack.sprout.items.food.Cloudberry;
@@ -51,7 +53,8 @@ public class AnkhChain extends Bag {
 	
 	@Override
 	public boolean grab(Item item) {
-		if (item instanceof Ankh ||  item instanceof Ring ){
+		if (item instanceof Ankh ||  item instanceof Ring || item instanceof RingOfDisintegration
+				|| item instanceof AdamantRing){
 			return true;
 			} else {
 			return false;

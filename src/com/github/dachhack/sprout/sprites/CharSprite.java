@@ -99,7 +99,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener,
 		ch.sprite = this;
 
 		place(ch.pos);
-		turnTo(ch.pos, Random.Int(Level.LENGTH));
+		turnTo(ch.pos, Random.Int(Level.getLength()));
 
 		if (parent != null)
 			ch.updateSpriteState();
@@ -109,8 +109,8 @@ public class CharSprite extends MovieClip implements Tweener.Listener,
 
 		final int csize = DungeonTilemap.SIZE;
 
-		return new PointF(((cell % Level.WIDTH) + 0.5f) * csize - width * 0.5f,
-				((cell / Level.WIDTH) + 1.0f) * csize - height);
+		return new PointF(((cell % Level.getWidth()) + 0.5f) * csize - width * 0.5f,
+				((cell / Level.getWidth()) + 1.0f) * csize - height);
 	}
 
 	public void place(int cell) {
@@ -180,8 +180,8 @@ public class CharSprite extends MovieClip implements Tweener.Listener,
 	}
 
 	public void turnTo(int from, int to) {
-		int fx = from % Level.WIDTH;
-		int tx = to % Level.WIDTH;
+		int fx = from % Level.getWidth();
+		int tx = to % Level.getWidth();
 		if (tx > fx) {
 			flipHorizontal = false;
 		} else if (tx < fx) {

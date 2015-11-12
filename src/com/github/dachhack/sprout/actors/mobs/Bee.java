@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.actors.mobs;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
@@ -69,7 +70,7 @@ public class Bee extends Mob {
 	}
 
 	public void spawn(int level) {
-		this.level = level;
+		this.level = Math.min(level,Statistics.deepestFloor);
 
 		HT = (2 + level) * 4;
 		defenseSkill = 9 + level;

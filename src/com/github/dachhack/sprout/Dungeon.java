@@ -30,6 +30,9 @@ import android.content.Context;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Charm;
+import com.github.dachhack.sprout.actors.buffs.Dewcharge;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
@@ -77,6 +80,7 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.StartScene;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.BArray;
+import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndResurrect;
 import com.watabou.noosa.Game;
@@ -101,7 +105,7 @@ public class Dungeon {
 		swarmHP, batHP, warlockHP, scorpioHP, cookingHP,
 		// blandfruit, which can technically be an unlimited health potion
 		// source
-		blandfruitSeed,
+		blandfruitSeed, upgradeEaterSeed,
 
 		// doesn't use Generator, so we have to enforce one armband drop here
 		armband, spork, royalspork, sewerkey, prisonkey, caveskey, citykey, hallskey, ringofwealth,
@@ -122,6 +126,8 @@ public class Dungeon {
 			count = 1;
 		}
 	}
+	
+	public static int[] pars;
 	
 	public static boolean earlygrass = false;
 	public static boolean playtest = false;
@@ -165,7 +171,7 @@ public class Dungeon {
 	public static HashSet<Integer> chapters;
 
 	// Hero's field of view
-	public static boolean[] visible = new boolean[Level.LENGTH];
+	public static boolean[] visible = new boolean[Level.getLength()];
 
 	public static SparseArray<ArrayList<Item>> droppedItems;
 
@@ -180,7 +186,7 @@ public class Dungeon {
 		Actor.clear();
 		Actor.resetNextID();
 
-		PathFinder.setMapSize(Level.WIDTH, Level.HEIGHT);
+		PathFinder.setMapSize(Level.getWidth(), Level.HEIGHT);
 
 		Scroll.initLabels();
 		Potion.initColors();
@@ -242,7 +248,9 @@ public class Dungeon {
 		dewDraw = false;
 		dewWater = false;
 		wings = false;
-	
+	    
+		pars = new int[24];
+		
 	}
 
 	public static boolean isChallenged(int mask) {
@@ -620,6 +628,10 @@ public static Level newThiefBossLevel(){
 		level.create();
 
 		Statistics.qualifiedForNoKilling = !bossLevel();
+		if (depth<25 && depth!=21 && !Dungeon.bossLevel(depth) && Dungeon.dewDraw){
+			
+			Buff.prolong(Dungeon.hero, Dewcharge.class, Dewcharge.DURATION+(Math.max(Statistics.prevfloormoves,1)));}
+		    GLog.p("You feel the dungeon charge with dew!");
 
 		return level;
 	}
@@ -666,7 +678,7 @@ public static Level newThiefBossLevel(){
 		if (respawner != null) {
 			Actor.add(level.respawner());
 		}
-
+		
 		Actor regrower = level.regrower();
 		if (regrower != null && growLevel(depth)) {
 			Actor.add(level.regrower());
@@ -682,6 +694,11 @@ public static Level newThiefBossLevel(){
 		Light light = hero.buff(Light.class);
 		hero.viewDistance = light == null ? level.viewDistance : Math.max(
 				Light.DISTANCE, level.viewDistance);
+		
+		Actor respawnerPet = level.respawnerPet();
+		if (respawnerPet != null) {
+			Actor.add(level.respawnerPet());
+		}
 
 		observe();
 		try {
@@ -784,6 +801,7 @@ public static Level newThiefBossLevel(){
 	private static final String ZOTDRAINS = "zotDrains";
 	private static final String SHELLCHARGE = "shellCharge";
 	private static final String PLAYTEST = "playtest";
+	private static final String PARS = "pars";
 	
 	
 	// TODO: to support pre-0.2.3 saves, remove when needed
@@ -850,6 +868,7 @@ public static Level newThiefBossLevel(){
 			bundle.put(WINGS, wings);
 			bundle.put(SHELLCHARGE, shellCharge);
 			bundle.put(PLAYTEST, playtest);
+			bundle.put(PARS, pars);
 	
 			for (int d : droppedItems.keyArray()) {
 				bundle.put(String.format(DROPPED, d), droppedItems.get(d));
@@ -963,7 +982,7 @@ public static Level newThiefBossLevel(){
 		Dungeon.depth = -1;
 
 		if (fullLoad) {
-			PathFinder.setMapSize(Level.WIDTH, Level.HEIGHT);
+			PathFinder.setMapSize(Level.getWidth(), Level.HEIGHT);
 		}
 
 		Scroll.restore(bundle);
@@ -1053,6 +1072,7 @@ public static Level newThiefBossLevel(){
 		dewWater = bundle.getBoolean(DEWWATER);
 		wings = bundle.getBoolean(WINGS);
 		playtest = bundle.getBoolean(PLAYTEST);
+		pars = bundle.getIntArray(PARS);
 		
 		Statistics.restoreFromBundle(bundle);
 		Journal.restoreFromBundle(bundle);
@@ -1167,7 +1187,7 @@ public static Level newThiefBossLevel(){
 		GameScene.afterObserve();
 	}
 
-	private static boolean[] passable = new boolean[Level.LENGTH];
+	private static boolean[] passable = new boolean[Level.getLength()];
 	
 
 	public static int findPath(Char ch, int from, int to, boolean pass[],
@@ -1181,7 +1201,7 @@ public static Level newThiefBossLevel(){
 		if (ch.flying || ch.buff(Amok.class) != null) {
 			BArray.or(pass, Level.avoid, passable);
 		} else {
-			System.arraycopy(pass, 0, passable, 0, Level.LENGTH);
+			System.arraycopy(pass, 0, passable, 0, Level.getLength());
 		}
 
 		for (Actor actor : Actor.all()) {
@@ -1203,7 +1223,7 @@ public static Level newThiefBossLevel(){
 		if (ch.flying) {
 			BArray.or(pass, Level.avoid, passable);
 		} else {
-			System.arraycopy(pass, 0, passable, 0, Level.LENGTH);
+			System.arraycopy(pass, 0, passable, 0, Level.getLength());
 		}
 
 		for (Actor actor : Actor.all()) {
@@ -1224,5 +1244,10 @@ public static Level newThiefBossLevel(){
 	   int hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 	   return (hour > 19 || hour < 7);
     }
+    
+    public static int getMonth(){
+ 	   int month=Calendar.getInstance().get(Calendar.MONTH);
+ 	   return month;
+     }
 
 }

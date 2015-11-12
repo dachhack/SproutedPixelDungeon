@@ -64,8 +64,8 @@ public class PlantSprite extends Image {
 		alpha(1f);
 
 		pos = plant.pos;
-		x = (pos % Level.WIDTH) * DungeonTilemap.SIZE;
-		y = (pos / Level.WIDTH) * DungeonTilemap.SIZE;
+		x = (pos % Level.getWidth()) * DungeonTilemap.SIZE;
+		y = (pos / Level.getWidth()) * DungeonTilemap.SIZE;
 
 		state = State.GROWING;
 		time = DELAY;

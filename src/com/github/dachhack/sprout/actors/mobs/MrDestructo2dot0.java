@@ -83,10 +83,12 @@ public class MrDestructo2dot0 extends Mob {
 		
 		for (int n : Level.NEIGHBOURS8DIST2) {
 			int c = pos + n;
+			if (c<Level.getLength() && c>0){
 			Char ch = Actor.findChar(c);
 				if (ch == Dungeon.hero && Dungeon.hero.isAlive() &&  enemy==null) {
 					yell("Scanning...");
 				}
+			}
 		}
 		//Level.fieldOfView[Dungeon.hero.pos] &&
 		

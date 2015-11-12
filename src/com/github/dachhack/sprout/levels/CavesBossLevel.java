@@ -47,8 +47,8 @@ public class CavesBossLevel extends Level {
 		viewDistance = 6;
 	}
 
-	private static final int ROOM_LEFT = WIDTH / 2 - 2;
-	private static final int ROOM_RIGHT = WIDTH / 2 + 2;
+	private static final int ROOM_LEFT = getWidth() / 2 - 2;
+	private static final int ROOM_RIGHT = getWidth() / 2 + 2;
 	private static final int ROOM_TOP = HEIGHT / 2 - 2;
 	private static final int ROOM_BOTTOM = HEIGHT / 2 + 2;
 
@@ -98,7 +98,7 @@ public class CavesBossLevel extends Level {
 				right = ROOM_RIGHT + 3;
 			} else {
 				left = ROOM_LEFT - 3;
-				right = Random.Int(ROOM_RIGHT + 3, WIDTH - 1);
+				right = Random.Int(ROOM_RIGHT + 3, getWidth() - 1);
 			}
 			if (Random.Int(2) == 0) {
 				top = Random.Int(2, ROOM_TOP - 3);
@@ -113,13 +113,13 @@ public class CavesBossLevel extends Level {
 
 			if (top < topMost) {
 				topMost = top;
-				exit = Random.Int(left, right) + (top - 1) * WIDTH;
+				exit = Random.Int(left, right) + (top - 1) * getWidth();
 			}
 		}
 
 		map[exit] = Terrain.LOCKED_EXIT;
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(6) == 0) {
 				map[i] = Terrain.INACTIVE_TRAP;
 			}
@@ -134,15 +134,15 @@ public class CavesBossLevel extends Level {
 				Terrain.TOXIC_TRAP);
 
 		arenaDoor = Random.Int(ROOM_LEFT, ROOM_RIGHT) + (ROOM_BOTTOM + 1)
-				* WIDTH;
+				* getWidth();
 		map[arenaDoor] = Terrain.DOOR;
 
 		entrance = Random.Int(ROOM_LEFT + 1, ROOM_RIGHT - 1)
-				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * WIDTH;
+				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * getWidth();
 		map[entrance] = Terrain.ENTRANCE;
 
 		boolean[] patch = Patch.generate(0.45f, 6);
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && patch[i]) {
 				map[i] = Terrain.WATER;
 			}
@@ -154,7 +154,7 @@ public class CavesBossLevel extends Level {
 	@Override
 	protected void decorate() {
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth(); i++) {
 			if (map[i] == Terrain.EMPTY) {
 				int n = 0;
 				if (map[i + 1] == Terrain.WALL) {
@@ -163,10 +163,10 @@ public class CavesBossLevel extends Level {
 				if (map[i - 1] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i + WIDTH] == Terrain.WALL) {
+				if (map[i + getWidth()] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i - WIDTH] == Terrain.WALL) {
+				if (map[i - getWidth()] == Terrain.WALL) {
 					n++;
 				}
 				if (Random.Int(8) <= n) {
@@ -175,7 +175,7 @@ public class CavesBossLevel extends Level {
 			}
 		}
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
 				map[i] = Terrain.WALL_DECO;
 			}
@@ -184,7 +184,7 @@ public class CavesBossLevel extends Level {
 		int sign;
 		do {
 			sign = Random.Int(ROOM_LEFT, ROOM_RIGHT)
-					+ Random.Int(ROOM_TOP, ROOM_BOTTOM) * WIDTH;
+					+ Random.Int(ROOM_TOP, ROOM_BOTTOM) * getWidth();
 		} while (sign == entrance);
 		map[sign] = Terrain.SIGN;
 	}
@@ -205,7 +205,7 @@ public class CavesBossLevel extends Level {
 			int pos;
 			do {
 				pos = Random.IntRange(ROOM_LEFT, ROOM_RIGHT)
-						+ Random.IntRange(ROOM_TOP + 1, ROOM_BOTTOM) * WIDTH;
+						+ Random.IntRange(ROOM_TOP + 1, ROOM_BOTTOM) * getWidth();
 			} while (pos == entrance || map[pos] == Terrain.SIGN);
 			drop(item, pos).type = Heap.Type.REMAINS;
 		}
@@ -229,7 +229,7 @@ public class CavesBossLevel extends Level {
 			Mob boss = Bestiary.mob(Dungeon.depth);
 			boss.state = boss.HUNTING;
 			do {
-				boss.pos = Random.Int(LENGTH);
+				boss.pos = Random.Int(getLength());
 			} while (!passable[boss.pos] || !outsideEntraceRoom(boss.pos)
 					|| Dungeon.visible[boss.pos]);
 			GameScene.add(boss);
@@ -237,7 +237,7 @@ public class CavesBossLevel extends Level {
 			Tower a = new Tower();  
 	    	
 			do {
-				a.pos = Random.Int(LENGTH);
+				a.pos = Random.Int(getLength());
 			} while (!passable[a.pos] || !outsideEntraceRoom(a.pos)
 					|| Dungeon.visible[a.pos]);
 			a.state = a.PASSIVE;
@@ -252,7 +252,7 @@ public class CavesBossLevel extends Level {
             Tower b = new Tower();  
 	    	
             do {
-				b.pos = Random.Int(LENGTH);
+				b.pos = Random.Int(getLength());
 			} while (!passable[b.pos] || !outsideEntraceRoom(b.pos)
 					|| Dungeon.visible[b.pos]);
 			b.state = b.PASSIVE;
@@ -295,8 +295,8 @@ public class CavesBossLevel extends Level {
 	}
 
 	private boolean outsideEntraceRoom(int cell) {
-		int cx = cell % WIDTH;
-		int cy = cell / WIDTH;
+		int cx = cell % getWidth();
+		int cy = cell / getWidth();
 		return cx < ROOM_LEFT - 1 || cx > ROOM_RIGHT + 1 || cy < ROOM_TOP - 1
 				|| cy > ROOM_BOTTOM + 1;
 	}

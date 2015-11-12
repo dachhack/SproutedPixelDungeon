@@ -39,9 +39,9 @@ public class Wound extends Image {
 	public void reset(int p) {
 		revive();
 
-		x = (p % Level.WIDTH) * DungeonTilemap.SIZE
+		x = (p % Level.getWidth()) * DungeonTilemap.SIZE
 				+ (DungeonTilemap.SIZE - width) / 2;
-		y = (p / Level.WIDTH) * DungeonTilemap.SIZE
+		y = (p / Level.getWidth()) * DungeonTilemap.SIZE
 				+ (DungeonTilemap.SIZE - height) / 2;
 
 		time = TIME_TO_FADE;

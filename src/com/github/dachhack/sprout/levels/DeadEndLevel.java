@@ -48,19 +48,19 @@ public class DeadEndLevel extends Level {
 
 		for (int i = 2; i < SIZE; i++) {
 			for (int j = 2; j < SIZE; j++) {
-				map[i * WIDTH + j] = Terrain.EMPTY;
+				map[i * getWidth() + j] = Terrain.EMPTY;
 			}
 		}
 
 		for (int i = 1; i <= SIZE; i++) {
-			map[WIDTH + i] = map[WIDTH * SIZE + i] = map[WIDTH * i + 1] = map[WIDTH
+			map[getWidth() + i] = map[getWidth() * SIZE + i] = map[getWidth() * i + 1] = map[getWidth()
 					* i + SIZE] = Terrain.WATER;
 		}
 
-		entrance = SIZE * WIDTH + SIZE / 2 + 1;
+		entrance = SIZE * getWidth() + SIZE / 2 + 1;
 		map[entrance] = Terrain.ENTRANCE;
 
-		map[(SIZE / 2 + 1) * (WIDTH + 1)] = Terrain.SIGN;
+		map[(SIZE / 2 + 1) * (getWidth() + 1)] = Terrain.SIGN;
 
 		exit = 0;
 
@@ -69,7 +69,7 @@ public class DeadEndLevel extends Level {
 
 	@Override
 	protected void decorate() {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(10) == 0) {
 				map[i] = Terrain.EMPTY_DECO;
 			} else if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
@@ -88,7 +88,7 @@ public class DeadEndLevel extends Level {
 
 	@Override
 	public int randomRespawnCell() {
-		return entrance - WIDTH;
+		return entrance - getWidth();
 	}
 
 }

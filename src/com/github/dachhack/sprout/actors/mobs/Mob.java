@@ -28,8 +28,10 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Dewcharge;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
@@ -38,12 +40,15 @@ import com.github.dachhack.sprout.effects.Wound;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.RedDewdrop;
+import com.github.dachhack.sprout.items.VioletDewdrop;
 import com.github.dachhack.sprout.items.YellowDewdrop;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
 import com.github.dachhack.sprout.items.rings.RingOfWealth;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Level.Feeling;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -74,6 +79,7 @@ public abstract class Mob extends Char {
 
 	protected int EXP = 1;
 	protected int maxLvl = 30;
+	protected int dewLvl = 1;
 
 	protected Char enemy;
 	protected boolean enemySeen;
@@ -83,10 +89,16 @@ public abstract class Mob extends Char {
 
 	public boolean hostile = true;
 	public boolean ally = false;
+	public boolean originalgen = false;
 
 	private static final String STATE = "state";
 	private static final String SEEN = "seen";
 	private static final String TARGET = "target";
+	private static final String ORIGINAL = "originalgen";
+	
+	public int getExp(){
+		return EXP;
+	}
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
@@ -106,6 +118,7 @@ public abstract class Mob extends Char {
 		}
 		bundle.put(SEEN, enemySeen);
 		bundle.put(TARGET, target);
+		bundle.put(ORIGINAL, originalgen);
 	}
 
 	@Override
@@ -129,6 +142,8 @@ public abstract class Mob extends Char {
 		enemySeen = bundle.getBoolean(SEEN);
 
 		target = bundle.getInt(TARGET);
+		
+		originalgen = bundle.getBoolean(ORIGINAL);
 	}
 
 	public CharSprite sprite() {
@@ -437,11 +452,43 @@ public abstract class Mob extends Char {
 			}
 		}
 	}
+	
+	public boolean checkOriginalGenMobs (){
+		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
+			if (mob.originalgen){return true;}
+		 }	
+		return false;
+	}
 
 	@Override
 	public void die(Object cause) {
 
 		super.die(cause);
+		
+		int generation=0;
+		
+		if(this instanceof Swarm){
+			Swarm swarm = (Swarm) this;
+			generation=swarm.generation;
+		}
+				
+		if (Dungeon.hero.buff(Dewcharge.class) != null && generation==0) {
+			explodeDewHigh(pos);
+		}
+		
+		if (originalgen && !checkOriginalGenMobs() && Dungeon.dewDraw && Dungeon.depth>2 && Dungeon.depth<25 && !Dungeon.bossLevel(Dungeon.depth)){
+			Dungeon.level.cleared=true;
+			GameScene.levelCleared();		
+			if(Dungeon.depth>0){Statistics.prevfloormoves=Math.max(Dungeon.pars[Dungeon.depth]-Dungeon.level.currentmoves,0);
+			   if (Statistics.prevfloormoves>1){
+			     GLog.h("Level cleared in %s moves under goal.", Statistics.prevfloormoves);
+			   } else if (Statistics.prevfloormoves==1){
+			     GLog.h("Level cleared in 1 move under goal."); 
+			   } else if (Statistics.prevfloormoves==0){
+				 GLog.h("Level cleared over goal moves.");
+			   }
+			} 
+		}
 
 		float lootChance = this.lootChance;
 		float lootChanceOther = this.lootChanceOther;
@@ -546,10 +593,26 @@ public abstract class Mob extends Char {
 
 		  for (int n : Level.NEIGHBOURS9) {
 			 int c = cell + n;
-			 if (c >= 0 && c < Level.LENGTH && Level.passable[c]) {
+			 if (c >= 0 && c < Level.getLength() && Level.passable[c]) {
 						
 				if (Random.Int(10)==1){Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();}
 				else if (Random.Int(3)==1){Dungeon.level.drop(new YellowDewdrop(), c).sprite.drop();}
+			}
+		  }	
+		}
+	}
+	
+public void explodeDewHigh(int cell) {
+		
+		if (Dungeon.dewDraw){
+		  Sample.INSTANCE.play(Assets.SND_BLAST, 2);
+
+		  for (int n : Level.NEIGHBOURS9) {
+			 int c = cell + n;
+			 if (c >= 0 && c < Level.getLength() && Level.passable[c]) {
+						
+				if (Random.Int(8)==1){Dungeon.level.drop(new VioletDewdrop(), c).sprite.drop();}
+				else if (Random.Int(2)==1){Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();}
 			}
 		  }	
 		}

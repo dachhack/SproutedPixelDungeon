@@ -18,17 +18,32 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.ui.BuffIndicator;
+import com.watabou.utils.Bundle;
 
 public class Barkskin extends Buff {
 
-	private int level = 0;
+	private int barkleft = 0;
+	
+	private static final String BARKLEFT = "barkleft";
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(BARKLEFT, barkleft);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		barkleft = bundle.getInt(BARKLEFT);
+	}
 
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
 
 			spend(TICK);
-			if (--level <= 0) {
+			if (--barkleft <= 0) {
 				detach();
 			}
 
@@ -42,12 +57,12 @@ public class Barkskin extends Buff {
 	}
 
 	public int level() {
-		return level;
+		return barkleft;
 	}
 
 	public void level(int value) {
-		if (level < value) {
-			level = value;
+		if (barkleft < value) {
+			barkleft = value;
 		}
 	}
 

@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.ActiveMrDestructo2;
+import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Generator.Category;
 import com.github.dachhack.sprout.items.Honeypot;
@@ -39,6 +40,7 @@ import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.potions.PotionOfMight;
+import com.github.dachhack.sprout.items.potions.PotionOfOverHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
@@ -89,6 +91,8 @@ public class WaterOfTransmutation extends WellWater {
 			item = changeHoneypot((SteelShatteredPot) item);
 		} else if (item instanceof Honeypot) {
 			item = changeHoneypot((Honeypot) item);
+		} else if (item instanceof Ankh) {
+			item = changeAnkh((Ankh) item);
 		} else {
 			item = null;
 		}
@@ -267,6 +271,11 @@ public class WaterOfTransmutation extends WellWater {
 		}
 	}
 
+	
+	private Potion changeAnkh(Ankh a) {
+		return new PotionOfOverHealing();
+	}
+	
 	private Food changeHoneypot(ShatteredPot s) {
 		return new PotionOfConstitution();
 	}

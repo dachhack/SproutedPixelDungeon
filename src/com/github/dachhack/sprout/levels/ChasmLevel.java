@@ -164,29 +164,29 @@ public class ChasmLevel extends RegularLevel {
 	@Override
 	protected void decorate() {
 
-		for (int i = 0; i < WIDTH; i++) {
-			if (map[i] == Terrain.WALL && map[i + WIDTH] == Terrain.WATER
+		for (int i = 0; i < getWidth(); i++) {
+			if (map[i] == Terrain.WALL && map[i + getWidth()] == Terrain.WATER
 					&& Random.Int(4) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
 			}
 		}
 
-		for (int i = WIDTH; i < LENGTH - WIDTH; i++) {
-			if (map[i] == Terrain.WALL && map[i - WIDTH] == Terrain.WALL
-					&& map[i + WIDTH] == Terrain.WATER && Random.Int(2) == 0) {
+		for (int i = getWidth(); i < getLength() - getWidth(); i++) {
+			if (map[i] == Terrain.WALL && map[i - getWidth()] == Terrain.WALL
+					&& map[i + getWidth()] == Terrain.WATER && Random.Int(2) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
 			}
 		}
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH - 1; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth() - 1; i++) {
 			if (map[i] == Terrain.EMPTY) {
 
 				int count = (map[i + 1] == Terrain.WALL ? 1 : 0)
 						+ (map[i - 1] == Terrain.WALL ? 1 : 0)
-						+ (map[i + WIDTH] == Terrain.WALL ? 1 : 0)
-						+ (map[i - WIDTH] == Terrain.WALL ? 1 : 0);
+						+ (map[i + getWidth()] == Terrain.WALL ? 1 : 0)
+						+ (map[i - getWidth()] == Terrain.WALL ? 1 : 0);
 
 				if (Random.Int(16) < count * count) {
 					map[i] = Terrain.EMPTY_DECO;
@@ -195,7 +195,7 @@ public class ChasmLevel extends RegularLevel {
 		}
 		
 			
-		int length = Level.LENGTH;
+		int length = Level.getLength();
 		
 		for (int i = 0; i < length; i++) {
 			
@@ -224,7 +224,7 @@ public class ChasmLevel extends RegularLevel {
 	}
 
 	public static void addVisuals(Level level, Scene scene) {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (level.map[i] == Terrain.WALL_DECO) {
 				scene.add(new Sink(i));
 			}
@@ -291,7 +291,7 @@ public class ChasmLevel extends RegularLevel {
 				super.update();
 
 				if ((rippleDelay -= Game.elapsed) <= 0) {
-					GameScene.ripple(pos + WIDTH).y -= DungeonTilemap.SIZE / 2;
+					GameScene.ripple(pos + getWidth()).y -= DungeonTilemap.SIZE / 2;
 					rippleDelay = Random.Float(0.2f, 0.3f);
 				}
 			}

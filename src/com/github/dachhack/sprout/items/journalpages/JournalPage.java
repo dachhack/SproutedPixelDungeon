@@ -39,7 +39,7 @@ public class JournalPage extends Item {
 
 		stackable = false;
 	}
-
+		
 	@Override
 	public boolean doPickUp(Hero hero) {
          

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.rings.RingOfElements.Resistance;
@@ -38,7 +39,7 @@ public class Weakness extends FlavourBuff {
 
 	@Override
 	public boolean attachTo(Char target) {
-		if (super.attachTo(target)) {
+		if (super.attachTo(target) && target==Dungeon.hero) {
 			Hero hero = (Hero) target;
 			hero.weakened = true;
 			hero.belongings.discharge();
@@ -52,7 +53,9 @@ public class Weakness extends FlavourBuff {
 	@Override
 	public void detach() {
 		super.detach();
+		if  (target==Dungeon.hero){
 		((Hero) target).weakened = false;
+		}
 	}
 
 	public static float duration(Char ch) {

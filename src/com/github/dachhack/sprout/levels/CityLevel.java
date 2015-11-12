@@ -58,6 +58,11 @@ public class CityLevel extends RegularLevel {
 	protected boolean[] grass() {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.60f : 0.40f, 3);
 	}
+	
+	@Override
+	protected void setPar(){
+		Dungeon.pars[Dungeon.depth] = 200+(Dungeon.depth*50)+(secretDoors*20);
+	}
 
 	@Override
 	protected boolean assignRoomType() {
@@ -75,7 +80,7 @@ public class CityLevel extends RegularLevel {
 	@Override
 	protected void decorate() {
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(10) == 0) {
 				map[i] = Terrain.EMPTY_DECO;
 			} else if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
@@ -90,6 +95,8 @@ public class CityLevel extends RegularLevel {
 				break;
 			}
 		}
+		
+		setPar();
 	}
 
 	@Override
@@ -156,7 +163,7 @@ public class CityLevel extends RegularLevel {
 	}
 
 	public static void addVisuals(Level level, Scene scene) {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (level.map[i] == Terrain.WALL_DECO) {
 				scene.add(new Smoke(i));
 			}

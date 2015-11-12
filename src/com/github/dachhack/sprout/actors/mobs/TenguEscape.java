@@ -146,7 +146,7 @@ public class TenguEscape extends Mob {
 
 		int newPos;
 		do {
-			newPos = Random.Int(Level.LENGTH);
+			newPos = Random.Int(Level.getLength());
 		} while (!Level.passable[newPos]
 				|| Level.adjacent(newPos, Dungeon.hero.pos)
 				|| Actor.findChar(newPos) != null);

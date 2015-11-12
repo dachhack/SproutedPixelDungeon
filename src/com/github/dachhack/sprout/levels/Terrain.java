@@ -68,6 +68,8 @@ public class Terrain {
 	public static final int SECRET_GRIPPING_TRAP = 38;
 	public static final int SUMMONING_TRAP = 39;
 	public static final int SECRET_SUMMONING_TRAP = 40;
+	public static final int FLEECING_TRAP = 65;
+	public static final int WOOL_RUG = 66;
 
 	public static final int WATER_TILES = 48;
 	public static final int WATER = 63;
@@ -136,6 +138,8 @@ public class Terrain {
 		flags[SUMMONING_TRAP] = AVOID;
 		flags[SECRET_SUMMONING_TRAP] = flags[EMPTY] | SECRET;
 		flags[INACTIVE_TRAP] = flags[EMPTY];
+		flags[FLEECING_TRAP] = AVOID;
+		flags[WOOL_RUG] = PASSABLE;
 
 		for (int i = WATER_TILES; i < WATER_TILES + 16; i++) {
 			flags[i] = flags[WATER];

@@ -61,6 +61,7 @@ public class Assets {
 	public static final String THIEF = "thief.png";
 	public static final String TENGU = "tengu.png";
 	public static final String SHEEP = "sheep.png";
+	public static final String SOKOBANSHEEP = "sokobansheep.png";
 	public static final String KEEPER = "shopkeeper.png";
 	public static final String BAT = "bat.png";
 	public static final String BRUTE = "brute.png";
@@ -124,7 +125,9 @@ public class Assets {
 	public static final String SKELETONKING = "skeletonkingskull.png";
 	public static final String SKELETONHAND1 = "skeletonhand1.png";
 	public static final String SKELETONHAND2 = "skeletonhand2.png";
-	
+	public static final String PETDRAGON = "petreddragon.png";
+	public static final String VELOCIROOSTER = "velocirooster.png";
+	public static final String FAIRY = "fairy.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";

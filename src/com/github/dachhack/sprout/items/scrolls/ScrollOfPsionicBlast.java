@@ -36,6 +36,7 @@ public class ScrollOfPsionicBlast extends Scroll {
 
 	{
 		name = "Scroll of Psionic Blast";
+		consumedValue = 10;
 
 		bones = true;
 	}

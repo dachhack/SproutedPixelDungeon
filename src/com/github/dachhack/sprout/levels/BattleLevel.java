@@ -39,8 +39,8 @@ public class BattleLevel extends Level {
 		viewDistance = 8;
 	}
 
-	private static final int ROOM_LEFT = WIDTH / 2 - 2;
-	private static final int ROOM_RIGHT = WIDTH / 2 + 2;
+	private static final int ROOM_LEFT = getWidth() / 2 - 2;
+	private static final int ROOM_RIGHT = getWidth() / 2 + 2;
 	private static final int ROOM_TOP = HEIGHT / 2 - 2;
 	private static final int ROOM_BOTTOM = HEIGHT / 2 + 2;
 
@@ -69,7 +69,7 @@ public class BattleLevel extends Level {
 				right = ROOM_RIGHT + 3;
 			} else {
 				left = ROOM_LEFT - 3;
-				right = Random.Int(ROOM_RIGHT + 3, WIDTH - 1);
+				right = Random.Int(ROOM_RIGHT + 3, getWidth() - 1);
 			}
 			if (Random.Int(2) == 0) {
 				top = Random.Int(2, ROOM_TOP - 3);
@@ -84,7 +84,7 @@ public class BattleLevel extends Level {
 
 			if (top < topMost) {
 				topMost = top;
-				exit = Random.Int(left, right) + (top - 1) * WIDTH;
+				exit = Random.Int(left, right) + (top - 1) * getWidth();
 			}
 		}
 
@@ -97,7 +97,7 @@ public class BattleLevel extends Level {
 
 		
 				entrance = Random.Int(ROOM_LEFT + 1, ROOM_RIGHT - 1)
-				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * WIDTH;
+				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * getWidth();
 		map[entrance] = Terrain.EMPTY;
 
 		return true;
@@ -106,7 +106,7 @@ public class BattleLevel extends Level {
 	@Override
 	protected void decorate() {
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth(); i++) {
 			if (map[i] == Terrain.EMPTY) {
 				int n = 0;
 				if (map[i + 1] == Terrain.WALL) {
@@ -115,10 +115,10 @@ public class BattleLevel extends Level {
 				if (map[i - 1] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i + WIDTH] == Terrain.WALL) {
+				if (map[i + getWidth()] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i - WIDTH] == Terrain.WALL) {
+				if (map[i - getWidth()] == Terrain.WALL) {
 					n++;
 				}
 				if (Random.Int(8) <= n) {
@@ -127,7 +127,7 @@ public class BattleLevel extends Level {
 			}
 		}
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
 				map[i] = Terrain.WALL_DECO;
 			}

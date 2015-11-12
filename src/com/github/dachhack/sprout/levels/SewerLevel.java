@@ -20,18 +20,23 @@ package com.github.dachhack.sprout.levels;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.Sentinel;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer2;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost.GnollArcher;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer3;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.DewVial;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
 import com.github.dachhack.sprout.items.food.Blackberry;
@@ -59,7 +64,7 @@ public class SewerLevel extends RegularLevel {
 		return Assets.TILES_SEWERS;
 	}
 	
-
+	
 	@Override
 	public String waterTex() {
 		return Assets.WATER_SEWERS;
@@ -74,33 +79,38 @@ public class SewerLevel extends RegularLevel {
 	protected boolean[] grass() {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.60f : 0.40f, 4);
 	}
+	
+	@Override
+	protected void setPar(){
+		Dungeon.pars[Dungeon.depth] = 500+(Dungeon.depth*50)+(secretDoors*50);
+	}
 
 	@Override
 	protected void decorate() {
 
-		for (int i = 0; i < WIDTH; i++) {
-			if (map[i] == Terrain.WALL && map[i + WIDTH] == Terrain.WATER
+		for (int i = 0; i < getWidth(); i++) {
+			if (map[i] == Terrain.WALL && map[i + getWidth()] == Terrain.WATER
 					&& Random.Int(4) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
 			}
 		}
 
-		for (int i = WIDTH; i < LENGTH - WIDTH; i++) {
-			if (map[i] == Terrain.WALL && map[i - WIDTH] == Terrain.WALL
-					&& map[i + WIDTH] == Terrain.WATER && Random.Int(2) == 0) {
+		for (int i = getWidth(); i < getLength() - getWidth(); i++) {
+			if (map[i] == Terrain.WALL && map[i - getWidth()] == Terrain.WALL
+					&& map[i + getWidth()] == Terrain.WATER && Random.Int(2) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
 			}
 		}
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH - 1; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth() - 1; i++) {
 			if (map[i] == Terrain.EMPTY) {
 
 				int count = (map[i + 1] == Terrain.WALL ? 1 : 0)
 						+ (map[i - 1] == Terrain.WALL ? 1 : 0)
-						+ (map[i + WIDTH] == Terrain.WALL ? 1 : 0)
-						+ (map[i - WIDTH] == Terrain.WALL ? 1 : 0);
+						+ (map[i + getWidth()] == Terrain.WALL ? 1 : 0)
+						+ (map[i - getWidth()] == Terrain.WALL ? 1 : 0);
 
 				if (Random.Int(16) < count * count) {
 					map[i] = Terrain.EMPTY_DECO;
@@ -114,7 +124,9 @@ public class SewerLevel extends RegularLevel {
 				map[pos] = Terrain.SIGN;
 				break;
 			}
-		}		
+		}	
+		
+		setPar();
 		
 		
 	}
@@ -131,6 +143,8 @@ public class SewerLevel extends RegularLevel {
 			addItemToSpawn(new Blueberry());
 			addItemToSpawn(new Cloudberry());
 			addItemToSpawn(new Blackberry());
+			
+			addItemToSpawn(new Egg());
 		}
 		
 		if (Dungeon.depth == 2){
@@ -142,7 +156,7 @@ public class SewerLevel extends RegularLevel {
 			mobs.add(npc);
 			Actor.occupyCell(npc);
 		}
-		
+				
 		Ghost.Quest.spawn(this);
 		spawnGnoll(this);
 
@@ -172,7 +186,7 @@ public class SewerLevel extends RegularLevel {
 	}
 
 	public static void addVisuals(Level level, Scene scene) {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (level.map[i] == Terrain.WALL_DECO) {
 				scene.add(new Sink(i));
 			}
@@ -234,7 +248,7 @@ public class SewerLevel extends RegularLevel {
 				super.update();
 
 				if ((rippleDelay -= Game.elapsed) <= 0) {
-					GameScene.ripple(pos + WIDTH).y -= DungeonTilemap.SIZE / 2;
+					GameScene.ripple(pos + getWidth()).y -= DungeonTilemap.SIZE / 2;
 					rippleDelay = Random.Float(0.2f, 0.3f);
 				}
 			}

@@ -15,38 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.github.dachhack.sprout.actors.mobs.pets;
+package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.levels.Level;
-import com.watabou.utils.Random;
+import com.github.dachhack.sprout.ui.BuffIndicator;
 
-public abstract class pet extends Mob {
+public class Dewcharge extends FlavourBuff {
 
-	{
-		HP = HT = 1;
-		EXP = 0;
+	public static final float DURATION = 50f;
 
-		hostile = false;
-		state = HUNTING;
-	}
-
-	protected void throwItem() {
-		Heap heap = Dungeon.level.heaps.get(pos);
-		if (heap != null) {
-			int n;
-			do {
-				n = pos + Level.NEIGHBOURS8[Random.Int(8)];
-			} while (!Level.passable[n] && !Level.avoid[n]);
-			Dungeon.level.drop(heap.pickUp(), n).sprite.drop(pos);
-		}
+	@Override
+	public int icon() {
+		return BuffIndicator.DEWCHARGE;
 	}
 
 	@Override
-	public void beckon(int cell) {
+	public String toString() {
+		return "Dew Charge";
 	}
-
-	abstract public void interact();
+	
 }

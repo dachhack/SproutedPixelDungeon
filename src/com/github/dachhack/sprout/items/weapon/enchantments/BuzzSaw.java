@@ -57,7 +57,7 @@ public class BuzzSaw extends Weapon.Enchantment {
 				  vial.sip();
 			      dmg = Math.max(1, (attacker.damageRoll()- i)*2);
 			      defender.damage(dmg, this);
-			      GLog.i("Vrrrrrr!");    
+			      GLog.h("Vrrrrrr!");    
 			  }  else if (vial.checkVol()==0 && saw.turnedOn){
 				  //defender.damage(Random.Int(level), this);
 				  GLog.n("Your chainsaw is out of fuel!");

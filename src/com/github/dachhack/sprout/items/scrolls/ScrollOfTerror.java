@@ -32,6 +32,7 @@ public class ScrollOfTerror extends Scroll {
 
 	{
 		name = "Scroll of Terror";
+		consumedValue = 5;
 	}
 
 	@Override

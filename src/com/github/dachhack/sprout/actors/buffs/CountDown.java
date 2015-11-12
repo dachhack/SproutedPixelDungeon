@@ -30,6 +30,7 @@ import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class CountDown extends Buff {
@@ -38,6 +39,21 @@ public class CountDown extends Buff {
 	
 	private int ticks = 0;
 
+	private static final String TICKS = "ticks";
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(TICKS, ticks);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		ticks = bundle.getInt(TICKS);
+	}
+	
+	
 	@Override
 	public int icon() {
 		return BuffIndicator.COUNTDOWN;

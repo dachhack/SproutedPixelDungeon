@@ -19,7 +19,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.3.0: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
+	private static final String TTL_Update = "v0.3.0b: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
 
 	private static final String TTL_Future = "Wait What?";
 
@@ -69,7 +69,28 @@ public class WelcomeScene extends PixelScene {
 
 
 	private static final String TXT_Update = 
-			"Version 0.3.0 adds in new mini-boss fights where you can earn adamant ore.\n\n"
+			"Version 0.3.5 adds the Dew Charge system and Pets\n\n"
+			+"\n\n"
+			+"Egg - How you treat it determines what hatches.\n\n"
+			+"Keep it warm in your pack or absorb energy by dropping it on traps.\n\n"
+			+"Don't break it open until you hear something alive inside!\n\n"
+			+"\n\n"
+			+"Dew Charge - For those who choose 'Dew Draw' a non-grinding option.\n\n"
+			+"At the start of each new level, you are dew charged for 50 moves.\n\n"
+			+"When dew charged, killing mobs draws out dew from the dungeon.\n\n"
+			+"Each dungeon floor has a move goal.\n\n"
+			+"If you kill all mobs on the floor (excepting statues, piranha, mimics) under the goal you add moves to your dew charge for the next level.\n\n"
+			+"Descending to the next level evaporates the dew on your current level.\n\n"
+			+"So you have to use all the dew before you start a new level.\n\n"
+			+"Dew bless lets you pick the item you want to apply the upgrade to.\n\n"
+			+"You can still grind dew on the key levels if you like.\n\n"
+			+"\n\n"
+			+"Version 0.3.0b fixes a bug with the weakness debuff and adds the Ring of Disintegration to Artifacts\n\n"
+			+"Fixes bugs with seed drops. A few other bugs squashed.\n\n"
+			+"\n\n"
+			+"Version 0.3.0a fixes a couple in-game messages and adds the Dewcatcher Plant\n\n"
+			+"\n\n"
+			+"Version 0.3.0 adds in new mini-boss fights where you can earn adamant ore.\n\n"
 			+"Items max out at 15 upgrades.\n\n"
 			+"You can upgrade items past 15 if they have been reinforced with adamantite ore.\n\n"	
 			+"There are five pieces of adamantite available in the game obtainable by completing new mini-boss fights.\n\n"

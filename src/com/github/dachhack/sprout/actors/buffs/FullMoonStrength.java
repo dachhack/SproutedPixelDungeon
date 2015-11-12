@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
+import com.watabou.utils.Bundle;
 
 public class FullMoonStrength extends Buff {
 
@@ -26,6 +27,21 @@ public class FullMoonStrength extends Buff {
 	
 	private int hits = (Dungeon.checkNight() ? Math.max(8, Math.round(Statistics.deepestFloor/5)+9) : Math.max(2, Math.round(Statistics.deepestFloor/5)+3));
 
+	
+	private static final String HITS = "hits";
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(HITS, hits);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		hits = bundle.getInt(HITS);
+	}
+	
 	//private int hits = Math.max(2, Math.round(Statistics.deepestFloor/5)+3);
 	@Override
 	public String toString() {

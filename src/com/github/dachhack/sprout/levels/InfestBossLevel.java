@@ -45,8 +45,8 @@ public class InfestBossLevel extends Level {
 		viewDistance = 6;
 	}
 
-	private static final int ROOM_LEFT = WIDTH / 2 - 2;
-	private static final int ROOM_RIGHT = WIDTH / 2 + 2;
+	private static final int ROOM_LEFT = getWidth() / 2 - 2;
+	private static final int ROOM_RIGHT = getWidth() / 2 + 2;
 	private static final int ROOM_TOP = HEIGHT / 2 - 2;
 	private static final int ROOM_BOTTOM = HEIGHT / 2 + 2;
 
@@ -98,7 +98,7 @@ public class InfestBossLevel extends Level {
 				right = ROOM_RIGHT + 3;
 			} else {
 				left = ROOM_LEFT - 3;
-				right = Random.Int(ROOM_RIGHT + 3, WIDTH - 1);
+				right = Random.Int(ROOM_RIGHT + 3, getWidth() - 1);
 			}
 			if (Random.Int(2) == 0) {
 				top = Random.Int(2, ROOM_TOP - 3);
@@ -113,13 +113,13 @@ public class InfestBossLevel extends Level {
 
 			if (top < topMost) {
 				topMost = top;
-				exit = Random.Int(left, right) + (top - 1) * WIDTH;
+				exit = Random.Int(left, right) + (top - 1) * getWidth();
 			}
 		}
 
 		map[exit] = Terrain.WALL;
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(20) == 0) {
 				map[i] = Terrain.SECRET_SUMMONING_TRAP;
 			}
@@ -134,11 +134,11 @@ public class InfestBossLevel extends Level {
 				Terrain.SUMMONING_TRAP);
 
 		arenaDoor = Random.Int(ROOM_LEFT, ROOM_RIGHT) + (ROOM_BOTTOM + 1)
-				* WIDTH;
+				* getWidth();
 		map[arenaDoor] = Terrain.DOOR;
 
 		entrance = Random.Int(ROOM_LEFT + 1, ROOM_RIGHT - 1)
-				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * WIDTH;
+				+ Random.Int(ROOM_TOP + 1, ROOM_BOTTOM - 1) * getWidth();
 		map[entrance] = Terrain.ENTRANCE;
 
 		return true;
@@ -147,7 +147,7 @@ public class InfestBossLevel extends Level {
 	@Override
 	protected void decorate() {
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth(); i++) {
 			if (map[i] == Terrain.EMPTY) {
 				int n = 0;
 				if (map[i + 1] == Terrain.WALL) {
@@ -156,10 +156,10 @@ public class InfestBossLevel extends Level {
 				if (map[i - 1] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i + WIDTH] == Terrain.WALL) {
+				if (map[i + getWidth()] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i - WIDTH] == Terrain.WALL) {
+				if (map[i - getWidth()] == Terrain.WALL) {
 					n++;
 				}
 				if (Random.Int(8) <= n) {
@@ -168,7 +168,7 @@ public class InfestBossLevel extends Level {
 			}
 		}
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
 				map[i] = Terrain.WALL_DECO;
 			}
@@ -208,7 +208,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss = new ShadowYog();
 			boss.state = boss.SLEEPING;
 			do {
-				boss.pos = Random.Int(LENGTH);
+				boss.pos = Random.Int(getLength());
 			} while (!passable[boss.pos] || !outsideEntraceRoom(boss.pos)
 					|| Dungeon.visible[boss.pos]);
 			GameScene.add(boss);
@@ -217,7 +217,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss2 = new ShadowYog();
 			boss2.state = boss2.SLEEPING;
 			do {
-				boss2.pos = Random.Int(LENGTH);
+				boss2.pos = Random.Int(getLength());
 			} while (!passable[boss2.pos] || !outsideEntraceRoom(boss2.pos)
 					|| Dungeon.visible[boss2.pos]);
 			GameScene.add(boss2);
@@ -226,7 +226,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss3 = new ShadowYog();
 			boss3.state = boss3.SLEEPING;
 			do {
-				boss3.pos = Random.Int(LENGTH);
+				boss3.pos = Random.Int(getLength());
 			} while (!passable[boss3.pos] || !outsideEntraceRoom(boss3.pos)
 					|| Dungeon.visible[boss3.pos]);
 			GameScene.add(boss3);
@@ -235,7 +235,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss4 = new ShadowYog();
 			boss4.state = boss4.SLEEPING;
 			do {
-				boss4.pos = Random.Int(LENGTH);
+				boss4.pos = Random.Int(getLength());
 			} while (!passable[boss4.pos] || !outsideEntraceRoom(boss4.pos)
 					|| Dungeon.visible[boss4.pos]);
 			GameScene.add(boss4);
@@ -244,7 +244,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss5 = new ShadowYog();
 			boss5.state = boss5.SLEEPING;
 			do {
-				boss5.pos = Random.Int(LENGTH);
+				boss5.pos = Random.Int(getLength());
 			} while (!passable[boss5.pos] || !outsideEntraceRoom(boss5.pos)
 					|| Dungeon.visible[boss5.pos]);
 			GameScene.add(boss5);
@@ -253,7 +253,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss6 = new ShadowYog();
 			boss6.state = boss6.SLEEPING;
 			do {
-				boss6.pos = Random.Int(LENGTH);
+				boss6.pos = Random.Int(getLength());
 			} while (!passable[boss6.pos] || !outsideEntraceRoom(boss6.pos)
 					|| Dungeon.visible[boss6.pos]);
 			GameScene.add(boss6);
@@ -262,7 +262,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss7 = new ShadowYog();
 			boss7.state = boss7.SLEEPING;
 			do {
-				boss7.pos = Random.Int(LENGTH);
+				boss7.pos = Random.Int(getLength());
 			} while (!passable[boss7.pos] || !outsideEntraceRoom(boss7.pos)
 					|| Dungeon.visible[boss7.pos]);
 			GameScene.add(boss7);
@@ -271,7 +271,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss8 = new ShadowYog();
 			boss8.state = boss8.SLEEPING;
 			do {
-				boss8.pos = Random.Int(LENGTH);
+				boss8.pos = Random.Int(getLength());
 			} while (!passable[boss8.pos] || !outsideEntraceRoom(boss8.pos)
 					|| Dungeon.visible[boss8.pos]);
 			GameScene.add(boss8);
@@ -280,7 +280,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss9 = new ShadowYog();
 			boss9.state = boss9.SLEEPING;
 			do {
-				boss9.pos = Random.Int(LENGTH);
+				boss9.pos = Random.Int(getLength());
 			} while (!passable[boss9.pos] || !outsideEntraceRoom(boss9.pos)
 					|| Dungeon.visible[boss9.pos]);
 			GameScene.add(boss9);
@@ -289,7 +289,7 @@ public class InfestBossLevel extends Level {
 			ShadowYog boss10 = new ShadowYog();
 			boss10.state = boss10.SLEEPING;
 			do {
-				boss10.pos = Random.Int(LENGTH);
+				boss10.pos = Random.Int(getLength());
 			} while (!passable[boss10.pos] || !outsideEntraceRoom(boss10.pos)
 					|| Dungeon.visible[boss10.pos]);
 			GameScene.add(boss10);
@@ -307,8 +307,8 @@ public class InfestBossLevel extends Level {
 
 	
 	private boolean outsideEntraceRoom(int cell) {
-		int cx = cell % WIDTH;
-		int cy = cell / WIDTH;
+		int cx = cell % getWidth();
+		int cy = cell / getWidth();
 		return cx < ROOM_LEFT - 1 || cx > ROOM_RIGHT + 1 || cy < ROOM_TOP - 1
 				|| cy > ROOM_BOTTOM + 1;
 	}

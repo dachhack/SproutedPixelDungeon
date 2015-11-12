@@ -102,6 +102,11 @@ public class GoldThief extends Mob {
 			Dungeon.limitedDrops.ancientcoin.drop();
 			Dungeon.level.drop(new AncientCoin(), pos).sprite.drop();
 		}
+		
+		if(!Dungeon.limitedDrops.ancientcoin.dropped() && Statistics.goldThievesKilled > 100) {
+			Dungeon.limitedDrops.ancientcoin.drop();
+			Dungeon.level.drop(new AncientCoin(), pos).sprite.drop();
+		}
 
 		Statistics.goldThievesKilled++;
 		GLog.w(TXT_KILLCOUNT, Statistics.goldThievesKilled);

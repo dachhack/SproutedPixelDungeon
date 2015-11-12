@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -86,5 +87,8 @@ public class SummoningTrap {
 			GameScene.add(mob, DELAY);
 			WandOfBlink.appear(mob, point);
 		}
+		
+		Heap heap = Dungeon.level.heaps.get(pos);
+		if (heap != null) {heap.summon();}
 	}
 }

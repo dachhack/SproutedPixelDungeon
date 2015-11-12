@@ -17,9 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs.pets;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Bee;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -27,27 +29,37 @@ import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.MirrorSprite;
 import com.github.dachhack.sprout.sprites.SteelBeeSprite;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-public class bee extends pet {
+public class bee extends PET {
 	
 	{
-		name = "pet bee";
+		name = "steel bee";
 		spriteClass = SteelBeeSprite.class;
         flying=true;
 		state = HUNTING;
+		level = 1;
+		type = 2;
 
 	}
 	
-	private int level;
+	protected int regen = 1;
+	protected float regenChance = 0.1f;
 	
-	public void spawn(int level) {
+			
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		adjustStats(level);
+	}
+
+	@Override
+	public void adjustStats(int level) {
 		this.level = level;
-        
-		HT = (10 + level) * 10;
-		defenseSkill = 9 + level*2;
+		defenseSkill = 1 + level*2;
+		HT = (2 + level) * 5;
 	}
-
 	
 
 	@Override
@@ -57,9 +69,17 @@ public class bee extends pet {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(HT / 10, HT / 4);
+		return Random.NormalIntRange(HT / 5, HT / 2);
 	}
 
+	@Override
+	protected boolean act() {
+		
+		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
+
+		return super.act();
+	}
+	
 	@Override
 	public void interact() {
 
@@ -74,14 +94,18 @@ public class bee extends pet {
 		Dungeon.hero.spend(1 / Dungeon.hero.speed());
 		Dungeon.hero.busy();
 	}
-
+/*
 	@Override
 	protected Char chooseEnemy() {
+		
+		if(enemy != null && !enemy.isAlive()){
+			kills++;
+		}
 		
 		if (enemy == null || !enemy.isAlive()) {
 			HashSet<Mob> enemies = new HashSet<Mob>();
 			for (Mob mob : Dungeon.level.mobs) {
-				if (!(mob instanceof Bee) && mob.hostile && Level.fieldOfView[mob.pos]) {
+				if (!(mob instanceof PET) && mob.hostile && Level.fieldOfView[mob.pos]) {
 					enemies.add(mob);
 				}
 			}
@@ -91,18 +115,7 @@ public class bee extends pet {
 
 		return enemy;
 }
-
-
-
-@Override
-protected boolean getCloser(int target) {
-	if (enemy != null) {
-		target = enemy.pos;
-	} else {
-		target = Dungeon.hero.pos;
-	}
-	return super.getCloser(target);
-}
+*/
 
 
 @Override

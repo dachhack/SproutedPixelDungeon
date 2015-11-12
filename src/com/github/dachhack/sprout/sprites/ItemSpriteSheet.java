@@ -178,6 +178,7 @@ public class ItemSpriteSheet {
 	public static final int DWARFHAMMER = ROW8 + 12;
 	public static final int ANCIENTKEY = ROW8 + 13;
 	public static final int OTILUKES_JOURNAL = ROW8 + 7;
+	public static final int RING_DISINTEGRATION = ROW7 + 13;
 
 	// Row Nine: Artifacts with Dynamic Images
 	public static final int ARTIFACT_HORN1 = ROW9 + 0;
@@ -252,6 +253,7 @@ public class ItemSpriteSheet {
 	public static final int SEED_STARFLOWER = ROW9 + 15;
 	public static final int SEED_PHASEPITCHER = ROW14 + 5;
 	public static final int SEED_FLYTRAP = ROW5 + 12;
+	public static final int SEED_DEWCATCHER	= ROW5+13;
 
 	// Row Thirteen: Food
 	public static final int MEAT = ROW13 + 0;
@@ -298,5 +300,6 @@ public class ItemSpriteSheet {
 	public static final int UPGRADEGOO_YELLOW = ROW16 + 0;
 	public static final int UPGRADEGOO_RED = ROW16 + 1;
 	public static final int UPGRADEGOO_VIOLET = ROW16 + 2;
+	public static final int EGG = ROW16 + 4;
 
 }

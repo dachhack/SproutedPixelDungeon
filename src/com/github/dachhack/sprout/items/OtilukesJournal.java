@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
@@ -26,10 +27,13 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
+import com.github.dachhack.sprout.windows.WndBlacksmith;
+import com.github.dachhack.sprout.windows.WndOtiluke;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
@@ -43,15 +47,14 @@ public class OtilukesJournal extends Item {
 	
 	public static final String AC_RETURN = "RETURN";
 	public static final String AC_ADD = "ADD A PAGE";
-	public static final String AC_PORT_HOME = "SAFE SPOT";
+	public static final String AC_PORT = "READ";
 
 	
 	private int returnDepth = -1;
 	private int returnPos;
 	
-	private Boolean[] rooms = new Boolean[10];
+	public boolean[] rooms = new boolean[10];	
 	
-
 	{
 		name = "Otiluke's journal";
 		image = ItemSpriteSheet.OTILUKES_JOURNAL;
@@ -62,11 +65,13 @@ public class OtilukesJournal extends Item {
 	
 	private static final String DEPTH = "depth";
 	private static final String POS = "pos";
+	private static final String ROOMS = "rooms";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
 		bundle.put(DEPTH, returnDepth);
+		bundle.put(ROOMS, rooms);
 		if (returnDepth != -1) {
 			bundle.put(POS, returnPos);
 		}
@@ -77,6 +82,7 @@ public class OtilukesJournal extends Item {
 		super.restoreFromBundle(bundle);
 		returnDepth = bundle.getInt(DEPTH);
 		returnPos = bundle.getInt(POS);
+		rooms = bundle.getBooleanArray(ROOMS);
 	}
 
 	@Override
@@ -86,9 +92,8 @@ public class OtilukesJournal extends Item {
 		
 		actions.add(AC_RETURN);
 		actions.add(AC_ADD);
-		if (rooms[0]){
-			actions.add(AC_PORT_HOME);
-		}
+		actions.add(AC_PORT);
+		
 		
 		return actions;
 	}
@@ -96,7 +101,7 @@ public class OtilukesJournal extends Item {
 	@Override
 	public void execute(Hero hero, String action) {
 
-		if (action == AC_PORT_HOME) {
+		if (action == AC_PORT) {
 
 			if (Dungeon.bossLevel()) {
 				hero.spend(TIME_TO_USE);
@@ -107,25 +112,10 @@ public class OtilukesJournal extends Item {
 			
 		}
 
-		if (action == AC_PORT_HOME) {
+		if (action == AC_PORT) {
 
+			GameScene.show(new WndOtiluke(rooms, this));
 			
-			Buff buff = Dungeon.hero
-						.buff(TimekeepersHourglass.timeFreeze.class);
-				if (buff != null)
-					buff.detach();
-
-				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
-					if (mob instanceof DriedRose.GhostHero)
-						mob.destroy();
-              if (Dungeon.depth<27){
-            	returnDepth = Dungeon.depth;
-       			returnPos = hero.pos;
-       			InterlevelScene.returnDepth = returnDepth;
-				InterlevelScene.returnPos = returnPos;
-				InterlevelScene.mode = InterlevelScene.Mode.PORT1;
-				Game.switchScene(InterlevelScene.class);
-			}
 		}
               
        if (action == AC_RETURN) {

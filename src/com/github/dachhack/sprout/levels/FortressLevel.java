@@ -143,7 +143,7 @@ public class FortressLevel extends RegularLevel {
 	@Override
 	protected void decorate() {
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(10) == 0) {
 				map[i] = Terrain.EMPTY_DECO;
 			} else if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
@@ -159,7 +159,7 @@ public class FortressLevel extends RegularLevel {
 		}
 		
 				
-   int length = Level.LENGTH;
+   int length = Level.getLength();
 		
 		for (int i = 0; i < length; i++) {
 			

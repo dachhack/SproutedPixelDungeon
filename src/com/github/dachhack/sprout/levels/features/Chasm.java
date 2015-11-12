@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.SanChikarahTranscend;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
@@ -61,6 +62,8 @@ public class Chasm {
 		});
 	}
 
+	
+	
 	public static void heroFall(int pos) {
 
 		jumpConfirmed = false;
@@ -70,7 +73,7 @@ public class Chasm {
 		Buff buff = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
 		if (buff != null)
 			buff.detach();
-
+		
 		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 			if (mob instanceof DriedRose.GhostHero)
 				mob.destroy();

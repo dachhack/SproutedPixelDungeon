@@ -18,18 +18,33 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.ui.BuffIndicator;
+import com.watabou.utils.Bundle;
 
 public class BerryRegeneration extends Buff {
 	
-	private int level = 0;
+	private int regenleft = 0;
+	
+	private static final String REGENLEFT = "regenleft";
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(REGENLEFT, regenleft);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		super.restoreFromBundle(bundle);
+		regenleft = bundle.getInt(REGENLEFT);
+	}
 
 	public int level() {
-		return level;
+		return regenleft;
 	}
 
 	public void level(int value) {
-		if (level < value) {
-			level = value;
+		if (regenleft < value) {
+			regenleft = value;
 		}
 	}
 
@@ -47,11 +62,11 @@ public class BerryRegeneration extends Buff {
 		if (target.isAlive()) {
 			   
 			if (target.HP < target.HT) {
-				target.HP += Math.min(1+Math.round(level/25),(target.HT-target.HP));
+				target.HP += Math.min(1+Math.round(regenleft/25),(target.HT-target.HP));
 			}
 			
 				spend(TICK);
-				if (--level <= 0) {
+				if (--regenleft <= 0) {
 					detach();
 				}
 

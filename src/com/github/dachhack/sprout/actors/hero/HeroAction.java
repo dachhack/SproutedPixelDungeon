@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.hero;
 
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 
 public class HeroAction {
 
@@ -53,6 +54,14 @@ public class HeroAction {
 
 		public Interact(NPC npc) {
 			this.npc = npc;
+		}
+	}
+	
+	public static class InteractPet extends HeroAction {
+		public PET pet;
+
+		public InteractPet(PET pet) {
+			this.pet = pet;
 		}
 	}
 

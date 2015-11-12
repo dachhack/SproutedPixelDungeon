@@ -229,15 +229,15 @@ public class DewVial2 extends Item {
 				distance = 1;
 			}
 
-			int cx = hero.pos % Level.WIDTH;
-			int cy = hero.pos / Level.WIDTH;
+			int cx = hero.pos % Level.getWidth();
+			int cy = hero.pos / Level.getWidth();
 			int ax = cx - distance;
 			if (ax < 0) {
 				ax = 0;
 			}
 			int bx = cx + distance;
-			if (bx >= Level.WIDTH) {
-				bx = Level.WIDTH - 1;
+			if (bx >= Level.getWidth()) {
+				bx = Level.getWidth() - 1;
 			}
 			int ay = cy - distance;
 			if (ay < 0) {
@@ -250,7 +250,7 @@ public class DewVial2 extends Item {
 
 			
 			for (int y = ay; y <= by; y++) {
-				for (int x = ax, p = ax + y * Level.WIDTH; x <= bx; x++, p++) {
+				for (int x = ax, p = ax + y * Level.getWidth(); x <= bx; x++, p++) {
 
 					if (Dungeon.visible[p]) {
 						int c = Dungeon.level.map[p];

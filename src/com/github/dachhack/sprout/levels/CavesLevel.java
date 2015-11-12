@@ -73,6 +73,10 @@ public class CavesLevel extends RegularLevel {
 		return Patch.generate(feeling == Feeling.GRASS ? 0.55f : 0.35f, 3);
 	}
 
+	@Override
+	protected void setPar(){
+		Dungeon.pars[Dungeon.depth] = 400+(Dungeon.depth*50)+(secretDoors*20);
+	}
 
 	@Override
 	protected void createItems() {
@@ -117,33 +121,33 @@ public class CavesLevel extends RegularLevel {
 			int s = room.square();
 
 			if (Random.Int(s) > 8) {
-				int corner = (room.left + 1) + (room.top + 1) * WIDTH;
+				int corner = (room.left + 1) + (room.top + 1) * getWidth();
 				if (map[corner - 1] == Terrain.WALL
-						&& map[corner - WIDTH] == Terrain.WALL) {
+						&& map[corner - getWidth()] == Terrain.WALL) {
 					map[corner] = Terrain.WALL;
 				}
 			}
 
 			if (Random.Int(s) > 8) {
-				int corner = (room.right - 1) + (room.top + 1) * WIDTH;
+				int corner = (room.right - 1) + (room.top + 1) * getWidth();
 				if (map[corner + 1] == Terrain.WALL
-						&& map[corner - WIDTH] == Terrain.WALL) {
+						&& map[corner - getWidth()] == Terrain.WALL) {
 					map[corner] = Terrain.WALL;
 				}
 			}
 
 			if (Random.Int(s) > 8) {
-				int corner = (room.left + 1) + (room.bottom - 1) * WIDTH;
+				int corner = (room.left + 1) + (room.bottom - 1) * getWidth();
 				if (map[corner - 1] == Terrain.WALL
-						&& map[corner + WIDTH] == Terrain.WALL) {
+						&& map[corner + getWidth()] == Terrain.WALL) {
 					map[corner] = Terrain.WALL;
 				}
 			}
 
 			if (Random.Int(s) > 8) {
-				int corner = (room.right - 1) + (room.bottom - 1) * WIDTH;
+				int corner = (room.right - 1) + (room.bottom - 1) * getWidth();
 				if (map[corner + 1] == Terrain.WALL
-						&& map[corner + WIDTH] == Terrain.WALL) {
+						&& map[corner + getWidth()] == Terrain.WALL) {
 					map[corner] = Terrain.WALL;
 				}
 			}
@@ -156,7 +160,7 @@ public class CavesLevel extends RegularLevel {
 			}
 		}
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth(); i++) {
 			if (map[i] == Terrain.EMPTY) {
 				int n = 0;
 				if (map[i + 1] == Terrain.WALL) {
@@ -165,10 +169,10 @@ public class CavesLevel extends RegularLevel {
 				if (map[i - 1] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i + WIDTH] == Terrain.WALL) {
+				if (map[i + getWidth()] == Terrain.WALL) {
 					n++;
 				}
-				if (map[i - WIDTH] == Terrain.WALL) {
+				if (map[i - getWidth()] == Terrain.WALL) {
 					n++;
 				}
 				if (Random.Int(6) <= n) {
@@ -177,8 +181,8 @@ public class CavesLevel extends RegularLevel {
 			}
 		}
 
-		for (int i = 0; i < LENGTH; i++) {
-			if (map[i] == Terrain.WALL && Random.Int(12) == 0) {
+		for (int i = 0; i < getLength(); i++) {
+			if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
 				map[i] = Terrain.WALL_DECO;
 			}
 		}
@@ -224,6 +228,8 @@ public class CavesLevel extends RegularLevel {
 				}
 			}
 		}
+		
+		setPar();
 	}
 
 	@Override
@@ -265,7 +271,7 @@ public class CavesLevel extends RegularLevel {
 	}
 
 	public static void addVisuals(Level level, Scene scene) {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (level.map[i] == Terrain.WALL_DECO) {
 				scene.add(new Vein(i));
 			}

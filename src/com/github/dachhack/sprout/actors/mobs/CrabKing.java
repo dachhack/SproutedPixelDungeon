@@ -143,7 +143,7 @@ public class CrabKing extends Mob {
 		
 		int newPos;
 		do {
-			newPos = Random.Int(Level.LENGTH);
+			newPos = Random.Int(Level.getLength());
 		} while (!Level.fieldOfView[newPos] || !Level.passable[newPos]
 				|| Level.adjacent(newPos, enemy.pos)
 				|| Actor.findChar(newPos) != null);

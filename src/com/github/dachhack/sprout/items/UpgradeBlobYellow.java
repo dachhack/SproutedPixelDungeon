@@ -95,7 +95,6 @@ public class UpgradeBlobYellow extends Item {
 			item.upgrade(Math.min(upgrades, 15-item.level));
 			}
 
-		detach(curUser.belongings.backpack);
 		curUser.sprite.operate(curUser.pos);
 		curUser.sprite.emitter().start(Speck.factory(Speck.UP), 0.2f, 3);
 		Badges.validateItemLevelAquired(item);

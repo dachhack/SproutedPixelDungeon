@@ -97,7 +97,7 @@ public class BrownBat extends Mob {
 		
 		if (Random.Int(5) == 0) {
 			  for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-				  if (Random.Int(2) == 0){mob.beckon(enemy.pos);}
+				  if (Random.Int(2) == 0 && enemy!=null){mob.beckon(enemy.pos);}
 			      }
 			  GLog.n("The brown bat's shrieks alert nearby enemies!");
 			}

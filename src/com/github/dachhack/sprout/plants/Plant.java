@@ -155,6 +155,9 @@ public class Plant implements Bundlable {
 			if (this instanceof Phaseshift.Seed && Phaseshift.checkWater()){
 				GLog.n("Phaseshift pitchers only grow when there are no active Wells of Transmutation on a level.");
 				super.onThrow(cell);
+			}	else if (this instanceof Flytrap.Seed && Flytrap.checkWater()){
+					GLog.n("Upgrade Eaters only grow when there are no other Upgrade Eaters growing on a level.");
+					super.onThrow(cell);
 			}	else if (Dungeon.level.map[cell] == Terrain.ALCHEMY || Level.pit[cell]) {
 				super.onThrow(cell);
 			} else {

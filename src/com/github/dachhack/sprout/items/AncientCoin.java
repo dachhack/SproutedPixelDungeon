@@ -106,7 +106,7 @@ public class AncientCoin extends Item {
 				return;
 			}
 			
-			if (Dungeon.depth==specialLevel && !Dungeon.banditkingkilled) {
+			if (Dungeon.depth==specialLevel && !Dungeon.banditkingkilled && !Dungeon.level.reset) {
 				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING2);
 				return;

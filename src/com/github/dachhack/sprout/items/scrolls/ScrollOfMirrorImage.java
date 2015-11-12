@@ -35,6 +35,7 @@ public class ScrollOfMirrorImage extends Scroll {
 
 	{
 		name = "Scroll of Mirror Image";
+		consumedValue = 5;
 	}
 
 	@Override

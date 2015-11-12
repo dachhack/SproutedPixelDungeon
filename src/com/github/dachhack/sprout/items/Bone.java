@@ -106,7 +106,7 @@ public class Bone extends Item {
 				return;
 			}
 			
-			if (Dungeon.depth==specialLevel && !Dungeon.skeletonkingkilled) {
+			if (Dungeon.depth==specialLevel && !Dungeon.skeletonkingkilled && !Dungeon.level.reset) {
 				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING2);
 				return;

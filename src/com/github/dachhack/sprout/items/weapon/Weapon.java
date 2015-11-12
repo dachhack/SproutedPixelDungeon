@@ -171,19 +171,19 @@ public class Weapon extends KindOfWeapon {
 			}
 		}
 		if (this instanceof MissileWeapon && hero.heroClass == HeroClass.HUNTRESS) {
-			int exStr = hero.STR() - STR;
-			int lvlBonus = Math.round(hero.lvl/3);
+			int exStr = Math.round((hero.STR() - STR)/5);
+			int lvlBonus = Math.round(hero.lvl/5);
 			int totBonus = exStr+lvlBonus+1;
 			if (totBonus > 0) {
-				damage += Random.IntRange(lvlBonus, totBonus);
+				damage += damage*Random.IntRange(lvlBonus, totBonus);
 			}
 		}
 		if (this instanceof MissileWeapon && hero.heroClass != HeroClass.HUNTRESS) {
-			int exStr = hero.STR() - STR;
-			int lvlBonus = Math.round(hero.lvl/5);
-			int totBonus = Math.round(exStr/3)+lvlBonus;
+			int exStr = Math.round((hero.STR() - STR)/5);
+			int lvlBonus = Math.round(hero.lvl/10);
+			int totBonus = exStr+lvlBonus;
 			if (totBonus > 0) {
-				damage += Random.IntRange(0, totBonus);
+				damage += damage*Random.IntRange(lvlBonus, totBonus);
 			}
 		}
 

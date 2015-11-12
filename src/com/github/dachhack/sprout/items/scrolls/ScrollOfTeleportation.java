@@ -33,6 +33,7 @@ public class ScrollOfTeleportation extends Scroll {
 
 	{
 		name = "Scroll of Teleportation";
+		consumedValue = 10;
 	}
 
 	@Override

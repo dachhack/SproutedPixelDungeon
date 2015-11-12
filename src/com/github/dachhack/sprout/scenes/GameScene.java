@@ -141,7 +141,7 @@ public class GameScene extends PixelScene {
 		terrain = new Group();
 		add(terrain);
 
-		water = new SkinnedBlock(Level.WIDTH * DungeonTilemap.SIZE,
+		water = new SkinnedBlock(Level.getWidth() * DungeonTilemap.SIZE,
 				Level.HEIGHT * DungeonTilemap.SIZE, Dungeon.level.waterTex());
 		terrain.add(water);
 
@@ -194,7 +194,7 @@ public class GameScene extends PixelScene {
 			addBlobSprite(blob);
 		}
 
-		fog = new FogOfWar(Level.WIDTH, Level.HEIGHT);
+		fog = new FogOfWar(Level.getWidth(), Level.HEIGHT);
 		fog.updateVisibility(Dungeon.visible, Dungeon.level.visited,
 				Dungeon.level.mapped);
 		add(fog);
@@ -583,13 +583,13 @@ public class GameScene extends PixelScene {
 
 	public static void updateMap() {
 		if (scene != null) {
-			scene.tiles.updated.set(0, 0, Level.WIDTH, Level.HEIGHT);
+			scene.tiles.updated.set(0, 0, Level.getWidth(), Level.HEIGHT);
 		}
 	}
 
 	public static void updateMap(int cell) {
 		if (scene != null) {
-			scene.tiles.updated.union(cell % Level.WIDTH, cell / Level.WIDTH);
+			scene.tiles.updated.union(cell % Level.getWidth(), cell / Level.getWidth());
 		}
 	}
 
@@ -636,6 +636,17 @@ public class GameScene extends PixelScene {
 			scene.showBanner(bossSlain);
 
 			Sample.INSTANCE.play(Assets.SND_BOSS);
+		}
+	}
+	
+	public static void levelCleared() {
+		if (Dungeon.hero.isAlive()) {
+			Banner levelCleared = new Banner(
+					BannerSprites.get(BannerSprites.Type.CLEARED));
+			levelCleared.show(0xFFFFFF, 0.3f, 5f);
+			scene.showBanner(levelCleared);
+
+			Sample.INSTANCE.play(Assets.SND_BADGE);
 		}
 	}
 

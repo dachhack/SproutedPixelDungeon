@@ -26,11 +26,14 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Bee;
 import com.github.dachhack.sprout.actors.mobs.SteelBee;
+import com.github.dachhack.sprout.actors.mobs.pets.bee;
 import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.effects.Splash;
+import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
@@ -102,10 +105,9 @@ public class SteelHoneypot extends Item {
 			newPos = candidates.size() > 0 ? Random.element(candidates) : -1;
 		}
 
-		if (newPos != -1) {
-			SteelBee bee = new SteelBee();
-			bee.spawn(Dungeon.depth);
-			bee.setPotInfo(pos, owner);
+		if (newPos != -1 && !Dungeon.hero.haspet) {
+			bee bee = new bee();
+			bee.spawn(1);
 			bee.HP = bee.HT;
 			bee.pos = newPos;
 			bee.state = bee.HUNTING;
@@ -117,7 +119,11 @@ public class SteelHoneypot extends Item {
 			bee.sprite.parent.add(new AlphaTweener(bee.sprite, 1, 0.15f));
 
 			Sample.INSTANCE.play(Assets.SND_BEE);
-			return new SteelShatteredPot().setBee(bee);
+			Dungeon.hero.haspet=true;
+			GLog.w("The pot contains a strength potion!");
+			
+			return new PotionOfStrength();
+						
 		} else {
 			return this;
 		}

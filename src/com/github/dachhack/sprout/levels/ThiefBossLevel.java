@@ -55,7 +55,7 @@ public class ThiefBossLevel extends Level {
 	private static final int HALL_HEIGHT = 15;
 	private static final int CHAMBER_HEIGHT = 3;
 
-	private static final int LEFT = (WIDTH - HALL_WIDTH) / 2;
+	private static final int LEFT = (getWidth() - HALL_WIDTH) / 2;
 	private static final int CENTER = LEFT + HALL_WIDTH / 2;
 
 	private int arenaDoor;
@@ -100,15 +100,15 @@ public class ThiefBossLevel extends Level {
 
 		int y = TOP + 1;
 		while (y < TOP + HALL_HEIGHT) {
-			map[y * WIDTH + CENTER - 2] = Terrain.CHASM;
-			map[y * WIDTH + CENTER + 2] = Terrain.CHASM;
+			map[y * getWidth() + CENTER - 2] = Terrain.CHASM;
+			map[y * getWidth() + CENTER + 2] = Terrain.CHASM;
 			y += 2;
 		}
 		
-		exit = (TOP - 1) * WIDTH + CENTER;
+		exit = (TOP - 1) * getWidth() + CENTER;
 		map[exit] = Terrain.LOCKED_EXIT;
 
-		arenaDoor = (TOP + HALL_HEIGHT) * WIDTH + CENTER;
+		arenaDoor = (TOP + HALL_HEIGHT) * getWidth() + CENTER;
 		map[arenaDoor] = Terrain.DOOR;
 
 		Painter.fill(this, LEFT, TOP + HALL_HEIGHT + 1, HALL_WIDTH,
@@ -119,7 +119,7 @@ public class ThiefBossLevel extends Level {
 				CHAMBER_HEIGHT, Terrain.WATER);
 
 		entrance = (TOP + HALL_HEIGHT + 2 + Random.Int(CHAMBER_HEIGHT - 1))
-				* WIDTH + LEFT + (/* 1 + */Random.Int(HALL_WIDTH - 2));
+				* getWidth() + LEFT + (/* 1 + */Random.Int(HALL_WIDTH - 2));
 		map[entrance] = Terrain.PEDESTAL;
 
 		map[exit] = Terrain.WALL;
@@ -130,7 +130,7 @@ public class ThiefBossLevel extends Level {
 	@Override
 	protected void decorate() {
 
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(10) == 0) {
 				map[i] = Terrain.EMPTY_DECO;
 			} else if (map[i] == Terrain.WALL && Random.Int(8) == 0) {
@@ -144,9 +144,9 @@ public class ThiefBossLevel extends Level {
 
 	public static int pedestal(boolean left) {
 		if (left) {
-			return (TOP + HALL_HEIGHT / 2) * WIDTH + CENTER - 2;
+			return (TOP + HALL_HEIGHT / 2) * getWidth() + CENTER - 2;
 		} else {
-			return (TOP + HALL_HEIGHT / 2) * WIDTH + CENTER + 2;
+			return (TOP + HALL_HEIGHT / 2) * getWidth() + CENTER + 2;
 		}
 	}
 
@@ -167,7 +167,7 @@ public class ThiefBossLevel extends Level {
 			do {
 				pos = Random.IntRange(LEFT + 1, LEFT + HALL_WIDTH - 2)
 						+ Random.IntRange(TOP + HALL_HEIGHT + 1, TOP
-								+ HALL_HEIGHT + CHAMBER_HEIGHT) * WIDTH;
+								+ HALL_HEIGHT + CHAMBER_HEIGHT) * getWidth();
 			} while (pos == entrance || map[pos] == Terrain.SIGN);
 			drop(item, pos).type = Heap.Type.REMAINS;
 		}
@@ -196,9 +196,9 @@ public class ThiefBossLevel extends Level {
 			bandit2.state = bandit2.HUNTING;
 			int count = 0;
 			do {
-				boss.pos = Random.Int(LENGTH);
-				bandit1.pos = (TOP + 1) * WIDTH + CENTER+1;
-				bandit2.pos = (TOP + 1) * WIDTH + CENTER-1;
+				boss.pos = Random.Int(getLength());
+				bandit1.pos = (TOP + 1) * getWidth() + CENTER+1;
+				bandit2.pos = (TOP + 1) * getWidth() + CENTER-1;
 				
 			} while (!passable[boss.pos] 
 					|| !outsideEntraceRoom(boss.pos)
@@ -240,7 +240,7 @@ public class ThiefBossLevel extends Level {
 	}
 
 	private boolean outsideEntraceRoom(int cell) {
-		return cell / WIDTH < arenaDoor / WIDTH;
+		return cell / getWidth() < arenaDoor / getWidth();
 	}
 
 	@Override

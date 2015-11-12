@@ -32,6 +32,7 @@ public class ScrollOfLullaby extends Scroll {
 
 	{
 		name = "Scroll of Lullaby";
+		consumedValue = 5;
 	}
 
 	@Override

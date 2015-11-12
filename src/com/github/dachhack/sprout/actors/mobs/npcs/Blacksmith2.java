@@ -75,7 +75,7 @@ public class Blacksmith2 extends NPC {
 	
 
 	{
-		name = "troll blacksmith";
+		name = "troll blacksmith named Bip";
 		spriteClass = BlacksmithSprite.class;
 	}
 	
@@ -161,7 +161,7 @@ public class Blacksmith2 extends NPC {
 		item2.detach(Dungeon.hero.belongings.backpack);
 		DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
 		if (gold == null || gold.quantity() > 49) {
-			gold.detachAll(Dungeon.hero.belongings.backpack);
+			gold.detach(Dungeon.hero.belongings.backpack,50);
 		}
 		
 		GLog.p(TXT_LOOKS_BETTER, item1.name());

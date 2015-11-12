@@ -29,6 +29,7 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
@@ -97,7 +98,9 @@ public class Tengu extends Mob {
 		}
 		if (!Badges.isUnlocked(badgeToCheck)) {
 			Dungeon.level.drop(new TomeOfMastery(), pos).sprite.drop();
-		} 
+		} else {
+			Dungeon.level.drop(new Egg(), pos).sprite.drop();
+		}
 
 		GameScene.bossSlain();
 		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
@@ -144,7 +147,7 @@ public class Tengu extends Mob {
 		for (int i = 0; i < 4; i++) {
 			int trapPos;
 			do {
-				trapPos = Random.Int(Level.LENGTH);
+				trapPos = Random.Int(Level.getLength());
 			} while (!Level.fieldOfView[trapPos] || !Level.passable[trapPos]);
 
 			if (Dungeon.level.map[trapPos] == Terrain.INACTIVE_TRAP) {
@@ -156,7 +159,7 @@ public class Tengu extends Mob {
 
 		int newPos;
 		do {
-			newPos = Random.Int(Level.LENGTH);
+			newPos = Random.Int(Level.getLength());
 		} while (!Level.fieldOfView[newPos] || !Level.passable[newPos]
 				|| Level.adjacent(newPos, enemy.pos)
 				|| Actor.findChar(newPos) != null);

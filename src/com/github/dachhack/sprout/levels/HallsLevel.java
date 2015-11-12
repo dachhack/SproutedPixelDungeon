@@ -62,6 +62,11 @@ public class HallsLevel extends RegularLevel {
 	public String waterTex() {
 		return Assets.WATER_HALLS;
 	}
+	
+	@Override
+	protected void setPar(){
+		Dungeon.pars[Dungeon.depth] = 300+(Dungeon.depth*50)+(secretDoors*20);
+	}
 
 	@Override
 	protected boolean[] water() {
@@ -76,7 +81,7 @@ public class HallsLevel extends RegularLevel {
 	@Override
 	protected void decorate() {
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH - 1; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth() - 1; i++) {
 			if (map[i] == Terrain.EMPTY) {
 
 				int count = 0;
@@ -92,7 +97,7 @@ public class HallsLevel extends RegularLevel {
 
 			} else if (map[i] == Terrain.WALL
 					&& map[i - 1] != Terrain.WALL_DECO
-					&& map[i - WIDTH] != Terrain.WALL_DECO
+					&& map[i - getWidth()] != Terrain.WALL_DECO
 					&& Random.Int(20) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
@@ -108,7 +113,7 @@ public class HallsLevel extends RegularLevel {
 			}
 		}
 		
-         for (int i = 0; i < LENGTH; i++) {
+         for (int i = 0; i < getLength(); i++) {
 			
 			if (map[i]==Terrain.EXIT){map[i] = Terrain.PEDESTAL; Dungeon.sealedlevel=true;
 			    if(Dungeon.depth==24){
@@ -118,6 +123,8 @@ public class HallsLevel extends RegularLevel {
 			}			
 			
 		}
+         
+         setPar();
 		
 		
 	}
@@ -168,7 +175,7 @@ public class HallsLevel extends RegularLevel {
 	}
 
 	public static void addVisuals(Level level, Scene scene) {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (level.map[i] == 63) {
 				scene.add(new Stream(i));
 			}

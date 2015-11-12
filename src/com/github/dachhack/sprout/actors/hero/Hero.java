@@ -38,6 +38,7 @@ import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
 import com.github.dachhack.sprout.actors.buffs.Combo;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.Dewcharge;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
 import com.github.dachhack.sprout.actors.buffs.Fury;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -56,6 +57,7 @@ import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.actors.mobs.Lichen;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.CheckedCell;
 import com.github.dachhack.sprout.effects.Flare;
@@ -64,7 +66,9 @@ import com.github.dachhack.sprout.items.Amulet;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Dewdrop;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Heap;
+import com.github.dachhack.sprout.items.SanChikarahDeath;
 import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
@@ -111,6 +115,7 @@ import com.github.dachhack.sprout.ui.AttackIndicator;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.GLog;
+import com.github.dachhack.sprout.windows.WndDescend;
 import com.github.dachhack.sprout.windows.WndDewVial;
 import com.github.dachhack.sprout.windows.WndMessage;
 import com.github.dachhack.sprout.windows.WndResurrect;
@@ -153,6 +158,16 @@ public class Hero extends Char {
 	private int defenseSkill = 5;
 
 	public boolean ready = false;
+	
+	public boolean haspet = false;
+	public boolean petfollow = false;
+	public int petType = 0;
+	public int petLevel = 0;
+	public int petKills = 0;
+	public int petHP = 0;
+	public int petExperience = 0;
+	public int petCooldown = 0;
+	
 	private boolean damageInterrupt = true;
 	public HeroAction curAction = null;
 	public HeroAction lastAction = null;
@@ -204,6 +219,14 @@ public class Hero extends Char {
 	private static final String STRENGTH = "STR";
 	private static final String LEVEL = "lvl";
 	private static final String EXPERIENCE = "exp";
+	private static final String HASPET = "haspet";
+	private static final String PETFOLLOW = "petfollow";
+	private static final String PETTYPE = "petType";
+	private static final String PETLEVEL = "petLevel";
+	private static final String PETKILLS = "petKills";
+	private static final String PETHP = "petHP";
+	private static final String PETEXP = "petExperience";
+	private static final String PETCOOLDOWN = "petCooldown";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
@@ -220,6 +243,14 @@ public class Hero extends Char {
 
 		bundle.put(LEVEL, lvl);
 		bundle.put(EXPERIENCE, exp);
+		bundle.put(HASPET, haspet);
+		bundle.put(PETFOLLOW, petfollow);
+		bundle.put(PETTYPE, petType);
+		bundle.put(PETLEVEL, petLevel);
+		bundle.put(PETKILLS, petKills);
+		bundle.put(PETHP, petHP);
+		bundle.put(PETEXP, petExperience);
+		bundle.put(PETCOOLDOWN, petCooldown);
 
 		belongings.storeInBundle(bundle);
 	}
@@ -239,7 +270,15 @@ public class Hero extends Char {
 
 		lvl = bundle.getInt(LEVEL);
 		exp = bundle.getInt(EXPERIENCE);
-
+		haspet = bundle.getBoolean(HASPET);
+		petfollow = bundle.getBoolean(PETFOLLOW);
+		petType = bundle.getInt(PETTYPE);
+		petLevel = bundle.getInt(PETLEVEL);
+		petKills = bundle.getInt(PETKILLS);
+		petHP = bundle.getInt(PETHP);
+		petExperience = bundle.getInt(PETEXP);
+		petCooldown = bundle.getInt(PETCOOLDOWN);
+		
 		belongings.restoreFromBundle(bundle);
 	}
 
@@ -426,6 +465,10 @@ public class Hero extends Char {
 	public boolean act() {
 
 		super.act();
+		
+		Statistics.moves++;
+		
+		if(Dungeon.dewDraw){Dungeon.level.currentmoves++;}
 
 		if (paralysed) {
 
@@ -435,6 +478,11 @@ public class Hero extends Char {
 			return false;
 		}
 	
+		Egg egg = belongings.getItem(Egg.class);
+		if (egg!=null){
+			egg.moves++;
+		}
+		
 		/*
 		Heap heap = Dungeon.level.heaps.get(pos);
 		if (heap != null){
@@ -472,6 +520,10 @@ public class Hero extends Char {
 			} else if (curAction instanceof HeroAction.Interact) {
 
 				return actInteract((HeroAction.Interact) curAction);
+				
+			} else if (curAction instanceof HeroAction.InteractPet) {
+
+				return actInteractPet((HeroAction.InteractPet) curAction);
 
 			} else if (curAction instanceof HeroAction.Buy) {
 
@@ -587,6 +639,31 @@ public class Hero extends Char {
 		}
 	}
 
+	private boolean actInteractPet(HeroAction.InteractPet action) {
+
+		PET pet = action.pet;
+
+		if (Level.adjacent(pos, pet.pos)) {
+
+			ready();
+			sprite.turnTo(pos, pet.pos);
+			pet.interact();
+			return false;
+
+		} else {
+
+			if (Level.fieldOfView[pet.pos] && getCloser(pet.pos)) {
+
+				return true;
+
+			} else {
+				ready();
+				return false;
+			}
+
+		}
+	}
+	
 	private boolean actBuy(HeroAction.Buy action) {
 		int dst = action.dst;
 		if (pos == dst || Level.adjacent(pos, dst)) {
@@ -781,13 +858,64 @@ public class Hero extends Char {
 			return false;
 		}
 	}
+	
+	private PET checkpet(){
+		for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {
+				return (PET) mob;
+			}
+		}	
+		return null;
+	}
+	
+	private boolean checkpetNear(){
+		for (int n : Level.NEIGHBOURS8) {
+			int c = pos + n;
+			if (Actor.findChar(c) instanceof PET) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private boolean actDescend(HeroAction.Descend action) {
 		int stairs = action.dst;
+		
+		if (!Dungeon.level.forcedone && Dungeon.dewDraw && (Dungeon.level.checkdew()>0 || Dungeon.hero.buff(Dewcharge.class) != null)) {
+			GameScene.show(new WndDescend());
+			ready();
+			return false;
+		}
+		
+		
 		if (pos == stairs && pos == Dungeon.level.exit && (Dungeon.depth!=24) && (Dungeon.depth<Statistics.deepestFloor || !Dungeon.sealedlevel)){
 
 			curAction = null;
-
+			
+			if(Dungeon.dewDraw){
+			 for (int i = 0; i < Level.LENGTH; i++) {
+				Heap heap = Dungeon.level.heaps.get(i);
+				if (heap != null)
+					heap.dryup();
+			  }	
+			}		
+			
+			PET pet = checkpet();
+			if(pet!=null && checkpetNear()){
+			  Dungeon.hero.petType=pet.type;
+			  Dungeon.hero.petLevel=pet.level;
+			  Dungeon.hero.petKills=pet.kills;	
+			  Dungeon.hero.petHP=pet.HP;
+			  Dungeon.hero.petExperience=pet.experience;
+			  Dungeon.hero.petCooldown=pet.cooldown;
+			  pet.destroy();
+			  petfollow=true;
+			} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+				petfollow=true;
+			} else {
+				petfollow=false;
+			}
+						
 			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 			if (buff != null) buff.detach();
 
@@ -832,7 +960,23 @@ public class Hero extends Char {
 				if (hunger != null && !hunger.isStarving()) {
 					hunger.satisfy(-Hunger.STARVING / 10);
 				}
-
+				
+				PET pet = checkpet();
+				if(pet!=null && checkpetNear()){
+				  Dungeon.hero.petType=pet.type;
+				  Dungeon.hero.petLevel=pet.level;
+				  Dungeon.hero.petKills=pet.kills;	
+				  Dungeon.hero.petHP=pet.HP;
+				  Dungeon.hero.petExperience=pet.experience;
+				  Dungeon.hero.petCooldown=pet.cooldown;
+				  pet.destroy();
+				  petfollow=true;
+				} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+					petfollow=true;
+				} else {
+					petfollow=false;
+				}
+				
 				Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 				if (buff != null)
 					buff.detach();
@@ -853,6 +997,22 @@ public class Hero extends Char {
 				hunger.satisfy(-Hunger.STARVING / 10);
 			}
 
+			PET pet = checkpet();
+			if(pet!=null && checkpetNear()){
+			  Dungeon.hero.petType=pet.type;
+			  Dungeon.hero.petLevel=pet.level;
+			  Dungeon.hero.petKills=pet.kills;	
+			  Dungeon.hero.petHP=pet.HP;
+			  Dungeon.hero.petExperience=pet.experience;
+			  Dungeon.hero.petCooldown=pet.cooldown;
+			  pet.destroy();
+			  petfollow=true;
+			} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+				petfollow=true;
+			} else {
+				petfollow=false;
+			}
+			
 			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 			if (buff != null)
 				buff.detach();
@@ -877,6 +1037,22 @@ public class Hero extends Char {
 					hunger.satisfy(-Hunger.STARVING / 10);
 				}
 
+				PET pet = checkpet();
+				if(pet!=null && checkpetNear()){
+				  Dungeon.hero.petType=pet.type;
+				  Dungeon.hero.petLevel=pet.level;
+				  Dungeon.hero.petKills=pet.kills;	
+				  Dungeon.hero.petHP=pet.HP;
+				  Dungeon.hero.petExperience=pet.experience;
+				  Dungeon.hero.petCooldown=pet.cooldown;
+				  pet.destroy();
+				  petfollow=true;
+				} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+					petfollow=true;
+				} else {
+					petfollow=false;
+				}
+				
 				Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 				if (buff != null)
 					buff.detach();
@@ -1102,7 +1278,7 @@ public class Hero extends Char {
 
 		} else {
 
-			int len = Level.LENGTH;
+			int len = Level.getLength();
 			boolean[] p = Level.passable;
 			boolean[] v = Dungeon.level.visited;
 			boolean[] m = Dungeon.level.mapped;
@@ -1150,6 +1326,8 @@ public class Hero extends Char {
 
 			if (ch instanceof NPC) {
 				curAction = new HeroAction.Interact((NPC) ch);
+			} else if (ch instanceof PET) {
+					curAction = new HeroAction.InteractPet((PET) ch);
 			} else {
 				curAction = new HeroAction.Attack(ch);
 			}
@@ -1396,7 +1574,7 @@ public class Hero extends Char {
 
 	public static void reallyDie(Object cause) {
 
-		int length = Level.LENGTH;
+		int length = Level.getLength();
 		int[] map = Dungeon.level.map;
 		boolean[] visited = Dungeon.level.visited;
 		boolean[] discoverable = Level.discoverable;
@@ -1545,15 +1723,15 @@ public class Hero extends Char {
 			distance = 1;
 		}
 
-		int cx = pos % Level.WIDTH;
-		int cy = pos / Level.WIDTH;
+		int cx = pos % Level.getWidth();
+		int cy = pos / Level.getWidth();
 		int ax = cx - distance;
 		if (ax < 0) {
 			ax = 0;
 		}
 		int bx = cx + distance;
-		if (bx >= Level.WIDTH) {
-			bx = Level.WIDTH - 1;
+		if (bx >= Level.getWidth()) {
+			bx = Level.getWidth() - 1;
 		}
 		int ay = cy - distance;
 		if (ay < 0) {
@@ -1573,7 +1751,7 @@ public class Hero extends Char {
 		}
 
 		for (int y = ay; y <= by; y++) {
-			for (int x = ax, p = ax + y * Level.WIDTH; x <= bx; x++, p++) {
+			for (int x = ax, p = ax + y * Level.getWidth(); x <= bx; x++, p++) {
 
 				if (Dungeon.visible[p]) {
 

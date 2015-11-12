@@ -41,12 +41,14 @@ import com.github.dachhack.sprout.items.ClusterBomb;
 import com.github.dachhack.sprout.items.ConchShell;
 import com.github.dachhack.sprout.items.DizzyBomb;
 import com.github.dachhack.sprout.items.DwarfHammer;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.HallsKey;
 import com.github.dachhack.sprout.items.HolyHandGrenade;
 import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.PrisonKey;
 import com.github.dachhack.sprout.items.ReturnBeacon;
 import com.github.dachhack.sprout.items.SanChikarah;
+import com.github.dachhack.sprout.items.SanChikarahDeath;
 import com.github.dachhack.sprout.items.SeekingBombItem;
 import com.github.dachhack.sprout.items.SeekingClusterBombItem;
 import com.github.dachhack.sprout.items.SewersKey;
@@ -57,6 +59,7 @@ import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
 import com.github.dachhack.sprout.items.armor.PlateArmor;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
+import com.github.dachhack.sprout.items.artifacts.RingOfDisintegration;
 import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.items.bags.KeyRing;
 import com.github.dachhack.sprout.items.bags.PotionBandolier;
@@ -89,9 +92,11 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.items.wands.WandOfAmok;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
 import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
+import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
 import com.github.dachhack.sprout.items.weapon.melee.Knuckles;
@@ -100,6 +105,7 @@ import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
+import com.github.dachhack.sprout.plants.Dewcatcher;
 import com.github.dachhack.sprout.plants.Flytrap;
 import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant;
@@ -276,7 +282,17 @@ public enum HeroClass {
 				
 				hero.HT=hero.HP=999;
 				hero.STR = hero.STR + 20;
-				
+			//PlateArmor armor1 = new PlateArmor();
+		   // armor1.reinforce().upgrade(14).identify().collect();
+		   // PlateArmor armor2 = new PlateArmor();
+		   // armor2.upgrade(14).identify().collect();
+		   // WarHammer hammer = new WarHammer();
+		   // hammer.imbue = Weapon.Imbue.HEAVY;
+		    //hammer.reinforce().upgrade(15).identify().collect();	
+		    //Dewcatcher.Seed seed3 = new Dewcatcher.Seed(); seed3.collect();
+		    //Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
+		    //Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
+		    //Starflower.Seed seed4 = new Starflower.Seed(); seed4.collect();
 				/*
 				PotionBandolier bag1 = new PotionBandolier(); bag1.collect();
 				ScrollHolder bag2 = new ScrollHolder(); bag2.collect();
@@ -291,15 +307,25 @@ public enum HeroClass {
 				AncientCoin coin = new AncientCoin(); coin.collect();
 				TenguKey key = new TenguKey(); key.collect();
 				*/
+				//Wand wand = new WandOfAmok(); wand.upgrade(15); wand.collect();
 				//Bone bone = new Bone(); bone.collect();
 				//ConchShell conch = new ConchShell(); conch.collect();
 				//AncientCoin coin = new AncientCoin(); coin.collect();
 				//TenguKey key = new TenguKey(); key.collect();
-			    //SanChikarah san = new SanChikarah(); san.collect();	
+			    //SanChikarah san = new SanChikarah(); san.collect();
+				//BookOfLife lbook = new BookOfLife(); lbook.collect();
 			    ReturnBeacon beacon = new ReturnBeacon(); beacon.collect();
-				
+			  //SanChikarahDeath san = new SanChikarahDeath(); san.collect();	
+			   // Blueberry berry = new Blueberry(10); berry.collect();
+			   // PotionOfMindVision potion4 = new PotionOfMindVision(); potion4.collect();
+			    //Dewcatcher.Seed seed3 = new Dewcatcher.Seed(); seed3.collect();
+			   // ActiveMrDestructo mrd = new ActiveMrDestructo(); mrd.collect();
+			   // ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2(); mrd2.collect();
+			  // RingOfDisintegration ar = new RingOfDisintegration(); ar.collect();
 				//PotionOfFrost pot = new PotionOfFrost(); pot.collect();
 				//SteelHoneypot hpot = new SteelHoneypot(); hpot.collect();
+				//Egg egg = new Egg(); egg.collect();
+				//Egg egg2 = new Egg(); egg2.collect();
 				//Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
 				//Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
 				//Starflower.Seed seed3 = new Starflower.Seed(); seed3.collect();
@@ -321,7 +347,7 @@ public enum HeroClass {
 				
 		
 		/*
-				for(int i=0; i<61; i++){
+				for(int i=0; i<99; i++){
 					Scroll scroll = new ScrollOfMagicalInfusion();
 			        scroll.identify().collect();
 			        Scroll scroll2 = new ScrollOfUpgrade();
@@ -331,8 +357,9 @@ public enum HeroClass {
 			        Scroll scroll4 = new ScrollOfRemoveCurse();
 			        scroll4.identify().collect();  
 			       }	
-			       */
-				
+			     
+			       
+			*/	
 		}
 		
 				/*
@@ -366,7 +393,7 @@ public enum HeroClass {
 				//Lichen mush6 = new Lichen(); mush6.collect();
 				//PixieParasol mush7 = new PixieParasol(); mush7.collect();
 				
-				//ActiveMrDestructo mrd = new ActiveMrDestructo(); mrd.collect();
+				ActiveMrDestructo mrd = new ActiveMrDestructo(); mrd.collect();
 				//OrbOfZot orb = new OrbOfZot(); orb.collect();
 				        
 				//Phaseshift.Seed seed = new Phaseshift.Seed(); seed.collect();

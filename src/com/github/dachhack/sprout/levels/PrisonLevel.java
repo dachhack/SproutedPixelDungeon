@@ -73,6 +73,11 @@ public class PrisonLevel extends RegularLevel {
 
 		return true;
 	}
+	
+	@Override
+	protected void setPar(){
+		Dungeon.pars[Dungeon.depth] = 500+(Dungeon.depth*50)+(secretDoors*20);
+	}
 
 	@Override
 	protected void createItems() {
@@ -102,24 +107,24 @@ public class PrisonLevel extends RegularLevel {
 	@Override
 	protected void decorate() {
 
-		for (int i = WIDTH + 1; i < LENGTH - WIDTH - 1; i++) {
+		for (int i = getWidth() + 1; i < getLength() - getWidth() - 1; i++) {
 			if (map[i] == Terrain.EMPTY) {
 
 				float c = 0.05f;
 				if (map[i + 1] == Terrain.WALL
-						&& map[i + WIDTH] == Terrain.WALL) {
+						&& map[i + getWidth()] == Terrain.WALL) {
 					c += 0.2f;
 				}
 				if (map[i - 1] == Terrain.WALL
-						&& map[i + WIDTH] == Terrain.WALL) {
+						&& map[i + getWidth()] == Terrain.WALL) {
 					c += 0.2f;
 				}
 				if (map[i + 1] == Terrain.WALL
-						&& map[i - WIDTH] == Terrain.WALL) {
+						&& map[i - getWidth()] == Terrain.WALL) {
 					c += 0.2f;
 				}
 				if (map[i - 1] == Terrain.WALL
-						&& map[i - WIDTH] == Terrain.WALL) {
+						&& map[i - getWidth()] == Terrain.WALL) {
 					c += 0.2f;
 				}
 
@@ -129,19 +134,19 @@ public class PrisonLevel extends RegularLevel {
 			}
 		}
 
-		for (int i = 0; i < WIDTH; i++) {
+		for (int i = 0; i < getWidth(); i++) {
 			if (map[i] == Terrain.WALL
-					&& (map[i + WIDTH] == Terrain.EMPTY || map[i + WIDTH] == Terrain.EMPTY_SP)
+					&& (map[i + getWidth()] == Terrain.EMPTY || map[i + getWidth()] == Terrain.EMPTY_SP)
 					&& Random.Int(6) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
 			}
 		}
 
-		for (int i = WIDTH; i < LENGTH - WIDTH; i++) {
+		for (int i = getWidth(); i < getLength() - getWidth(); i++) {
 			if (map[i] == Terrain.WALL
-					&& map[i - WIDTH] == Terrain.WALL
-					&& (map[i + WIDTH] == Terrain.EMPTY || map[i + WIDTH] == Terrain.EMPTY_SP)
+					&& map[i - getWidth()] == Terrain.WALL
+					&& (map[i + getWidth()] == Terrain.EMPTY || map[i + getWidth()] == Terrain.EMPTY_SP)
 					&& Random.Int(3) == 0) {
 
 				map[i] = Terrain.WALL_DECO;
@@ -155,6 +160,8 @@ public class PrisonLevel extends RegularLevel {
 				break;
 			}
 		}
+		
+		setPar();
 	}
 
 	@Override
@@ -186,7 +193,7 @@ public class PrisonLevel extends RegularLevel {
 	}
 
 	public static void addVisuals(Level level, Scene scene) {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (level.map[i] == Terrain.WALL_DECO) {
 				scene.add(new Torch(i));
 			}

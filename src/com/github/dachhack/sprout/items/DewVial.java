@@ -41,6 +41,7 @@ import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
+import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -80,6 +81,7 @@ public class DewVial extends Item {
 	private static final String TXT_FULL = "Your dew vial is full!";
 	private static final String TXT_EMPTY = "Your dew vial is empty!";
 	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
+	private static final String TXT_SELECT = "Select an item to upgrade";
 
 	{
 		name = "dew vial";
@@ -255,15 +257,15 @@ public class DewVial extends Item {
 				distance = 1;
 			}
 
-			int cx = hero.pos % Level.WIDTH;
-			int cy = hero.pos / Level.WIDTH;
+			int cx = hero.pos % Level.getWidth();
+			int cy = hero.pos / Level.getWidth();
 			int ax = cx - distance;
 			if (ax < 0) {
 				ax = 0;
 			}
 			int bx = cx + distance;
-			if (bx >= Level.WIDTH) {
-				bx = Level.WIDTH - 1;
+			if (bx >= Level.getWidth()) {
+				bx = Level.getWidth() - 1;
 			}
 			int ay = cy - distance;
 			if (ay < 0) {
@@ -276,7 +278,7 @@ public class DewVial extends Item {
 
 			
 			for (int y = ay; y <= by; y++) {
-				for (int x = ax, p = ax + y * Level.WIDTH; x <= bx; x++, p++) {
+				for (int x = ax, p = ax + y * Level.getWidth(); x <= bx; x++, p++) {
 
 					if (Dungeon.visible[p]) {
 						int c = Dungeon.level.map[p];
@@ -305,7 +307,7 @@ public class DewVial extends Item {
 			GLog.i("You are moving much faster!");
 			volume = volume - 10;
 			
-		} else if (action.equals(AC_BLESS)) {	
+		} else if (action.equals(AC_BLESS) && !Dungeon.dewDraw) {	
 
 			boolean procced = uncurse(hero, hero.belongings.backpack.items.toArray(new Item[0]));
 			procced = uncurse(hero, hero.belongings.weapon,
@@ -320,6 +322,13 @@ public class DewVial extends Item {
 			}
 													
 			volume = volume - 50;	
+			
+		} else if (action.equals(AC_BLESS) && Dungeon.dewDraw) {	
+
+			curUser = hero;
+			GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEDEW,	TXT_SELECT);
+													
+			volume = volume - 90;	
 			
 		} else {
 
@@ -380,7 +389,29 @@ public class DewVial extends Item {
 		return procced;
 	}
 			
+  private final WndBag.Listener itemSelector = new WndBag.Listener() {
+		@Override
+		public void onSelect(Item item) {
+			if (item != null) {
+				upgrade(item);
+			}
+		}
+	};
+	
+	private void upgrade(Item item) {
+
+		GLog.w(TXT_LOOKS_BETTER, item.name());
+
+		item.upgrade();
 		
+		curUser.sprite.operate(curUser.pos);
+		curUser.sprite.emitter().start(Speck.factory(Speck.UP), 0.2f, 3);
+		Badges.validateItemLevelAquired(item);
+		
+		curUser.busy();
+		
+	}
+
 	
 	public void empty() {
 		volume = volume - 10;

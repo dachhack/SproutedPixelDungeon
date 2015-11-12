@@ -122,7 +122,7 @@ public class ClusterBomb extends Item {
 		boolean terrainAffected = false;
 		for (int n : Level.NEIGHBOURS9) {
 			int c = cell + n;
-			if (c >= 0 && c < Level.LENGTH) {
+			if (c >= 0 && c < Level.getLength()) {
 				if (Dungeon.visible[c]) {
 					CellEmitter.get(c).burst(SmokeParticle.FACTORY, 4);
 				}

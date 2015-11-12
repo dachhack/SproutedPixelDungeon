@@ -71,7 +71,7 @@ public class RatKing extends NPC {
 	public void interact() {
 		
 		int checkChests = 0;
-		int length = Level.LENGTH;
+		int length = Level.getLength();
 		for (int i = 0; i < length; i++) {
 			Heap chest = Dungeon.level.heaps.get(i);
 			if(chest != null && chest.chestCheck()){checkChests++;}

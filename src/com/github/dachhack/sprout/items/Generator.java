@@ -39,6 +39,7 @@ import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.HornOfPlenty;
 import com.github.dachhack.sprout.items.artifacts.MasterThievesArmband;
+import com.github.dachhack.sprout.items.artifacts.RingOfDisintegration;
 import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
 import com.github.dachhack.sprout.items.artifacts.TalismanOfForesight;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
@@ -68,6 +69,7 @@ import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
+import com.github.dachhack.sprout.items.potions.PotionOfOverHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfParalyticGas;
 import com.github.dachhack.sprout.items.potions.PotionOfPurity;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
@@ -134,6 +136,7 @@ import com.github.dachhack.sprout.items.weapon.missiles.Shuriken;
 import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
 import com.github.dachhack.sprout.plants.Blindweed;
+import com.github.dachhack.sprout.plants.Dewcatcher;
 import com.github.dachhack.sprout.plants.Dreamfoil;
 import com.github.dachhack.sprout.plants.Earthroot;
 import com.github.dachhack.sprout.plants.Fadeleaf;
@@ -204,9 +207,10 @@ public class Generator {
 				PotionOfLevitation.class, PotionOfStrength.class,
 				PotionOfMindVision.class, PotionOfPurity.class,
 				PotionOfInvisibility.class, PotionOfMight.class,
-				PotionOfFrost.class, PotionOfMending.class};
+				PotionOfFrost.class, PotionOfMending.class,
+				PotionOfOverHealing.class};
 		Category.POTION.probs = new float[] { 45, 4, 15, 10, 15, 10, 0, 20, 12,
-				10, 0, 10, 10};
+				10, 0, 10, 10, 4};
 
 		Category.WAND.classes = new Class<?>[] { WandOfTeleportation.class,
 				WandOfSlowness.class, WandOfFirebolt.class,
@@ -247,21 +251,22 @@ public class Generator {
 				ChaliceOfBlood.class, CloakOfShadows.class, HornOfPlenty.class,
 				MasterThievesArmband.class, SandalsOfNature.class,
 				TalismanOfForesight.class, TimekeepersHourglass.class,
-				UnstableSpellbook.class, AlchemistsToolkit.class,
+				UnstableSpellbook.class, AlchemistsToolkit.class, RingOfDisintegration.class,
 				DriedRose.class // starts with no chance of spawning, chance is
 								// set directly after beating ghost quest.
 		};
-		Category.ARTIFACT.probs = new float[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0 };
+		Category.ARTIFACT.probs = new float[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 };
 
-		Category.SEED.classes = new Class<?>[] { Firebloom.Seed.class,
-				Icecap.Seed.class, Sorrowmoss.Seed.class, Blindweed.Seed.class,
-				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
-				Rotberry.Seed.class, BlandfruitBush.Seed.class,
-				Dreamfoil.Seed.class, Stormvine.Seed.class,
-				Nut.class, Blackberry.class, Blueberry.class, Cloudberry.class,
-				Moonberry.class, Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.class};
+		Category.SEED.classes = new Class<?>[] { 
+				Firebloom.Seed.class, Icecap.Seed.class, Sorrowmoss.Seed.class, Blindweed.Seed.class, Sungrass.Seed.class,
+				Earthroot.Seed.class, Fadeleaf.Seed.class, Rotberry.Seed.class, BlandfruitBush.Seed.class, Dreamfoil.Seed.class,
+				Stormvine.Seed.class, Nut.class, Blackberry.class, Blueberry.class, Cloudberry.class,
+				Moonberry.class, Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.Seed.class, Dewcatcher.Seed.class};
 		
-		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 2, 12, 12, 48, 20, 4, 16, 2, 1, 1, 4};
+		Category.SEED.probs = new float[] { 12, 12, 12, 12, 12,
+				                            12, 12, 0, 2, 12,
+				                            12, 48, 20, 4, 16,
+				                            2, 1, 1, 4, 8};
 		
 		
 		Category.SEED2.classes = new Class<?>[] { Firebloom.Seed.class,
@@ -269,18 +274,20 @@ public class Generator {
 				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
-				Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.class};
+				Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.Seed.class,
+				Dewcatcher.Seed.class};
 		
-		Category.SEED2.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 2, 2, 6};
+		Category.SEED2.probs = new float[] { 12, 12, 12, 12, 12, 12, 12, 0, 4, 12, 12, 2, 2, 6, 8};
 		
 		Category.SEEDRICH.classes = new Class<?>[] { Firebloom.Seed.class,
 				Icecap.Seed.class, Sorrowmoss.Seed.class, Blindweed.Seed.class,
 				Sungrass.Seed.class, Earthroot.Seed.class, Fadeleaf.Seed.class,
 				Rotberry.Seed.class, BlandfruitBush.Seed.class,
 				Dreamfoil.Seed.class, Stormvine.Seed.class,
-				Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.class};
+				Starflower.Seed.class, Phaseshift.Seed.class, Flytrap.Seed.class,
+				Dewcatcher.Seed.class};
 		
-		Category.SEEDRICH.probs = new float[] { 1, 1, 1, 1, 2, 1, 1, 0, 4, 1, 1, 4, 4, 8};
+		Category.SEEDRICH.probs = new float[] { 1, 1, 1, 1, 2, 1, 1, 0, 4, 1, 1, 4, 4, 8, 6};
 		
 		Category.BERRY.classes = new Class<?>[] {Blackberry.class, Blueberry.class, Cloudberry.class, Moonberry.class};
 		Category.BERRY.probs = new float[] {8,2,2,1};	
@@ -439,7 +446,7 @@ public class Generator {
 
 	// resets artifact probabilities, for new dungeons
 	public static void initArtifacts() {
-		Category.ARTIFACT.probs = new float[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0 };
+		Category.ARTIFACT.probs = new float[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 };
 		spawnedArtifacts = new ArrayList<String>();
 	}
 

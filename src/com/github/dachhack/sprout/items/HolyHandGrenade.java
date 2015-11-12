@@ -131,7 +131,7 @@ public class HolyHandGrenade extends Item {
 
 	     	for (int n: Level.NEIGHBOURS9DIST2) {
 			int c = cell + n;
-			if (c >= 0 && c < Level.LENGTH) {
+			if (c >= 0 && c < Level.getLength()) {
 				if (Dungeon.visible[c]) {
 					CellEmitter.get(c).burst(SmokeParticle.FACTORY, 4);
 				}

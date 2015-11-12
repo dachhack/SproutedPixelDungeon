@@ -23,7 +23,7 @@ import com.watabou.noosa.Image;
 public class BannerSprites {
 
 	public enum Type {
-		PIXEL_DUNGEON, BOSS_SLAIN, GAME_OVER, SELECT_YOUR_HERO, PIXEL_DUNGEON_SIGNS
+		PIXEL_DUNGEON, BOSS_SLAIN, GAME_OVER, SELECT_YOUR_HERO, PIXEL_DUNGEON_SIGNS, CLEARED
 	};
 
 	public static Image get(Type type) {
@@ -43,6 +43,9 @@ public class BannerSprites {
 			break;
 		case PIXEL_DUNGEON_SIGNS:
 			icon.frame(icon.texture.uvRect(0, 161, 128, 218));
+			break;
+		case CLEARED:
+			icon.frame(icon.texture.uvRect(0, 230, 128, 250));
 			break;
 		}
 		return icon;

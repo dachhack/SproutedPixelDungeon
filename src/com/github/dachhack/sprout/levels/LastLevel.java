@@ -52,7 +52,7 @@ public class LastLevel extends Level {
 	@Override
 	public void create() {
 		super.create();
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			int flags = Terrain.flags[map[i]];
 			if ((flags & Terrain.PIT) != 0) {
 				passable[i] = avoid[i] = false;
@@ -77,24 +77,24 @@ public class LastLevel extends Level {
 		// Painter.fill( this, 2, 2, SIZE-2, SIZE-2, Terrain.EMPTY );
 		// Painter.fill( this, SIZE/2, SIZE/2, 3, 3, Terrain.EMPTY_SP );
 
-		entrance = SIZE * WIDTH + SIZE / 2 + 1;
+		entrance = SIZE * getWidth() + SIZE / 2 + 1;
 		map[entrance] = Terrain.ENTRANCE;
 
-		pedestal = (SIZE / 2 + 1) * (WIDTH + 1) - 4 * WIDTH;
+		pedestal = (SIZE / 2 + 1) * (getWidth() + 1) - 4 * getWidth();
 		map[pedestal] = Terrain.PEDESTAL;
-		map[pedestal - 1 - WIDTH] = map[pedestal + 1 - WIDTH] = map[pedestal
-				- 1 + WIDTH] = map[pedestal + 1 + WIDTH] = Terrain.STATUE_SP;
+		map[pedestal - 1 - getWidth()] = map[pedestal + 1 - getWidth()] = map[pedestal
+				- 1 + getWidth()] = map[pedestal + 1 + getWidth()] = Terrain.STATUE_SP;
 
 		exit = pedestal;
 
 		int pos = pedestal;
 
-		map[pos - WIDTH] = map[pos - 1] = map[pos + 1] = map[pos - 2] = map[pos + 2] = Terrain.WATER;
-		pos += WIDTH;
+		map[pos - getWidth()] = map[pos - 1] = map[pos + 1] = map[pos - 2] = map[pos + 2] = Terrain.WATER;
+		pos += getWidth();
 		map[pos] = map[pos - 2] = map[pos + 2] = map[pos - 3] = map[pos + 3] = Terrain.WATER;
-		pos += WIDTH;
+		pos += getWidth();
 		map[pos - 3] = map[pos - 2] = map[pos - 1] = map[pos] = map[pos + 1] = map[pos + 2] = map[pos + 3] = Terrain.WATER;
-		pos += WIDTH;
+		pos += getWidth();
 		map[pos - 2] = map[pos + 2] = Terrain.WATER;
 
 		feeling = Feeling.NONE;
@@ -105,7 +105,7 @@ public class LastLevel extends Level {
 
 	@Override
 	protected void decorate() {
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			if (map[i] == Terrain.EMPTY && Random.Int(10) == 0) {
 				map[i] = Terrain.EMPTY_DECO;
 			}
@@ -165,7 +165,7 @@ public class LastLevel extends Level {
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
-		for (int i = 0; i < LENGTH; i++) {
+		for (int i = 0; i < getLength(); i++) {
 			int flags = Terrain.flags[map[i]];
 			if ((flags & Terrain.PIT) != 0) {
 				passable[i] = avoid[i] = false;

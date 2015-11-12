@@ -106,7 +106,7 @@ public class ConchShell extends Item {
 				return;
 			}
 			
-			if (Dungeon.depth==specialLevel && !Dungeon.crabkingkilled) {
+			if (Dungeon.depth==specialLevel && !Dungeon.crabkingkilled && !Dungeon.level.reset) {
 				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING2);
 				return;

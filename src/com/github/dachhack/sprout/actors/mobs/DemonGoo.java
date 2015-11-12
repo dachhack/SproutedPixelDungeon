@@ -120,8 +120,8 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 			ArrayList<Integer> candidates = new ArrayList<Integer>();
 			boolean[] passable = Level.passable;
 
-			int[] neighbours = { pos + 1, pos - 1, pos + Level.WIDTH,
-					pos - Level.WIDTH };
+			int[] neighbours = { pos + 1, pos - 1, pos + Level.getWidth(),
+					pos - Level.getWidth() };
 			for (int n : neighbours) {
 				if (passable[n] && Actor.findChar(n) == null) {
 					candidates.add(n);

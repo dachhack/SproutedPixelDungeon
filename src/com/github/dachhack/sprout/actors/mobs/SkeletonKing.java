@@ -88,8 +88,10 @@ public class SkeletonKing extends Mob {
 	@Override
 	public int attackProc(Char enemy, int damage) {
 		if (Random.Int(2) == 0) {
+			if(enemy == Dungeon.hero){
 			 Buff.prolong(enemy, Weakness.class, Weakness.duration(enemy));
 			state = FLEEING;
+			}
 		}
 
 		return damage;

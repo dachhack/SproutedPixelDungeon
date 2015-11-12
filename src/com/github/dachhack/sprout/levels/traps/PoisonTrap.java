@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.PoisonParticle;
+import com.github.dachhack.sprout.items.Heap;
 
 public class PoisonTrap {
 
@@ -36,6 +37,8 @@ public class PoisonTrap {
 		}
 
 		CellEmitter.center(pos).burst(PoisonParticle.SPLASH, 3);
+		Heap heap = Dungeon.level.heaps.get(pos);
+		if (heap != null) {heap.poison();}
 
 	}
 }

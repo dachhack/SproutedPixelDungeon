@@ -216,7 +216,7 @@ public class Toolbar extends Component {
 			}
 
 			if (cell < 0
-					|| cell > Level.LENGTH
+					|| cell > Level.getLength()
 					|| (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell])) {
 				GameScene.show(new WndMessage("You don't know what is there."));
 				return;

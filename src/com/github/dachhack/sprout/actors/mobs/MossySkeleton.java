@@ -92,6 +92,11 @@ public class MossySkeleton extends Mob {
 			Dungeon.limitedDrops.bone.drop();
 			Dungeon.level.drop(new Bone(), pos).sprite.drop();
 		}
+		
+		if(!Dungeon.limitedDrops.bone.dropped() && Statistics.skeletonsKilled > 100) {
+			Dungeon.limitedDrops.bone.drop();
+			Dungeon.level.drop(new Bone(), pos).sprite.drop();
+		}
 
 		boolean heroKilled = false;
 		for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {

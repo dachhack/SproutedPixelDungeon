@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
+import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -55,8 +56,8 @@ public class LightningTrap {
 
 			int[] points = new int[2];
 
-			points[0] = pos - Level.WIDTH;
-			points[1] = pos + Level.WIDTH;
+			points[0] = pos - Level.getWidth();
+			points[1] = pos + Level.getWidth();
 			ch.sprite.parent.add(new Lightning(points, 2, null));
 
 			points[0] = pos - 1;
@@ -66,6 +67,9 @@ public class LightningTrap {
 
 		CellEmitter.center(pos).burst(SparkParticle.FACTORY,
 				Random.IntRange(3, 4));
+		
+		Heap heap = Dungeon.level.heaps.get(pos);
+		if (heap != null) {heap.lit();}
 
 	}
 

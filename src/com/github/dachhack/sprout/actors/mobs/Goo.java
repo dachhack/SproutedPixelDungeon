@@ -34,6 +34,7 @@ import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.LloydsBeacon;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
@@ -63,7 +64,10 @@ public class Goo extends Mob {
 		lootChance = 0.5f;
 		
 		lootOther = new Chainsaw().enchantBuzz();
-		lootChanceOther = 1f;
+		lootChanceOther = 0.1f;
+		
+		lootThird = new Egg();
+		lootChanceThird = 1f;
 	}
 
 	private int pumpedUp = 0;

@@ -101,7 +101,7 @@ public class ShadowYog extends Mob  {
 			for (int i = 0; i < 4; i++) {
 				int trapPos;
 				do {
-					trapPos = Random.Int(Level.LENGTH);
+					trapPos = Random.Int(Level.getLength());
 				} while (!Level.fieldOfView[trapPos] || !Level.passable[trapPos]);
 
 				if (Dungeon.level.map[trapPos] == Terrain.INACTIVE_TRAP) {

@@ -19,6 +19,8 @@ package com.github.dachhack.sprout;
 
 import com.watabou.utils.Bundle;
 
+//move target 300 + d3*lvl
+
 public class Statistics {
 
 	public static int goldCollected;
@@ -41,7 +43,12 @@ public class Statistics {
 	public static int prisonKills;
 
 	public static float duration;
-
+	public static int floormoves;
+	public static int prevfloormoves;
+	public static int moves;
+	public static float prevfloorduration;
+	
+	
 	public static boolean qualifiedForNoKilling = false;
 	public static boolean completedWithNoKilling = false;
 	
@@ -73,6 +80,9 @@ public class Statistics {
 		prisonKills = 0;
 
 		duration = 0;
+		moves = 0;
+		floormoves = 0;
+		prevfloormoves = 0;
 
 		qualifiedForNoKilling = false;
 
@@ -102,6 +112,9 @@ public class Statistics {
 	private static final String NIGHT = "nightHunt";
 	private static final String ANKHS = "ankhsUsed";
 	private static final String DURATION = "duration";
+	private static final String FLOORMOVES = "floormoves";
+	private static final String PREVFLOORMOVES = "prevfloormoves";
+	private static final String MOVES = "moves";
 	private static final String AMULET = "amuletObtained";
 	private static final String ORB = "orbObtained";
 
@@ -122,6 +135,9 @@ public class Statistics {
 		bundle.put(NIGHT, nightHunt);
 		bundle.put(ANKHS, ankhsUsed);
 		bundle.put(DURATION, duration);
+		bundle.put(FLOORMOVES, floormoves);
+		bundle.put(PREVFLOORMOVES, prevfloormoves);
+		bundle.put(MOVES, moves);
 		bundle.put(AMULET, amuletObtained);
 		bundle.put(ORB, orbObtained);
 		bundle.put(WATERS, waters);
@@ -152,6 +168,9 @@ public class Statistics {
 		nightHunt = bundle.getInt(NIGHT);
 		ankhsUsed = bundle.getInt(ANKHS);
 		duration = bundle.getFloat(DURATION);
+		floormoves = bundle.getInt(FLOORMOVES);
+		prevfloormoves = bundle.getInt(PREVFLOORMOVES);
+		moves = bundle.getInt(MOVES);
 		amuletObtained = bundle.getBoolean(AMULET);
 		orbObtained = bundle.getBoolean(ORB);	
 		

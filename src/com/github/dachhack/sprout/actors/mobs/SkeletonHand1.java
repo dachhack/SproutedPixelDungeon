@@ -86,8 +86,10 @@ public class SkeletonHand1 extends Mob {
 	@Override
 	public int attackProc(Char enemy, int damage) {
 		if (Random.Int(2) == 0) {
+			if(enemy == Dungeon.hero){
 			Buff.affect(enemy, Burning.class).reignite(enemy);
 			state = FLEEING;
+			}
 		}
 
 		return damage;
