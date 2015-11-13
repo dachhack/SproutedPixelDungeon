@@ -63,10 +63,10 @@ public class Goo extends Mob {
 		loot = new ActiveMrDestructo();
 		lootChance = 0.5f;
 		
-		lootOther = new Chainsaw().enchantBuzz();
-		lootChanceOther = 0.1f;
+		lootOther = Dungeon.getMonth() == 9 ? new Egg() : new Chainsaw().enchantBuzz();
+		lootChanceOther = 0.05f;
 		
-		lootThird = new Egg();
+		lootThird = Dungeon.getMonth() != 9 ? new Chainsaw().enchantBuzz() : new Egg();
 		lootChanceThird = 1f;
 	}
 

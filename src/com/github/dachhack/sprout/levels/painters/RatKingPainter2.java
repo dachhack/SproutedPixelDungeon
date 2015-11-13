@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.actors.mobs.SeekingClusterBomb;
 import com.github.dachhack.sprout.actors.mobs.npcs.RatKing;
 import com.github.dachhack.sprout.actors.mobs.npcs.RatKingDen;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
@@ -81,7 +82,7 @@ public class RatKingPainter2 extends Painter {
 		Item prize;
 		switch (Random.Int(10)) {
 		case 0:
-			prize = Generator.random(Generator.Category.MUSHROOM);
+			prize = new Egg();
 			break;
 		case 1:
 			prize = new Phaseshift.Seed();

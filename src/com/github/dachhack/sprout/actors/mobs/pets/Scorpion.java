@@ -43,7 +43,7 @@ import com.github.dachhack.sprout.sprites.BlueDragonSprite;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.MirrorSprite;
 import com.github.dachhack.sprout.sprites.RedDragonSprite;
-import com.github.dachhack.sprout.sprites.ScorpianSprite;
+import com.github.dachhack.sprout.sprites.ScorpionSprite;
 import com.github.dachhack.sprout.sprites.SpiderSprite;
 import com.github.dachhack.sprout.sprites.SteelBeeSprite;
 import com.github.dachhack.sprout.sprites.VelociroosterSprite;
@@ -58,7 +58,7 @@ public class Scorpion extends PET {
 	
 	{
 		name = "scorpion";
-		spriteClass = ScorpianSprite.class;       
+		spriteClass = ScorpionSprite.class;       
 		flying=false;
 		state = HUNTING;
 		level = 1;

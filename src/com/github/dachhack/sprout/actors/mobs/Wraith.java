@@ -133,7 +133,7 @@ public class Wraith extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("BOO!");
+		if (Dungeon.getMonth()==9) {yell("BOO!");}
 	}
 	
 	@Override

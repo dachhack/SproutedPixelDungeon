@@ -67,9 +67,9 @@ public class Egg extends Item {
 	public static final int RED_DRAGON = 30;
 	public static final int GREEN_DRAGON = 5;
 	public static final int BLUE_DRAGON = 5;
-	public static final int VIOLET_DRAGON = 10;
+	public static final int VIOLET_DRAGON = 5;
 	public static final int SPIDER = 2000;
-	public static final int SCORPION = 400;
+	public static final int SCORPION = 4000;
 	public static final int VELOCIROOSTER = 1;
 	public static final int FAIRY = 10;
 	

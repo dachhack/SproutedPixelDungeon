@@ -19,7 +19,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.3.0b: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
+	private static final String TTL_Update = "v0.3.5: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
 
 	private static final String TTL_Future = "Wait What?";
 

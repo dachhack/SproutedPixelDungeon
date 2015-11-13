@@ -23,10 +23,10 @@ import com.github.dachhack.sprout.levels.Level;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.utils.Callback;
 
-public class ScorpianSprite extends MobSprite {
+public class ScorpionSprite extends MobSprite {
 
 
-	public ScorpianSprite() {
+	public ScorpionSprite() {
 		super();
 
 		texture(Assets.SCORPIO);
@@ -34,16 +34,16 @@ public class ScorpianSprite extends MobSprite {
 		TextureFilm frames = new TextureFilm(texture, 18, 17);
 
 		idle = new Animation(12, true);
-		idle.frames(frames, 32, 32, 32, 32, 32, 32, 32, 32, 33, 34, 33, 34, 33, 34);
+		idle.frames(frames, 28, 28, 28, 28, 28, 28, 28, 28, 29, 30, 29, 30, 29, 30);
 
 		run = new Animation(8, true);
-		run.frames(frames, 37, 37, 38, 38);
+		run.frames(frames, 33, 33, 34, 34);
 
 		attack = new Animation(15, false);
-		attack.frames(frames, 32, 35, 36);
+		attack.frames(frames, 28, 31, 32);
 		
 		die = new Animation(12, false);
-		die.frames(frames, 32, 39, 40, 41, 42);
+		die.frames(frames, 28, 35, 36, 37, 38);
 
 		play(idle);
 	}
