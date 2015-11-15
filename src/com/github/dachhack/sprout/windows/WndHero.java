@@ -368,15 +368,15 @@ public class WndHero extends WndTabbed {
 			statSlot(TXT_KILLS, heropet.kills);
 			statSlot(TXT_EXP, heropet.level<10 ? heropet.experience + "/" + (heropet.level*heropet.level*heropet.level) : "Max");
 			if (heropet.type==4 || heropet.type==5 || heropet.type==6 || heropet.type==7){
-			  statSlot(TXT_BREATH, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " turns.");
+			  statSlot(TXT_BREATH, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
 			} else if (heropet.type==1){
-				statSlot(TXT_SPIN, heropet.cooldown==0 ? "Armed" : heropet.cooldown + " turns.");
+				statSlot(TXT_SPIN, heropet.cooldown==0 ? "Armed" : heropet.cooldown + " Turns");
 			} else if (heropet.type==3){
-				statSlot(TXT_FEATHERS, heropet.cooldown==0 ? "Ruffled" : heropet.cooldown + " turns.");
+				statSlot(TXT_FEATHERS, heropet.cooldown==0 ? "Ruffled" : heropet.cooldown + " Turns");
 			} else if (heropet.type==8){
-				statSlot(TXT_STING, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " turns.");
+				statSlot(TXT_STING, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
 			} else if (heropet.type==10 || heropet.type==11){
-				statSlot(TXT_SPARKLE, heropet.cooldown==0 ? "Sparkling" : heropet.cooldown + " turns.");
+				statSlot(TXT_SPARKLE, heropet.cooldown==0 ? "Sparkling" : heropet.cooldown + " Turns");
 			}
 			
 			pos += GAP;

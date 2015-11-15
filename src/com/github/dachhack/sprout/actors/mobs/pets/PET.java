@@ -131,7 +131,7 @@ public abstract class PET extends Mob {
 	public void die(Object cause) {
 		
 		    Dungeon.hero.haspet=false;
-			GLog.n("Your pet, %s dies.");			
+			GLog.n("Your pet %s dies.",name);			
 
 		super.die(cause);
 
