@@ -61,7 +61,7 @@ public class Eye extends Mob {
 		flying = true;
 
 		loot = new PotionOfHealing();
-		lootChance = 0.5f;
+		lootChance = 0.1f;
 		
 		lootOther = new Meat();
 		lootChanceOther = 0.5f; // by default, see die()

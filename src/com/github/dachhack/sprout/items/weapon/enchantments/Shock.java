@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.watabou.utils.Random;
@@ -33,6 +34,11 @@ public class Shock extends Weapon.Enchantment {
 
 	private static final String TXT_SHOCKING = "Shocking %s";
 
+	@Override
+	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
+		return false;
+	}
+	
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
 		// lvl 0 - 25%

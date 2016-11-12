@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.Badges.Badge;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -35,7 +36,10 @@ import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Gold;
+import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.artifacts.CapeOfThorns;
+import com.github.dachhack.sprout.items.journalpages.Sokoban2;
+import com.github.dachhack.sprout.items.journalpages.Sokoban3;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
@@ -214,10 +218,33 @@ public class DM300 extends Mob implements Callback {
 				 
 					GameScene.bossSlain();
 					Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-					Dungeon.level.drop(new Gold(Random.Int(3000, 6000)), pos).sprite.drop();
-
 					Badges.validateBossSlain();
 			 }
+			 
+			 if (!Dungeon.limitedDrops.journal.dropped()){ 
+				  Dungeon.level.drop(new OtilukesJournal(), pos).sprite.drop();
+				  Dungeon.limitedDrops.journal.drop();
+				}
+			 
+			 Badges.Badge badgeToCheck = null;
+				switch (Dungeon.hero.heroClass) {
+				case WARRIOR:
+					badgeToCheck = Badge.MASTERY_WARRIOR;
+					break;
+				case MAGE:
+					badgeToCheck = Badge.MASTERY_MAGE;
+					break;
+				case ROGUE:
+					badgeToCheck = Badge.MASTERY_ROGUE;
+					break;
+				case HUNTRESS:
+					badgeToCheck = Badge.MASTERY_HUNTRESS;
+					break;
+				}
+				
+				
+				Dungeon.level.drop(new Sokoban3(), pos).sprite.drop();
+		       
 
 		yell("Mission failed. Shutting down.");
 	}

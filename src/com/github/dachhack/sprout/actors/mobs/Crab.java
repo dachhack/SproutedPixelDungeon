@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.sprites.CrabSprite;

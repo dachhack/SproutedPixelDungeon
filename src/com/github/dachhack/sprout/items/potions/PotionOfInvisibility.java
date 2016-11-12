@@ -23,9 +23,8 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.items.misc.AutoPotion.AutoHealPotion;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.windows.WndOptions;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 
@@ -42,7 +41,7 @@ public class PotionOfInvisibility extends Potion {
 	@Override
 	public void apply(Hero hero) {
 		setKnown();
-		Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
+		Buff.affect(hero, Invisibility.class,  Dungeon.hero.buff(AutoHealPotion.class) != null ? Invisibility.DURATION*2 : Invisibility.DURATION);
 		GLog.i("You see your hands turn invisible!");
 		Sample.INSTANCE.play(Assets.SND_MELD);
 	}

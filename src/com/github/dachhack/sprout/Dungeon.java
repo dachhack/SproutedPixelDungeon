@@ -31,7 +31,6 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Charm;
 import com.github.dachhack.sprout.actors.buffs.Dewcharge;
 import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -56,6 +55,7 @@ import com.github.dachhack.sprout.levels.CityBossLevel;
 import com.github.dachhack.sprout.levels.CityLevel;
 import com.github.dachhack.sprout.levels.CrabBossLevel;
 import com.github.dachhack.sprout.levels.DeadEndLevel;
+import com.github.dachhack.sprout.levels.DragonCaveLevel;
 import com.github.dachhack.sprout.levels.FieldLevel;
 import com.github.dachhack.sprout.levels.FishingLevel;
 import com.github.dachhack.sprout.levels.FortressLevel;
@@ -65,17 +65,26 @@ import com.github.dachhack.sprout.levels.InfestBossLevel;
 import com.github.dachhack.sprout.levels.LastLevel;
 import com.github.dachhack.sprout.levels.LastShopLevel;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.MineLevel;
+import com.github.dachhack.sprout.levels.MinesBossLevel;
 import com.github.dachhack.sprout.levels.PrisonBossLevel;
 import com.github.dachhack.sprout.levels.PrisonLevel;
 import com.github.dachhack.sprout.levels.Room;
+import com.github.dachhack.sprout.levels.SafeLevel;
 import com.github.dachhack.sprout.levels.SewerBossLevel;
 import com.github.dachhack.sprout.levels.SewerLevel;
 import com.github.dachhack.sprout.levels.SkeletonBossLevel;
+import com.github.dachhack.sprout.levels.SokobanCastle;
+import com.github.dachhack.sprout.levels.SokobanIntroLevel;
+import com.github.dachhack.sprout.levels.SokobanPuzzlesLevel;
+import com.github.dachhack.sprout.levels.SokobanTeleportLevel;
+import com.github.dachhack.sprout.levels.SokobanVaultLevel;
 import com.github.dachhack.sprout.levels.TenguDenLevel;
-import com.github.dachhack.sprout.levels.TenguHideoutLevel;
 import com.github.dachhack.sprout.levels.ThiefBossLevel;
 import com.github.dachhack.sprout.levels.ThiefCatchLevel;
+import com.github.dachhack.sprout.levels.TownLevel;
 import com.github.dachhack.sprout.levels.VaultLevel;
+import com.github.dachhack.sprout.levels.ZotBossLevel;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.StartScene;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
@@ -105,11 +114,14 @@ public class Dungeon {
 		swarmHP, batHP, warlockHP, scorpioHP, cookingHP,
 		// blandfruit, which can technically be an unlimited health potion
 		// source
-		blandfruitSeed, upgradeEaterSeed,
+		blandfruitSeed, upgradeEaterSeed, 
+		
+		//Norn Stones
+		nornstones,
 
 		// doesn't use Generator, so we have to enforce one armband drop here
-		armband, spork, royalspork, sewerkey, prisonkey, caveskey, citykey, hallskey, ringofwealth,
-		conchshell, ancientcoin, tengukey, bone, 
+		armband, spork, royalspork, sewerkey, prisonkey, caveskey, citykey, hallskey, ringofwealth, vaultpage,
+		conchshell, ancientcoin, tengukey, bone, journal, safespotpage, dragoncave,
 
 		// containers
 		dewVial, seedBag, scrollBag, potionBag, wandBag, ankhChain;
@@ -147,13 +159,12 @@ public class Dungeon {
 	public static boolean dewDraw = false;
 	public static boolean dewWater = false;
 	public static boolean wings = false;
+	//public static boolean secondQuest = false;
 
-	public static boolean sealedlevel = false;
-	
-	
 	public static int challenges;
 	
 	public static int ratChests = 0;
+	public static int petHasteLevel = 0;
 	public static int zotDrains = 0;
 	public static int shellCharge = 20;
 	public static boolean sporkAvail = false;
@@ -240,7 +251,7 @@ public class Dungeon {
 		tengukilled = false;
 		tengudenkilled = false;
 		skeletonkingkilled = false;
-		sealedlevel = false;
+		petHasteLevel = 0;
         ratChests = 0;
         zotDrains = 0;
         shellCharge = 20;
@@ -249,7 +260,7 @@ public class Dungeon {
 		dewWater = false;
 		wings = false;
 	    
-		pars = new int[24];
+		pars = new int[100];
 		
 	}
 
@@ -520,6 +531,103 @@ public static Level newThiefBossLevel(){
 	return level;
 }
 
+public static Level newMineBossLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth++;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new MinesBossLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+public static Level newZotBossLevel(){
+
+	Dungeon.level = null;
+	Actor.clear();
+	depth = 99;
+	if (depth > Statistics.realdeepestFloor) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	level = new ZotBossLevel();
+
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
+public static Level newJournalLevel(int page, Boolean first){
+
+	Dungeon.level = null;
+	Actor.clear();
+	
+	depth = 50+page;
+	
+	if (page==6){
+		depth = 66;
+	}
+	
+	if (page==7){
+		depth = 67;
+	}
+	
+	if (depth > Statistics.realdeepestFloor && depth < 68) {
+		Statistics.realdeepestFloor = depth;}
+	
+	Arrays.fill(visible, false);
+
+	Level level;
+	switch(page){
+	case 0:
+	    level = new SafeLevel();
+	    break;
+	case 1:
+		level = new SokobanIntroLevel();
+		break;
+	case 2:
+		level = new SokobanCastle();
+		break;
+	case 3:
+		level = new SokobanTeleportLevel();
+		break;
+	case 4:
+		level = new SokobanPuzzlesLevel();
+		break;
+	case 5:
+		level = new TownLevel();
+		break;
+	case 6:
+		level = new SokobanVaultLevel();
+		break;
+	case 7:
+		level = new DragonCaveLevel();
+		break;
+	default:
+		level = Dungeon.newLevel();
+	}
+
+	level.first = first;
+	level.create();
+
+	Statistics.qualifiedForNoKilling = !bossLevel();
+
+	return level;
+}
+
 	
 	public static Level newLevel() {
 
@@ -620,6 +728,18 @@ public static Level newThiefBossLevel(){
 		case 41:
 			level = new ThiefCatchLevel();
 			break;
+		case 56:
+		case 57:
+		case 58:
+		case 59:
+		case 60:
+		case 61:
+		case 62:
+		case 63:
+		case 64:
+		case 65:
+			level = new MineLevel();
+			break;
 		default:
 			level = new DeadEndLevel();
 			if (depth<27){Statistics.deepestFloor--;}
@@ -659,8 +779,22 @@ public static Level newThiefBossLevel(){
 				|| depth == 25 ||  depth ==  36 ||  depth ==  41;
 	}
 	
+
+	public static boolean notClearableLevel(int depth) {
+		return depth == 1 || depth ==2 ||depth == 5 || depth == 10 || depth == 15 || depth == 20 || depth == 21
+				|| depth == 25 || depth>25;
+	}
+	
+	public static boolean townCheck(int depth) {
+		return depth > 54 && depth < 66;
+	}
+	
 	public static boolean growLevel(int depth) {
-		return depth == 27 || depth == 28 || depth == 32 || depth == 30;
+		return depth == 27 || depth == 28 || depth == 32 || depth == 30 || depth == 55;
+	}
+
+	public static boolean sokobanLevel(int depth) {
+		return  depth == 51 || depth == 52 || depth == 53 || depth == 54;
 	}
 	
 	public static boolean dropLevel(int depth) {
@@ -779,6 +913,7 @@ public static Level newThiefBossLevel(){
 	
 	
 	private static final String RATCHESTS = "ratChests";
+	private static final String PETHASTELEVEL = "petHasteLevel";
 	private static final String EARLYGRASS = "earlygrass";
 	private static final String GNOLLSPAWN = "gnollspawned";
 	private static final String SKELETONSPAWN = "skeletonspawned";
@@ -793,7 +928,6 @@ public static Level newThiefBossLevel(){
 	private static final String TENGUDENKILL = "tengudenkilled";
 	private static final String SKELETONKILL = "skeletonkingkilled";
 	private static final String BANDITKILL = "banditkingkilled";
-	private static final String SEALEDLEV = "sealedlevel";
 	private static final String SPORK = "sporkAvail";
 	private static final String DEWDRAW = "dewDraw";
 	private static final String DEWWATER = "dewWater";
@@ -802,7 +936,7 @@ public static Level newThiefBossLevel(){
 	private static final String SHELLCHARGE = "shellCharge";
 	private static final String PLAYTEST = "playtest";
 	private static final String PARS = "pars";
-	
+	//private static final String SECONDQUEST = "secondQuest";
 	
 	// TODO: to support pre-0.2.3 saves, remove when needed
 	private static final String POS = "potionsOfStrength";
@@ -845,6 +979,8 @@ public static Level newThiefBossLevel(){
 			bundle.put(GOLD, gold);
 			bundle.put(DEPTH, depth);
 			
+			//bundle.put(SECONDQUEST, secondQuest);
+			bundle.put(PETHASTELEVEL, petHasteLevel);
 			bundle.put(RATCHESTS, ratChests);
 			bundle.put(ZOTDRAINS, zotDrains);
 			bundle.put(EARLYGRASS, earlygrass);
@@ -861,7 +997,6 @@ public static Level newThiefBossLevel(){
 			bundle.put(TENGUDENKILL, tengudenkilled);
 			bundle.put(BANDITKILL, banditkingkilled);
 			bundle.put(SKELETONKILL, skeletonkingkilled);
-			bundle.put(SEALEDLEV, sealedlevel);
 			bundle.put(SPORK, sporkAvail);
 			bundle.put(DEWDRAW, dewDraw);
 			bundle.put(DEWWATER, dewWater);
@@ -1050,6 +1185,7 @@ public static Level newThiefBossLevel(){
 		depth = bundle.getInt(DEPTH);
 		
 		ratChests = bundle.getInt(RATCHESTS);
+		petHasteLevel = bundle.getInt(PETHASTELEVEL);
 		zotDrains = bundle.getInt(ZOTDRAINS);
 		shellCharge = bundle.getInt(SHELLCHARGE);
 		earlygrass = bundle.getBoolean(EARLYGRASS);
@@ -1066,13 +1202,14 @@ public static Level newThiefBossLevel(){
 		tengudenkilled = bundle.getBoolean(TENGUDENKILL);
 		banditkingkilled = bundle.getBoolean(BANDITKILL);
 		skeletonkingkilled = bundle.getBoolean(SKELETONKILL);
-		sealedlevel = bundle.getBoolean(SEALEDLEV);
 		sporkAvail = bundle.getBoolean(SPORK);
 		dewDraw = bundle.getBoolean(DEWDRAW);
 		dewWater = bundle.getBoolean(DEWWATER);
 		wings = bundle.getBoolean(WINGS);
 		playtest = bundle.getBoolean(PLAYTEST);
 		pars = bundle.getIntArray(PARS);
+		//add version check
+		//secondQuest = bundle.getBoolean(SECONDQUEST);
 		
 		Statistics.restoreFromBundle(bundle);
 		Journal.restoreFromBundle(bundle);
@@ -1131,6 +1268,9 @@ public static Level newThiefBossLevel(){
 			while (Game.instance.deleteFile(Utils.format(depthFile(cl), depth))) {
 				depth++;
 			}
+			for(int i=1; i<200; i++){
+	              Game.instance.deleteFile(Utils.format(depthFile(cl), i));
+	         }
 		}
 
 		GamesInProgress.delete(cl);

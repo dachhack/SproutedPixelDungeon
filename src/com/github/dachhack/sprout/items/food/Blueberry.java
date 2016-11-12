@@ -19,15 +19,14 @@ package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.buffs.Awareness;
 import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Identification;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.misc.Spectacles.MagicSight;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -47,10 +46,22 @@ public class Blueberry extends Food {
 		bones = false;
 	}
 
+	
+	private static final String TXT_PREVENTING = "The magic of this place prevents this type of scrying! ";
+	
 	@Override
 	public void execute(Hero hero, String action) {
 
 		super.execute(hero, action);
+		
+         if (action.equals(AC_EAT)) {
+			
+			if (Dungeon.depth>50 && Dungeon.hero.buff(MagicSight.class) == null ){
+				GLog.w(TXT_PREVENTING);
+				return;
+			}
+
+		}
 
 		if (action.equals(AC_EAT)) {
 

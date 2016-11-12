@@ -22,6 +22,7 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Badges.Badge;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.GooWarn;
@@ -33,10 +34,10 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
-import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.LloydsBeacon;
+import com.github.dachhack.sprout.items.OtilukesJournal;
+import com.github.dachhack.sprout.items.journalpages.Sokoban1;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
@@ -215,14 +216,29 @@ public class Goo extends Mob {
 			((SewerBossLevel) Dungeon.level).unseal();
 
 			GameScene.bossSlain();
-			Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-
-			Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
-
+			Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();	
 			Badges.validateBossSlain();
-		} else {
-			Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
 		}
+			 
+		 Badges.Badge badgeToCheck = null;
+				switch (Dungeon.hero.heroClass) {
+				case WARRIOR:
+					badgeToCheck = Badge.MASTERY_WARRIOR;
+					break;
+				case MAGE:
+					badgeToCheck = Badge.MASTERY_MAGE;
+					break;
+				case ROGUE:
+					badgeToCheck = Badge.MASTERY_ROGUE;
+					break;
+				case HUNTRESS:
+					badgeToCheck = Badge.MASTERY_HUNTRESS;
+					break;
+		}
+				
+	
+		Dungeon.level.drop(new Sokoban1(), pos).sprite.drop();
+		
 
 		yell("glurp... glurp...");
 	}

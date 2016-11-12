@@ -26,19 +26,25 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
 import com.github.dachhack.sprout.items.rings.RingOfFuror;
 import com.github.dachhack.sprout.items.rings.RingOfSharpshooting;
+import com.github.dachhack.sprout.items.weapon.enchantments.AresLeech;
 import com.github.dachhack.sprout.items.weapon.enchantments.BuzzSaw;
+import com.github.dachhack.sprout.items.weapon.enchantments.CromLuck;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
 import com.github.dachhack.sprout.items.weapon.enchantments.Horror;
 import com.github.dachhack.sprout.items.weapon.enchantments.Instability;
+import com.github.dachhack.sprout.items.weapon.enchantments.JupitersHorror;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
+import com.github.dachhack.sprout.items.weapon.enchantments.LokisPoison;
 import com.github.dachhack.sprout.items.weapon.enchantments.Luck;
+import com.github.dachhack.sprout.items.weapon.enchantments.NeptuneShock;
 import com.github.dachhack.sprout.items.weapon.enchantments.Nomnom;
 import com.github.dachhack.sprout.items.weapon.enchantments.Paralysis;
 import com.github.dachhack.sprout.items.weapon.enchantments.Poison;
 import com.github.dachhack.sprout.items.weapon.enchantments.Shock;
 import com.github.dachhack.sprout.items.weapon.enchantments.Slow;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -73,7 +79,7 @@ public class Weapon extends KindOfWeapon {
 	public void proc(Char attacker, Char defender, int damage) {
 
 		if (enchantment != null) {
-			enchantment.proc(this, attacker, defender, damage);
+			enchantment.proc(this, attacker, defender, damage);	
 		}
 
 		if (!levelKnown) {
@@ -171,19 +177,19 @@ public class Weapon extends KindOfWeapon {
 			}
 		}
 		if (this instanceof MissileWeapon && hero.heroClass == HeroClass.HUNTRESS) {
-			int exStr = Math.round((hero.STR() - STR)/5);
-			int lvlBonus = Math.round(hero.lvl/5);
+			int exStr = Math.max(Math.round((hero.STR() - STR)/5),0);
+			int lvlBonus = Math.round(hero.lvl/10);
 			int totBonus = exStr+lvlBonus+1;
 			if (totBonus > 0) {
-				damage += damage*Random.IntRange(lvlBonus, totBonus);
+				damage += damage*(Random.IntRange(exStr, totBonus)/4);
 			}
 		}
 		if (this instanceof MissileWeapon && hero.heroClass != HeroClass.HUNTRESS) {
-			int exStr = Math.round((hero.STR() - STR)/5);
+			int exStr = Math.max(Math.round((hero.STR() - STR)/5),0);
 			int lvlBonus = Math.round(hero.lvl/10);
 			int totBonus = exStr+lvlBonus;
 			if (totBonus > 0) {
-				damage += damage*Random.IntRange(lvlBonus, totBonus);
+				damage = damage*Random.IntRange(lvlBonus, totBonus);
 			}
 		}
 
@@ -261,6 +267,17 @@ public class Weapon extends KindOfWeapon {
 		
 		return enchant(ench);
 	}
+	
+	public Weapon enchantLow() {
+
+		Class<? extends Enchantment> oldEnchantment = enchantment != null ? enchantment.getClass() : null;
+		Enchantment ench = Enchantment.randomLow();
+		while (ench.getClass() == oldEnchantment) {
+			ench = Enchantment.randomLow();
+		}
+		
+		return enchant(ench);
+	}
 
 	public Weapon enchantNom() {
 
@@ -268,9 +285,39 @@ public class Weapon extends KindOfWeapon {
 		return enchant(ench);
 	}
 	
+	public Weapon enchantLuck() {
+
+		Enchantment ench = Enchantment.randomLuck();
+		return enchant(ench);
+	}
+	
 	public Weapon enchantBuzz() {
 
 		Enchantment ench = Enchantment.randomBuzz();
+		return enchant(ench);
+	}
+	
+	public Weapon enchantNeptune() {
+
+		Enchantment ench = Enchantment.randomNeptune();
+		return enchant(ench);
+	}
+	
+	public Weapon enchantAres() {
+
+		Enchantment ench = Enchantment.Ares();
+		return enchant(ench);
+	}
+	
+
+	public Weapon enchantJupiter() {
+
+		Enchantment ench = Enchantment.Jupiter();
+		return enchant(ench);
+	}
+	public Weapon enchantLoki() {
+
+		Enchantment ench = Enchantment.Loki();
 		return enchant(ench);
 	}
 	
@@ -288,21 +335,41 @@ public class Weapon extends KindOfWeapon {
 		private static final Class<?>[] enchants = new Class<?>[] { Fire.class,
 				Poison.class, Death.class, Paralysis.class, Leech.class,
 				Slow.class, Shock.class, Instability.class, Horror.class,
-				Luck.class, Nomnom.class, BuzzSaw.class };
+				Luck.class, Nomnom.class, BuzzSaw.class, NeptuneShock.class,
+				CromLuck.class, AresLeech.class};
 		private static final float[] chances = new float[] { 10, 10, 1, 2, 1,
-				2, 6, 3, 2, 2, 0, 0 };
+				2, 6, 3, 2, 2, 0, 0, 0, 0, 0 };
+		
+		private static final float[] chancesLow = new float[] { 10, 10, 0, 0, 1,
+			2, 6, 0, 0, 2, 0, 0, 0, 0, 0 };
 		
 		private static final float[] chancesAdv = new float[] { 2, 2, 2, 2, 2,
-			2, 2, 2, 2, 2, 0, 0 };
+			2, 2, 2, 2, 2, 0, 0,0, 0, 0 };
 		
 		private static final float[] chancesNom = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 1, 0 };
+			0, 0, 0, 0, 0, 1, 0,0, 0, 0 };
 		
 		private static final float[] chancesBuzz = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 1 };
+			0, 0, 0, 0, 0, 0, 1,0, 0, 0 };
+		
+		private static final float[] chancesNeptune = new float[] { 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+		
+		private static final float[] chancesLuck = new float[] { 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+		
+		private static final Class<?>[] relicenchants = new Class<?>[] {  NeptuneShock.class,
+			CromLuck.class, AresLeech.class, JupitersHorror.class, LokisPoison.class};
+		
+		private static final float[] chancesAres = new float[] { 0, 0, 1, 0, 0 };
+		private static final float[] chancesJupiter = new float[] { 0, 0, 0, 1, 0 };
+		private static final float[] chancesLoki = new float[] { 0, 0, 0, 0, 1 };
+		
+		public abstract boolean proc(Weapon weapon, Char attacker,
+				Char defender, int damage);
 		
 
-		public abstract boolean proc(Weapon weapon, Char attacker,
+		public abstract boolean proc(RelicMeleeWeapon weapon, Char attacker,
 				Char defender, int damage);
 
 		public String name(String weaponName) {
@@ -340,6 +407,15 @@ public class Weapon extends KindOfWeapon {
 			}
 		}
 		@SuppressWarnings("unchecked")
+		public static Enchantment randomLow() {
+			try {
+				return ((Class<Enchantment>) enchants[Random.chances(chancesLow)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		@SuppressWarnings("unchecked")
 		public static Enchantment randomNom() {
 			try {
 				return ((Class<Enchantment>) enchants[Random.chances(chancesNom)])
@@ -357,6 +433,56 @@ public class Weapon extends KindOfWeapon {
 				return null;
 			}
 		}
+		
+		@SuppressWarnings("unchecked")
+		public static Enchantment randomLuck() {
+			try {
+				return ((Class<Enchantment>) enchants[Random.chances(chancesLuck)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
 
+		@SuppressWarnings("unchecked")
+		public static Enchantment Ares() {
+			try {
+				return ((Class<Enchantment>) relicenchants[Random.chances(chancesAres)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		
+		@SuppressWarnings("unchecked")
+		public static Enchantment Jupiter() {
+			try {
+				return ((Class<Enchantment>) relicenchants[Random.chances(chancesJupiter)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		
+		@SuppressWarnings("unchecked")
+		public static Enchantment Loki() {
+			try {
+				return ((Class<Enchantment>) relicenchants[Random.chances(chancesLoki)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		
+		
+		@SuppressWarnings("unchecked")
+		public static Enchantment randomNeptune() {
+			try {
+				return ((Class<Enchantment>) enchants[Random.chances(chancesNeptune)])
+						.newInstance();
+			} catch (Exception e) {
+				return null;
+			}
+		}
 	}
 }

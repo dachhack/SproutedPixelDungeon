@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -31,7 +32,6 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mimic;
 import com.github.dachhack.sprout.actors.mobs.RedWraith;
 import com.github.dachhack.sprout.actors.mobs.Wraith;
-import com.github.dachhack.sprout.actors.mobs.npcs.SeekingBombNPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.Splash;
@@ -39,7 +39,6 @@ import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.artifacts.AlchemistsToolkit;
-import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Blandfruit;
 import com.github.dachhack.sprout.items.food.ChargrilledMeat;
 import com.github.dachhack.sprout.items.food.FrozenCarpaccio;
@@ -47,10 +46,18 @@ import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.food.Nut;
 import com.github.dachhack.sprout.items.food.ToastedNut;
+import com.github.dachhack.sprout.items.nornstone.NornStone;
 import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
+import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
+import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
+import com.github.dachhack.sprout.items.weapon.melee.relic.CromCruachAxe;
+import com.github.dachhack.sprout.items.weapon.melee.relic.LokisFlail;
+import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
 import com.github.dachhack.sprout.plants.Plant.Seed;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -691,6 +698,60 @@ public class Heap implements Bundlable {
 			return null;
 		}
 	}
+	
+	public Weapon consecrate() {
+
+		CellEmitter.get(pos).burst(Speck.factory(Speck.FORGE), 3);
+		Splash.at(pos, 0xFFFFFF, 3);	
+		
+		int count=0;
+		int type=0;
+		
+		for (Item item : items) {
+			if (item instanceof NornStone) {
+				count += item.quantity;
+				if(type==0){
+					type=((NornStone) item).type;
+				} else if (Random.Int(3)<item.quantity){
+				 	type=((NornStone) item).type;	
+				}
+			} else {
+				count = 0;
+				break;
+			}
+		}
+		
+		Weapon weapon;
+				
+		if (count >= SEEDS_TO_POTION) {
+
+			CellEmitter.get(pos).burst(Speck.factory(Speck.WOOL), 6);
+			Sample.INSTANCE.play(Assets.SND_PUFF);
+			
+			destroy(); 
+			
+				switch (type) {
+	            case 1:  weapon = new JupitersWraith(); weapon.enchantJupiter();
+	                     break;
+	            case 2:  weapon = new AresSword(); weapon.enchantAres();
+                         break;
+	            case 3:  weapon = new CromCruachAxe(); weapon.enchantLuck();
+                         break;
+	            case 4:  weapon = new LokisFlail(); weapon.enchantLoki();
+                         break;
+	            case 5:  weapon = new NeptunusTrident(); weapon.enchantNeptune();
+                         break;
+	            default: weapon = new AresSword(); weapon.enchantAres();
+                         break;
+                          }
+                         
+			return weapon;
+
+		} else {
+			return null;
+		}
+	}
+
 
 	public static void burnFX(int pos) {
 		CellEmitter.get(pos).burst(ElmoParticle.FACTORY, 6);

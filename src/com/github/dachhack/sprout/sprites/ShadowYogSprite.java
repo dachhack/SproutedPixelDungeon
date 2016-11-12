@@ -18,8 +18,6 @@
 package com.github.dachhack.sprout.sprites;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.actors.mobs.ShadowYog;
-import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.Splash;
 import com.watabou.noosa.TextureFilm;
 

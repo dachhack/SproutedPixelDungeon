@@ -18,14 +18,14 @@
 package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.food.Blackberry;
@@ -33,6 +33,7 @@ import com.github.dachhack.sprout.items.food.Blueberry;
 import com.github.dachhack.sprout.items.food.Cloudberry;
 import com.github.dachhack.sprout.items.food.FullMoonberry;
 import com.github.dachhack.sprout.items.food.Moonberry;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -93,7 +94,7 @@ public class CavesKey extends Item {
 
 		if (action == AC_PORT) {
 
-			if (Dungeon.bossLevel()) {
+			if (Dungeon.bossLevel() || hero.petfollow) {
 				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING);
 				return;
@@ -114,6 +115,8 @@ public class CavesKey extends Item {
 		}
 
 		if (action == AC_PORT) {
+			
+			    hero.spend(TIME_TO_USE);
 
 				Buff buff = Dungeon.hero
 						.buff(TimekeepersHourglass.timeFreeze.class);
@@ -136,6 +139,8 @@ public class CavesKey extends Item {
 				hero.invisible=0;
 								
 				this.doDrop(hero);
+				 checkPetPort();
+				 removePet();
 				
 				if (Statistics.albinoPiranhasKilled>99){
 					Moonberry berry1 = new Moonberry(10);
@@ -167,6 +172,59 @@ public class CavesKey extends Item {
 
 		}
 	}
+	
+	
+
+	private PET checkpet(){
+		for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {
+				return (PET) mob;
+			}
+		}	
+		return null;
+	}
+	
+	private boolean checkpetNear(){
+		for (int n : Level.NEIGHBOURS8) {
+			int c =  Dungeon.hero.pos + n;
+			if (Actor.findChar(c) instanceof PET) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void checkPetPort(){
+		PET pet = checkpet();
+		if(pet!=null && checkpetNear()){
+		  //GLog.i("I see pet");
+		  Dungeon.hero.petType=pet.type;
+		  Dungeon.hero.petLevel=pet.level;
+		  Dungeon.hero.petKills=pet.kills;	
+		  Dungeon.hero.petHP=pet.HP;
+		  Dungeon.hero.petExperience=pet.experience;
+		  Dungeon.hero.petCooldown=pet.cooldown;
+		  pet.destroy();
+		  Dungeon.hero.petfollow=true;
+		} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			Dungeon.hero.petfollow=true;
+		} else {
+			Dungeon.hero.petfollow=false;
+		}
+		
+	}
+	private void removePet(){
+		if (Dungeon.hero.haspet && !Dungeon.hero.petfollow){
+		 for (Mob mob : Dungeon.level.mobs) {
+				if(mob instanceof PET) {				 
+					Dungeon.hero.haspet=false;
+					Dungeon.hero.petCount++;
+					mob.destroy();				
+				}
+			  }
+		}
+	}
+	
 	
 	public void reset() {
 		returnDepth = -1;

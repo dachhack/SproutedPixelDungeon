@@ -25,7 +25,6 @@ import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Bone;
-import com.github.dachhack.sprout.items.ConchShell;
 import com.github.dachhack.sprout.items.PrisonKey;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.YellowDewdrop;
@@ -52,7 +51,7 @@ public class MossySkeleton extends Mob {
 		EXP = 1;
 		maxLvl = 10;
 		
-		baseSpeed = 0.5f+(Math.min(2.5f, Statistics.skeletonsKilled/50));
+		baseSpeed = 0.5f+(Math.min(2f, Statistics.skeletonsKilled/50));
 
 		loot = new YellowDewdrop();
 		lootChance = 0.5f; // by default, see die()
@@ -69,7 +68,7 @@ public class MossySkeleton extends Mob {
 
 	@Override
 	protected float attackDelay() {
-		return 2f-(Statistics.skeletonsKilled/100);
+		return 2f-(Math.min(1.75f, Statistics.skeletonsKilled/50));
 	}
 	
 	@Override

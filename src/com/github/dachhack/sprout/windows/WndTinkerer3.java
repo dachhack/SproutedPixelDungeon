@@ -17,33 +17,16 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer3;
-import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
-import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.DewVial2;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Mushroom;
-import com.github.dachhack.sprout.items.SanChikarahDeath;
-import com.github.dachhack.sprout.items.quest.Pickaxe;
-import com.github.dachhack.sprout.items.wands.Wand;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
-import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
-import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.ui.Component;
 
 public class WndTinkerer3 extends Window {
 
@@ -96,7 +79,7 @@ public class WndTinkerer3 extends Window {
 		mushroom.detach(Dungeon.hero.belongings.backpack);
 		
 			Dungeon.dewWater=true;				
-			Dungeon.dewDraw=true;
+			//Dungeon.dewDraw=true;
 			Dungeon.wings=true;
 	
 		

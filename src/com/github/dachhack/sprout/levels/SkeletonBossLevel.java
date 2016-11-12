@@ -22,20 +22,13 @@ import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.Bestiary;
-import com.github.dachhack.sprout.actors.mobs.CrabKing;
-import com.github.dachhack.sprout.actors.mobs.DwarfKingTomb;
-import com.github.dachhack.sprout.actors.mobs.HermitCrab;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.actors.mobs.Shaman;
-import com.github.dachhack.sprout.actors.mobs.Shell;
 import com.github.dachhack.sprout.actors.mobs.SkeletonHand1;
 import com.github.dachhack.sprout.actors.mobs.SkeletonHand2;
 import com.github.dachhack.sprout.actors.mobs.SkeletonKing;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
-import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
 import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -49,7 +42,7 @@ public class SkeletonBossLevel extends Level {
 	{
 		color1 = 0x6a723d;
 		color2 = 0x88924c;
-
+        cleared=true;
 		viewDistance = 8;
 	}
 	

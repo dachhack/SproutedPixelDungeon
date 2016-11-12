@@ -22,7 +22,6 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;

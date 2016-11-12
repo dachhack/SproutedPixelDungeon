@@ -21,17 +21,11 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.mobs.BanditKing;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.InfectingFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.PinningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
-import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.Random;
 
 public class CountDown extends Buff {
 

@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.mobs.SeekingClusterBomb;
-import com.github.dachhack.sprout.actors.mobs.npcs.RatKing;
 import com.github.dachhack.sprout.actors.mobs.npcs.RatKingDen;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.Egg;
@@ -28,7 +25,6 @@ import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.SeekingClusterBombItem;
-import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.levels.Terrain;

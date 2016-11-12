@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -34,7 +35,6 @@ import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
@@ -238,6 +238,7 @@ public class Tower extends Mob implements Callback {
 	static {
 		IMMUNITIES.add(ToxicGas.class);
 		IMMUNITIES.add(Terror.class);
+		IMMUNITIES.add(ConfusionGas.class);
 	}
 
 	@Override

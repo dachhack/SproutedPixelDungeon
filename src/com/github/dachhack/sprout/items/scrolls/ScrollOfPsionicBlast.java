@@ -20,10 +20,13 @@ package com.github.dachhack.sprout.items.scrolls;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.MindVision;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -64,10 +67,33 @@ public class ScrollOfPsionicBlast extends Scroll {
 
 		curUser.spendAndNext(TIME_TO_READ);
 
+		if (!checkOriginalGenMobs() &&
+				!Dungeon.level.cleared && Dungeon.dewDraw && Dungeon.depth>2 && Dungeon.depth<25 && !Dungeon.bossLevel(Dungeon.depth)
+				){
+				Dungeon.level.cleared=true;
+				GameScene.levelCleared();		
+				if(Dungeon.depth>0){Statistics.prevfloormoves=Math.max(Dungeon.pars[Dungeon.depth]-Dungeon.level.currentmoves,0);
+				   if (Statistics.prevfloormoves>1){
+				     GLog.h("Level cleared in %s moves under goal.", Statistics.prevfloormoves);
+				   } else if (Statistics.prevfloormoves==1){
+				     GLog.h("Level cleared in 1 move under goal."); 
+				   } else if (Statistics.prevfloormoves==0){
+					 GLog.h("Level cleared over goal moves.");
+				   }
+				} 
+		}
+		
 		if (!curUser.isAlive()) {
 			Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
 			GLog.n("The Psionic Blast tears your mind apart...");
 		}
+	}
+	
+	public boolean checkOriginalGenMobs (){
+		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
+			if (mob.originalgen){return true;}
+		 }	
+		return false;
 	}
 
 	@Override

@@ -39,19 +39,19 @@ import com.github.dachhack.sprout.actors.buffs.MindVision;
 import com.github.dachhack.sprout.actors.buffs.Shadows;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.actors.mobs.AlbinoPiranha;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
 import com.github.dachhack.sprout.actors.mobs.pets.BlueDragon;
+import com.github.dachhack.sprout.actors.mobs.pets.Bunny;
 import com.github.dachhack.sprout.actors.mobs.pets.Fairy;
 import com.github.dachhack.sprout.actors.mobs.pets.GreenDragon;
 import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.actors.mobs.pets.RedDragon;
 import com.github.dachhack.sprout.actors.mobs.pets.Scorpion;
+import com.github.dachhack.sprout.actors.mobs.pets.ShadowDragon;
 import com.github.dachhack.sprout.actors.mobs.pets.Spider;
 import com.github.dachhack.sprout.actors.mobs.pets.SugarplumFairy;
 import com.github.dachhack.sprout.actors.mobs.pets.Velocirooster;
@@ -66,6 +66,7 @@ import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Stylus;
 import com.github.dachhack.sprout.items.Torch;
+import com.github.dachhack.sprout.items.StoneOre;
 import com.github.dachhack.sprout.items.armor.Armor;
 import com.github.dachhack.sprout.items.artifacts.AlchemistsToolkit;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
@@ -86,9 +87,11 @@ import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.levels.features.HighGrass;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.github.dachhack.sprout.levels.traps.AlarmTrap;
+import com.github.dachhack.sprout.levels.traps.ChangeSheepTrap;
 import com.github.dachhack.sprout.levels.traps.FireTrap;
 import com.github.dachhack.sprout.levels.traps.FleecingTrap;
 import com.github.dachhack.sprout.levels.traps.GrippingTrap;
+import com.github.dachhack.sprout.levels.traps.HeapGenTrap;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.levels.traps.ParalyticTrap;
 import com.github.dachhack.sprout.levels.traps.PoisonTrap;
@@ -120,9 +123,9 @@ public abstract class Level implements Bundlable {
 	 * 
 	 */
 	
-	public static final int WIDTH = 48;
-	public static final int HEIGHT = 48;
-	public static final int LENGTH = WIDTH * HEIGHT;
+	public static int WIDTH = 48;
+	public static int HEIGHT = 48;
+	public static int LENGTH = WIDTH * HEIGHT;
 
 	public static final int[] NEIGHBOURS4 = { -getWidth(), +1, +getWidth(), -1 };
 	public static final int[] NEIGHBOURS8 = { +1, -1, +getWidth(), -getWidth(),
@@ -155,7 +158,7 @@ public abstract class Level implements Bundlable {
 	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
 
 	public static boolean resizingNeeded;
-	public static boolean exitsealed=false;
+	public static boolean first;
 	public static int loadedMapSize;
 	
 	public int[] map;
@@ -180,7 +183,7 @@ public abstract class Level implements Bundlable {
 	public static boolean[] pit = new boolean[getLength()];
 
 	public static boolean[] discoverable = new boolean[getLength()];
-
+	
 	public Feeling feeling = Feeling.NONE;
 
 
@@ -193,6 +196,7 @@ public abstract class Level implements Bundlable {
 	public boolean special = false;
 	public boolean cleared = false;
 	public boolean forcedone = false;
+	public boolean sealedlevel = false;
 
 	public HashSet<Mob> mobs;
 	public SparseArray<Heap> heaps;
@@ -225,13 +229,12 @@ public abstract class Level implements Bundlable {
 	private static final String RESET = "reset";
 	private static final String FORCEDONE = "forcedone";
 	private static final String GENPETNEXT = "genpetnext";
-	
+	private static final String SEALEDLEVEL = "sealedlevel";
+
 	
 	public void create() {
 
-		resizingNeeded = false;
-		
-		 Dungeon.sealedlevel=false;
+		resizingNeeded = false;		
 		
 		map = new int[getLength()];
 		visited = new boolean[getLength()];
@@ -352,7 +355,18 @@ public abstract class Level implements Bundlable {
 				addItemToSpawn(new Torch());
 				addItemToSpawn(new Torch());
 				viewDistance = (int) Math.ceil(viewDistance / 3f);
-			} else if (Dungeon.depth==32) {
+			} else if (Dungeon.depth>55) {			
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				addItemToSpawn(new StoneOre());
+				viewDistance = (int) Math.ceil(viewDistance / 3f);
+			}else if (Dungeon.depth==32) {
 				feeling = Feeling.WATER;
 			} else if (Dungeon.depth==33) {
 				feeling = Feeling.CHASM;			
@@ -413,6 +427,7 @@ public abstract class Level implements Bundlable {
 		reset = bundle.getBoolean(RESET);
 		forcedone = bundle.getBoolean(FORCEDONE);
 		genpetnext = bundle.getBoolean(GENPETNEXT);
+		sealedlevel = bundle.getBoolean(SEALEDLEVEL);
 
 		weakFloorCreated = false;
 
@@ -481,6 +496,7 @@ public abstract class Level implements Bundlable {
 		bundle.put(RESET, reset);
 		bundle.put(FORCEDONE, forcedone);
 		bundle.put(GENPETNEXT, genpetnext);
+		bundle.put(SEALEDLEVEL, sealedlevel);
 	}
 
 	public int tunnelTile() {
@@ -597,9 +613,11 @@ public abstract class Level implements Bundlable {
 		return new Actor() {
 			@Override
 			protected boolean act() {
+				//GLog.i("Check Pet");
 				int petpos = -1;
 				int heropos = Dungeon.hero.pos;
 				if (Actor.findChar(heropos) != null && Dungeon.hero.petfollow) {
+					//GLog.i("Check Pet 2");
 					ArrayList<Integer> candidates = new ArrayList<Integer>();
 					boolean[] passable = Level.passable;
 
@@ -615,18 +633,9 @@ public abstract class Level implements Bundlable {
 
 				if (petpos != -1 && Dungeon.hero.haspet && Dungeon.hero.petfollow) {
 					
-					/* 1 snake
-					   2 bee
-					   3 velo
-					   4 red dragon
-					   5 blue dragon 
-					   6 violet dragon
-					   7 green dragon
-					   8 bunny
-					   9 fairy 
-					   10  
-					*/ 
-					
+					  PET petCheck = checkpet();
+					  if(petCheck!=null){petCheck.destroy();petCheck.sprite.killAndErase();}
+					  
 					 if (Dungeon.hero.petType==1){
 						 Spider pet = new Spider();
 						  spawnPet(pet,petpos,heropos);					 
@@ -659,12 +668,20 @@ public abstract class Level implements Bundlable {
 					   Scorpion pet = new Scorpion();
 						  spawnPet(pet,petpos,heropos);					 
 				   }
+				   if (Dungeon.hero.petType==9){
+					   Bunny pet = new Bunny();
+						  spawnPet(pet,petpos,heropos);					 
+				   }
 				   if (Dungeon.hero.petType==10){
 					   Fairy pet = new Fairy();
 						  spawnPet(pet,petpos,heropos);					 
 				   }
 				   if (Dungeon.hero.petType==11){
 					   SugarplumFairy pet = new SugarplumFairy();
+						  spawnPet(pet,petpos,heropos);					 
+				   }
+				   if (Dungeon.hero.petType==12){
+					   ShadowDragon pet = new ShadowDragon();
 						  spawnPet(pet,petpos,heropos);					 
 				   }
 					
@@ -674,6 +691,15 @@ public abstract class Level implements Bundlable {
 				return true;
 			}
 		};
+	}
+
+	private PET checkpet(){
+		for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {
+				return (PET) mob;
+			}
+		}	
+		return null;
 	}
 	
 	public void spawnPet(PET pet, Integer petpos, Integer heropos){
@@ -822,6 +848,26 @@ public abstract class Level implements Bundlable {
 		return cell;
 	}
 	
+	public int randomRespawnCellSheep(int start, int dist) {
+		int cell;
+		do {
+			cell = Random.Int(getLength());
+		} while (!avoid[cell] || Actor.findChar(cell) != null || map[cell]!=Terrain.FLEECING_TRAP
+				  || distance(start, cell) > dist);
+		return cell;
+	}
+	
+	public int countFleeceTraps(int start, int dist) {
+		int count=0;
+		for (int cell = 0; cell < getLength(); cell++) {
+		  if(avoid[cell] && Actor.findChar(cell) == null && map[cell]==Terrain.FLEECING_TRAP && distance(start, cell) < dist){
+			  count++;
+		  }
+		}
+		return count;		
+	}
+	
+	
 	public int randomRespawnCellFish() {
 		int cell;
 		do {
@@ -868,7 +914,7 @@ public abstract class Level implements Bundlable {
 		return null;
 	}
 
-	private void buildFlagMaps() {
+	protected void buildFlagMaps() {
 
 		for (int i = 0; i < getLength(); i++) {
 			int flags = Terrain.flags[map[i]];
@@ -921,7 +967,7 @@ public abstract class Level implements Bundlable {
 		}
 	}
 
-	private void cleanWalls() {
+	protected void cleanWalls() {
 		for (int i = 0; i < getLength(); i++) {
 
 			boolean d = false;
@@ -962,8 +1008,7 @@ public abstract class Level implements Bundlable {
 		solid[cell] = (flags & Terrain.SOLID) != 0;
 		avoid[cell] = (flags & Terrain.AVOID) != 0;
 		pit[cell] = (flags & Terrain.PIT) != 0;
-		water[cell] = terrain == Terrain.WATER
-				|| terrain >= Terrain.WATER_TILES;
+		water[cell] = terrain == Terrain.WATER	|| (terrain >= Terrain.WATER_TILES && terrain<Terrain.WOOL_RUG);
 	}
 
 	public int checkdew(){
@@ -1091,6 +1136,7 @@ public abstract class Level implements Bundlable {
 
 		boolean trap = false;
 		boolean fleece = false;
+		boolean sheep = false;
 
 		switch (map[cell]) {
 
@@ -1163,8 +1209,16 @@ public abstract class Level implements Bundlable {
 			if (ch instanceof SheepSokoban || ch instanceof SheepSokobanSwitch || ch instanceof SheepSokobanCorner){
 				fleece=true;
 			}			
-			if (!frozen && ch != null)
+			if (ch != null)
 				FleecingTrap.trigger(cell, ch);
+			break;
+			
+		case Terrain.CHANGE_SHEEP_TRAP:
+			trap = true;
+			if (ch instanceof SheepSokoban || ch instanceof SheepSokobanSwitch || ch instanceof SheepSokobanCorner){
+				sheep=true;
+				ChangeSheepTrap.trigger(cell, ch);
+			}						
 			break;
 
 		case Terrain.HIGH_GRASS:
@@ -1226,6 +1280,14 @@ public abstract class Level implements Bundlable {
 			set(cell, Terrain.WOOL_RUG);
 			GameScene.updateMap(cell);
 
+		} else if (trap && sheep) {
+
+			if (Dungeon.visible[cell])
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+
+			set(cell, Terrain.INACTIVE_TRAP);
+			GameScene.updateMap(cell);
+
 		}
 
 		Plant plant = plants.get(cell);
@@ -1245,6 +1307,7 @@ public abstract class Level implements Bundlable {
 
 		boolean trap = true;
 		boolean fleece = false;
+		boolean sheep = false;
 		switch (map[cell]) {
 
 		case Terrain.TOXIC_TRAP:
@@ -1264,6 +1327,21 @@ public abstract class Level implements Bundlable {
 				fleece=true;
 			}
 			FleecingTrap.trigger(cell, mob);
+			break;
+			
+		case Terrain.CHANGE_SHEEP_TRAP:
+			if (mob instanceof SheepSokoban || mob instanceof SheepSokobanSwitch || mob instanceof SheepSokobanCorner){
+				sheep=true;
+				ChangeSheepTrap.trigger(cell, mob);
+			}						
+			break;
+			
+		case Terrain.SOKOBAN_ITEM_REVEAL:
+			trap=false;
+			if (mob instanceof SheepSokoban || mob instanceof SheepSokobanSwitch || mob instanceof SheepSokobanCorner){
+				HeapGenTrap.trigger(cell, mob);
+				sheep=true;
+			}						
 			break;
 
 		case Terrain.POISON_TRAP:
@@ -1307,8 +1385,24 @@ public abstract class Level implements Bundlable {
 			}
 			set(cell, Terrain.WOOL_RUG);
 			GameScene.updateMap(cell);
+		} 	
+		
+		if (trap && sheep) {
+			if (Dungeon.visible[cell]) {
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+			}
+			set(cell, Terrain.INACTIVE_TRAP);
+			GameScene.updateMap(cell);
 		}
-
+		
+		if (!trap && sheep) {
+			if (Dungeon.visible[cell]) {
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+			}
+			set(cell, Terrain.EMPTY);
+			GameScene.updateMap(cell);
+		}
+		
 		Plant plant = plants.get(cell);
 		if (plant != null) {
 			plant.activate(mob);
@@ -1428,6 +1522,7 @@ public abstract class Level implements Bundlable {
 		if (tile >= Terrain.WATER_TILES) {
 			return tileName(Terrain.WATER);
 		}
+		// && tile<Terrain.WOOL_RUG
 
 		if (tile != Terrain.CHASM && (Terrain.flags[tile] & Terrain.PIT) != 0) {
 			return tileName(Terrain.CHASM);
@@ -1491,8 +1586,18 @@ public abstract class Level implements Bundlable {
 			return "Fire trap";
 		case Terrain.PARALYTIC_TRAP:
 			return "Paralytic gas trap";
-		case Terrain.FLEECING_TRAP:
-			return "Fleecing trap";
+		//case Terrain.WOOL_RUG:
+			//return "Wool rug";
+		//case Terrain.FLEECING_TRAP:
+			//return "Fleecing trap";
+		//case Terrain.CHANGE_SHEEP_TRAP:
+			//return "Change sheep trap";
+		//case Terrain.SOKOBAN_ITEM_REVEAL:
+			//return "Item creation switch";
+		//case Terrain.SOKOBAN_PORT_SWITCH:
+			//return "Portal switch";
+		//case Terrain.PORT_WELL:
+			//return "Portal";
 		case Terrain.POISON_TRAP:
 			return "Poison dart trap";
 		case Terrain.ALARM_TRAP:
@@ -1551,8 +1656,16 @@ public abstract class Level implements Bundlable {
 		case Terrain.GRIPPING_TRAP:
 		case Terrain.SUMMONING_TRAP:
 			return "Stepping onto a hidden pressure plate will activate the trap.";
-		case Terrain.FLEECING_TRAP:
-			return "Stepping onto a fleecing trap will likely kill you.";
+		//case Terrain.FLEECING_TRAP:
+			//return "Stepping onto a fleecing trap will destroy your armor or eject you from the level.";
+		//case Terrain.CHANGE_SHEEP_TRAP:
+			//return "This trap will change the form of any sheep.";
+		//case Terrain.SOKOBAN_ITEM_REVEAL:
+			//return "This switch creates an item somewhere on the level.";
+		//case Terrain.SOKOBAN_PORT_SWITCH:
+			//return "This switch turns on and off a portal somewhere.";
+		//case Terrain.PORT_WELL:
+			//return "This is a portal to another location on this level.";
 		case Terrain.INACTIVE_TRAP:
 			return "The trap has been triggered before and it's not dangerous anymore.";
 		case Terrain.STATUE:
@@ -1562,9 +1675,14 @@ public abstract class Level implements Bundlable {
 			return "Drop some seeds here to cook a potion.";
 		case Terrain.EMPTY_WELL:
 			return "The well has run dry.";
-		case Terrain.WOOL_RUG:
-			return "A plush wool rug. Very nice!";
+		//case Terrain.WOOL_RUG:
+			//return "A plush wool rug. Very nice!";
 		default:
+			/*
+			if(tile >= Terrain.WOOL_RUG){
+				return "???";
+			}
+			*/			
 			if (tile >= Terrain.WATER_TILES) {
 				return tileDesc(Terrain.WATER);
 			}
@@ -1574,6 +1692,22 @@ public abstract class Level implements Bundlable {
 			return "";
 		}
 	}
+	
+	/*
+
+public static final int FLEECING_TRAP = 65;
+	public static final int WOOL_RUG = 66;
+	public static final int SOKOBAN_SHEEP = 67;
+	public static final int CORNER_SOKOBAN_SHEEP = 68;
+	public static final int SWITCH_SOKOBAN_SHEEP = 69;
+	public static final int CHANGE_SHEEP_TRAP = 70;
+	public static final int SOKOBAN_ITEM_REVEAL = 71;
+	public static final int SOKOBAN_HEAP = 72;
+	public static final int BLACK_SOKOBAN_SHEEP = 73;
+	public static final int SOKOBAN_PORT_SWITCH = 75;
+	public static final int PORT_WELL = 74;
+*/
+
 
 	public static int getWidth() {
 		return WIDTH;

@@ -22,12 +22,16 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.MirrorSprite;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -122,9 +126,22 @@ public class MirrorImage extends NPC {
 		return s;
 	}
 
+
 	@Override
 	public void interact() {
 
+		if (this.buff(MagicalSleep.class) != null) {
+			Buff.detach(this, MagicalSleep.class);
+		}
+		
+		if (state == SLEEPING) {
+			state = HUNTING;
+		}
+		if (buff(Paralysis.class) != null) {
+			Buff.detach(this, Paralysis.class);
+			GLog.i("You shake your %s out of paralysis.", name);
+		}
+		
 		int curPos = pos;
 
 		moveSprite(pos, Dungeon.hero.pos);

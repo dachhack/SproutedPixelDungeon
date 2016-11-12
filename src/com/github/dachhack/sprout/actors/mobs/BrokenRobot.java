@@ -33,7 +33,6 @@ import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.RedDewdrop;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
@@ -65,11 +64,11 @@ public class BrokenRobot extends Mob {
 		maxLvl = 25;
 
 		
-		loot = new RedDewdrop();
-		lootChance = 0.5f;
+		lootOther = new RedDewdrop();
+		lootChanceOther = 0.5f;
 		
-		lootOther = new ScrollOfRecharging();
-		lootChanceOther = 0.5f; // by default, see die()
+		loot = new ScrollOfRecharging();
+		lootChance = 0.5f; // by default, see die()
 	}
 
 	@Override

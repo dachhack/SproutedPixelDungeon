@@ -19,9 +19,7 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.pets.BlueDragon;
@@ -34,11 +32,9 @@ import com.github.dachhack.sprout.actors.mobs.pets.Spider;
 import com.github.dachhack.sprout.actors.mobs.pets.SugarplumFairy;
 import com.github.dachhack.sprout.actors.mobs.pets.Velocirooster;
 import com.github.dachhack.sprout.actors.mobs.pets.VioletDragon;
-import com.github.dachhack.sprout.actors.mobs.pets.bee;
 import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -66,10 +62,10 @@ public class Egg extends Item {
 	
 	public static final int RED_DRAGON = 30;
 	public static final int GREEN_DRAGON = 5;
-	public static final int BLUE_DRAGON = 5;
+	public static final int BLUE_DRAGON = Dungeon.getMonth()==11 ? 1 : 5;
 	public static final int VIOLET_DRAGON = 5;
 	public static final int SPIDER = 2000;
-	public static final int SCORPION = 4000;
+	public static final int SCORPION = 10000;
 	public static final int VELOCIROOSTER = 1;
 	public static final int FAIRY = 10;
 	
@@ -169,6 +165,7 @@ public class Egg extends Item {
 	@Override
 	public void execute(Hero hero, String action) {
 
+		/*
 		if (action == AC_BREAK) {
 
 			if (Dungeon.depth>26) {
@@ -177,6 +174,7 @@ public class Egg extends Item {
 				return;
 			}			
 		}
+		*/
 
 		if (action == AC_BREAK) {	
 			
@@ -333,12 +331,25 @@ public class Egg extends Item {
 				GLog.w(TXT_HATCH);
 				Dungeon.hero.haspet=true;
 				
+				assignPet(pet);
+				
 		  } else {
 			  
 			  Dungeon.hero.spend(Egg.TIME_TO_USE);
 			  GLog.w(TXT_NOTREADY);
 
 		  }
+	}
+	
+	
+	private void assignPet(PET pet){
+		
+		  Dungeon.hero.petType=pet.type;
+		  Dungeon.hero.petLevel=pet.level;
+		  Dungeon.hero.petKills=pet.kills;	
+		  Dungeon.hero.petHP=pet.HP;
+		  Dungeon.hero.petExperience=pet.experience;
+		  Dungeon.hero.petCooldown=pet.cooldown;		
 	}
 		
 	@Override

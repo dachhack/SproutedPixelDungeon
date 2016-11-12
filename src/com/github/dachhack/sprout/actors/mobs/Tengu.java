@@ -31,12 +31,14 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Gold;
+import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.TomeOfMastery;
+import com.github.dachhack.sprout.items.journalpages.Sokoban1;
+import com.github.dachhack.sprout.items.journalpages.Sokoban2;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
@@ -101,10 +103,18 @@ public class Tengu extends Mob {
 		} else {
 			Dungeon.level.drop(new Egg(), pos).sprite.drop();
 		}
-
+		
+		if (!Dungeon.limitedDrops.journal.dropped()){ 
+		  Dungeon.level.drop(new OtilukesJournal(), pos).sprite.drop();
+		  Dungeon.limitedDrops.journal.drop();
+		}
+		
+		Dungeon.level.drop(new Sokoban2(), pos).sprite.drop();
+       
+		
 		GameScene.bossSlain();
 		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-		Dungeon.level.drop(new Gold(Random.Int(1900, 4000)), pos).sprite.drop();
+			
 		super.die(cause);
 
 		Badges.validateBossSlain();

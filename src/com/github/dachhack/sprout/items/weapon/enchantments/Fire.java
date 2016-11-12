@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
@@ -32,6 +33,11 @@ public class Fire extends Weapon.Enchantment {
 
 	private static ItemSprite.Glowing ORANGE = new ItemSprite.Glowing(0xFF4400);
 
+	@Override
+	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
+		return false;
+	}
+	
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
 		// lvl 0 - 33%

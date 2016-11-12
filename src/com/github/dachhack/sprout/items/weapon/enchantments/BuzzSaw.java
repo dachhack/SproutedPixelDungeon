@@ -17,14 +17,12 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.utils.GLog;
@@ -37,7 +35,11 @@ public class BuzzSaw extends Weapon.Enchantment {
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
 	
-
+	@Override
+	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
+		return false;
+	}
+	
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) { 
 		

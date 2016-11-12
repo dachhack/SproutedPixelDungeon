@@ -29,9 +29,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Dewcharge;
-import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
-import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
@@ -45,7 +43,6 @@ import com.github.dachhack.sprout.items.YellowDewdrop;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.rings.RingOfAccuracy;
 import com.github.dachhack.sprout.items.rings.RingOfWealth;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Level.Feeling;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -100,6 +97,10 @@ public abstract class Mob extends Char {
 		return EXP;
 	}
 
+	public boolean isPassive(){
+		return state==PASSIVE;
+	}
+	
 	@Override
 	public void storeInBundle(Bundle bundle) {
 
@@ -396,18 +397,24 @@ public abstract class Mob extends Char {
 	}
 	
 	public int adj(int type){
-		switch (type){
-		case 0:
-				return Dungeon.depth;
-		case 1:
-			    return (int) Dungeon.depth/2;
-		case 2:
-		    return (int) Dungeon.depth/4;
-		case 3:
-		    return (int) Dungeon.depth*2;
-		default:
-			    return 1;		
-		}
+		
+		int adjustment = 1;
+				
+			switch (type){
+			  case 0:
+				  adjustment = Dungeon.depth;
+			  case 1:
+				  adjustment = (int) Dungeon.depth/2;
+			  case 2:
+				  adjustment = (int) Dungeon.depth/4;
+			  case 3:
+				  adjustment = (int) Dungeon.depth*2;
+		      default:
+		    	  adjustment = 1;		
+			  
+		    }
+		
+		return adjustment;
 	}
 
 	@Override
@@ -476,7 +483,7 @@ public abstract class Mob extends Char {
 			explodeDewHigh(pos);
 		}
 		
-		if (originalgen && !checkOriginalGenMobs() && Dungeon.dewDraw && Dungeon.depth>2 && Dungeon.depth<25 && !Dungeon.bossLevel(Dungeon.depth)){
+		if (!Dungeon.level.cleared && originalgen && !checkOriginalGenMobs() && Dungeon.dewDraw && Dungeon.depth>2 && Dungeon.depth<25 && !Dungeon.bossLevel(Dungeon.depth)){
 			Dungeon.level.cleared=true;
 			GameScene.levelCleared();		
 			if(Dungeon.depth>0){Statistics.prevfloormoves=Math.max(Dungeon.pars[Dungeon.depth]-Dungeon.level.currentmoves,0);
@@ -500,18 +507,18 @@ public abstract class Mob extends Char {
 		lootChance *= Math.pow(1.1, bonus);
 		lootChanceOther *= Math.pow(1.1, bonus);
 
-		if (Random.Float() < lootChance && Dungeon.hero.lvl <= maxLvl + 80) {
+		if (Random.Float() < lootChance && Dungeon.hero.lvl <= maxLvl + 800) {
 			Item loot = createLoot();
 			if (loot != null)
 				Dungeon.level.drop(loot, pos).sprite.drop();
 
 		} else if (Random.Float() < lootChanceOther
-				&& Dungeon.hero.lvl <= maxLvl + 80) {
+				&& Dungeon.hero.lvl <= maxLvl + 800) {
 			Item lootOther = createLootOther();
 			if (lootOther != null)
 				Dungeon.level.drop(lootOther, pos).sprite.drop();
 		} else if (Random.Float() < lootChanceThird
-				&& Dungeon.hero.lvl <= maxLvl + 80) {
+				&& Dungeon.hero.lvl <= maxLvl + 800) {
 			Item lootThird = createLootThird();
 			if (lootThird != null)
 				Dungeon.level.drop(lootThird, pos).sprite.drop();
@@ -826,4 +833,6 @@ public void explodeDewHigh(int cell) {
 			return Utils.format("This %s is passive", name);
 		}
 	}
+	
+	
 }

@@ -19,10 +19,21 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
+import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
+import com.github.dachhack.sprout.items.wands.WandOfFlock.Sheep;
+import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.levels.Terrain;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfTeleportation extends Scroll {
@@ -30,6 +41,8 @@ public class ScrollOfTeleportation extends Scroll {
 	public static final String TXT_TELEPORTED = "In a blink of an eye you were teleported to another location of the level.";
 
 	public static final String TXT_NO_TELEPORT = "Strong magic aura of this place prevents you from teleporting!";
+	
+	public static final String TXT_DEACTIVATE = "This portal appears to be deactivated right now...";
 
 	{
 		name = "Scroll of Teleportation";
@@ -72,6 +85,63 @@ public class ScrollOfTeleportation extends Scroll {
 			GLog.i(TXT_TELEPORTED);
 
 		}
+	}
+
+	public static void teleportHeroLocation(Hero hero, int spot) {
+		
+		Char ch = Actor.findChar(spot);
+		boolean sheepchk = false;
+		
+		if (ch!=null && (ch instanceof SheepSokoban || ch instanceof SheepSokobanSwitch || ch instanceof SheepSokobanCorner || ch instanceof Sheep)){
+			sheepchk = true;
+		}
+
+		if (Level.passable[spot] && (Actor.findChar(spot) == null || sheepchk)) {
+			
+			//GLog.i("clear");
+			
+			if (Actor.findChar(spot) != null && sheepchk){
+				Camera.main.shake(2, 0.3f);
+				ch.destroy();
+				ch.sprite.killAndErase();
+				ch.sprite.emitter().burst(ShadowParticle.UP, 5);
+				Level.set(spot, Terrain.WOOL_RUG);
+				GameScene.updateMap(spot);
+			}
+			
+			WandOfBlink.appear(hero, spot);
+			Dungeon.level.press(spot, hero);
+			Dungeon.observe();
+
+			GLog.i(TXT_TELEPORTED);
+		} 
+		
+		
+		else {
+		
+		int count = 10;
+		int pos;
+		do {
+			pos = Dungeon.level.randomRespawnCell();
+			if (count-- <= 0) {
+				break;
+			}
+		} while (pos == -1);
+
+		if (pos == -1) {
+
+			GLog.w(TXT_DEACTIVATE);
+
+		} else {
+
+			WandOfBlink.appear(hero, pos);
+			Dungeon.level.press(pos, hero);
+			Dungeon.observe();
+
+			GLog.i(TXT_TELEPORTED);
+
+		}
+	  }
 	}
 
 	@Override

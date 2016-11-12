@@ -24,7 +24,6 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer3;
 import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.items.Rice;
@@ -37,6 +36,7 @@ public class FortressLevel extends RegularLevel {
 	{
 		color1 = 0x4b6636;
 		color2 = 0xf2f2f2;
+		cleared=true;
 	}
 
 	protected static final int REGROW_TIMER = 4;

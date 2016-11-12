@@ -82,7 +82,7 @@ public class DwarfHammer extends Item {
 		  if (hero.pos != Dungeon.level.exit)	{
 			  detach(Dungeon.hero.belongings.backpack);			  
 			  		 
-			  Dungeon.sealedlevel=false;
+			  Dungeon.level.sealedlevel=false;
 			  
 			  Dungeon.level.map[Dungeon.level.exit]=Terrain.EMPTY;
 			  GameScene.updateMap(Dungeon.level.exit);

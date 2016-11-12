@@ -22,12 +22,9 @@ import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.CrabKing;
-import com.github.dachhack.sprout.actors.mobs.DwarfKingTomb;
 import com.github.dachhack.sprout.actors.mobs.HermitCrab;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.actors.mobs.Shaman;
 import com.github.dachhack.sprout.actors.mobs.Shell;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
@@ -44,6 +41,7 @@ public class CrabBossLevel extends Level {
 	{
 		color1 = 0x4b6636;
 		color2 = 0xf2f2f2;
+		cleared=true;
 	}
 
 	private static final int TOP = 2;

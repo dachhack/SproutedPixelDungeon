@@ -26,6 +26,7 @@ import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.FlyingProtectorSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -37,6 +38,9 @@ import com.watabou.utils.Random;
 public class FlyingProtector extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
+	
+	private static final float SPAWN_DELAY = 0.2f;
+	
 
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
@@ -117,6 +121,16 @@ public class FlyingProtector extends Mob implements Callback {
 			return !visible;
 		}
 	}
+	
+	 public static FlyingProtector spawnAt(int pos) {
+			
+		 FlyingProtector b = new FlyingProtector();  
+	    	
+				b.pos = pos;
+				b.state = b.HUNTING;
+				GameScene.add(b, SPAWN_DELAY);
+				return b;	     
+	     }
 
 	@Override
 	public void call() {

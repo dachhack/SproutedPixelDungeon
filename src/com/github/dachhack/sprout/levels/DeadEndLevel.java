@@ -77,6 +77,18 @@ public class DeadEndLevel extends Level {
 			}
 		}
 	}
+	
+	@Override
+	public String tileName(int tile) {
+		switch (tile) {
+		case Terrain.WATER:
+			return "Suspiciously colored water";
+		case Terrain.HIGH_GRASS:
+			return "High blooming flowers";
+		default:
+			return super.tileName(tile);
+		}
+	}
 
 	@Override
 	protected void createMobs() {

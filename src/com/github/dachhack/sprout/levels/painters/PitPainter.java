@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap.Type;

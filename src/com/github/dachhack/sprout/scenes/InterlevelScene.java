@@ -24,8 +24,11 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndError;
 import com.github.dachhack.sprout.windows.WndStory;
 import com.watabou.noosa.BitmapText;
@@ -33,6 +36,7 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Random;
 
 public class InterlevelScene extends PixelScene {
 
@@ -58,6 +62,9 @@ public class InterlevelScene extends PixelScene {
 	private static final String TXT_PORTTENGU = "Entering Tengu hideout...";
 	private static final String TXT_PORTCOIN = "Coins spilling...";
 	private static final String TXT_PORTBONE = "War drums and fire...";
+	private static final String TXT_JOURNAL = "Flipping pages...";
+	private static final String TXT_SOKOBANFAIL = "You are ejected...";
+	private static final String TXT_PALANTIR = "You break the palatir...";
 
 	private static final String ERR_FILE_NOT_FOUND = "Save file not found. If this error persists after restarting, "
 			+ "it may mean this save game is corrupted. Sorry about that.";
@@ -66,13 +73,17 @@ public class InterlevelScene extends PixelScene {
 
 	public static enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, PORT1, PORT2, PORT3, PORT4,
-		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS, PORTCRAB, PORTTENGU, PORTCOIN, PORTBONE, RETURNSAVE
+		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS, PORTCRAB, PORTTENGU, PORTCOIN, PORTBONE, RETURNSAVE,
+		JOURNAL, SOKOBANFAIL, PALANTIR
 	};
 
 	public static Mode mode;
 
 	public static int returnDepth;
 	public static int returnPos;
+	
+	public static int journalpage;
+	public static boolean first;
 
 	public static boolean noStory = false;
 
@@ -154,6 +165,15 @@ public class InterlevelScene extends PixelScene {
 		case  PORTBONE:
 			text = TXT_PORTBONE;
 		    break;
+		case  JOURNAL:
+			text = TXT_JOURNAL;
+		    break;
+		case  SOKOBANFAIL:
+			text = TXT_SOKOBANFAIL;
+		    break;
+		case  PALANTIR:
+			text = TXT_PALANTIR;
+		    break;
 		}
 
 		message = PixelScene.createText(text, 9);
@@ -234,6 +254,15 @@ public class InterlevelScene extends PixelScene {
 					case PORTBONE:
 						portal(13);
 						break;
+					case JOURNAL:
+						journalPortal(journalpage);
+						break;	
+					case SOKOBANFAIL:
+						ascend();
+						break;	
+					case PALANTIR:
+						portal(14);
+						break;	
 					}
 
 					if ((Dungeon.depth % 5) == 0) {
@@ -327,7 +356,11 @@ public class InterlevelScene extends PixelScene {
 		}
 
 		Level level;
-		if (Dungeon.depth >= Statistics.deepestFloor) {
+		if ((Dungeon.depth>60) && (Dungeon.depth >= Statistics.realdeepestFloor) && ((Random.Int(100)<50) || Dungeon.depth==65) ){
+			level = Dungeon.newMineBossLevel();	
+		}else if (Dungeon.townCheck(Dungeon.depth) && (Dungeon.depth >= Statistics.realdeepestFloor || Random.Int(10)<2)){
+				level = Dungeon.newLevel();	
+	    }else if (Dungeon.depth >= Statistics.deepestFloor && !Dungeon.townCheck(Dungeon.depth) ){				
 			level = Dungeon.newLevel();
 		} else {
 			Dungeon.depth++;
@@ -360,7 +393,7 @@ public class InterlevelScene extends PixelScene {
 			  Dungeon.depth=40;
 			  Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
 			  Dungeon.switchLevel(level, level.entrance);
-		} else if (Dungeon.depth > 26) {
+		} else if (Dungeon.depth > 26 && !Dungeon.townCheck(Dungeon.depth)) {
 		  Dungeon.depth=1;
 		  Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
 		  Dungeon.switchLevel(level, level.entrance);
@@ -372,10 +405,10 @@ public class InterlevelScene extends PixelScene {
 	}
 
 	private void returnTo() throws IOException {
-
+		checkPetPort();
 		Actor.fixTime();
-        Dungeon.hero.invisible=0;
-		Dungeon.saveLevel();
+       // Dungeon.hero.invisible=0;
+        Dungeon.saveAll();
 		Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel(Dungeon.hero.heroClass);
 		Dungeon.switchLevel(level,
@@ -384,9 +417,10 @@ public class InterlevelScene extends PixelScene {
 	
 	private void returnToSave() throws IOException {
 
+		checkPetPort();
 		Actor.fixTime();
-        Dungeon.hero.invisible=0;
-		Dungeon.saveLevel();
+       // Dungeon.hero.invisible=0;
+        Dungeon.saveAll();
 		if (Dungeon.bossLevel(Statistics.deepestFloor)){
 			Dungeon.depth = Statistics.deepestFloor-1;
 		} else {
@@ -429,8 +463,9 @@ public class InterlevelScene extends PixelScene {
 	
 	private void portal(int branch) throws IOException {
 
+	    checkPetPort();
 		Actor.fixTime();
-		Dungeon.saveLevel();
+		Dungeon.saveAll();
 				
 		Level level;
 		switch(branch){
@@ -473,10 +508,74 @@ public class InterlevelScene extends PixelScene {
 		case 13:
 			level = Dungeon.newSkeletonBossLevel();
 			break;
+		case 14:
+			level = Dungeon.newZotBossLevel();
+			break;
 		default:
 			level = Dungeon.newLevel();
 		}
 		Dungeon.switchLevel(level, level.entrance);
+	}
+	
+	private void journalPortal(int branch) throws IOException {
+	    //checkPetPort();
+		Actor.fixTime();
+		Dungeon.saveAll();
+				
+		Level level;
+		
+		if (branch==5 && !first){
+		   Dungeon.depth=55;
+		   level = Dungeon.loadLevel(Dungeon.hero.heroClass);	
+		   
+		} else if (branch==0 && !first){
+			   Dungeon.depth=50;
+			   level = Dungeon.loadLevel(Dungeon.hero.heroClass);	
+			   
+		} else {
+		   level=Dungeon.newJournalLevel(branch, first);			
+		}
+		
+		Dungeon.switchLevel(level, level.entrance);
+	}
+	
+	private PET checkpet(){
+		for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {
+				return (PET) mob;
+			}
+		}	
+		return null;
+	}
+	
+	private boolean checkpetNear(){
+		for (int n : Level.NEIGHBOURS8) {
+			int c =  Dungeon.hero.pos + n;
+			if (Actor.findChar(c) instanceof PET) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void checkPetPort(){
+		PET pet = checkpet();
+		if(pet!=null && checkpetNear()){
+		  //GLog.i("I see pet");
+		  Dungeon.hero.petType=pet.type;
+		  Dungeon.hero.petLevel=pet.level;
+		  Dungeon.hero.petKills=pet.kills;	
+		  Dungeon.hero.petHP=pet.HP;
+		  Dungeon.hero.petExperience=pet.experience;
+		  Dungeon.hero.petCooldown=pet.cooldown;
+		  pet.destroy();
+		  Dungeon.hero.petfollow=true;
+		} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			Dungeon.hero.petfollow=true;
+		} else {
+			Dungeon.hero.petfollow=false;
+		}
+		
 	}
 	
 		

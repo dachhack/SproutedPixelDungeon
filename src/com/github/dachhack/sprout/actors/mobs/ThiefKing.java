@@ -19,29 +19,15 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.Badges.Badge;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.AdamantRing;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.TomeOfMastery;
-import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
-import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.ShamanSprite;
 import com.github.dachhack.sprout.sprites.ThiefKingSprite;
-import com.github.dachhack.sprout.sprites.WarlockSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 

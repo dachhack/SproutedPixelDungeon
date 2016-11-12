@@ -29,9 +29,9 @@ public class Challenges {
 
 	public static final String[] NAMES = { "On diet", "Faith is my armor",
 			"Pharmacophobia", "Barren land", "Swarm intelligence",
-			"Into darkness", "Forbidden runes" };
+			"Into darkness", "Forbidden runes"};
 
 	public static final int[] MASKS = { NO_FOOD, NO_ARMOR, NO_HEALING,
-			NO_HERBALISM, SWARM_INTELLIGENCE, DARKNESS, NO_SCROLLS };
+			NO_HERBALISM, SWARM_INTELLIGENCE, DARKNESS, NO_SCROLLS};
 
 }

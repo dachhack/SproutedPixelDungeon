@@ -20,25 +20,12 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.ToxicGas;
-import com.github.dachhack.sprout.actors.buffs.Burning;
-import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.actors.mobs.MrDestructo;
-import com.github.dachhack.sprout.actors.mobs.Rat;
 import com.github.dachhack.sprout.items.Bomb;
-import com.github.dachhack.sprout.items.ClusterBomb;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.ClusterBomb.Fuse;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.BatSprite;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.MirrorSprite;
 import com.github.dachhack.sprout.sprites.SeekingBombSprite;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class SeekingBombNPC extends NPC {

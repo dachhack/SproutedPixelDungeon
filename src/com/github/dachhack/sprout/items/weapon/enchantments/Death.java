@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
@@ -31,7 +32,12 @@ public class Death extends Weapon.Enchantment {
 	private static final String TXT_GRIM = "Grim %s";
 
 	private static ItemSprite.Glowing BLACK = new ItemSprite.Glowing(0x000000);
-
+	
+	@Override
+	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
+		return false;
+	}
+	
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
 		// lvl 0 - 8%

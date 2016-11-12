@@ -36,6 +36,7 @@ public class FishingLevel extends Level {
 	{
 		color1 = 0x534f3e;
 		color2 = 0xb9d661;
+		cleared=true;
 
 		viewDistance = 8;
 	}

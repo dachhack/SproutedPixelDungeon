@@ -23,7 +23,6 @@ import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.weapon.melee.RoyalSpork;
 import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.RatKingSprite;

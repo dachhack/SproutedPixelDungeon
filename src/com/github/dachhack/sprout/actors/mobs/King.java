@@ -30,6 +30,9 @@ import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
+import com.github.dachhack.sprout.items.OtilukesJournal;
+import com.github.dachhack.sprout.items.journalpages.Sokoban3;
+import com.github.dachhack.sprout.items.journalpages.Sokoban4;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
@@ -158,6 +161,13 @@ public class King extends Mob {
 		 for (Mob mob : Dungeon.level.mobs) {
 				if (mob instanceof DwarfKingTomb){findTomb=mob.pos;}
 		 }
+		 
+		 Dungeon.level.drop(new Sokoban4(), pos).sprite.drop();
+		 
+		 if (!Dungeon.limitedDrops.journal.dropped()){ 
+			  Dungeon.level.drop(new OtilukesJournal(), pos).sprite.drop();
+			  Dungeon.limitedDrops.journal.drop();
+			}
 		 
 		 summonLiches(findTomb);
 		 GLog.n("Release the Liches!");

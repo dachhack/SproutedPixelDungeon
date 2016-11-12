@@ -31,6 +31,7 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.CellSelector;
@@ -183,7 +184,7 @@ public class Item implements Bundlable {
 			}
 
 			items.add(this);
-			if (stackable || this instanceof Boomerang)
+			if (stackable || this instanceof Boomerang || this instanceof JupitersWraith)
 				Dungeon.quickslot.replaceSimilar(this);
 			updateQuickslot();
 			Collections.sort(items, itemComparator);
@@ -209,7 +210,7 @@ public class Item implements Bundlable {
 
 		} else if (quantity == 1) {
 
-			if (stackable || this instanceof Boomerang) {
+			if (stackable || this instanceof Boomerang || this instanceof JupitersWraith) {
 				Dungeon.quickslot.convertToPlaceholder(this);
 			}
 
@@ -245,7 +246,7 @@ public class Item implements Bundlable {
 
 		} else if (quantity == 1) {
 
-			if (stackable || this instanceof Boomerang) {
+			if (stackable || this instanceof Boomerang || this instanceof JupitersWraith) {
 				Dungeon.quickslot.convertToPlaceholder(this);
 			}
 

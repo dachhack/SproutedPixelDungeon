@@ -25,9 +25,18 @@ import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.Heap;
+import com.github.dachhack.sprout.items.OtilukesJournal;
+import com.github.dachhack.sprout.items.bags.AnkhChain;
+import com.github.dachhack.sprout.items.journalpages.DragonCave;
+import com.github.dachhack.sprout.items.journalpages.Vault;
+import com.github.dachhack.sprout.items.misc.Spectacles;
+import com.github.dachhack.sprout.items.misc.Spectacles.MagicSight;
+import com.github.dachhack.sprout.items.weapon.melee.RoyalSpork;
+import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.watabou.utils.Random;
 
 public class Fire extends Blob {
 
@@ -44,6 +53,7 @@ public class Fire extends Blob {
 		for (int pos = from; pos < to; pos++) {
 
 			int fire;
+			boolean shelf = false;
 
 			if (cur[pos] > 0) {
 
@@ -51,9 +61,42 @@ public class Fire extends Blob {
 
 				fire = cur[pos] - 1;
 				if (fire <= 0 && flamable[pos]) {
+					
+					if(Dungeon.level.map[pos]==Terrain.BOOKSHELF){
+						shelf=true;
+					}
 
-					int oldTile = Dungeon.level.map[pos];
+					int oldTile = Dungeon.level.map[pos];					
 					Level.set(pos, Terrain.EMBERS);
+					
+					
+					if (shelf && Random.Float()<.02 && Dungeon.hero.buff(MagicSight.class) != null){
+						
+						if (!Dungeon.limitedDrops.vaultpage.dropped()) {
+							Dungeon.level.drop(new Vault(), pos);
+							Dungeon.limitedDrops.vaultpage.drop();	
+						}
+					}
+					
+                    if (shelf && Random.Float()<.02 && Dungeon.hero.buff(MagicSight.class) != null){
+						
+						if (!Dungeon.limitedDrops.dragoncave.dropped()) {
+							Dungeon.level.drop(new DragonCave(), pos);
+							Dungeon.limitedDrops.dragoncave.drop();	
+						}
+					}
+						
+                    /*
+					if (shelf && Random.Float()<.02 && Dungeon.hero.buff(MagicSight.class) != null){
+							
+							if (Dungeon.limitedDrops.vaultpage.dropped()) {
+								Dungeon.level.drop(new RoyalSpork(), pos);
+							}
+					
+					}
+					*/
+					
+					
 
 					observe = true;
 					GameScene.updateMap(pos);
@@ -109,7 +152,6 @@ public class Fire extends Blob {
 		super.use(emitter);
 		emitter.start(FlameParticle.FACTORY, 0.03f, 0);
 	}
-
 	@Override
 	public String tileDesc() {
 		return "A fire is raging here.";

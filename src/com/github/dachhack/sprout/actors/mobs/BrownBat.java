@@ -17,23 +17,12 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.food.Meat;
-import com.github.dachhack.sprout.items.potions.PotionOfMending;
-import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.sprites.BatSprite;
 import com.github.dachhack.sprout.sprites.BrownBatSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;

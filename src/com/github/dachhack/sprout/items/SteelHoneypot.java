@@ -24,7 +24,6 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.Bee;
 import com.github.dachhack.sprout.actors.mobs.SteelBee;
 import com.github.dachhack.sprout.actors.mobs.pets.bee;
 import com.github.dachhack.sprout.effects.Pushing;

@@ -19,26 +19,21 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
+import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.InfectingFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.PinningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.food.Meat;
+import com.github.dachhack.sprout.items.Gold;
+import com.github.dachhack.sprout.items.keys.GoldenSkeletonKey;
+import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.HermitCrabSprite;
-import com.github.dachhack.sprout.sprites.ShamanSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
@@ -156,6 +151,15 @@ public class HermitCrab extends Mob implements Callback {
 	public void call() {
 		next();
 	}
+	
+	@Override
+	public void die(Object cause) {
+		super.die(cause);  
+		if(Random.Int(1)==0){
+		Dungeon.level.drop(new GoldenSkeletonKey(0), pos).sprite.drop();	
+		}
+	}
+	
 
 	@Override
 	public String description() {

@@ -23,12 +23,8 @@ import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.levels.Level.Feeling;
 import com.github.dachhack.sprout.levels.painters.Painter;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.Scene;
 import com.watabou.utils.Random;
 
@@ -37,6 +33,7 @@ public class FieldLevel extends Level {
 	{
 		color1 = 0x48763c;
 		color2 = 0x59994a;
+		cleared=true;
 
 		viewDistance = 6;
 	}

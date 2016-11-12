@@ -17,18 +17,13 @@
  */
 package com.github.dachhack.sprout.actors.mobs.pets;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.mobs.Bee;
-import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.sprites.MirrorSprite;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.sprites.SteelBeeSprite;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -47,7 +42,12 @@ public class bee extends PET {
 	protected int regen = 1;
 	protected float regenChance = 0.1f;
 	
-			
+
+	@Override
+	public int dr(){
+		return level*4;
+	}		
+	
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
@@ -58,7 +58,7 @@ public class bee extends PET {
 	public void adjustStats(int level) {
 		this.level = level;
 		defenseSkill = 1 + level*2;
-		HT = (2 + level) * 5;
+		HT = (2 + level) * 8;
 	}
 	
 
@@ -80,9 +80,22 @@ public class bee extends PET {
 		return super.act();
 	}
 	
+
 	@Override
 	public void interact() {
 
+		if (this.buff(MagicalSleep.class) != null) {
+			Buff.detach(this, MagicalSleep.class);
+		}
+		
+		if (state == SLEEPING) {
+			state = HUNTING;
+		}
+		if (buff(Paralysis.class) != null) {
+			Buff.detach(this, Paralysis.class);
+			GLog.i("You shake your %s out of paralysis.", name);
+		}
+		
 		int curPos = pos;
 
 		moveSprite(pos, Dungeon.hero.pos);

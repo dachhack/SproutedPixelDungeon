@@ -22,8 +22,8 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker.Rotberry;
 import com.github.dachhack.sprout.items.armor.Armor;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
@@ -40,6 +40,7 @@ import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.HornOfPlenty;
 import com.github.dachhack.sprout.items.artifacts.MasterThievesArmband;
 import com.github.dachhack.sprout.items.artifacts.RingOfDisintegration;
+import com.github.dachhack.sprout.items.artifacts.RingOfFrost;
 import com.github.dachhack.sprout.items.artifacts.SandalsOfNature;
 import com.github.dachhack.sprout.items.artifacts.TalismanOfForesight;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
@@ -59,6 +60,12 @@ import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.food.Nut;
 import com.github.dachhack.sprout.items.food.Pasty;
 import com.github.dachhack.sprout.items.food.PixieParasol;
+import com.github.dachhack.sprout.items.nornstone.BlueNornStone;
+import com.github.dachhack.sprout.items.nornstone.GreenNornStone;
+import com.github.dachhack.sprout.items.nornstone.NornStone;
+import com.github.dachhack.sprout.items.nornstone.OrangeNornStone;
+import com.github.dachhack.sprout.items.nornstone.PurpleNornStone;
+import com.github.dachhack.sprout.items.nornstone.YellowNornStone;
 import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfFrost;
@@ -159,7 +166,8 @@ public class Generator {
 				Potion.class), SCROLL(400, Scroll.class), WAND(40, Wand.class), RING(
 				15, Ring.class), ARTIFACT(20, Artifact.class), SEED(0,
 				Plant.Seed.class), SEED2(0,	Plant.Seed.class), SEEDRICH(0,	Plant.Seed.class),
-				FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class), MUSHROOM(0, Food.class);
+				FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class), MUSHROOM(0, Food.class),
+				NORNSTONE(0,NornStone.class), NORNSTONE2(0,NornStone.class);
 
 		public Class<?>[] classes;
 		public float[] probs;
@@ -185,6 +193,8 @@ public class Generator {
 	};
 
 	private static HashMap<Category, Float> categoryProbs = new HashMap<Generator.Category, Float>();
+	
+	private static final float[] INITIAL_ARTIFACT_PROBS = new float[]{  0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0};
 
 	static {
 
@@ -208,9 +218,9 @@ public class Generator {
 				PotionOfMindVision.class, PotionOfPurity.class,
 				PotionOfInvisibility.class, PotionOfMight.class,
 				PotionOfFrost.class, PotionOfMending.class,
-				PotionOfOverHealing.class};
-		Category.POTION.probs = new float[] { 45, 4, 15, 10, 15, 10, 0, 20, 12,
-				10, 0, 10, 10, 4};
+				PotionOfOverHealing.class, Egg.class};
+		Category.POTION.probs = new float[] { 10, 4, 15, 10, 15, 10, 0, 20, 12,
+				10, 0, 10, 45, 4, 10};
 
 		Category.WAND.classes = new Class<?>[] { WandOfTeleportation.class,
 				WandOfSlowness.class, WandOfFirebolt.class,
@@ -220,7 +230,7 @@ public class Generator {
 				WandOfMagicMissile.class, WandOfDisintegration.class,
 				WandOfAvalanche.class };
 		Category.WAND.probs = new float[] { 10, 10, 15, 6, 10, 11, 15, 10, 6,
-				10, 0, 5, 5 };
+				5, 0, 5, 5 };
 
 		Category.WEAPON.classes = new Class<?>[] { Dagger.class,
 				Knuckles.class, Quarterstaff.class, Spear.class, Mace.class,
@@ -252,10 +262,11 @@ public class Generator {
 				MasterThievesArmband.class, SandalsOfNature.class,
 				TalismanOfForesight.class, TimekeepersHourglass.class,
 				UnstableSpellbook.class, AlchemistsToolkit.class, RingOfDisintegration.class,
+				RingOfFrost.class,
 				DriedRose.class // starts with no chance of spawning, chance is
 								// set directly after beating ghost quest.
 		};
-		Category.ARTIFACT.probs = new float[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 };
+		Category.ARTIFACT.probs =  INITIAL_ARTIFACT_PROBS;
 
 		Category.SEED.classes = new Class<?>[] { 
 				Firebloom.Seed.class, Icecap.Seed.class, Sorrowmoss.Seed.class, Blindweed.Seed.class, Sungrass.Seed.class,
@@ -294,6 +305,12 @@ public class Generator {
 		
 		Category.MUSHROOM.classes = new Class<?>[] {BlueMilk.class, DeathCap.class, Earthstar.class, JackOLantern.class, PixieParasol.class, GoldenJelly.class};
 		Category.MUSHROOM.probs = new float[] {2,2,2,2,2,2};
+		
+		Category.NORNSTONE.classes = new Class<?>[] {BlueNornStone.class, GreenNornStone.class, OrangeNornStone.class, PurpleNornStone.class, YellowNornStone.class};
+		Category.NORNSTONE.probs = new float[] {2,2,2,2,2};
+		
+		Category.NORNSTONE2.classes = new Class<?>[] {BlueNornStone.class, GreenNornStone.class, OrangeNornStone.class, PurpleNornStone.class, YellowNornStone.class};
+		Category.NORNSTONE2.probs = new float[] {2,0,2,2,2};
 		
 	}
 
@@ -446,7 +463,10 @@ public class Generator {
 
 	// resets artifact probabilities, for new dungeons
 	public static void initArtifacts() {
-		Category.ARTIFACT.probs = new float[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 };
+		Category.ARTIFACT.probs = INITIAL_ARTIFACT_PROBS;
+		
+		//checks for dried rose quest completion, adds the rose in accordingly.
+		if (Ghost.Quest.processed) Category.ARTIFACT.probs[12] = 1;
 		spawnedArtifacts = new ArrayList<String>();
 	}
 

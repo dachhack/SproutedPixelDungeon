@@ -66,24 +66,30 @@ import com.github.dachhack.sprout.items.Amulet;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Dewdrop;
+import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.SanChikarahDeath;
 import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
+import com.github.dachhack.sprout.items.OtilukesJournal;
+import com.github.dachhack.sprout.items.ShadowDragonEgg;
 import com.github.dachhack.sprout.items.armor.glyphs.Viscosity;
 import com.github.dachhack.sprout.items.artifacts.CapeOfThorns;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TalismanOfForesight;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.keys.GoldenKey;
+import com.github.dachhack.sprout.items.keys.GoldenSkeletonKey;
 import com.github.dachhack.sprout.items.keys.IronKey;
 import com.github.dachhack.sprout.items.keys.Key;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
+import com.github.dachhack.sprout.items.misc.AutoPotion.AutoHealPotion;
 import com.github.dachhack.sprout.items.potions.Potion;
+import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
+import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.rings.RingOfElements;
 import com.github.dachhack.sprout.items.rings.RingOfEvasion;
 import com.github.dachhack.sprout.items.rings.RingOfForce;
@@ -98,6 +104,7 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
@@ -115,11 +122,11 @@ import com.github.dachhack.sprout.ui.AttackIndicator;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.GLog;
+import com.github.dachhack.sprout.windows.WndAscend;
 import com.github.dachhack.sprout.windows.WndDescend;
 import com.github.dachhack.sprout.windows.WndDewVial;
 import com.github.dachhack.sprout.windows.WndMessage;
 import com.github.dachhack.sprout.windows.WndResurrect;
-import com.github.dachhack.sprout.windows.WndTinkerer;
 import com.github.dachhack.sprout.windows.WndTradeItem;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -168,6 +175,8 @@ public class Hero extends Char {
 	public int petExperience = 0;
 	public int petCooldown = 0;
 	
+	public int petCount = 0;
+	
 	private boolean damageInterrupt = true;
 	public HeroAction curAction = null;
 	public HeroAction lastAction = null;
@@ -175,6 +184,7 @@ public class Hero extends Char {
 	private Char enemy;
 
 	private Item theKey;
+	private Item theSkeletonKey;
 
 	public boolean restoreHealth = false;
 
@@ -227,6 +237,7 @@ public class Hero extends Char {
 	private static final String PETHP = "petHP";
 	private static final String PETEXP = "petExperience";
 	private static final String PETCOOLDOWN = "petCooldown";
+	private static final String PETCOUNT = "petCount";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
@@ -251,6 +262,7 @@ public class Hero extends Char {
 		bundle.put(PETHP, petHP);
 		bundle.put(PETEXP, petExperience);
 		bundle.put(PETCOOLDOWN, petCooldown);
+		bundle.put(PETCOUNT, petCount);
 
 		belongings.storeInBundle(bundle);
 	}
@@ -278,6 +290,7 @@ public class Hero extends Char {
 		petHP = bundle.getInt(PETHP);
 		petExperience = bundle.getInt(PETEXP);
 		petCooldown = bundle.getInt(PETCOOLDOWN);
+		petCount = bundle.getInt(PETCOUNT);
 		
 		belongings.restoreFromBundle(bundle);
 	}
@@ -398,6 +411,7 @@ public class Hero extends Char {
 		return (int) dmg;
 		
 	}
+	
 
 	@Override
 	public float speed() {
@@ -409,6 +423,18 @@ public class Hero extends Char {
 			hasteLevel += ((RingOfHaste.Haste) buff).level;
 		}
 
+		if(haspet){
+		  int pethaste=Dungeon.petHasteLevel;	
+		  PET heropet = checkpet();	
+		  
+		   if(pethaste>0 && hasteLevel>10 && heropet!=null){
+			 hasteLevel=10;
+		   }
+		   
+		}
+		
+		
+		
 		if (hasteLevel != 0)
 			speed *= Math.pow(1.2, hasteLevel);
 
@@ -464,7 +490,7 @@ public class Hero extends Char {
 	@Override
 	public boolean act() {
 
-		super.act();
+		super.act();		
 		
 		Statistics.moves++;
 		
@@ -481,6 +507,26 @@ public class Hero extends Char {
 		Egg egg = belongings.getItem(Egg.class);
 		if (egg!=null){
 			egg.moves++;
+		}
+		
+		EasterEgg egg2 = belongings.getItem(EasterEgg.class);
+		if (egg2!=null){
+			egg2.moves++;
+		}
+		
+		ShadowDragonEgg egg3 = belongings.getItem(ShadowDragonEgg.class);
+		if (egg3!=null){
+			egg3.moves++;
+		}
+		
+		OtilukesJournal journal = belongings.getItem(OtilukesJournal.class);
+		if (journal!=null && (Dungeon.depth < 26 || Dungeon.depth==55) 
+				&& (journal.level>1 || journal.rooms[0]) 
+				&& journal.charge<journal.fullCharge){
+			journal.charge++;
+			if (journal.charge>=journal.fullCharge){
+				GLog.p("Otilike's Journal is fully charged!");
+			}
 		}
 		
 		/*
@@ -512,7 +558,7 @@ public class Hero extends Char {
 			restoreHealth = false;
 
 			ready = false;
-
+			
 			if (curAction instanceof HeroAction.Move) {
 
 				return actMove((HeroAction.Move) curAction);
@@ -559,7 +605,7 @@ public class Hero extends Char {
 
 			}
 		}
-
+		
 		return false;
 	}
 
@@ -772,6 +818,7 @@ public class Hero extends Char {
 					&& (heap.type != Type.HEAP && heap.type != Type.FOR_SALE)) {
 
 				theKey = null;
+				theSkeletonKey = null;
 
 				if (heap.type == Type.LOCKED_CHEST
 						|| heap.type == Type.CRYSTAL_CHEST 
@@ -779,8 +826,9 @@ public class Hero extends Char {
 						) {
 
 					theKey = belongings.getKey(GoldenKey.class, Dungeon.depth);
+					theSkeletonKey = belongings.getKey(GoldenSkeletonKey.class, 0);
 
-					if (theKey == null) {
+					if (theKey == null && theSkeletonKey == null) {
 						GLog.w(TXT_LOCKED_CHEST);
 						ready();
 						return false;
@@ -881,14 +929,30 @@ public class Hero extends Char {
 	private boolean actDescend(HeroAction.Descend action) {
 		int stairs = action.dst;
 		
-		if (!Dungeon.level.forcedone && Dungeon.dewDraw && (Dungeon.level.checkdew()>0 || Dungeon.hero.buff(Dewcharge.class) != null)) {
+		if (!Dungeon.level.forcedone && 
+			 Dungeon.dewDraw && (					 
+					 Dungeon.level.checkdew()>0 
+				     || Dungeon.hero.buff(Dewcharge.class) != null)
+				    ) {
+			
 			GameScene.show(new WndDescend());
 			ready();
 			return false;
 		}
 		
+		if (!Dungeon.level.forcedone && 
+				 Dungeon.dewDraw && 
+				 !Dungeon.level.cleared &&
+				 !Dungeon.notClearableLevel(Dungeon.depth)
+				 ) {
+				
+				GameScene.show(new WndDescend());
+				ready();
+				return false;
+			}
 		
-		if (pos == stairs && pos == Dungeon.level.exit && (Dungeon.depth!=24) && (Dungeon.depth<Statistics.deepestFloor || !Dungeon.sealedlevel)){
+		
+		if (pos == stairs && pos == Dungeon.level.exit && !Dungeon.level.sealedlevel){
 
 			curAction = null;
 			
@@ -898,7 +962,14 @@ public class Hero extends Char {
 				if (heap != null)
 					heap.dryup();
 			  }	
-			}		
+			 
+			 if (!Dungeon.level.cleared && Dungeon.dewDraw && !Dungeon.notClearableLevel(Dungeon.depth) ){
+				 Dungeon.level.cleared=true;
+				 Statistics.prevfloormoves=0;
+			 }
+			 
+			}	
+				
 			
 			PET pet = checkpet();
 			if(pet!=null && checkpetNear()){
@@ -947,10 +1018,14 @@ public class Hero extends Char {
 				if (belongings.getItem(Amulet.class) == null) {
 					GameScene.show(new WndMessage(TXT_LEAVE));
 					ready();
-				} else {
+							
+				} else if (Dungeon.level.forcedone){
 					Dungeon.win(ResultDescriptions.WIN);
 					Dungeon.deleteGame(Dungeon.hero.heroClass, true);
 					Game.switchScene(SurfaceScene.class);
+				} else {
+					GameScene.show(new WndAscend());
+					ready();
 				}
 				
 			} else if (Dungeon.depth == 34) {
@@ -1024,9 +1099,11 @@ public class Hero extends Char {
 			InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 			Game.switchScene(InterlevelScene.class);
 			
-		   } else if (Dungeon.depth > 26){
+		   } else if (Dungeon.depth > 26 && !Dungeon.townCheck(Dungeon.depth)){
 				ready();
-			} else if (Dungeon.depth == 25){
+			} else if (Dungeon.depth == 25 || Dungeon.depth == 55 || Dungeon.depth == 99){
+				ready();
+			} else if (Dungeon.depth > 55 && Dungeon.level.locked){
 				ready();
 			} else {
 
@@ -1208,6 +1285,25 @@ public class Hero extends Char {
 				&& HP <= HT * Fury.LEVEL) {
 			Buff.affect(this, Fury.class);
 		}
+		
+		if (this.buff(AutoHealPotion.class) != null && ((float) HP / HT)<.1) {
+			PotionOfHealing pot = Dungeon.hero.belongings.getItem(PotionOfHealing.class);
+			if (pot != null) {
+				pot.detach(Dungeon.hero.belongings.backpack,1);	
+				/*
+				if(!(Dungeon.hero.belongings.getItem(PotionOfHealing.class).quantity() > 0)){
+					pot.detachAll(Dungeon.hero.belongings.backpack);
+				}
+				*/
+				GLog.w("AutoPotion Triggered!");
+				pot.apply(this);				
+			}	
+			else if (pot==null){
+				GLog.w("AutoPotion triggered but you are not carrying any potions of healing!");
+			}
+			
+		}
+		
 	}
 
 	private void checkVisibleMobs() {
@@ -1351,7 +1447,7 @@ public class Hero extends Char {
 
 			curAction = new HeroAction.Unlock(cell);
 
-		} else if (cell == Dungeon.level.exit && Dungeon.depth < 26 && !Level.exitsealed) {
+		} else if (cell == Dungeon.level.exit && (Dungeon.depth < 26 || Dungeon.townCheck(Dungeon.depth))) {
 
 			curAction = new HeroAction.Descend(cell);
 
@@ -1693,8 +1789,11 @@ public class Hero extends Char {
 			if (theKey != null) {
 				theKey.detach(belongings.backpack);
 				theKey = null;
+			} else if (theKey == null && theSkeletonKey != null) {
+				theSkeletonKey.detach(belongings.backpack);
+				theSkeletonKey = null;
 			}
-
+			
 			Heap heap = Dungeon.level.heaps
 					.get(((HeroAction.OpenChest) curAction).dst);
 			if (heap.type == Type.SKELETON || heap.type == Type.REMAINS) {

@@ -17,31 +17,17 @@
  */
 package com.github.dachhack.sprout.actors.mobs.pets;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Weakness;
-import com.github.dachhack.sprout.actors.mobs.Bee;
-import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.MirrorSprite;
-import com.github.dachhack.sprout.sprites.RedDragonSprite;
-import com.github.dachhack.sprout.sprites.SteelBeeSprite;
 import com.github.dachhack.sprout.sprites.VioletDragonSprite;
-import com.github.dachhack.sprout.sprites.WarlockSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
@@ -73,12 +59,18 @@ public class VioletDragon extends PET implements Callback{
 		return 0.8f;
 	}
 	
+	
+
+	@Override
+	public int dr(){
+		return level*5;
+	}
 		
 
 	@Override
 	public void adjustStats(int level) {
 		this.level = level;
-		HT = (level) * 10;
+		HT = (level) * 14;
 		defenseSkill = 5 + level*level;
 	}
 	
@@ -170,9 +162,22 @@ public class VioletDragon extends PET implements Callback{
 	
 	
 	
+
 	@Override
 	public void interact() {
 
+		if (this.buff(MagicalSleep.class) != null) {
+			Buff.detach(this, MagicalSleep.class);
+		}
+		
+		if (state == SLEEPING) {
+			state = HUNTING;
+		}
+		if (buff(Paralysis.class) != null) {
+			Buff.detach(this, Paralysis.class);
+			GLog.i("You shake your %s out of paralysis.", name);
+		}
+		
 		int curPos = pos;
 
 		moveSprite(pos, Dungeon.hero.pos);

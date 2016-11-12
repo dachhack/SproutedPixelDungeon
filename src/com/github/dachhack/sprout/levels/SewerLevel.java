@@ -20,24 +20,16 @@ package com.github.dachhack.sprout.levels;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
-import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.actors.mobs.Sentinel;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
-import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer2;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost.GnollArcher;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer3;
+import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Mushroom;
+import com.github.dachhack.sprout.items.misc.Spectacles;
+import com.github.dachhack.sprout.items.Towel;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
 import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.food.Blueberry;
@@ -144,17 +136,23 @@ public class SewerLevel extends RegularLevel {
 			addItemToSpawn(new Cloudberry());
 			addItemToSpawn(new Blackberry());
 			
-			addItemToSpawn(new Egg());
+			//addItemToSpawn(new Spectacles());
+			//addItemToSpawn(new Towel());
+			
+			//addItemToSpawn(new Egg());
 		}
 		
 		if (Dungeon.depth == 2){
-			addItemToSpawn(new Mushroom());
 			Tinkerer1 npc = new Tinkerer1();
 			do {
 				npc.pos = randomRespawnCell();
 			} while (npc.pos == -1 || heaps.get(npc.pos) != null);
 			mobs.add(npc);
 			Actor.occupyCell(npc);
+		}
+		
+		if (Dungeon.depth == 1){
+			addItemToSpawn(new Mushroom());
 		}
 				
 		Ghost.Quest.spawn(this);

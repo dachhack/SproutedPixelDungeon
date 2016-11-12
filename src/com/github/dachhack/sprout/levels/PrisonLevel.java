@@ -27,7 +27,6 @@ import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
 import com.github.dachhack.sprout.effects.Halo;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.Bomb;
-import com.github.dachhack.sprout.items.DwarfHammer;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.Emitter;

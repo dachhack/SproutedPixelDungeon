@@ -5,37 +5,23 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
-import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Awareness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.DeathRay;
-import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
-import com.github.dachhack.sprout.effects.particles.SmokeParticle;
-import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.artifacts.Artifact.ArtifactBuff;
-import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.github.dachhack.sprout.ui.BuffIndicator;
-import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
@@ -90,7 +76,7 @@ public class RingOfDisintegration extends Artifact {
 			if (!isEquipped(hero))
 				GLog.i("You need to equip your ring to do that.");
 			else if (charge != chargeCap)
-				GLog.i("Your ring isn't full charged yet.");
+				GLog.i("Your ring isn't fully charged yet.");
 			else {
 				
 				blast(hero.pos);

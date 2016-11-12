@@ -28,7 +28,6 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.FossilSkeletonSprite;
-import com.github.dachhack.sprout.sprites.SkeletonSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;

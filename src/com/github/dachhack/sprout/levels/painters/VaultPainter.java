@@ -18,7 +18,6 @@
 package com.github.dachhack.sprout.levels.painters;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;

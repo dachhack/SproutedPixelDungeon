@@ -19,11 +19,19 @@ package com.github.dachhack.sprout.items.weapon.melee;
 
 import java.util.ArrayList;
 
+import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.mobs.Gullin;
+import com.github.dachhack.sprout.actors.mobs.Kupua;
+import com.github.dachhack.sprout.actors.mobs.MineSentinel;
+import com.github.dachhack.sprout.actors.mobs.Otiluke;
+import com.github.dachhack.sprout.actors.mobs.Zot;
+import com.github.dachhack.sprout.actors.mobs.ZotPhase;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Random;
 
 public class Chainsaw extends MeleeWeapon {
 
@@ -60,7 +68,43 @@ public class Chainsaw extends MeleeWeapon {
 			super.execute(hero, action);
 		}
 	}
+	
+	@Override
+	public void proc(Char attacker, Char defender, int damage) {
+		
+		if (defender instanceof Gullin 
+        		|| defender instanceof Kupua
+        		|| defender instanceof MineSentinel
+        		|| defender instanceof Otiluke
+        		|| defender instanceof Zot
+        		|| defender instanceof ZotPhase){
+        	
+        	//damage*=2;
+			
+			defender.damage(Random.Int(damage,damage*4), this);
+		}
+        
+		
+		if (enchantment != null) {
+			enchantment.proc(this, attacker, defender, damage);		
+		}
+	}
 
+	@Override
+	public Item upgrade() {
+		return upgrade(false);
+	}
+
+	@Override
+	public Item upgrade(boolean enchant) {
+		
+		return super.upgrade(false);		
+	}
+
+	public Item safeUpgrade() {
+		return upgrade(enchantment != null);
+	}
+	
 	public Chainsaw() {
 		super(1, 1.2f, .75f);
 	}
@@ -73,8 +117,8 @@ public class Chainsaw extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "Happy Halloween! "
-			   +"This dwarven device attaches to your arm and cannot be removed. "
+		return 
+			   "This dwarven device attaches to your arm and cannot be removed. "
 			  +"Its Bloodlust enchantment is fueled by dew from your vial. "
 			   ;
 	}

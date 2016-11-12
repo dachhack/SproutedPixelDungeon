@@ -17,33 +17,14 @@
  */
 package com.github.dachhack.sprout.plants;
 
-import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.Fire;
-import com.github.dachhack.sprout.actors.blobs.WaterOfTransmutation;
-import com.github.dachhack.sprout.actors.blobs.WaterOfUpgradeEating;
-import com.github.dachhack.sprout.actors.blobs.WellWater;
-import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Slow;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.VioletDewdrop;
 import com.github.dachhack.sprout.items.YellowDewdrop;
-import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
-import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfOverHealing;
-import com.github.dachhack.sprout.items.potions.PotionOfStrength;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.Terrain;
-import com.github.dachhack.sprout.plants.Plant.Seed;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Dewcatcher extends Plant {

@@ -19,7 +19,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.3.5: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
+	private static final String TTL_Update = "v0.4.1: SPD 0.2.4c: PD 1.7.5 and Some Extras!";
 
 	private static final String TTL_Future = "Wait What?";
 
@@ -40,36 +40,49 @@ public class WelcomeScene extends PixelScene {
 			+"Mobs now adjust strength as you go deeper in the dungeon to stay balanced with upgrades.\n\n"
 			+"New levels are accessible at each stage with Four additional levels available at the end of the game.\n\n"
 			+"New levels include unique enemies, items and rewards.\n\n"
-			+"\n\n"
+			+"\n\n";
 			
-			+"New original items include:\n\n"
-			+"Nuts\n\n"
-			+"Four kinds of berries\n\n"
-			+"Mushrooms\n\n"
-			+"New potion type\n\n"
-			+"New scroll type\n\n"			
-			+"\n\n"
 			
-			+"Hidden rarities include:\n\n"
-			+"Golden nut\n\n"
-			+"The Spork\n\n"
-			+"Full Moon Berry\n\n"
-			+"Honey\n\n"
-			+"\n\n"
-			
-			+"New Mobs include:\n\n"
-			+"Rat Boss\n\n"
-			+"Shinobi\n\n"
-			+"Robots\n\n"
-			+"Liches\n\n"
-			+"Demon Goo\n\n"
-			+"\n\n"
-
-			+"Many other tweaks and additions have been included!\n\n";
-
 
 	private static final String TXT_Update = 
-			"Version 0.3.5 adds the Dew Charge system and Pets\n\n"
+			
+			
+			"Version 0.4.1\n\n"
+			+"Fix pet follow bugs\n\n"
+			+"Fix sokoban teleport bugs\n\n"
+			+"Added pet whistle\n\n"
+			+"Added autopotion charm\n\n"
+			+"Fix Dolyahaven level save/delete bugs\n\n"
+			+"\n\n"
+			+"Version 0.4.0 \n\n"
+		    +"Otiluke's Journal available in first shop will take you to Sokoban levels using Journal Pages dropped by bosses. \n\n"
+		    +"You will need to solve puzzles on the Sokoban levels to gather enough gold to purchase the books from the imp shop. \n\n"	
+		    +"New Post-Shadow Yog Play using Otiluke's Journal includes: \n\n"
+		    +" * Overworld Town \n\n"
+		    +" * A new mine stage overrun with demons \n\n"
+		    +" * New tier-6 weapons with special powers \n\n"
+		    +" * Two new boss fights with powerful wizards and their minions \n\n"
+		    +"Also: \n\n"
+		    +" * Spectacles \n\n"
+		    +" * AutoPotion Charm \n\n"
+		    +" * Fix Ranged Damage (Huntress Fix)\n\n"
+		    +" * Haste Can Now Apply to Pets \n\n"
+		    +" * Mossy Skeleton Unlimited Hits Fix \n\n"
+		    +" * Removing Armor While Hasted Fix \n\n"
+		    +" * 0 Dark Gold Drop Fix \n\n"
+		    +" * Other Bug fixes \n\n"
+		    +" * A new Easter Egg \n\n"
+		    
+			+"\n\n"		
+			+"Version 0.3.5a \n\n"
+			+"Nerf Huntress missle bonus.\n\n"
+			+"Buff pets.\n\n"
+			+"Added Golden Skeleton Key.\n\n"
+			+"Added Ring of Frost Artifact.\n\n"
+			+"Various bug fixes.\n\n"
+			+"\n\n"
+			+"Version 0.3.5 adds the Dew Charge system and Pets\n\n"
+			+"Please note that saves to previous versions might not work in 0.3.5.\n\n"			
 			+"\n\n"
 			+"Egg - How you treat it determines what hatches.\n\n"
 			+"Keep it warm in your pack or absorb energy by dropping it on traps.\n\n"
@@ -179,29 +192,6 @@ public class WelcomeScene extends PixelScene {
 			+"New levels include unique enemies, items and rewards.\n\n"
 			+"\n\n"
 			
-			+"New original items include:\n\n"
-			+"Nuts\n\n"
-			+"Four kinds of berries\n\n"
-	        +"New potion type\n\n"
-	        +"New scroll type\n\n"
-	        +"\n\n"
-	        
-			+"Hidden rarities include:\n\n"
-			+"Golden nut\n\n"
-			+"The Spork\n\n"
-			+"Full Moon Berry\n\n"
-			+"Honey\n\n"
-			+"\n\n"
-	        
-            +"New Mobs include:\n\n"
-            +"Rat Boss\n\n"
-            +"Shinobi\n\n"
-            +"Robots\n\n"
-            +"Liches\n\n"
-            +"Demon Goo\n\n"
-            +"\n\n"
-            
-			+"Many other tweaks and additions have been included!\n\n"
 	
 			;
 

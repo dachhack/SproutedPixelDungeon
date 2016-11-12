@@ -20,36 +20,23 @@ package com.github.dachhack.sprout.actors.mobs;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Statistics;
-import com.github.dachhack.sprout.Badges.Badge;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
-import com.github.dachhack.sprout.effects.particles.ShadowParticle;
-import com.github.dachhack.sprout.items.ConchShell;
-import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.TenguKey;
-import com.github.dachhack.sprout.items.TomeOfMastery;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.TenguSprite;
-import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
 public class TenguEscape extends Mob {

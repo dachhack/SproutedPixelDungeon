@@ -20,13 +20,10 @@ package com.github.dachhack.sprout.actors.mobs;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.sprites.BeeSprite;
 import com.github.dachhack.sprout.sprites.SteelBeeSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;

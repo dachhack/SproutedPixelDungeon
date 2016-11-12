@@ -109,7 +109,8 @@ public class Badges {
 				"2000 games played", 63, true), HAPPY_END("Happy end", 38), CHAMPION(
 				"Challenge won", 39, true), SUPPORTER(
 				"Thanks for your support!", 31, true),
-				 ORB("Orb of Zot obtained!", 68)
+				 ORB("Orb of Zot obtained!", 68),
+				 OTILUKE("Otiluke rescued!",65)
 				 ;
 
 		public boolean meta;
@@ -672,13 +673,29 @@ public class Badges {
 	}
 	
 	public static void validateOrbObtained()  {
-			if (!local.contains(Badge.ORB)) {
-				Badge badge = Badge.ORB;
-				local.add(badge);
-				displayBadge(badge);
+		    Badge badge = Badge.ORB;
+	    	local.add(badge);
+			displayBadge(badge);
+			if (!global.contains(Badge.ORB)) {
+				global.add(badge);		
 			}
 		}
 
+	public static boolean checkOrbObtained()  {
+		return global.contains(Badge.ORB); 
+	}
+	
+	public static void validateOtilukeRescued()  {
+		if (!local.contains(Badge.OTILUKE)) {
+			Badge badge = Badge.OTILUKE;
+			local.add(badge);
+			displayBadge(badge);
+		}
+	}
+
+   public static boolean checkOtilukeRescued()  {
+	   return local.contains(Badge.OTILUKE); 
+   }
 
 
 	public static void validateMastery() {

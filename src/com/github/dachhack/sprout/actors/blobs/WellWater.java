@@ -31,7 +31,7 @@ import com.watabou.utils.Random;
 
 public class WellWater extends Blob {
 
-	protected int pos;
+	public int pos;
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {

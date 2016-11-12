@@ -18,16 +18,11 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
 import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.quest.DwarfToken;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
-import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
 
@@ -35,6 +30,7 @@ public class WndDescend extends Window {
 
 	private static final String TXT_MESSAGE = "Are you sure you want to descend? "
                                              +"Any dew on this level will evaporate and your dew charge might be wasted. "
+			                                 +"If you have not cleared the level, you will forfeit any additional dew charge for the next level. "
 			                                 +"If you really want to descend click the button below then try the stairs again. ";
 	private static final String TXT_REWARD = "Descend";
 

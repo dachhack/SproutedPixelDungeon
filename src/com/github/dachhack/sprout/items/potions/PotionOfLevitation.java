@@ -34,6 +34,8 @@ public class PotionOfLevitation extends Potion {
 		name = "Potion of Levitation";
 	}
 
+	private static final String TXT_PREVENTING = "Strog magic on this level prevents you from levitating.";
+	
 	@Override
 	public void shatter(int cell) {
 
@@ -59,6 +61,20 @@ public class PotionOfLevitation extends Potion {
 		return "Drinking this curious liquid will cause you to hover in the air, "
 				+ "able to drift effortlessly over traps and pits. Throwing this potion "
 				+ "will create a cloud of unrefined gas, disorienting anything caught in it.";
+	}
+	
+	@Override
+	public void execute(final Hero hero, String action) {
+		if (action.equals(AC_DRINK)) {
+			
+		  if (Dungeon.depth>50) {
+				GLog.w(TXT_PREVENTING);
+				return;		
+		   } 
+		}
+		
+	   super.execute(hero, action);
+		 	
 	}
 
 	@Override

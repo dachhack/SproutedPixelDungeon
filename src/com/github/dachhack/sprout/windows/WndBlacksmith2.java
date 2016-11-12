@@ -20,7 +20,6 @@ package com.github.dachhack.sprout.windows;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
 import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith2;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.scenes.GameScene;

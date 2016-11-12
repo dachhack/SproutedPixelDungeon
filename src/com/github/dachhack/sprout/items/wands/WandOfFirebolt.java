@@ -32,7 +32,6 @@ import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
-import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
@@ -154,7 +153,7 @@ public class WandOfFirebolt extends Wand {
 	
 	@Override
 	protected void fx(int cell, Callback callback) {
-		MagicMissile.fire(curUser.sprite.parent, curUser.pos, cell, callback);
+		MagicMissile.fire(curUser.sprite.parent, curUser.pos, cell, callback);		
 		Sample.INSTANCE.play(Assets.SND_ZAP);
 	}
 

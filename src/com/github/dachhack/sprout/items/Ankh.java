@@ -51,7 +51,7 @@ public class Ankh extends Item {
 		bones = true;
 	}
 
-	private Boolean blessed = false;
+	private Boolean blessed = true;
 
 	@Override
 	public boolean isUpgradable() {

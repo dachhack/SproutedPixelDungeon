@@ -70,6 +70,15 @@ public class Terrain {
 	public static final int SECRET_SUMMONING_TRAP = 40;
 	public static final int FLEECING_TRAP = 65;
 	public static final int WOOL_RUG = 66;
+	public static final int SOKOBAN_SHEEP = 67;
+	public static final int CORNER_SOKOBAN_SHEEP = 68;
+	public static final int SWITCH_SOKOBAN_SHEEP = 69;
+	public static final int CHANGE_SHEEP_TRAP = 70;
+	public static final int SOKOBAN_ITEM_REVEAL = 71;
+	public static final int SOKOBAN_HEAP = 72;
+	public static final int BLACK_SOKOBAN_SHEEP = 73;
+	public static final int SOKOBAN_PORT_SWITCH = 75;
+	public static final int PORT_WELL = 74;
 
 	public static final int WATER_TILES = 48;
 	public static final int WATER = 63;
@@ -138,9 +147,19 @@ public class Terrain {
 		flags[SUMMONING_TRAP] = AVOID;
 		flags[SECRET_SUMMONING_TRAP] = flags[EMPTY] | SECRET;
 		flags[INACTIVE_TRAP] = flags[EMPTY];
-		flags[FLEECING_TRAP] = AVOID;
+		flags[FLEECING_TRAP] = AVOID ;
 		flags[WOOL_RUG] = PASSABLE;
+		flags[SOKOBAN_SHEEP] = PASSABLE;
+		flags[CORNER_SOKOBAN_SHEEP] = PASSABLE;
+		flags[SWITCH_SOKOBAN_SHEEP] = PASSABLE;
+		flags[CHANGE_SHEEP_TRAP] = PASSABLE;
+		flags[SOKOBAN_ITEM_REVEAL] = PASSABLE;
+		flags[SOKOBAN_HEAP] = PASSABLE;
+		flags[BLACK_SOKOBAN_SHEEP] = PASSABLE;
+		flags[SOKOBAN_PORT_SWITCH] = PASSABLE;
+		flags[PORT_WELL] = PASSABLE;
 
+		
 		for (int i = WATER_TILES; i < WATER_TILES + 16; i++) {
 			flags[i] = flags[WATER];
 		}

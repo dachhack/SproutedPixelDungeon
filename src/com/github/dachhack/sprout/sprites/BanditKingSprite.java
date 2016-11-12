@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.sprites;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.sprites.CharSprite.State;
 import com.watabou.noosa.TextureFilm;
 
 public class BanditKingSprite extends MobSprite {

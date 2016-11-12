@@ -24,7 +24,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
-import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.windows.WndBag;
@@ -79,7 +79,8 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 				} else {
 					Item item = select(slotNum);
 					if (item.stackable || item instanceof Wand
-							|| item instanceof Boomerang)
+							|| item instanceof Boomerang
+							|| item instanceof JupitersWraith)
 						useTargeting();
 					item.execute(Dungeon.hero);
 				}

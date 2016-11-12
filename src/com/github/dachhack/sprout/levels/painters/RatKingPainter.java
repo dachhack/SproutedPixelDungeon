@@ -18,11 +18,14 @@
 package com.github.dachhack.sprout.levels.painters;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.mobs.npcs.RatKing;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.bags.AnkhChain;
+import com.github.dachhack.sprout.items.journalpages.Town;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Room;
@@ -31,6 +34,8 @@ import com.watabou.utils.Random;
 
 public class RatKingPainter extends Painter {
 
+	static boolean page = false;
+	
 	public static void paint(Level level, Room room) {
 
 		fill(level, room, Terrain.WALL);
@@ -65,7 +70,7 @@ public class RatKingPainter extends Painter {
 		level.mobs.add(king);
 	}
 
-	private static void addChest(Level level, int pos, int door) {
+	private static void addChest(Level level, int pos, int door) {		
 
 		if (pos == door - 1 || pos == door + 1 || pos == door - Level.getWidth()
 				|| pos == door + Level.getWidth()) {
@@ -91,7 +96,12 @@ public class RatKingPainter extends Painter {
 			break;
 		}
 
+		if (!page && Statistics.enemiesSlain<21 && Dungeon.limitedDrops.journal.dropped()){
+			level.drop(new Town(), pos);
+			page=true;
+		} else {
 		level.drop(prize, pos).type = Heap.Type.CHEST;
 		Dungeon.ratChests++;
+		}
 	}
 }

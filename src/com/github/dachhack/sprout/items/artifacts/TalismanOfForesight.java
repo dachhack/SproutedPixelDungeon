@@ -40,7 +40,7 @@ public class TalismanOfForesight extends Artifact {
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
-		if (isEquipped(hero) && charge == 100 && !cursed)
+		if (isEquipped(hero) && charge == 100 && !cursed && !Dungeon.sokobanLevel(Dungeon.depth))
 			actions.add(AC_SCRY);
 		return actions;
 	}

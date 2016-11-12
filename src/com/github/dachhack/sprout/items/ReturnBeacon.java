@@ -19,24 +19,15 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
-import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
-import com.github.dachhack.sprout.items.wands.WandOfBlink;
-import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
-import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Game;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Bundle;
 
 public class ReturnBeacon extends Item {
 

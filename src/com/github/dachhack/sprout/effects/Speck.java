@@ -46,6 +46,7 @@ public class Speck extends Image {
 	public static final int BUBBLE = 12;
 	public static final int STEAM = 13;
 	public static final int COIN = 14;
+	public static final int CORRUPT = 15;
 
 	public static final int DISCOVER = 101;
 	public static final int EVOKE = 102;
@@ -104,6 +105,7 @@ public class Speck extends Image {
 		case STENCH:
 		case CONFUSION:
 		case DUST:
+		case CORRUPT:
 			frame(film.get(STEAM));
 			break;
 		default:
@@ -271,6 +273,13 @@ public class Speck extends Image {
 			angle = Random.Float(360);
 			lifespan = Random.Float(1f, 3f);
 			break;
+			
+		case CORRUPT:
+			hardlight(0xCCFFCC);
+			angularSpeed = 30;
+			angle = Random.Float(360);
+			lifespan = Random.Float(1f, 3f);
+			break;
 
 		case PARALYSIS:
 			hardlight(0xFFFF66);
@@ -402,6 +411,7 @@ public class Speck extends Image {
 			case TOXIC:
 			case PARALYSIS:
 			case CONFUSION:
+			case CORRUPT:
 			case DUST:
 				am = p < 0.5f ? p : 1 - p;
 				scale.set(1 + p * 2);

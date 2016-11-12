@@ -41,7 +41,6 @@ import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DemonGooSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.watabou.noosa.Camera;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 

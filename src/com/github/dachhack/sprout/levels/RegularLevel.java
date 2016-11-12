@@ -144,7 +144,7 @@ public abstract class RegularLevel extends Level {
 		}
 
 		specials = new ArrayList<Room.Type>(Room.SPECIALS);
-		if (Dungeon.bossLevel(Dungeon.depth + 1)) {
+		if (Dungeon.bossLevel(Dungeon.depth + 1) || Dungeon.townCheck(Dungeon.depth)) {
 			specials.remove(Room.Type.WEAK_FLOOR);
 		}
 		if (Dungeon.isChallenged(Challenges.NO_ARMOR)) {
@@ -156,9 +156,27 @@ public abstract class RegularLevel extends Level {
 			specials.remove(Room.Type.GARDEN);
 		}
 		
-		if (Dungeon.depth > 21 && Dungeon.depth < 27) {
+		if (Dungeon.depth > 21 && Dungeon.depth < 100) {
 				specials.remove(Room.Type.WEAK_FLOOR);
 		}
+		
+		if (Dungeon.depth > 50 && Dungeon.depth < 100) {
+			specials.remove(Room.Type.WEAK_FLOOR);
+			specials.remove(Room.Type.ARMORY);
+			specials.remove(Room.Type.CRYPT);
+			specials.remove(Room.Type.GARDEN);
+			specials.remove(Room.Type.LABORATORY);
+			specials.remove(Room.Type.LIBRARY);
+			specials.remove(Room.Type.MAGIC_WELL);
+			specials.remove(Room.Type.POOL);
+			specials.remove(Room.Type.STATUE);
+			specials.remove(Room.Type.STORAGE);
+			specials.remove(Room.Type.TRAPS);
+			specials.remove(Room.Type.TREASURY);
+			specials.remove(Room.Type.VAULT);
+	}
+		
+		
 		if (!assignRoomType())
 			return false;
 

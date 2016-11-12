@@ -62,4 +62,10 @@ public class ScrollOfUpgrade extends InventoryScroll {
 				+ "the effect of a ring on its wearer will intensify. Weapons and armor will also "
 				+ "require less strength to use, and any curses on the item will be lifted.";
 	}
+	
+
+	@Override
+	public int price() {
+		return 100 * quantity;
+	}
 }

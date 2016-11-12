@@ -17,38 +17,22 @@
  */
 package com.github.dachhack.sprout.actors.mobs.pets;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Weakness;
-import com.github.dachhack.sprout.actors.mobs.Bee;
-import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
-import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.DM300Sprite;
-import com.github.dachhack.sprout.sprites.FairySprite;
-import com.github.dachhack.sprout.sprites.GreenDragonSprite;
-import com.github.dachhack.sprout.sprites.MirrorSprite;
-import com.github.dachhack.sprout.sprites.RedDragonSprite;
-import com.github.dachhack.sprout.sprites.SteelBeeSprite;
 import com.github.dachhack.sprout.sprites.SugarplumFairySprite;
-import com.github.dachhack.sprout.sprites.WarlockSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
@@ -73,7 +57,12 @@ public class SugarplumFairy extends PET implements Callback{
 	
 	//Frames 0,2 are idle, 0,1,2 are moving, 0,3,4,1 are attack and 5,6,7 are for death 
 
-				
+
+	@Override
+	public int dr(){
+		return level*5;
+	}			
+	
 	protected int regen = 1;	
 	protected float regenChance = 0.2f;	
 		
@@ -81,7 +70,7 @@ public class SugarplumFairy extends PET implements Callback{
 	@Override
 	public void adjustStats(int level) {
 		this.level = level;
-		HT = (level) * 5;
+		HT = (level) * 10;
 		defenseSkill = 5+(level*level);
 	}
 	
@@ -196,9 +185,22 @@ public class SugarplumFairy extends PET implements Callback{
 	}
 		
 	
+
 	@Override
 	public void interact() {
 
+		if (this.buff(MagicalSleep.class) != null) {
+			Buff.detach(this, MagicalSleep.class);
+		}
+		
+		if (state == SLEEPING) {
+			state = HUNTING;
+		}
+		if (buff(Paralysis.class) != null) {
+			Buff.detach(this, Paralysis.class);
+			GLog.i("You shake your %s out of paralysis.", name);
+		}
+		
 		int curPos = pos;
 
 		moveSprite(pos, Dungeon.hero.pos);
@@ -210,7 +212,6 @@ public class SugarplumFairy extends PET implements Callback{
 		Dungeon.hero.spend(1 / Dungeon.hero.speed());
 		Dungeon.hero.busy();
 	}
-
 
 @Override
 public String description() {

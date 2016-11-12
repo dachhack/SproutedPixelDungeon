@@ -17,15 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.RatSprite;
 import com.watabou.utils.Random;

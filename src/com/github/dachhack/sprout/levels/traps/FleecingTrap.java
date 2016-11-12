@@ -22,19 +22,20 @@ import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanBlack;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
-import com.github.dachhack.sprout.effects.particles.SparkParticle;
-import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.armor.Armor;
-import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.items.keys.IronKey;
+import com.github.dachhack.sprout.items.wands.WandOfFlock.Sheep;
+import com.github.dachhack.sprout.levels.traps.LightningTrap.Electricity;
+import com.github.dachhack.sprout.scenes.InterlevelScene;
+import com.github.dachhack.sprout.sprites.HeroSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
-import com.watabou.utils.Random;
+import com.watabou.noosa.Game;
 
 public class FleecingTrap {
 
@@ -44,35 +45,62 @@ public class FleecingTrap {
 
 	public static void trigger(int pos, Char ch) {
 
-		if (ch instanceof SheepSokoban || ch instanceof SheepSokobanCorner || ch instanceof SheepSokobanSwitch ){
+		if (ch instanceof SheepSokoban || ch instanceof SheepSokobanCorner || ch instanceof SheepSokobanSwitch || ch instanceof Sheep || ch instanceof SheepSokobanBlack ){
 			Camera.main.shake(2, 0.3f);
-			ch.sprite.emitter().burst(ShadowParticle.UP, 5);
 			ch.destroy();
+			ch.sprite.killAndErase();
+			ch.sprite.emitter().burst(ShadowParticle.UP, 5);
 		
 		} else if (ch != null) {
 			
-			int dmg = ch.HT;			
+			int dmg = ch.HP;	
+			boolean port=true;
 						
 			if (ch == Dungeon.hero) {
 				
-				Armor armor = Dungeon.hero.belongings.armor; 
+				Hero hero = Dungeon.hero;
+			
+				Armor armor = hero.belongings.armor; 
 				if (armor!=null){
-					 Dungeon.hero.belongings.armor=null;
-					 GLog.n("The fleecing trap destroys your armor!");
-					 dmg=dmg/2;
-				}
+					hero.belongings.armor=null;
+					GLog.n("The fleecing trap destroys your armor!");
+					((HeroSprite) hero.sprite).updateArmor();
+					dmg=dmg-1;
+					port=false;
+				}			
+						
+		    }
+			
+			//Port back to 1,1 or something
+			
+			Camera.main.shake(2, 0.3f);
+			ch.sprite.emitter().burst(ShadowParticle.UP, 5);
+			
+			if (ch == Dungeon.hero && port) {
+				 IronKey key = ((Hero)ch).belongings.getKey(IronKey.class, Dungeon.depth);
+				 if (key!=null){key.detachAll(Dungeon.hero.belongings.backpack);}				
+			  InterlevelScene.mode = InterlevelScene.Mode.SOKOBANFAIL;
+			  Game.switchScene(InterlevelScene.class);
+			}
+									
+			if (ch == Dungeon.hero) {
 
-				ch.damage((dmg),null);
 				Camera.main.shake(2, 0.3f);
-				ch.sprite.emitter().burst(ShadowParticle.UP, 5);
 
 				if (!ch.isAlive()) {
 					Dungeon.fail(Utils.format(ResultDescriptions.TRAP, name));
 					GLog.n("You were killed by a discharge of a fleecing trap...");
 				} 
-		    }
+			}
 		}
+		
+		Dungeon.hero.next();
 
+	}
+	
+	public static final Fleece FLEECE = new Fleece();
+
+	public static class Fleece {
 	}
 
 	

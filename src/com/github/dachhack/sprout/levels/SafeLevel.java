@@ -17,262 +17,583 @@
  */
 package com.github.dachhack.sprout.levels;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.Alchemy;
+import com.github.dachhack.sprout.actors.blobs.Blob;
+import com.github.dachhack.sprout.actors.blobs.Fire;
+import com.github.dachhack.sprout.actors.blobs.Foliage;
+import com.github.dachhack.sprout.actors.blobs.Portal;
+import com.github.dachhack.sprout.actors.blobs.WaterOfHealth;
+import com.github.dachhack.sprout.actors.blobs.WaterOfTransmutation;
+import com.github.dachhack.sprout.actors.blobs.WellWater;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.SokobanSentinel;
+import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanBlack;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
+import com.github.dachhack.sprout.effects.CellEmitter;
+import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.levels.Room.Type;
+import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.keys.IronKey;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
+import com.github.dachhack.sprout.items.wands.WandOfFlock.Sheep;
+import com.github.dachhack.sprout.levels.features.Chasm;
+import com.github.dachhack.sprout.levels.features.Door;
+import com.github.dachhack.sprout.levels.features.HighGrass;
+import com.github.dachhack.sprout.levels.traps.ActivatePortalTrap;
+import com.github.dachhack.sprout.levels.traps.AlarmTrap;
+import com.github.dachhack.sprout.levels.traps.ChangeSheepTrap;
+import com.github.dachhack.sprout.levels.traps.FireTrap;
+import com.github.dachhack.sprout.levels.traps.FleecingTrap;
+import com.github.dachhack.sprout.levels.traps.GrippingTrap;
+import com.github.dachhack.sprout.levels.traps.HeapGenTrap;
+import com.github.dachhack.sprout.levels.traps.LightningTrap;
+import com.github.dachhack.sprout.levels.traps.ParalyticTrap;
+import com.github.dachhack.sprout.levels.traps.PoisonTrap;
+import com.github.dachhack.sprout.levels.traps.SokobanPortalTrap;
+import com.github.dachhack.sprout.levels.traps.SummoningTrap;
+import com.github.dachhack.sprout.levels.traps.ToxicTrap;
+import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.watabou.noosa.Scene;
+import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.Graph;
 import com.watabou.utils.Random;
+import com.watabou.utils.SparseArray;
 
-public class SafeLevel extends RegularLevel {
+public class SafeLevel extends Level {
+
 
 	{
-		color1 = 0x48763c;
-		color2 = 0x59994a;
+		color1 = 0x534f3e;
+		color2 = 0xb9d661;
+		WIDTH = 48;
+		HEIGHT = 48;
+		LENGTH = HEIGHT*WIDTH;
+	}
+	
+	
+	public HashSet<Item> heapstogen;
+	public int[] heapgenspots;
+	public int[] teleportspots;
+	public int[] portswitchspots;
+	public int[] teleportassign;
+	public int[] destinationspots;
+	public int[] destinationassign;
+	public int prizeNo;
+	
+	private static final String HEAPSTOGEN = "heapstogen";
+	private static final String HEAPGENSPOTS = "heapgenspots";
+	private static final String TELEPORTSPOTS = "teleportspots";
+	private static final String PORTSWITCHSPOTS = "portswitchspots";
+	private static final String DESTINATIONSPOTS = "destinationspots";
+	private static final String TELEPORTASSIGN = "teleportassign";
+	private static final String DESTINATIONASSIGN= "destinationassign";
+	private static final String PRIZENO = "prizeNo";
+	
+	
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		super.storeInBundle(bundle);
+		bundle.put(HEAPSTOGEN, heapstogen);
+		bundle.put(HEAPGENSPOTS, heapgenspots);
+		bundle.put(TELEPORTSPOTS, teleportspots);
+		bundle.put(PORTSWITCHSPOTS, portswitchspots);
+		bundle.put(DESTINATIONSPOTS, destinationspots);
+		bundle.put(DESTINATIONASSIGN, destinationassign);
+		bundle.put(TELEPORTASSIGN, teleportassign);
+		bundle.put(PRIZENO, prizeNo);
+	}
+	
+	
+	
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		
+		      super.restoreFromBundle(bundle);
+		      
+		      heapgenspots = bundle.getIntArray(HEAPGENSPOTS);
+		      teleportspots = bundle.getIntArray(TELEPORTSPOTS);
+		      portswitchspots = bundle.getIntArray(PORTSWITCHSPOTS);
+		      destinationspots = bundle.getIntArray(DESTINATIONSPOTS);
+		      destinationassign = bundle.getIntArray(DESTINATIONASSIGN);
+		      teleportassign = bundle.getIntArray(TELEPORTASSIGN);
+		      prizeNo = bundle.getInt(PRIZENO);
+		      
+		      heapstogen = new HashSet<Item>();
+		      
+		      Collection <Bundlable> collectionheap = bundle.getCollection(HEAPSTOGEN);
+				for (Bundlable i : collectionheap) {
+					Item item = (Item) i;
+					if (item != null) {
+						heapstogen.add(item);
+					}
+				}
 	}
 
-	private int stairs = 0;
+  @Override
+  public void create() {
+	   heapstogen = new HashSet<Item>();
+	   heapgenspots = new int[10];
+	   teleportspots = new int[10];
+	   portswitchspots = new int[10];
+	   destinationspots = new int[10];
+	   destinationassign = new int[10];
+	   teleportassign = new int[10];
+	   super.create();	
+   }	
+  
+  public void addItemToGen(Item item, int arraypos, int pos) {
+		if (item != null) {
+			heapstogen.add(item);
+			heapgenspots[arraypos]=pos;
+		}
+	}
+  
+  
+	public Item genPrizeItem() {
+		return genPrizeItem(null);
+	}
+	
+	
+	public Item genPrizeItem(Class<? extends Item> match) {
+		
+		boolean keysLeft = false;
+		
+		if (heapstogen.size() == 0)
+			return null;
+
+		for (Item item : heapstogen) {
+			if (match.isInstance(item)) {
+				heapstogen.remove(item);
+				keysLeft=true;
+				return item;
+			}
+		}
+		
+		if (match == null || !keysLeft) {
+			Item item = Random.element(heapstogen);
+			heapstogen.remove(item);
+			return item;
+		}
+
+		return null;
+	}
+	
+	@Override
+	public void press(int cell, Char ch) {
+
+		if (pit[cell] && ch == Dungeon.hero) {
+			Chasm.heroFall(cell);
+			return;
+		}
+
+		TimekeepersHourglass.timeFreeze timeFreeze = null;
+
+		if (ch != null)
+			timeFreeze = ch.buff(TimekeepersHourglass.timeFreeze.class);
+
+		boolean trap = false;
+		
+		switch (map[cell]) {
+
+			case Terrain.FLEECING_TRAP:			
+					
+			if (ch != null && ch==Dungeon.hero){
+				trap = true;
+				FleecingTrap.trigger(cell, ch);
+			}
+			break;
+			
+		case Terrain.CHANGE_SHEEP_TRAP:
+			
+			if (ch instanceof SheepSokoban || ch instanceof SheepSokobanSwitch || ch instanceof SheepSokobanCorner || ch instanceof Sheep){
+				trap = true;
+				ChangeSheepTrap.trigger(cell, ch);
+			}						
+			break;
+			
+        case Terrain.PORT_WELL:
+			
+			if (ch != null && ch==Dungeon.hero){
+
+				int portarray=-1;
+				int destinationspot=cell;
+				
+				for(int i = 0; i < teleportspots.length; i++) {
+					  if(teleportspots[i] == cell) {
+						     portarray = i;
+						     break;
+						  }
+				}
+				
+				if(portarray != -1) {
+					destinationspot=destinationspots[portarray];
+					if (destinationspot>0){
+					SokobanPortalTrap.trigger(cell, ch, destinationspot);
+					}
+				}				
+			}						
+			break;
+
+		case Terrain.HIGH_GRASS:
+			HighGrass.trample(this, cell, ch);
+			break;
+
+		case Terrain.WELL:
+			WellWater.affectCell(cell);
+			break;
+
+		case Terrain.ALCHEMY:
+			if (ch == null) {
+				Alchemy.transmute(cell);
+			}
+			break;
+
+		case Terrain.DOOR:
+			Door.enter(cell);
+			break;
+		}
+
+		if (trap){
+
+			if (Dungeon.visible[cell])
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+
+			if (ch == Dungeon.hero)
+				Dungeon.hero.interrupt();
+
+			set(cell, Terrain.INACTIVE_TRAP);
+			GameScene.updateMap(cell);					
+		} 
+
+		Plant plant = plants.get(cell);
+		if (plant != null) {
+			plant.activate(ch);
+		}
+	}
+
+	
+	
+	@Override
+	public void mobPress(Mob mob) {
+
+		int cell = mob.pos;
+
+		if (pit[cell] && !mob.flying) {
+			Chasm.mobFall(mob);
+			return;
+		}
+
+		boolean trap = true;
+		boolean fleece = false;
+		boolean sheep = false;
+		switch (map[cell]) {
+
+		case Terrain.TOXIC_TRAP:
+			ToxicTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.FIRE_TRAP:
+			FireTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.PARALYTIC_TRAP:
+			ParalyticTrap.trigger(cell, mob);
+			break;
+			
+		case Terrain.FLEECING_TRAP:
+			if (mob instanceof SheepSokoban || mob instanceof SheepSokobanSwitch || mob instanceof SheepSokobanCorner || mob instanceof SheepSokobanBlack || mob instanceof Sheep){
+				fleece=true;
+			}
+			FleecingTrap.trigger(cell, mob);
+			break;
+			
+		case Terrain.CHANGE_SHEEP_TRAP:
+			trap=false;
+			if (mob instanceof SheepSokoban || mob instanceof SheepSokobanSwitch || mob instanceof SheepSokobanCorner || mob instanceof Sheep){
+				trap=true;
+				ChangeSheepTrap.trigger(cell, mob);
+			}						
+			break;
+			
+		case Terrain.SOKOBAN_ITEM_REVEAL:
+			trap=false;
+			if (mob instanceof SheepSokoban || mob instanceof SheepSokobanSwitch || mob instanceof SheepSokobanCorner || mob instanceof SheepSokobanBlack || mob instanceof Sheep){
+				HeapGenTrap.trigger(cell, mob);
+				drop(genPrizeItem(IronKey.class),heapgenspots[prizeNo]);
+				prizeNo++;
+				sheep=true;
+			}						
+			break;
+			
+		case Terrain.SOKOBAN_PORT_SWITCH:
+			trap=false;
+			if (mob instanceof SheepSokoban || mob instanceof SheepSokobanSwitch || mob instanceof SheepSokobanCorner || mob instanceof SheepSokobanBlack || mob instanceof Sheep){
+				ActivatePortalTrap.trigger(cell, mob);
+				
+				/*
+				public int[] teleportspots; location of teleports
+				public int[] portswitchspots; location of switches
+				public int[] teleportassign; assignment of teleports to switches
+				public int[] destinationspots; current assignment of destination spots to teleports
+				public int[] destinationassign; assignemnt of destination spots to switches
+				*/
+				
+				int arraypos = -1; //position in array of teleport switch
+				int portpos = -1; //position on map of teleporter
+				int portarray = -1; //position in array of teleporter
+				int destpos = -1; //destination position assigned to switch
+				
+				for(int i = 0; i < portswitchspots.length; i++) {
+				  if(portswitchspots[i] == cell) {
+				     arraypos = i;
+				     GLog.i("Pos1 %s", arraypos);
+				     break;
+				  }
+				}
+				
+				portpos = teleportassign[arraypos];
+				destpos = destinationassign[arraypos];
+				
+				GLog.i("ass2 %s", portpos);
+				GLog.i("dest3 %s", destpos);
+				
+				for(int i = 0; i < teleportspots.length; i++) {
+					  if(teleportspots[i] == portpos) {
+						     portarray = i;
+						     GLog.i("Pos4 %s", portarray);
+						     break;
+						  }
+				}
+				
+				if (map[portpos] == Terrain.PORT_WELL){
+					destinationspots[portarray]=destpos;	
+					GLog.i("Pos5 %s", destpos);
+				}
+				
+				sheep=true;
+			}						
+			break;
+
+		case Terrain.POISON_TRAP:
+			PoisonTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.ALARM_TRAP:
+			AlarmTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.LIGHTNING_TRAP:
+			LightningTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.GRIPPING_TRAP:
+			GrippingTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.SUMMONING_TRAP:
+			SummoningTrap.trigger(cell, mob);
+			break;
+
+		case Terrain.DOOR:
+			Door.enter(cell);
+
+		default:
+			trap = false;
+		}
+
+		if (trap && !fleece && !sheep) {
+			if (Dungeon.visible[cell]) {
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+			}
+			set(cell, Terrain.INACTIVE_TRAP);
+			GameScene.updateMap(cell);
+		}
+		
+		if (trap && fleece) {
+			if (Dungeon.visible[cell]) {
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+			}
+			set(cell, Terrain.WOOL_RUG);
+			GameScene.updateMap(cell);
+		} 	
+		
+		if (trap && sheep) {
+			if (Dungeon.visible[cell]) {
+				Sample.INSTANCE.play(Assets.SND_TRAP);
+			}
+			set(cell, Terrain.EMPTY);
+			GameScene.updateMap(cell);
+		}
+	
+		
+		Plant plant = plants.get(cell);
+		if (plant != null) {
+			plant.activate(mob);
+		}
+		
+		Dungeon.observe();
+	}
 
 	@Override
 	public String tilesTex() {
-		return Assets.TILES_CAVES;
+		return Assets.TILES_PRISON;
 	}
 
 	@Override
 	public String waterTex() {
-		return Assets.WATER_CAVES;
+		return Assets.WATER_PRISON;
 	}
 
 	@Override
 	protected boolean build() {
-
-		initRooms();
-
-		int distance;
-		// if we ever need to try 20 or more times to find a room, better to
-		// give up and try again.
-		int retry = 0;
-
-		// start with finding an entrance room (will also contain exit)
-		// the room must be at least 4x4 and be nearer the top of the map(so
-		// that it is less likely something connects to the top)
-		do {
-			if (retry++ > 20) {
-				return false;
-			}
-			roomEntrance = Random.element(rooms);
-		} while (roomEntrance.width() < 4 || roomEntrance.height() < 4
-				|| roomEntrance.top == 0 || roomEntrance.top >= 12);
-
-		roomEntrance.type = Type.ENTRANCE;
-		roomExit = roomEntrance;
-
-		// now find the rest of the rooms for this boss mini-maze
-		Room curRoom = null;
-		Room lastRoom = roomEntrance;
-		// we make 4 rooms, last iteration is tieing the final room to the start
-		for (int i = 0; i <= 2; i++) {
-			retry = 0;
-			// find a suitable room the first four times
-			// suitable room should be empty, have a distance of 2 from the
-			// current room, and not touch the entrance.
-			if (i < 2) {
-				do {
-					if (retry++ > 20) {
-						return false;
-					}
-					curRoom = Random.element(rooms);
-					Graph.buildDistanceMap(rooms, curRoom);
-					distance = lastRoom.distance();
-				} while (curRoom.type != Type.NULL || distance != 2
-						|| !curRoom.intersect(roomEntrance).isEmpty());
-
-				curRoom.type = Type.STANDARD;
-
-				// otherwise, we're on the last iteration.
-			} else {
-				// set the current room to the entrance, so we can build a
-				// connection to it.
-				curRoom = roomEntrance;
-			}
-
-			// now build a connection between the current room and the last one.
-			Graph.buildDistanceMap(rooms, curRoom);
-			List<Room> path = Graph.buildPath(rooms, lastRoom, curRoom);
-
-			Graph.setPrice(path, lastRoom.distance);
-
-			path = Graph.buildPath(rooms, lastRoom, curRoom);
-
-			Room room = lastRoom;
-			for (Room next : path) {
-				room.connect(next);
-				room = next;
-			}			
-			lastRoom = curRoom;
-		}
-
-		// the connection structure ensures that (most of the time) there is a
-		// nice loop for the player to kite the
-		// boss around. What's nice is that there is enough chaos such that the
-		// loop is rarely straightforward
-		// and boring.
-
-		// fills our connection rooms in with tunnel
-		for (Room r : rooms) {
-			if (r.type == Type.NULL && r.connected.size() > 0) {
-				r.type = Type.STANDARD;
-			}
-		}
-
-		// make sure nothing is connecting at the top of the entrance, this
-		// would be bad.
-		for (Room r : roomEntrance.neigbours) {
-			if (r.bottom == roomEntrance.top && r.type != Type.NULL)
-				return false;
-		}
-
-		paint();
-
-		// TODO: not handling this through a painter is kinda iffy, separate
-		// into a painter if you use it again.
-		// sticks the exit in the room entrance.
-		exit = roomEntrance.top * Level.getWidth()
-				+ (roomEntrance.left + roomEntrance.right) / 2;
 		
-		
-			map[exit] = Terrain.WALL;
-			map[entrance] = Terrain.PEDESTAL;
-	   
+		map = Layouts.SAFE_ROOM_DEFAULT.clone();	
+	
+		decorate();
 
-		paintWater();
-		paintGrass();
+		buildFlagMaps();
+		cleanWalls();
+		createSwitches();
+		createSheep();
+	
+		entrance = 23 + WIDTH * 15;
+		exit = 0;
+
 
 		return true;
 	}
-
-	@Override
-	protected boolean[] water() {
-		return Patch.generate(0.5f, 5);
-	}
-
-	@Override
-	protected boolean[] grass() {
-		return Patch.generate(0.40f, 4);
-	}
-
 	@Override
 	protected void decorate() {
-		int start = roomExit.top * getWidth() + roomExit.left + 1;
-		int end = start + roomExit.width() - 1;
-		for (int i = start; i < end; i++) {
-			if (i != exit) {
-				map[i] = Terrain.WALL_DECO;
-				map[i + getWidth()] = Terrain.WATER;
-			} else {
-				map[i + getWidth()] = Terrain.EMPTY;
-			}
-		}
-	}
-
-	@Override
-	public void addVisuals(Scene scene) {
-		SewerLevel.addVisuals(this, scene);
+		//do nothing, all decorations are hard-coded.
 	}
 
 	@Override
 	protected void createMobs() {
-		
-	}
-
-	@Override
-	public Actor respawner() {
-		return null;
-	}
-
-	@Override
-	protected void createItems() {
-		Item item = Bones.get();
-		if (item != null) {
-			int pos;
-			do {
-				pos = roomEntrance.random();
-			} while (pos == entrance || map[pos] == Terrain.SIGN);
-			drop(item, pos).type = Heap.Type.REMAINS;
-		}
+		/*
+		    SokobanSentinel mob = new SokobanSentinel();
+			mob.pos = 38 + WIDTH * 21;
+			mobs.add(mob);
+			Actor.occupyCell(mob);
+			
+			SokobanSentinel mob2 = new SokobanSentinel();
+			mob2.pos = 25 + WIDTH * 36;
+			mobs.add(mob2);
+			Actor.occupyCell(mob2);		
+			*/	
 	}
 	
 	
-	public void seal() {
-		if (entrance != 0) {
 
-			locked = true;
-
-			set(entrance, Terrain.WATER_TILES);
-			GameScene.updateMap(entrance);
-			GameScene.ripple(entrance);
-
-			stairs = entrance;
-			entrance = 0;
-		}
-	}
-
-	public void unseal() {
-		if (stairs != 0) {
-
-			locked = false;
-
-			entrance = stairs;
-			stairs = 0;
-
-			set(entrance, Terrain.ENTRANCE);
-			GameScene.updateMap(entrance);
-
-		}
-	}
-
-	private static final String STAIRS = "stairs";
-
+	
 	@Override
-	public void storeInBundle(Bundle bundle) {
-		super.storeInBundle(bundle);
-		bundle.put(STAIRS, stairs);
-	}
-
-	@Override
-	public void restoreFromBundle(Bundle bundle) {
-		super.restoreFromBundle(bundle);
-		stairs = bundle.getInt(STAIRS);
+	public String tileDesc(int tile) {
+		switch (tile) {
+		case Terrain.EMPTY_DECO:
+			return "There are old blood stains on the floor.";
+		default:
+			return super.tileDesc(tile);
+		}
 	}
 
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "Murky water";
+			return "Suspiciously colored water";
+		case Terrain.HIGH_GRASS:
+			return "High blooming flowers";
 		default:
 			return super.tileName(tile);
 		}
 	}
 
-	@Override
-	public String tileDesc(int tile) {
-		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "Wet yellowish moss covers the floor.";
-		default:
-			return super.tileDesc(tile);
-		}
+
+	protected void createSheep() {
+		 for (int i = 0; i < LENGTH; i++) {				
+				if (map[i]==Terrain.SOKOBAN_SHEEP){SheepSokoban npc = new SheepSokoban(); mobs.add(npc); npc.pos = i; Actor.occupyCell(npc);}
+				else if (map[i]==Terrain.CORNER_SOKOBAN_SHEEP){SheepSokobanCorner npc = new SheepSokobanCorner(); mobs.add(npc); npc.pos = i; Actor.occupyCell(npc);}
+				else if (map[i]==Terrain.SWITCH_SOKOBAN_SHEEP){SheepSokobanSwitch npc = new SheepSokobanSwitch(); mobs.add(npc); npc.pos = i; Actor.occupyCell(npc);}
+				else if (map[i]==Terrain.BLACK_SOKOBAN_SHEEP){SheepSokobanBlack npc = new SheepSokobanBlack(); mobs.add(npc); npc.pos = i; Actor.occupyCell(npc);}
+				else if (map[i]==Terrain.PORT_WELL){
+				
+					/*
+					Portal portal = new Portal();
+				portal.seed(i, 1);
+				blobs.put(Portal.class, portal);
+				*/
+				}
+				
+			}
 	}
+	
+	
+	protected void createSwitches(){
+		
+		//spots where your portal switches are
+		
+		
+		//spots where your portals are
+		
+		
+		
+		//assign each switch to a portal
+		
+						
+		//assign each switch to a destination spot
+		
+		
+		
+		//set the original destination of portals
+		
+				
+	}
+	
+
+	@Override
+	protected void createItems() {
+		 for (int i = 0; i < LENGTH; i++) {				
+				if (first && map[i]==Terrain.SOKOBAN_HEAP){
+					if (Random.Int(5)==0){drop(new ScrollOfUpgrade(), i).type = Heap.Type.CHEST;}
+					else {drop(new Gold(Random.Int(500, 1500)), i).type = Heap.Type.CHEST;}
+				}
+			}	
+		 if(first){
+		   addItemToGen(new IronKey(Dungeon.depth) , 0, 23 + WIDTH * 17);
+		 } else {
+			 addItemToGen(new Food(), 0, 23 + WIDTH * 17); 
+		 }
+		 /*
+		 if (first){
+		 addItemToGen(new ScrollOfMagicalInfusion(), 4, 11+10*WIDTH);
+		 }
+		 */
+		 
+	}
+
+	@Override
+	public int randomRespawnCell() {
+		return -1;
+	}
+		
+	
+
 }

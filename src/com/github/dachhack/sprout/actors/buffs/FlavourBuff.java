@@ -29,9 +29,15 @@ public class FlavourBuff extends Buff {
 	}
 	
 	//flavour buffs can all just rely on cooldown()
-		protected String dispTurns() {
+		public String dispTurns() {
 			//add one turn as buffs act last, we want them to end at 1 visually, even if they end at 0 internally.
 			float visualTurnsLeft = cooldown()+1f;
 			return visualTurnsLeft == 1 ? "1 more turn" : new DecimalFormat("#.##").format(visualTurnsLeft) + " more turns";
+		}
+		
+		public int dispTurnsInt() {
+			//add one turn as buffs act last, we want them to end at 1 visually, even if they end at 0 internally.
+			float visualTurnsLeft = cooldown()+1f;
+			return (int) visualTurnsLeft;
 		}
 }

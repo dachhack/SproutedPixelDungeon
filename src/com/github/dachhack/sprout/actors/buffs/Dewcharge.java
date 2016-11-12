@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class Dewcharge extends FlavourBuff {

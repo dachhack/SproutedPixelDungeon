@@ -99,6 +99,7 @@ public class Monk extends Mob {
 				hero.belongings.weapon = null;
 				Dungeon.level.drop(weapon, hero.pos).sprite.drop();
 				GLog.w(TXT_DISARM, name, weapon.name());
+				weapon.updateQuickslot();
 			}
 		}
 

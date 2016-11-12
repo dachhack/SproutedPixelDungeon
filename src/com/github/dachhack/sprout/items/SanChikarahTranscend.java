@@ -57,6 +57,16 @@ public class SanChikarahTranscend extends Item {
 	}
 	
 	@Override
+	public void doDrop(Hero hero) {
+		
+			if (Dungeon.level != null && Dungeon.depth==33) {
+				Dungeon.sanchikarahtranscend= false;							
+			}
+		
+			super.doDrop(hero);
+	}
+	
+	@Override
 	public int price() {
 		return 10 * quantity;
 	}

@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.actors.Actor;
@@ -212,8 +213,7 @@ public class Wandmaker extends NPC {
 		}
 
 		public static void spawn(PrisonLevel level, Room room) {
-			if (!spawned && Dungeon.depth > 6
-					&& Random.Int(10 - Dungeon.depth) == 0) {
+			if (!spawned && Dungeon.depth==7) {
 
 				Wandmaker npc = new Wandmaker();
 				do {
@@ -224,7 +224,12 @@ public class Wandmaker extends NPC {
 				Actor.occupyCell(npc);
 
 				spawned = true;
-				alternative = Random.Int(2) == 0;
+				
+				if (Dungeon.isChallenged(Challenges.NO_HERBALISM)){
+					alternative=true;
+				} else {
+				    alternative = Random.Int(2) == 0;
+				}
 
 				given = false;
 
@@ -269,7 +274,7 @@ public class Wandmaker extends NPC {
 		}
 
 		public static void placeItem() {
-			if (alternative) {
+			if (alternative || Dungeon.isChallenged(Challenges.NO_HERBALISM)) {
 
 				ArrayList<Heap> candidates = new ArrayList<Heap>();
 				for (Heap heap : Dungeon.level.heaps.values()) {

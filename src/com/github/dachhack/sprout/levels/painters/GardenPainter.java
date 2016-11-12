@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.blobs.Foliage;
 import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.SteelHoneypot;
 import com.github.dachhack.sprout.items.bags.AnkhChain;
@@ -71,6 +72,13 @@ public class GardenPainter extends Painter {
 			do {pos = room.random();}
 			while (level.heaps.get(pos) != null);
 			level.drop(new SteelHoneypot(), pos);
+		}
+		
+		if (Random.Int(100)==0 && (Dungeon.getMonth()==4 || Dungeon.getMonth()==5)){
+			int pos;
+			do {pos = room.random();}
+			while (level.heaps.get(pos) != null);
+			level.drop(new EasterEgg(), pos);
 		}
 		
 		if (Dungeon.depth==32 && Random.Float() < 0.75f){

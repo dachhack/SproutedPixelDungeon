@@ -293,6 +293,9 @@ public class GameScene extends PixelScene {
 		case FALL:
 			Chasm.heroLand();
 			break;
+		case PALANTIR:
+			WndStory.showChapter(WndStory.ID_ZOT);
+			break;
 		case DESCEND:
 			switch (Dungeon.depth) {
 			case 1:
@@ -307,10 +310,30 @@ public class GameScene extends PixelScene {
 			case 16:
 				WndStory.showChapter(WndStory.ID_METROPOLIS);
 				break;
-			case 22:
-				WndStory.showChapter(WndStory.ID_HALLS);
+			}
+			
+		case JOURNAL:
+			switch (Dungeon.depth) {
+			case 50:
+				WndStory.showChapter(WndStory.ID_SAFELEVEL);
+				break;
+			case 51:
+				WndStory.showChapter(WndStory.ID_SOKOBAN1);
+				break;
+			case 52:
+				WndStory.showChapter(WndStory.ID_SOKOBAN2);
+				break;
+			case 53:
+				WndStory.showChapter(WndStory.ID_SOKOBAN3);
+				break;
+			case 54:
+				WndStory.showChapter(WndStory.ID_SOKOBAN4);
+				break;
+			case 55:
+				WndStory.showChapter(WndStory.ID_TOWN);
 				break;
 			}
+			
 			if (Dungeon.hero.isAlive() && Dungeon.depth != 22) {
 				Badges.validateNoKilling();
 			}

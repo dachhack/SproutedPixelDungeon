@@ -21,13 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.levels.Room.Type;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.watabou.noosa.Scene;
@@ -40,6 +37,7 @@ public class ThiefCatchLevel extends RegularLevel {
 	{
 		color1 = 0x48763c;
 		color2 = 0x59994a;
+		cleared=true;
 	}
 
 	private int stairs = 0;

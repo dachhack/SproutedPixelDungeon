@@ -104,7 +104,8 @@ public class StandardPainter extends Painter {
 			case 5:
 				if (!Dungeon.bossLevel()
 						&& !Dungeon.bossLevel(Dungeon.depth + 1) 
-						&& (Dungeon.depth < 22 || Dungeon.depth > 26)
+						&& (Dungeon.depth < 22 || Dungeon.depth > 100)
+						&& !Dungeon.townCheck(Dungeon.depth)
 						&& Math.min(room.width(), room.height()) >= 5) {
 					paintFissure(level, room);
 					return;
@@ -216,6 +217,7 @@ public class StandardPainter extends Painter {
 		fill(level, room.left + 1, room.top + 1, room.width() - 1,
 				room.height() - 1,
 				!Dungeon.bossLevel() && !Dungeon.bossLevel(Dungeon.depth + 1) && (Dungeon.depth < 22 || Dungeon.depth > 26)
+				       && !Dungeon.townCheck(Dungeon.depth)
 						&& Random.Int(3) == 0 ? Terrain.CHASM : Terrain.WATER);
 
 		Point door1 = null;

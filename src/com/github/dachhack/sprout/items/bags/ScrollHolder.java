@@ -17,11 +17,8 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
-import com.github.dachhack.sprout.actors.mobs.SeekingBomb;
-import com.github.dachhack.sprout.actors.mobs.SeekingClusterBomb;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.ActiveMrDestructo2;
-import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.ClusterBomb;
 import com.github.dachhack.sprout.items.DizzyBomb;
@@ -33,7 +30,6 @@ import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.SeekingBombItem;
 import com.github.dachhack.sprout.items.SeekingClusterBombItem;
 import com.github.dachhack.sprout.items.SmartBomb;
-import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 

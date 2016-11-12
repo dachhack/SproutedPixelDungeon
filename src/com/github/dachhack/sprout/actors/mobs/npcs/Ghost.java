@@ -46,8 +46,8 @@ import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.SewersKey;
 import com.github.dachhack.sprout.items.TenguKey;
 import com.github.dachhack.sprout.items.armor.Armor;
-import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
+import com.github.dachhack.sprout.items.journalpages.SafeSpotPage;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.missiles.CurareDart;
@@ -248,7 +248,7 @@ public class Ghost extends NPC {
 		private static int type;
 
 		private static boolean given;
-		private static boolean processed;
+		public static boolean processed;
 
 		private static int depth;
 
@@ -688,6 +688,11 @@ public class Ghost extends NPC {
 			 if(!Dungeon.limitedDrops.tengukey.dropped() && Dungeon.tengukilled && Statistics.archersKilled > 100) {
 					Dungeon.limitedDrops.tengukey.drop();
 					Dungeon.level.drop(new TenguKey(), pos).sprite.drop();
+				}
+			 
+			 if(!Dungeon.limitedDrops.safespotpage.dropped() && Statistics.archersKilled > 20 && Random.Int(10)==0) {
+					Dungeon.limitedDrops.safespotpage.drop();
+					Dungeon.level.drop(new SafeSpotPage(), pos).sprite.drop();
 				}
 			 
 			 

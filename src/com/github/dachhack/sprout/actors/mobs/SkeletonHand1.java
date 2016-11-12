@@ -23,19 +23,11 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
-import com.github.dachhack.sprout.actors.buffs.Frost;
-import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Terror;
-import com.github.dachhack.sprout.actors.buffs.Weakness;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.items.food.ChargrilledMeat;
 import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
 import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
 import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.sprites.ElementalSprite;
 import com.github.dachhack.sprout.sprites.SkeletonHand1Sprite;
-import com.github.dachhack.sprout.sprites.SkeletonKingSprite;
 import com.watabou.utils.Random;
 
 public class SkeletonHand1 extends Mob {

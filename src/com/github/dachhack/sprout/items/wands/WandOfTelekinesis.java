@@ -21,10 +21,18 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanBlack;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanStop;
+import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
 import com.github.dachhack.sprout.actors.mobs.npcs.Shopkeeper;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Pushing;
+import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Heap.Type;
@@ -47,6 +55,8 @@ public class WandOfTelekinesis extends Wand {
 		name = "Wand of Telekinesis";
 		hitChars = false;
 	}
+	
+	private static final String TXT_PREVENTING = "Something scrambles the telekinesis magic! ";
 
 	@Override
 	protected void onZap(int cell) {
@@ -75,9 +85,27 @@ public class WandOfTelekinesis extends Wand {
 
 					int next = Ballistica.trace[i + 1];
 					if ((Level.passable[next] || Level.avoid[next])
-							&& Actor.findChar(next) == null) {
+							&& Actor.findChar(next) == null 
+						/*	
+							&& !(ch instanceof SheepSokoban || 
+							     ch instanceof SheepSokobanCorner ||
+							     ch instanceof SheepSokobanStop ||
+								 ch instanceof SheepSokobanSwitch ||
+								 ch instanceof SheepSokobanBlack)
+						*/	
+							) {
 
-						Actor.addDelayed(new Pushing(ch, ch.pos, next), -1);
+						if ((ch instanceof SheepSokoban || 
+							     ch instanceof SheepSokobanCorner ||
+							     ch instanceof SheepSokobanStop ||
+								 ch instanceof SheepSokobanSwitch ||
+								 ch instanceof SheepSokobanBlack)
+								 && (Dungeon.level.map[next]==Terrain.FLEECING_TRAP ||
+										 Dungeon.level.map[next]==Terrain.CHANGE_SHEEP_TRAP)){							
+							
+						} else {
+							Actor.addDelayed(new Pushing(ch, ch.pos, next), -1);
+						}
 
 						ch.pos = next;
 						Actor.freeCell(next);
@@ -86,14 +114,21 @@ public class WandOfTelekinesis extends Wand {
 							ch.damage(0, this);
 
 						// FIXME
-						if (ch instanceof Mob) {
+						
+						if (ch instanceof SheepSokoban || 
+							     ch instanceof SheepSokobanCorner ||
+							     ch instanceof SheepSokobanStop ||
+								 ch instanceof SheepSokobanSwitch ||
+								 ch instanceof SheepSokobanBlack){
+							Dungeon.level.mobPress((NPC) ch);						
+						}	else if (ch instanceof Mob){							
 							Dungeon.level.mobPress((Mob) ch);
+						
 						} else {
 							Dungeon.level.press(ch.pos, ch);
 						}
 
-					} else {
-
+					} else {					
 						ch.damage(maxDistance - 1 - i, this);
 
 					}
@@ -113,7 +148,7 @@ public class WandOfTelekinesis extends Wand {
 			}
 
 			Dungeon.level.press(c, null);
-			if (before == Terrain.OPEN_DOOR && Actor.findChar(c) == null) {
+					if (before == Terrain.OPEN_DOOR && Actor.findChar(c) == null) {
 
 				Level.set(c, Terrain.DOOR);
 				GameScene.updateMap(c);
@@ -125,16 +160,24 @@ public class WandOfTelekinesis extends Wand {
 			}
 
 			if (!mapUpdated && Dungeon.level.map[c] != before) {
-				mapUpdated = true;
+				mapUpdated = true;				
 			}
 		}
 
 		if (mapUpdated) {
-			Dungeon.observe();
+			Dungeon.observe();		
 		}
 	}
 
 	private void transport(Heap heap) {
+		
+		if (Dungeon.depth>50){
+			GLog.w(TXT_PREVENTING);	
+			Invisibility.dispel();
+			setKnown();
+			return;
+		}
+		
 		Item item = heap.pickUp();
 		if (item.doPickUp(curUser)) {
 

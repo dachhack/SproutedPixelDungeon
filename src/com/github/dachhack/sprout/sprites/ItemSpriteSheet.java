@@ -36,6 +36,7 @@ public class ItemSpriteSheet {
 	private static final int ROW14 = 13 * 16;
 	private static final int ROW15 = 14 * 16;
 	private static final int ROW16 = 15 * 16;
+	private static final int ROW17 = 16 * 16;
 
 	// Row One: Items which can't be obtained
 	// null warning occupies space 0, should only show up if there's a bug.
@@ -120,7 +121,11 @@ public class ItemSpriteSheet {
 	public static final int WAVE = ROW4 + 9;
 	public static final int STL_HONEYPOT = ROW4 + 11;
 	public static final int STL_SHATTPOT = ROW4 + 12;
-
+	public static final int PALANTIR = ROW4 + 13;
+	public static final int SKULLWEP = ROW4 + 14;
+	public static final int STONE = ROW4 + 15;
+	
+	
 	// Row Five: Armors
 	public static final int ARMOR_CLOTH = ROW5 + 0;
 	public static final int ARMOR_LEATHER = ROW5 + 1;
@@ -177,8 +182,9 @@ public class ItemSpriteSheet {
 	public static final int BOOKOFTRANSCENDENCE = ROW8 + 11;
 	public static final int DWARFHAMMER = ROW8 + 12;
 	public static final int ANCIENTKEY = ROW8 + 13;
-	public static final int OTILUKES_JOURNAL = ROW8 + 7;
+	public static final int OTILUKES_JOURNAL = ROW16 + 3;
 	public static final int RING_DISINTEGRATION = ROW7 + 13;
+	public static final int RING_FROST = ROW7 + 15;
 
 	// Row Nine: Artifacts with Dynamic Images
 	public static final int ARTIFACT_HORN1 = ROW9 + 0;
@@ -296,10 +302,28 @@ public class ItemSpriteSheet {
 	public static final int ORBOFZOT = ROW15 + 10;
 	public static final int KEYRING = ROW4 + 10;
 
-	// Row Sixteen: Unused
+	// Row Sixteen: Random OP Stuff
 	public static final int UPGRADEGOO_YELLOW = ROW16 + 0;
 	public static final int UPGRADEGOO_RED = ROW16 + 1;
 	public static final int UPGRADEGOO_VIOLET = ROW16 + 2;
 	public static final int EGG = ROW16 + 4;
+	public static final int TRIDENT = ROW16 + 5;
+	public static final int ARESSWORD = ROW16 + 6;
+	public static final int JUPITERSWRAITH = ROW16 + 7;
+	public static final int CROMAXE = ROW16 + 8;
+	public static final int LOKISFLAIL = ROW16 + 9;
+	public static final int EASTEREGG = ROW16 + 10;
+	public static final int NORNGREEN = ROW16 + 11;
+	public static final int NORNBLUE = ROW16 + 12;
+	public static final int NORNORANGE = ROW16 + 13;
+	public static final int NORNPURPLE = ROW16 + 14;
+	public static final int NORNYELLOW = ROW16 + 15;
+	
+	// Row Seventeen: Random Lame Stuff
+	public static final int TOWEL = ROW17 + 0;
+	public static final int OTILUKES_SPECS = ROW17 + 1;
+	public static final int PUDDING_CUP = ROW17 + 2;
+	public static final int WHISTLE = ROW17 + 3;
+	
 
 }

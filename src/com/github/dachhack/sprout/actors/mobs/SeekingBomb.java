@@ -19,42 +19,16 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import java.util.HashSet;
 
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
-import com.github.dachhack.sprout.actors.buffs.Light;
 import com.github.dachhack.sprout.actors.buffs.Terror;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.effects.particles.BlastParticle;
-import com.github.dachhack.sprout.effects.particles.PurpleParticle;
-import com.github.dachhack.sprout.effects.particles.SmokeParticle;
-import com.github.dachhack.sprout.items.ArmorKit;
 import com.github.dachhack.sprout.items.Bomb;
-import com.github.dachhack.sprout.items.Gold;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.InactiveMrDestructo;
-import com.github.dachhack.sprout.items.RedDewdrop;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.Terrain;
-import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.BrokenRobotSprite;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.CrabSprite;
-import com.github.dachhack.sprout.sprites.MrDestructoSprite;
 import com.github.dachhack.sprout.sprites.SeekingBombSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class SeekingBomb extends Mob {

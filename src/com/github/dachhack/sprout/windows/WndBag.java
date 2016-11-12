@@ -42,11 +42,13 @@ import com.github.dachhack.sprout.items.bags.ScrollHolder;
 import com.github.dachhack.sprout.items.bags.SeedPouch;
 import com.github.dachhack.sprout.items.bags.WandHolster;
 import com.github.dachhack.sprout.items.food.Food;
+import com.github.dachhack.sprout.items.journalpages.JournalPage;
 import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
 import com.github.dachhack.sprout.plants.Plant.Seed;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -66,7 +68,7 @@ public class WndBag extends WndTabbed {
 	public static enum Mode {
 		ALL, UNIDENTIFED, UPGRADEABLE, QUICKSLOT, FOR_SALE, WEAPON, ARMOR, ENCHANTABLE, 
 		WAND, SEED, FOOD, POTION, SCROLL, EQUIPMENT, ADAMANT, REINFORCED, UPGRADEABLESIMPLE,
-		NOTREINFORCED, UPGRADEDEW
+		NOTREINFORCED, UPGRADEDEW, JOURNALPAGES
 	}
 
 	protected static final int COLS_P = 4;
@@ -397,11 +399,13 @@ public class WndBag extends WndTabbed {
 							|| mode == Mode.QUICKSLOT
 							&& (item.defaultAction != null)
 							|| mode == Mode.WEAPON
-							&& (item instanceof MeleeWeapon || item instanceof Boomerang)
+							&& (item instanceof MeleeWeapon || item instanceof Boomerang || item instanceof JupitersWraith)
 							|| mode == Mode.ARMOR
 							&& (item instanceof Armor)
 							|| mode == Mode.ENCHANTABLE
 							&& (item instanceof MeleeWeapon	|| item instanceof Boomerang || item instanceof Armor)
+							|| mode == Mode.JOURNALPAGES
+							&& (item instanceof JournalPage)
 							|| mode == Mode.WAND && (item instanceof Wand)
 							|| mode == Mode.SEED && (item instanceof Seed)
 							|| mode == Mode.FOOD && (item instanceof Food)

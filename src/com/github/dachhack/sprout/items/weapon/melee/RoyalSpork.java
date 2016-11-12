@@ -17,7 +17,15 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.mobs.Gullin;
+import com.github.dachhack.sprout.actors.mobs.Kupua;
+import com.github.dachhack.sprout.actors.mobs.MineSentinel;
+import com.github.dachhack.sprout.actors.mobs.Otiluke;
+import com.github.dachhack.sprout.actors.mobs.Zot;
+import com.github.dachhack.sprout.actors.mobs.ZotPhase;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.watabou.utils.Random;
 
 public class RoyalSpork extends MeleeWeapon {
 
@@ -30,6 +38,28 @@ public class RoyalSpork extends MeleeWeapon {
 		super(1, 1f, 0.15f);
 	}
 
+
+	@Override
+	public void proc(Char attacker, Char defender, int damage) {
+		
+		if (defender instanceof Gullin 
+        		|| defender instanceof Kupua
+        		|| defender instanceof MineSentinel
+        		|| defender instanceof Otiluke
+        		|| defender instanceof Zot
+        		|| defender instanceof ZotPhase){
+        	
+        	//damage*=2;
+			
+			defender.damage(Random.Int(damage,damage*8), this);
+		}
+        
+		
+		if (enchantment != null) {
+			enchantment.proc(this, attacker, defender, damage);		
+		}
+	}
+	
 	@Override
 	public String desc() {
 		return "Is it a spoon? Is it a fork? It is neither and it is both. "

@@ -136,7 +136,7 @@ public class HallsBossLevel extends Level {
 			}
 		}	
 		
-		if (Dungeon.sealedlevel==true){Dungeon.sealedlevel=false;}
+		sealedlevel=false;
 		
 		
 	}

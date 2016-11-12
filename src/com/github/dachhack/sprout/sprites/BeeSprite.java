@@ -19,7 +19,6 @@ package com.github.dachhack.sprout.sprites;
 
 import com.github.dachhack.sprout.Assets;
 import com.watabou.noosa.TextureFilm;
-import com.watabou.noosa.MovieClip.Animation;
 
 public class BeeSprite extends MobSprite {
 

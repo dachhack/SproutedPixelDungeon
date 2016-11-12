@@ -28,7 +28,6 @@ import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
-import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
@@ -36,7 +35,6 @@ import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
-import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -44,6 +42,7 @@ import com.github.dachhack.sprout.effects.Pushing;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Gold;
+import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
@@ -106,7 +105,16 @@ public class Yog extends Mob {
 
 	@Override
 	public int dr() {
-		return 10+(30*fistsCount);
+		
+		int checkFists = 0;
+		
+		for (Mob mob : Dungeon.level.mobs) {
+			if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof PinningFist || mob instanceof InfectingFist) {
+			checkFists++;	
+			}
+		}
+		
+		return 10+(30*checkFists);
 	}
 	
 	@Override
@@ -117,17 +125,7 @@ public class Yog extends Mob {
 	@Override
 	public void damage(int dmg, Object src) {
 
-		if (fistsCount > 0) {
-
-			for (Mob mob : Dungeon.level.mobs) {
-				if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof PinningFist || mob instanceof InfectingFist) {
-					mob.beckon(pos);
-				}
-			}
-
-			dmg >>= fistsCount;
-		}
-		
+				
 		if (HP<(HT/8) && Random.Float() < 0.50f && dmg<HP){
 			int newPos = -1;
 				for (int i = 0; i < 20; i++) {
@@ -203,10 +201,15 @@ public class Yog extends Mob {
 				mob.die(cause);
 			}
 		}
+		
+		if (!Dungeon.limitedDrops.journal.dropped()){ 
+			  Dungeon.level.drop(new OtilukesJournal(), pos).sprite.drop();
+			  Dungeon.limitedDrops.journal.drop();
+			}
 
 		GameScene.bossSlain();
 		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-		Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
+		//Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
 		super.die(cause);
 
 		yell("Back to the shadow...");

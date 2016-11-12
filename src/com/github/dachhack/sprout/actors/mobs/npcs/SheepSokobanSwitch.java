@@ -17,51 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import java.util.ArrayList;
-
-import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Journal;
-import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Roots;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.potions.PotionOfStrength;
-import com.github.dachhack.sprout.items.quest.CorpseDust;
-import com.github.dachhack.sprout.items.wands.Wand;
-import com.github.dachhack.sprout.items.wands.WandOfAmok;
-import com.github.dachhack.sprout.items.wands.WandOfAvalanche;
-import com.github.dachhack.sprout.items.wands.WandOfBlink;
-import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
-import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
-import com.github.dachhack.sprout.items.wands.WandOfLightning;
-import com.github.dachhack.sprout.items.wands.WandOfPoison;
-import com.github.dachhack.sprout.items.wands.WandOfRegrowth;
-import com.github.dachhack.sprout.items.wands.WandOfSlowness;
-import com.github.dachhack.sprout.items.wands.WandOfTelekinesis;
-import com.github.dachhack.sprout.levels.PrisonLevel;
-import com.github.dachhack.sprout.levels.Room;
-import com.github.dachhack.sprout.levels.Terrain;
-import com.github.dachhack.sprout.plants.Plant;
-import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.github.dachhack.sprout.sprites.SheepSprite;
 import com.github.dachhack.sprout.sprites.SokobanSheepSwitchSprite;
-import com.github.dachhack.sprout.sprites.WandmakerSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.github.dachhack.sprout.windows.WndQuest;
-import com.github.dachhack.sprout.windows.WndWandmaker;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class SheepSokobanSwitch extends NPC {
@@ -84,11 +42,14 @@ protected boolean act() {
 @Override
 public void damage(int dmg, Object src) {
 }
+@Override
+public void add(Buff buff) {
+}
 
 @Override
 public String description() {
 return "This is a magic sheep. What's so magical about it? You can't kill it. "
-		+ "It will stand there until it magcially fades away, all the while chewing cud with a blank stare.";
+		+ "It will stand anywhere you move it, all the while chewing cud with a blank stare.";
 }
 
 @Override

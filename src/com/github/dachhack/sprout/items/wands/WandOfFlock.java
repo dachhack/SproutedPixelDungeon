@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.mobs.FlyingProtector;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
@@ -30,6 +31,7 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.SheepSprite;
 import com.github.dachhack.sprout.utils.BArray;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.PathFinder;
@@ -89,6 +91,15 @@ public class WandOfFlock extends Wand {
 				}
 				dist++;
 			} while (dist < n);
+		}
+		
+		if (Dungeon.depth>50 && Dungeon.depth<55){
+			int spawnCell = Dungeon.level.randomRespawnCellMob();
+			if (spawnCell>0){
+			   FlyingProtector.spawnAt(spawnCell);
+			   GLog.w("How dare you violate the magic of this place! ");
+			   GLog.w("A Protector has spawned to defend the level!");
+			}
 		}
 	}
 

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Haste;
@@ -53,15 +54,19 @@ public class Cloudberry extends Food {
 				break;
 			case 6: case 7: case 8: 
 				 Buff.affect(hero, Haste.class, Haste.DURATION);
-				Buff.affect(hero, Levitation.class, duration);
+				 if(Dungeon.depth<51){Buff.affect(hero, Levitation.class, duration);
+				 GLog.i("You float into the air!");
+				 }
 				GLog.i("You are moving much faster!");
-				GLog.i("You float into the air!");
+				
 				break;
 			 case 9: case 10:
 				 Buff.affect(hero, Haste.class, Haste.DURATION);
-				Buff.affect(hero, Levitation.class, duration*2);
+				 if(Dungeon.depth<51){Buff.affect(hero, Levitation.class, duration*2);
+				 GLog.i("You float into the air!");
+				 }
 				GLog.i("You are moving much faster!");
-				GLog.i("You float into the air!");
+				
 				GLog.w("The berry releases energy into your body!");
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
 				break;

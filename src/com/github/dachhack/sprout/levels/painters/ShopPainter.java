@@ -34,6 +34,7 @@ import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.Stylus;
 import com.github.dachhack.sprout.items.Torch;
 import com.github.dachhack.sprout.items.Weightstone;
@@ -121,6 +122,8 @@ public class ShopPainter extends Painter {
 
 		switch (Dungeon.depth) {
 		case 6:
+			itemsToSpawn.add(new OtilukesJournal().identify());
+			Dungeon.limitedDrops.journal.drop();
 			itemsToSpawn.add((Random.Int(2) == 0 ? new Quarterstaff()
 					: new Spear()).identify());
 			itemsToSpawn.add(Random.Int(2) == 0 ? new IncendiaryDart()

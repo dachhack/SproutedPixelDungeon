@@ -17,11 +17,17 @@
  */
 package com.github.dachhack.sprout.items.potions;
 
+import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.MindVision;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.effects.SpellSprite;
+import com.github.dachhack.sprout.items.misc.Spectacles.MagicSight;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Random;
 
 public class PotionOfMindVision extends Potion {
 
@@ -29,10 +35,18 @@ public class PotionOfMindVision extends Potion {
 		name = "Potion of Mind Vision";
 	}
 
+	private static final String TXT_PREVENTING = "Something scrambles the scrying magic! ";
+	
 	@Override
 	public void apply(Hero hero) {
 		setKnown();
-		Buff.affect(hero, MindVision.class, MindVision.DURATION);
+		
+		if (Dungeon.level.locked && Dungeon.depth>50 && Dungeon.hero.buff(MagicSight.class) == null){
+			GLog.w(TXT_PREVENTING);	
+			return;
+		}
+		
+		Buff.affect(hero, MindVision.class, Dungeon.hero.buff(MagicSight.class) != null ? MindVision.DURATION*4 : MindVision.DURATION);
 		Dungeon.observe();
 
 		if (Dungeon.level.mobs.size() > 0) {

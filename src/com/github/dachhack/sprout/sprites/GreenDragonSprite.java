@@ -18,17 +18,9 @@
 package com.github.dachhack.sprout.sprites;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.actors.mobs.FlyingProtector;
-import com.github.dachhack.sprout.actors.mobs.Shaman;
-import com.github.dachhack.sprout.actors.mobs.Warlock;
 import com.github.dachhack.sprout.actors.mobs.pets.GreenDragon;
-import com.github.dachhack.sprout.actors.mobs.pets.RedDragon;
-import com.github.dachhack.sprout.effects.Fireball;
 import com.github.dachhack.sprout.effects.Lightning;
-import com.github.dachhack.sprout.effects.MagicMissile;
 import com.watabou.noosa.TextureFilm;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Callback;
 
 public class GreenDragonSprite extends MobSprite {
 	

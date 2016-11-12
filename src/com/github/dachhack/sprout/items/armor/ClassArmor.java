@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.armor;
 
 import java.util.ArrayList;
 
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.utils.GLog;
@@ -88,7 +89,7 @@ abstract public class ClassArmor extends Armor {
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
-		if (hero.HP >= 3 && isEquipped(hero)) {
+		if (hero.HP >= 3 && isEquipped(hero) && !Dungeon.sokobanLevel(Dungeon.depth)) {
 			actions.add(special());
 		}
 		return actions;
@@ -117,10 +118,12 @@ abstract public class ClassArmor extends Armor {
 
 	abstract public void doSpecial();
 
+	
 	@Override
 	public boolean isUpgradable() {
-		return false;
+		return true;
 	}
+
 
 	@Override
 	public boolean isIdentified() {

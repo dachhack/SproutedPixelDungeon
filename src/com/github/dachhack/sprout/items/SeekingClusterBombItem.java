@@ -19,35 +19,12 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
-import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.actors.mobs.MrDestructo;
-import com.github.dachhack.sprout.actors.mobs.SeekingBomb;
-import com.github.dachhack.sprout.actors.mobs.SeekingClusterBomb;
-import com.github.dachhack.sprout.actors.mobs.npcs.MirrorImage;
-import com.github.dachhack.sprout.actors.mobs.npcs.SeekingBombNPC;
 import com.github.dachhack.sprout.actors.mobs.npcs.SeekingClusterBombNPC;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.particles.BlastParticle;
-import com.github.dachhack.sprout.effects.particles.SmokeParticle;
-import com.github.dachhack.sprout.items.wands.WandOfBlink;
-import com.github.dachhack.sprout.items.weapon.missiles.RiceBall;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.Terrain;
-import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class SeekingClusterBombItem extends Item {

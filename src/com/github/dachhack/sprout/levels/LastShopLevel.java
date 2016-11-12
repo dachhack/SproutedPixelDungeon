@@ -117,8 +117,7 @@ public class LastShopLevel extends RegularLevel {
 		if (roomShop == null || shopSquare < 54) {
 			return false;
 		} else {
-			roomShop.type = Imp.Quest.isCompleted() ? Room.Type.SHOP
-					: Room.Type.STANDARD;
+			roomShop.type =  Room.Type.SHOP;
 		}
 
 		paint();
@@ -148,7 +147,7 @@ public class LastShopLevel extends RegularLevel {
 			}
 		}
 
-		if (Imp.Quest.isCompleted()) {
+		
 			while (true) {
 				int pos = roomEntrance.random();
 				if (pos != entrance) {
@@ -156,7 +155,7 @@ public class LastShopLevel extends RegularLevel {
 					break;
 				}
 			}
-		}
+		
 	}
 
 	@Override

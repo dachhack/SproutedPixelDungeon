@@ -47,6 +47,8 @@ import com.watabou.utils.Random;
 public class Armor extends EquipableItem {
 
 	private static final int HITS_TO_KNOW = 10;
+	
+	private static final float TIME_TO_EQUIP = 1f;
 
 	private static final String TXT_EQUIP_CURSED = "your %s constricts around you painfully";
 
@@ -118,7 +120,7 @@ public class Armor extends EquipableItem {
 
 			((HeroSprite) hero.sprite).updateArmor();
 
-			hero.spendAndNext(2 * time2equip(hero));
+			hero.spendAndNext(2 * TIME_TO_EQUIP);
 			return true;
 
 		} else {

@@ -22,22 +22,19 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
-import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
 import com.github.dachhack.sprout.effects.particles.SmokeParticle;
-import com.github.dachhack.sprout.items.weapon.missiles.RiceBall;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
@@ -157,7 +154,7 @@ public class DizzyBomb extends Item {
 							- Random.Int(ch.dr());
 					if (dmg > 0) {
 						ch.damage(dmg, this);
-						if (!ch.immunities().contains(ConfusionGas.class)){
+						if (!ch.immunities().contains(ConfusionGas.class) && !(ch instanceof NPC)){
 							Buff.affect(ch, Vertigo.class, Vertigo.duration(ch));
 						   }
 					 }

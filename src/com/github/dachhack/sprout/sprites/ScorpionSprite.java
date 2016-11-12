@@ -18,10 +18,7 @@
 package com.github.dachhack.sprout.sprites;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.items.weapon.missiles.Dart;
-import com.github.dachhack.sprout.levels.Level;
 import com.watabou.noosa.TextureFilm;
-import com.watabou.utils.Callback;
 
 public class ScorpionSprite extends MobSprite {
 

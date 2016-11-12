@@ -17,27 +17,22 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
-import com.watabou.noosa.audio.Sample;
 
 public class JournalPage extends Item {
 
 	private static final String TXT_VALUE = "Journal Page";
-	public int room=0;
+	public int room;
 
 	{
 		name = "journal page";
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 
 		stackable = false;
+		unique = true;
 	}
 		
 	@Override
@@ -48,6 +43,22 @@ public class JournalPage extends Item {
 	
 	}
 
+
+	@Override
+	public boolean isUpgradable() {
+		return false;
+	}
+
+	@Override
+	public boolean isIdentified() {
+		return true;
+	}
+
+	@Override
+	public int price() {
+		return 10 * quantity;
+	}
+	
 	@Override
 	public String info() {
 		return "A loose journal page labled Journal Page.";

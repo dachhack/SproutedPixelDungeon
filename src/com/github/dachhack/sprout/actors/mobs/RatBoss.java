@@ -21,7 +21,6 @@ package com.github.dachhack.sprout.actors.mobs;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
 import com.github.dachhack.sprout.sprites.RatBossSprite;
 import com.github.dachhack.sprout.utils.GLog;

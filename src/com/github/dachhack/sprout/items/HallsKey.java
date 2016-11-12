@@ -21,12 +21,15 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
@@ -49,7 +52,7 @@ public class HallsKey extends Item {
 	private int returnPos;
 
 	{
-		name = "ancient halls key";
+		name = "end boss key";
 		image = ItemSpriteSheet.ANCIENTKEY;
 
 		stackable = false;
@@ -96,7 +99,7 @@ public class HallsKey extends Item {
 			}
 			*/
 			
-			if (Dungeon.depth>25) {
+			if (Dungeon.depth>25 || hero.petfollow) {
 				hero.spend(TIME_TO_USE);
 				GLog.w(TXT_PREVENTING);
 				return;
@@ -111,6 +114,8 @@ public class HallsKey extends Item {
 		}
 
 		if (action == AC_PORT) {
+			
+			 hero.spend(TIME_TO_USE);
 
 				Buff buff = Dungeon.hero
 						.buff(TimekeepersHourglass.timeFreeze.class);
@@ -126,6 +131,8 @@ public class HallsKey extends Item {
        			returnPos = hero.pos;
 				InterlevelScene.mode = InterlevelScene.Mode.PORTHALLS;
 			} else {
+				 checkPetPort();
+				 removePet();
 				
 				if (Statistics.amuletObtained){this.detach(Dungeon.hero.belongings.backpack);}
 				SkeletonKey key = Dungeon.hero.belongings.getItem(SkeletonKey.class);
@@ -144,6 +151,58 @@ public class HallsKey extends Item {
 
 		}
 	}
+	
+
+	private PET checkpet(){
+		for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {
+				return (PET) mob;
+			}
+		}	
+		return null;
+	}
+	
+	private boolean checkpetNear(){
+		for (int n : Level.NEIGHBOURS8) {
+			int c =  Dungeon.hero.pos + n;
+			if (Actor.findChar(c) instanceof PET) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void checkPetPort(){
+		PET pet = checkpet();
+		if(pet!=null && checkpetNear()){
+		  //GLog.i("I see pet");
+		  Dungeon.hero.petType=pet.type;
+		  Dungeon.hero.petLevel=pet.level;
+		  Dungeon.hero.petKills=pet.kills;	
+		  Dungeon.hero.petHP=pet.HP;
+		  Dungeon.hero.petExperience=pet.experience;
+		  Dungeon.hero.petCooldown=pet.cooldown;
+		  pet.destroy();
+		  Dungeon.hero.petfollow=true;
+		} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			Dungeon.hero.petfollow=true;
+		} else {
+			Dungeon.hero.petfollow=false;
+		}
+		
+	}
+	private void removePet(){
+		if (Dungeon.hero.haspet && !Dungeon.hero.petfollow){
+		 for (Mob mob : Dungeon.level.mobs) {
+				if(mob instanceof PET) {				 
+					Dungeon.hero.haspet=false;
+					Dungeon.hero.petCount++;
+					mob.destroy();				
+				}
+			  }
+		}
+	}
+	
 	
 	public void reset() {
 		returnDepth = -1;

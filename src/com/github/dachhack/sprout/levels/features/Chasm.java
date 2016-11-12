@@ -26,9 +26,11 @@ import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.pets.PET;
+import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.SanChikarahTranscend;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.RegularLevel;
 import com.github.dachhack.sprout.levels.Room;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -78,11 +80,23 @@ public class Chasm {
 			if (mob instanceof DriedRose.GhostHero)
 				mob.destroy();
 		
+		if(Dungeon.depth==33){
+		  for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {				 
+				Dungeon.hero.haspet=false;
+				Dungeon.hero.petCount++;
+				mob.destroy();				
+			}
+		  }
+		}
+			
 		SanChikarahTranscend san3 = Dungeon.hero.belongings.getItem(SanChikarahTranscend.class);
 		if (Dungeon.depth==33 && san3 != null) {			
 			san3.detach(Dungeon.hero.belongings.backpack);
 			Dungeon.sanchikarahtranscend= false;						
 		}
+		
+		
 
 		if (Dungeon.hero.isAlive()) {
 			Dungeon.hero.interrupt();
@@ -99,6 +113,7 @@ public class Chasm {
 			Dungeon.hero.sprite.visible = false;
 		}
 	}
+	
 
 	public static void heroLand() {
 

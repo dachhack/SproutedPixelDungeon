@@ -23,13 +23,16 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.rings.RingOfHaste;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.sprites.HeroSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -51,6 +54,8 @@ public abstract class PET extends Mob {
 	public int experience;
 	public int cooldown;
 	public int goaways = 0;
+	public boolean callback = false;
+	public boolean stay = false;
 	/*
 	 type
 	 1 = 
@@ -68,6 +73,9 @@ public abstract class PET extends Mob {
 	private static final String EXPERIENCE = "experience";
 	private static final String COOLDOWN = "cooldown";
 	private static final String GOAWAYS = "goaways";
+	private static final String CALLBACK = "callback";
+	private static final String STAY = "stay";
+
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
@@ -78,6 +86,8 @@ public abstract class PET extends Mob {
 		bundle.put(EXPERIENCE, experience);
 		bundle.put(COOLDOWN, cooldown);
 		bundle.put(GOAWAYS, goaways);
+		bundle.put(CALLBACK, callback);
+		bundle.put(STAY, stay);
 	}
 
 	@Override
@@ -89,6 +99,8 @@ public abstract class PET extends Mob {
 		experience = bundle.getInt(EXPERIENCE);
 		cooldown = bundle.getInt(COOLDOWN);
 		goaways = bundle.getInt(GOAWAYS);
+		callback = bundle.getBoolean(CALLBACK);
+		stay = bundle.getBoolean(STAY);
 		adjustStats(level);
 	}
 	
@@ -112,6 +124,14 @@ public abstract class PET extends Mob {
 	}
 	
 	@Override
+	protected boolean act() {
+		
+		assignPet(this);
+		return super.act();
+	}
+	
+	
+	@Override
 	public void damage(int dmg, Object src) {
 		
 		if (src instanceof Hero){
@@ -131,15 +151,33 @@ public abstract class PET extends Mob {
 	public void die(Object cause) {
 		
 		    Dungeon.hero.haspet=false;
+		    Dungeon.hero.petCount++;
 			GLog.n("Your pet %s dies.",name);			
 
 		super.die(cause);
 
 	}
 	
+	@Override
+	public float speed() {
+
+		float speed = super.speed();
+		
+		int hasteLevel = Dungeon.petHasteLevel;
+		
+		if(hasteLevel>10){
+			hasteLevel=10;
+		}
+
+		if (hasteLevel != 0)
+			speed *= Math.pow(1.2, hasteLevel);
+
+		return speed;
+	}
+	
 	public void flee() {
 		Dungeon.hero.haspet=false;
-        GLog.n("Your %s knows when it's not wanted!",name);
+	    GLog.n("Your %s knows when it's not wanted!",name);
 		destroy();
 		sprite.killAndErase();
 		CellEmitter.get(pos).burst(ElmoParticle.FACTORY, 6);
@@ -154,8 +192,9 @@ public abstract class PET extends Mob {
 			experience+=((Mob)enemy).getExp();
 		}
 		
-		if (experience >= level*level*level && level < 10){			
+		if (experience >= level*(level+level) && level < 20){			
 			level++;
+			GLog.p("Your pet %s gains a level!",name);
 			adjustStats(level);
 			experience=0;
 		}
@@ -176,13 +215,23 @@ public abstract class PET extends Mob {
 	
 	@Override
 	protected boolean getCloser(int target) {
-		if (enemy != null) {
+		if (enemy != null && !callback) {
 		   target = enemy.pos;		
 		} else if (checkNearbyHero()) {
-		   target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;		
-		} else {
+		   target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;	
+		   callback = false;
+		} else if(Dungeon.hero.invisible==0){
 			target = Dungeon.hero.pos;
+		} else {
+			target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;				
 		}
+		
+		if (stay) {
+			
+			return false;
+			
+		}
+		
 		return super.getCloser(target);
 	}
 
@@ -207,11 +256,24 @@ public abstract class PET extends Mob {
 		return newPos;
 	}
 	
-	
+	@Override
+	public void aggro(Char ch) {		
+	}
 	
 	@Override
 	public void beckon(int cell) {
 	}
 
+
+	private void assignPet(PET pet){
+		
+		  Dungeon.hero.petType=pet.type;
+		  Dungeon.hero.petLevel=pet.level;
+		  Dungeon.hero.petKills=pet.kills;	
+		  Dungeon.hero.petHP=pet.HP;
+		  Dungeon.hero.petExperience=pet.experience;
+		  Dungeon.hero.petCooldown=pet.cooldown;		
+	}
+		
 	abstract public void interact();
 }

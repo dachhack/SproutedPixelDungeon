@@ -17,7 +17,6 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
-import com.github.dachhack.sprout.Dungeon;
 
 public class LichenDrop extends FlavourBuff {
 

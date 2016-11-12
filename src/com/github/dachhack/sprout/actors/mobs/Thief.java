@@ -26,8 +26,6 @@ import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.MasterThievesArmband;
-import com.github.dachhack.sprout.items.food.Cloudberry;
-import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ThiefSprite;
 import com.github.dachhack.sprout.utils.GLog;

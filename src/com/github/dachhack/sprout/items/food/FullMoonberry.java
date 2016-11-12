@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.items.food;
 
-import java.util.Calendar;
-
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.FullMoonStrength;

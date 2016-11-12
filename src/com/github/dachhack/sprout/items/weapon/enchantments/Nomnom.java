@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
@@ -33,6 +34,11 @@ public class Nomnom extends Weapon.Enchantment {
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
 
+	@Override
+	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
+		return false;
+	}
+	
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
 		// lvl 0 - 8%

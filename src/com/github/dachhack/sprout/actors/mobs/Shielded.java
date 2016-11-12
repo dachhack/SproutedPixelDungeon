@@ -18,7 +18,6 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.sprites.ShieldedSprite;
 
 public class Shielded extends Brute {

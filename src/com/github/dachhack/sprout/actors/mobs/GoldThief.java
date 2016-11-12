@@ -24,15 +24,12 @@ import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.AncientCoin;
 import com.github.dachhack.sprout.items.CityKey;
-import com.github.dachhack.sprout.items.ConchShell;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.food.Cloudberry;
 import com.github.dachhack.sprout.items.weapon.missiles.Shuriken;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.GoldThiefSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 

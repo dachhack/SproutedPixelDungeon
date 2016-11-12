@@ -21,9 +21,11 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.mechanics.Ballistica;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Callback;
@@ -33,9 +35,16 @@ public class WandOfBlink extends Wand {
 	{
 		name = "Wand of Blink";
 	}
-
+	private static final String TXT_PREVENTING = "Something scrambles the blink magic! ";
 	@Override
 	protected void onZap(int cell) {
+		
+		if (Dungeon.sokobanLevel(Dungeon.depth)){
+			GLog.w(TXT_PREVENTING);	
+			Invisibility.dispel();
+			setKnown();
+			return;
+		}
 
 		int level = level();
 
@@ -55,7 +64,9 @@ public class WandOfBlink extends Wand {
 		MagicMissile.whiteLight(curUser.sprite.parent, curUser.pos, cell,
 				callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);
+		if (!Dungeon.sokobanLevel(Dungeon.depth)){
 		curUser.sprite.visible = false;
+		}
 	}
 
 	public static void appear(Char ch, int pos) {

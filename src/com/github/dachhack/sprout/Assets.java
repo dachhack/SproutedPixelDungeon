@@ -128,6 +128,16 @@ public class Assets {
 	public static final String PETDRAGON = "petreddragon.png";
 	public static final String VELOCIROOSTER = "velocirooster.png";
 	public static final String FAIRY = "fairy.png";
+	public static final String KUPUA = "kupua.png";
+	public static final String GULLIN = "gullin.png";
+	public static final String BUNNY = "rabbit.png";
+	public static final String LITTOWER = "littower.png";
+	public static final String OTILUKESTONE = "otilukestone.png";
+	public static final String OTILUKE = "otiluke.png";
+	public static final String ZOT = "zot.png";
+	public static final String ZOTPHASE = "zotphase.png";
+	public static final String MAGICEYE = "magiceye.png";
+	public static final String DRAGON = "adultdragon.png";
 
 	public static final String ITEMS = "items.png";
 	public static final String PLANTS = "plants.png";
@@ -142,6 +152,7 @@ public class Assets {
 	public static final String TILES_SKELETON = "tiles_skeleton.png";
 	public static final String TILES_VAULT = "tiles_vault.png";
 	public static final String TILES_FOREST = "tiles_forest.png";
+	public static final String TILES_TOWN = "tiles_town.png";
 	
 	public static final String WATER_SEWERS = "water0.png";
 	public static final String WATER_PRISON = "water1.png";

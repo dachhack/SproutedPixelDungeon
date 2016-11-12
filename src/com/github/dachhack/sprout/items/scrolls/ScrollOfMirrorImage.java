@@ -20,12 +20,15 @@ package com.github.dachhack.sprout.items.scrolls;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.mobs.npcs.MirrorImage;
+import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
@@ -37,9 +40,22 @@ public class ScrollOfMirrorImage extends Scroll {
 		name = "Scroll of Mirror Image";
 		consumedValue = 5;
 	}
+	
+	private static final String TXT_PREVENTING = "Something scrambles the illusion magic! ";
 
 	@Override
 	protected void doRead() {
+		
+		if (Dungeon.depth>50){
+			GLog.w(TXT_PREVENTING);
+			Sample.INSTANCE.play(Assets.SND_READ);
+			Invisibility.dispel();
+
+			setKnown();
+
+			curUser.spendAndNext(TIME_TO_READ);
+			return;
+		}
 
 		ArrayList<Integer> respawnPoints = new ArrayList<Integer>();
 

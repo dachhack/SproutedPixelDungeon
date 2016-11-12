@@ -84,6 +84,22 @@ public class MagicMissile extends Emitter {
 		missile.size(4);
 		missile.pour(FlameParticle.FACTORY, 0.01f);
 	}
+	
+	public static void firesmall(Group group, int from, int to, Callback callback) {
+		MagicMissile missile = ((MagicMissile) group
+				.recycle(MagicMissile.class));
+		missile.reset(from, to, callback);
+		missile.size(2);
+		missile.pour(FlameParticle.FACTORY, 0.01f);
+	}
+	
+	public static void firelarge(Group group, int from, int to, Callback callback) {
+		MagicMissile missile = ((MagicMissile) group
+				.recycle(MagicMissile.class));
+		missile.reset(from, to, callback);
+		missile.size(8);
+		missile.pour(FlameParticle.FACTORY, 0.01f);
+	}
 
 	public static void earth(Group group, int from, int to, Callback callback) {
 		MagicMissile missile = ((MagicMissile) group

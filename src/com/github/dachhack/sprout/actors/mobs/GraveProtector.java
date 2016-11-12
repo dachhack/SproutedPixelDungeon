@@ -29,8 +29,6 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.DewProtectorSprite;
-import com.github.dachhack.sprout.sprites.FlyingProtectorSprite;
 import com.github.dachhack.sprout.sprites.GraveProtectorSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;

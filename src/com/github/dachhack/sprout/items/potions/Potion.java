@@ -30,7 +30,6 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.Splash;
-import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.ItemStatusHandler;
 import com.github.dachhack.sprout.levels.Level;

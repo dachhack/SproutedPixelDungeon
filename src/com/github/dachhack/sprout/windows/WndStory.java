@@ -43,6 +43,13 @@ public class WndStory extends Window {
 	public static final int ID_CAVES = 2;
 	public static final int ID_METROPOLIS = 3;
 	public static final int ID_HALLS = 4;
+	public static final int ID_SOKOBAN1 = 5;
+	public static final int ID_SOKOBAN2 = 6;
+	public static final int ID_SOKOBAN3 = 7;
+	public static final int ID_SOKOBAN4 = 8;
+	public static final int ID_SAFELEVEL = 9;
+	public static final int ID_TOWN = 10;
+	public static final int ID_ZOT = 11;
 
 	private static final SparseArray<String> CHAPTERS = new SparseArray<String>();
 
@@ -80,6 +87,52 @@ public class WndStory extends Window {
 						+ "dwarves were too weakened to clear them of remaining demons. Gradually demons have tightened their grip on this place "
 						+ "and now it's called Demon Halls.\n\n"
 						+ "Very few adventurers have ever descended this far...");
+		CHAPTERS.put(
+				ID_SOKOBAN1,
+				"I have devised a method for creating extra-planar spaces in which to hide my belongings.\n\n "
+						+"Oddly, strange breeds of sheep have materialized in these spaces. "
+						+"Maybe I can use these ovine denizens to my advantage. \n\n"
+						+"-Otiluke, 1345 LP. ");
+		CHAPTERS.put(
+				ID_SOKOBAN2,
+				"Having mastered the elements required for creating my spaces, "
+						+"I am now set out to build a grand fortress in which to hide my valuables. \n\n"
+						+"-Otiluke, 1348 LP. ");
+		CHAPTERS.put(
+				ID_SOKOBAN3,
+				"My powers have grown stronger since I created my first space.\n\n "
+						+"I find myself able to alter time and position in ways I have never thought possible.\n\n "
+						+"My activities have created ripples in the magical ethosphere. "
+						+"On clear days I am able to capture echoes of some disturbance focused on my presence. \n\n"
+						+"-Otiluke, 1355 LP. ");
+		CHAPTERS.put(
+				ID_SOKOBAN4,
+				"My efforts to stop my pursuers have only slowed their progress.\n\n "
+						+"I am now remembering the strange spaces where I hid some of my valuables centuries ago. "
+						+"The items themselves are no longer of importance to me, "
+						+"but the source of the odd power generating the sheep eluded me for years.\n\n "
+						+"Perhaps this power, once illuminated, will be a source of succor. "
+						+"I fear I have little options left. \n\n"
+						+"-Otiluke, 1617 LP. ");
+		CHAPTERS.put(
+				ID_SAFELEVEL,
+				"A small space carved out of the fabric of time serves well to keep me replenished. "
+				+"I have been able to rest here and store some of my items to relieve my burden.");
+		CHAPTERS.put(
+				ID_TOWN,
+				"With what little power I have left I have "
+						+"momentarily bested Zot and obtained his orb of power.\n\n "
+						+"Although its power is warded against me, I can transpose "
+						+"objects from this world into the heart of the orb.\n\n "
+						+"I hear a rushing of power in the distance... Zot approaches!\n\n "
+						+"My last act will be to return to Dolyahaven, my birthplace "
+						+"and seal this script into the orb.\n\n Zot will need to break "
+						+"the orb and source of his power to follow me.\n\n "
+						+"-Otiluke, 1999 LP. ");
+		CHAPTERS.put(
+				ID_ZOT,
+				"You gaze into the Palantir you are sucked into the power of the sphere.\n\n"
+				+"You sense a great evil lurking nearby.");
 	};
 
 	private BitmapTextMultiline tf;

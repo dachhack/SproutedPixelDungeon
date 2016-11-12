@@ -298,7 +298,7 @@ public class DewVial extends Item {
 		} else if (action.equals(AC_SPLASH)) {	
 			Buff.affect(hero, Haste.class, Haste.DURATION);
 			Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
-			if(Dungeon.wings){
+			if(Dungeon.wings && Dungeon.depth<51){
 				Buff.affect(hero, Levitation.class, Levitation.DURATION);
 			    GLog.i("You float into the air!");
 			}
@@ -328,7 +328,7 @@ public class DewVial extends Item {
 			curUser = hero;
 			GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEDEW,	TXT_SELECT);
 													
-			volume = volume - 90;	
+				
 			
 		} else {
 
@@ -394,6 +394,7 @@ public class DewVial extends Item {
 		public void onSelect(Item item) {
 			if (item != null) {
 				upgrade(item);
+				volume = volume - 90;
 			}
 		}
 	};

@@ -17,46 +17,29 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Statistics;
-import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Dewcharge;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
-import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
-import com.github.dachhack.sprout.actors.mobs.pets.PET;
-import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.DewVial2;
+import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.Mushroom;
-import com.github.dachhack.sprout.items.SanChikarahDeath;
-import com.github.dachhack.sprout.items.quest.Pickaxe;
-import com.github.dachhack.sprout.items.wands.Wand;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.items.OtilukesJournal;
+import com.github.dachhack.sprout.items.artifacts.DriedRose;
+import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
-import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
-import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.ui.Component;
+import com.watabou.noosa.Game;
 
 public class WndOtiluke extends Window {
 
 	
-	private static final String TXT_DRAW_INFO = "Tell me more about Draw Out Dew";
 
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
-	private static final String TXT_FARAWELL_DRAW = "Good luck in your quest, %s! I'll give you a head start drawing out dew!";
+	private static final String TXT_FARAWELL = "Where would you like to go?";
+	public static final float TIME_TO_USE = 1;
 
     
 	private static final int PAGES = 10;
@@ -64,12 +47,19 @@ public class WndOtiluke extends Window {
 	private static final int BTN_HEIGHT = 20;
 	private static final float GAP = 2;
 
-	public WndOtiluke(final boolean[] rooms, final Item item) {
+	public WndOtiluke(final boolean[] rooms, final OtilukesJournal item) {
 
 		super();
 		
 		String[] roomNames = new String[PAGES];
 		roomNames[0] = "Safe Room";
+		roomNames[1] = "Sokoban 1";
+		roomNames[2] = "Sokoban 2";
+		roomNames[3] = "Sokoban 3";
+		roomNames[4] = "Sokoban 4";
+		roomNames[5] = "Dolyahaven";
+		roomNames[6] = "Vault";
+		roomNames[7] = "Dragon Cave";
 	
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon(new ItemSprite(item.image(), null));
@@ -87,15 +77,23 @@ public class WndOtiluke extends Window {
 		  //after n*BTN_HEIGHT+GAP
 		//add port function
 		
+		if (rooms[0]){
 		RedButton btn1 = new RedButton(roomNames[0]) {
 			@Override
 			protected void onClick() {
-				port(0);
+				item.returnDepth = Dungeon.depth;
+				item.returnPos = Dungeon.hero.pos;
+				port(0, item.firsts[0]);
+				if (!Dungeon.playtest){
+				   item.firsts[0]=false;
+				}
+				item.charge=0;
 			}
 		};
 		btn1.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
 		add(btn1);
 		resize(WIDTH, (int) btn1.bottom());
+		}
 		
 		int buttons=1;
 		
@@ -106,10 +104,16 @@ public class WndOtiluke extends Window {
 				RedButton btn = new RedButton(roomNames[i]) {
 					@Override
 					protected void onClick() {
-						port(portnum);
+						item.returnDepth = Dungeon.depth;
+						item.returnPos = Dungeon.hero.pos;
+						port(portnum, item.firsts[portnum]);
+						item.firsts[portnum]=false;
+						item.charge=0;
 					}
 				};
-				btn.setRect(0, buttons*BTN_HEIGHT + GAP, WIDTH, BTN_HEIGHT);
+				
+				btn.setRect(0, buttons*BTN_HEIGHT + (buttons+2)*GAP, WIDTH, BTN_HEIGHT);	
+				
 				add(btn);
 				resize(WIDTH, (int) btn.bottom());
 			}
@@ -117,8 +121,30 @@ public class WndOtiluke extends Window {
 	}
 
 	
-	public void port(Integer room){
+	public void port(int room, boolean first){
 		
+		 Hero hero = Dungeon.hero;
+		 hero.spend(TIME_TO_USE);
+		 
+		Buff buff = Dungeon.hero
+				.buff(TimekeepersHourglass.timeFreeze.class);
+		if (buff != null)
+			buff.detach();
+
+		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
+			if (mob instanceof DriedRose.GhostHero)
+				mob.destroy();
+		       	
+    	  
+		InterlevelScene.mode = InterlevelScene.Mode.JOURNAL;
+		
+		InterlevelScene.returnDepth = Dungeon.depth;
+		InterlevelScene.returnPos = Dungeon.hero.pos;
+		InterlevelScene.journalpage = room;
+		InterlevelScene.first = first;
+		Game.switchScene(InterlevelScene.class);
+		
+		
+	  
 	}
-	
 }

@@ -20,11 +20,14 @@ package com.github.dachhack.sprout.items;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
+import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -101,6 +104,8 @@ public class SanChikarah extends Item {
 		}
 
 		if (action == AC_PORT) {
+			
+			 hero.spend(TIME_TO_USE);
 
 				Buff buff = Dungeon.hero
 						.buff(TimekeepersHourglass.timeFreeze.class);
@@ -115,6 +120,7 @@ public class SanChikarah extends Item {
        			returnPos = hero.pos;
 				InterlevelScene.mode = InterlevelScene.Mode.PORT4;
 			} else {
+				 checkPetPort();
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;	
 				this.doDrop(hero);
 			}
@@ -133,6 +139,46 @@ public class SanChikarah extends Item {
 	
 	public void reset() {
 		returnDepth = -1;
+	}
+	
+
+	private PET checkpet(){
+		for (Mob mob : Dungeon.level.mobs) {
+			if(mob instanceof PET) {
+				return (PET) mob;
+			}
+		}	
+		return null;
+	}
+	
+	private boolean checkpetNear(){
+		for (int n : Level.NEIGHBOURS8) {
+			int c =  Dungeon.hero.pos + n;
+			if (Actor.findChar(c) instanceof PET) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void checkPetPort(){
+		PET pet = checkpet();
+		if(pet!=null && checkpetNear()){
+		  GLog.i("I see pet");
+		  Dungeon.hero.petType=pet.type;
+		  Dungeon.hero.petLevel=pet.level;
+		  Dungeon.hero.petKills=pet.kills;	
+		  Dungeon.hero.petHP=pet.HP;
+		  Dungeon.hero.petExperience=pet.experience;
+		  Dungeon.hero.petCooldown=pet.cooldown;
+		  pet.destroy();
+		  Dungeon.hero.petfollow=true;
+		} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			Dungeon.hero.petfollow=true;
+		} else {
+			Dungeon.hero.petfollow=false;
+		}
+		
 	}
 
 	@Override

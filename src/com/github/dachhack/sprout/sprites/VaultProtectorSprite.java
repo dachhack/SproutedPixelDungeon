@@ -18,7 +18,6 @@
 package com.github.dachhack.sprout.sprites;
 
 import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.actors.mobs.FlyingProtector;
 import com.github.dachhack.sprout.actors.mobs.VaultProtector;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.watabou.noosa.TextureFilm;

@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.SpellSprite;
+import com.github.dachhack.sprout.items.misc.Spectacles.MagicSight;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -32,6 +33,7 @@ import com.watabou.noosa.audio.Sample;
 public class ScrollOfMagicMapping extends Scroll {
 
 	private static final String TXT_LAYOUT = "You are now aware of the level layout.";
+	private static final String TXT_PREVENTING = "Something scrambles the scrying magic! ";
 
 	{
 		name = "Scroll of Magic Mapping";
@@ -41,6 +43,18 @@ public class ScrollOfMagicMapping extends Scroll {
 	@Override
 	protected void doRead() {
 
+		if (Dungeon.depth>50 && Dungeon.hero.buff(MagicSight.class) == null){
+			GLog.w(TXT_PREVENTING);
+			SpellSprite.show(curUser, SpellSprite.MAP);
+			Sample.INSTANCE.play(Assets.SND_READ);
+			Invisibility.dispel();
+
+			setKnown();
+
+			curUser.spendAndNext(TIME_TO_READ);
+			return;
+		}
+		
 		int length = Level.LENGTH;
 		int[] map = Dungeon.level.map;
 		boolean[] mapped = Dungeon.level.mapped;

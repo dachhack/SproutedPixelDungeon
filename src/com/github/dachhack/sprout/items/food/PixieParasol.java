@@ -19,14 +19,10 @@ package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
-import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
-import com.github.dachhack.sprout.actors.buffs.Haste;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
-import com.github.dachhack.sprout.actors.buffs.MindVision;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;

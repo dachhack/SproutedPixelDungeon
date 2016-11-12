@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Lightning;
+import com.github.dachhack.sprout.effects.LightningLarge;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
@@ -109,7 +110,11 @@ public class WandOfLightning extends Wand {
 			CellEmitter.center(cell).burst(SparkParticle.FACTORY, 3);
 
 		}
+		if(Random.Int(10)<5){
 		curUser.sprite.parent.add(new Lightning(points, nPoints, callback));
+		} else {
+			curUser.sprite.parent.add(new LightningLarge(points, nPoints, callback));	
+		}
 	}
 
 	@Override

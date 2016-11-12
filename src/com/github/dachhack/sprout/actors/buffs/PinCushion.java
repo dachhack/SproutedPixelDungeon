@@ -41,4 +41,5 @@ public class PinCushion extends Buff {
 						.getCollection(ITEMS)));
 		super.restoreFromBundle(bundle);
 	}
+
 }

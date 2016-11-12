@@ -17,41 +17,15 @@
  */
 package com.github.dachhack.sprout.actors.mobs.pets;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.Fire;
-import com.github.dachhack.sprout.actors.blobs.Web;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Frost;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Weakness;
-import com.github.dachhack.sprout.actors.mobs.Bee;
-import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.effects.particles.SnowParticle;
-import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.BlueDragonSprite;
 import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.MirrorSprite;
-import com.github.dachhack.sprout.sprites.RedDragonSprite;
 import com.github.dachhack.sprout.sprites.ScorpionSprite;
-import com.github.dachhack.sprout.sprites.SpiderSprite;
-import com.github.dachhack.sprout.sprites.SteelBeeSprite;
-import com.github.dachhack.sprout.sprites.VelociroosterSprite;
-import com.github.dachhack.sprout.sprites.WarlockSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.utils.Bundle;
-import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class Scorpion extends PET {
@@ -72,9 +46,14 @@ public class Scorpion extends PET {
 		
 
 	@Override
+	public int dr(){
+		return level*2;
+	}
+	
+	@Override
 	public void adjustStats(int level) {
 		this.level = level;
-		HT = (2 + level) * 5;
+		HT = (2 + level) * 8;
 		defenseSkill = 1 + level*2;
 	}
 	
@@ -135,9 +114,22 @@ public String description() {
 }
 
 
+
 @Override
 public void interact() {
 
+	if (this.buff(MagicalSleep.class) != null) {
+		Buff.detach(this, MagicalSleep.class);
+	}
+	
+	if (state == SLEEPING) {
+		state = HUNTING;
+	}
+	if (buff(Paralysis.class) != null) {
+		Buff.detach(this, Paralysis.class);
+		GLog.i("You shake your %s out of paralysis.", name);
+	}
+	
 	int curPos = pos;
 
 	moveSprite(pos, Dungeon.hero.pos);
