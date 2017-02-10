@@ -301,7 +301,7 @@ public class SokobanTeleportLevel extends Level {
 			trap=false;
 			ActivatePortalTrap.trigger(cell, ch);
 				
-					
+				/*	
 				int arraypos = -1; //position in array of teleport switch
 				int portpos = -1; //position on map of teleporter
 				int portarraypos = -1; //position in array of teleporter
@@ -318,7 +318,7 @@ public class SokobanTeleportLevel extends Level {
 				portpos = teleportassign[arraypos];
 				destpos = destinationassign[arraypos];
 				
-				/* Stepping on switch deactivates the portal */
+				// Stepping on switch deactivates the portal 
 				destpos = -1;
 				
 				//GLog.i("ass2 %s", portpos);
@@ -337,7 +337,7 @@ public class SokobanTeleportLevel extends Level {
 					GLog.i("Portal Deactivated!");
 				}
 				
-				
+				*/
 								
 			break;
 
@@ -647,7 +647,7 @@ public class SokobanTeleportLevel extends Level {
 		teleportspots[3] = 32 + WIDTH * 5;	
 		teleportspots[4] = 4 + WIDTH * 6;	
 		teleportspots[5] = 25 + WIDTH * 7;	
-		teleportspots[6] = 42 + WIDTH * 7;	
+		teleportspots[6] = 42 + WIDTH * 8;	
 		teleportspots[7] = 10 + WIDTH * 9;	
 		teleportspots[8] = 2 + WIDTH * 10;	
 		teleportspots[9] = 3 + WIDTH * 17;	
@@ -662,6 +662,7 @@ public class SokobanTeleportLevel extends Level {
 		teleportspots[18] = 15 + WIDTH * 24;	
 		teleportspots[19] = 6 + WIDTH * 44;	
 		teleportspots[20] = 23 + WIDTH * 44;	
+		teleportspots[21] = 44 + WIDTH * 28;	
 
 				
 				
@@ -681,33 +682,30 @@ public class SokobanTeleportLevel extends Level {
 				
 		//assign each switch to a portal		
 		teleportassign[0] = 8 + WIDTH * 17;	
-		teleportassign[1] = 8 + WIDTH * 17;	
+		teleportassign[1] = 44 + WIDTH * 28;	
 		teleportassign[2] = 40 + WIDTH * 17;	
 		teleportassign[3] = 40 + WIDTH * 17;	
 		teleportassign[4] = 8 + WIDTH * 17;	
 		teleportassign[5] = 40 + WIDTH * 20;	
 		teleportassign[6] = 15 + WIDTH * 24;	
-		teleportassign[7] = 15 + WIDTH * 24;	
+		teleportassign[7] = 8 + WIDTH * 17;	
 		teleportassign[8] = 23 + WIDTH * 44;	
 		teleportassign[9] = 6 + WIDTH * 44;	
-	
+			
 				
-				
-		//assign each switch to a destination spot		
+		//assign each switch to a destination spot	
 		destinationassign[0] = 9 + WIDTH * 9;	
-		destinationassign[1] = 13 + WIDTH * 24;	
+		destinationassign[1] = 25 + WIDTH * 44;	
 		destinationassign[2] = 36 + WIDTH * 20;	
 		destinationassign[3] = 41 + WIDTH * 20;	
 		destinationassign[4] = 2 + WIDTH * 17;	
 		destinationassign[5] = 22 + WIDTH * 21;	
 		destinationassign[6] = 16 + WIDTH * 17;	
-		destinationassign[7] = 9 + WIDTH * 16;	
+		destinationassign[7] = 13 + WIDTH * 24;	
 		destinationassign[8] = 0;	
 		destinationassign[9] = 42 + WIDTH * 7;	
-
-						
-				
-		//set the original destination of portals		
+			
+		//set the original destination of portals	
 		destinationspots[0] = 2 + WIDTH * 9;	
 		destinationspots[1] = 24 + WIDTH * 8;	
 		destinationspots[2] = 8 + WIDTH * 44;	
@@ -729,6 +727,7 @@ public class SokobanTeleportLevel extends Level {
 		destinationspots[18] = 9 + WIDTH * 16;	
 		destinationspots[19] = 9 + WIDTH * 16;	
 		destinationspots[20] = 9 + WIDTH * 16;	
+		destinationspots[21] = 0;	
 
 
 				
@@ -763,9 +762,10 @@ public class SokobanTeleportLevel extends Level {
 			 addItemToGen(new ScrollOfMagicalInfusion(), 9, 36 + WIDTH * 28);
 			 addItemToGen(new ScrollOfMagicalInfusion(), 10, 36 + WIDTH * 28);
 			 addItemToGen(new ScrollOfRegrowth(), 11, 36 + WIDTH * 28);
+			 addItemToGen(new Starflower.Seed(), 12, 36 + WIDTH * 28);
 		 }
 		 
-		 drop(new PotionOfLiquidFlame(), 9 + WIDTH * 24).type = Heap.Type.CHEST;
+		 //drop(new PotionOfLiquidFlame(), 9 + WIDTH * 24).type = Heap.Type.CHEST;
 	}
 
 	@Override

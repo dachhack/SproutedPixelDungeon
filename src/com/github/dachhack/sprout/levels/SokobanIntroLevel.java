@@ -251,7 +251,7 @@ public class SokobanIntroLevel extends Level {
 			if (ch!=null){
 			   ActivatePortalTrap.trigger(cell, ch);
 				
-					
+				/*	
 				int arraypos = -1; //position in array of teleport switch
 				int portpos = -1; //position on map of teleporter
 				int portarraypos = -1; //position in array of teleporter
@@ -267,7 +267,7 @@ public class SokobanIntroLevel extends Level {
 				portpos = teleportassign[arraypos];
 				destpos = destinationassign[arraypos];
 				
-				/* Stepping on switch deactivates the portal */
+				// Stepping on switch deactivates the portal 
 				destpos = -1;
 				
 				for(int i = 0; i < teleportspots.length; i++) {
@@ -282,7 +282,7 @@ public class SokobanIntroLevel extends Level {
 					GLog.i("Portal Deactivated!");
 				}
 				
-				
+				*/
 			}				
 			break;
 

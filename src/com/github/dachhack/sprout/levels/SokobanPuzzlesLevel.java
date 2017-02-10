@@ -326,7 +326,7 @@ public class SokobanPuzzlesLevel extends Level {
 			trap=false;
 			ActivatePortalTrap.trigger(cell, ch);
 				
-					
+				/*	
 				int arraypos = -1; //position in array of teleport switch
 				int portpos = -1; //position on map of teleporter
 				int portarraypos = -1; //position in array of teleporter
@@ -343,7 +343,7 @@ public class SokobanPuzzlesLevel extends Level {
 				portpos = teleportassign[arraypos];
 				destpos = destinationassign[arraypos];
 				
-				/* Stepping on switch deactivates the portal */
+				// Stepping on switch deactivates the portal 
 				destpos = -1;
 				
 				//GLog.i("ass2 %s", portpos);
@@ -363,7 +363,7 @@ public class SokobanPuzzlesLevel extends Level {
 				}
 				
 				
-								
+			*/					
 			break;
 
 
